@@ -20,48 +20,33 @@
                     <input type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
                   </div>
               </div>
-              <div class="resource flex-group-center">
-                  <label for="data.power.value" class="resource-label">Power</label>
-                  <div class="resource-content flexrow flex-center flex-between">
-                    <input type="text" name="data.power.value" value="{{data.power.value}}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="data.power.max" value="{{data.power.max}}" data-dtype="Number"/>
-                  </div>
-              </div>
-          </div>
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns.  --}}
-          <div class="abilities grid grid-3col">
-            {{#each data.abilities as |ability key|}}
-              <div class="ability flexrow flex-group-center">
-                <label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
-                <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-                <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{key}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-              </div>
-            {{/each}}
           </div>
         </div>
     </header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="items">Items</a>
-        <a class="item" data-tab="features">Features</a>
-        <a class="item" data-tab="spells">Spells</a>
+        <a class="item" data-tab="traits">{{localize "SVNSEA2E.Traits"}}</a>
+        <a class="item" data-tab="biography">{{localize "SVNSEA2E.Baiography"}}</a>
+        <a class="item" data-tab="backgrounds">{{localize "SVNSEA2E.Backgrounds"}}</a>
+        <a class="item" data-tab="advantages">{{localize "SVNSEA2E.Advantages"}}</a>
+        <a class="item" data-tab="sorcery">{{localize "SVNSEA2E.Sorcery"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+      {{!-- Traits Tab --}}
+      <div class="tab traits" data-group="primary" data-tab="traits">
+          {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
+      </div>
 
         {{!-- Biography Tab --}}
-        <div class="tab biography" data-group="primary" data-tab="description">
+        <div class="tab biography" data-group="primary" data-tab="biography">
             {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
         </div>
 
-        {{!-- Owned Items Tab --}}
-        <div class="tab items" data-group="primary" data-tab="items">
+        {{!-- Backgrounds Tab --}}
+        <div class="tab items" data-group="primary" data-tab="backgrounds">
             <ol class="items-list">
                 <li class="item flexrow item-header">
                   <div class="item-image"></div>
@@ -83,8 +68,8 @@
             </ol>
         </div>
 
-        {{!-- Owned Features Tab --}}
-        <div class="tab features" data-group="primary" data-tab="features">
+        {{!-- Advantages Tab --}}
+        <div class="tab features" data-group="primary" data-tab="advantages">
             <ol class="items-list">
                 <li class="item flexrow item-header">
                   <div class="item-image"></div>
@@ -106,8 +91,8 @@
             </ol>
         </div>
 
-        {{!-- Owned Spells Tab --}}
-        <div class="tab spells" data-group="primary" data-tab="spells">
+        {{!-- Sorcery Tab --}}
+        <div class="tab spells" data-group="primary" data-tab="sorcery">
             <ol class="items-list">
                 <li class="item flexrow item-header">
                   <div class="item-image"></div>

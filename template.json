@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character", "npc"],
     "templates": {
       "base": {
         "health": {
@@ -8,59 +8,159 @@
           "min": 0,
           "max": 10
         },
-        "power": {
-          "value": 5,
-          "min": 0,
-          "max": 5
+        "biography": "",
+        "nation": {
+          "value": ""
+        },
+        "religion": "",
+        "age": 20,
+        "traits": {
+          "brawn": {
+            "value": 2,
+            "min": 0,
+            "max": 5
+          },
+          "finesse": {
+            "value": 2,
+            "min": 0,
+            "max": 5
+          },
+          "resolve": {
+            "value": 2,
+            "min": 0,
+            "max": 5
+          },
+          "wits": {
+            "value": 2,
+            "min": 0,
+            "max": 5
+          },
+          "panache": {
+            "value": 2,
+            "min": 0,
+            "max": 5
+          }
+        },
+        "skills": {
+          "aim": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "athletics": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "brawl": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "convince": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "empathy": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "hide": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "intimidate": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "notice": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "perform": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "ride": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "sailing": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "scholarship": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "tempt": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "theft": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "warfare": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          },
+          "weaponry": {
+            "value": 0,
+            "min": 0,
+            "max": 5
+          }
         }
       }
     },
     "character": {
       "templates": ["base"],
-      "biography": "",
-      "attributes": {
-        "level": {
-          "value": 1
-        }
-      },
-      "abilities": {
-        "str": {
-          "value": 10
-        },
-        "dex": {
-          "value": 10
-        },
-        "con": {
-          "value": 10
-        },
-        "int": {
-          "value": 10
-        },
-        "wis": {
-          "value": 10
-        },
-        "cha": {
-          "value": 10
-        }
+      "wealth": "",
+      "concept": "",
+      "backgrounds": {
+        "value": 5,
+        "min": 0,
+        "max": 5
       }
+    },
+    "npc":{
+      "template": ["base"]
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
+    "types": ["background", "advantage", "sorcery", "nation","secretsociety"],
     "templates": {
       "base": {
         "description": ""
       }
     },
-    "item": {
+    "background": {
       "templates": ["base"],
       "quantity": 1,
       "weight": 0
     },
-    "feature": {
+    "advantage": {
       "templates": ["base"]
     },
-    "spell": {
+    "secretsociety": {
+      "templates": ["base"]
+    },
+    "nation": {
+      "templates": ["base"]
+    },
+    "sorcery": {
       "templates": ["base"],
       "spellLevel": 1
     }
