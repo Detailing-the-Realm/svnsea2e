@@ -1,19 +1,27 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": ["character", "npc", "villian"],
     "templates": {
       "base": {
-        "health": {
-          "value": 10,
+        "wounds": {
+          "value": 0,
           "min": 0,
-          "max": 10
+          "max": 16
+        },
+        "dwounds": {
+          "value": 0,
+          "min": 0,
+          "max": 4
         },
         "biography": "",
         "nation": {
           "value": ""
         },
+        "ssociety":[],
         "religion": "",
         "age": 20,
+        "reputation": "",
+        "languages": [],
         "traits": {
           "brawn": {
             "value": 2,
@@ -129,40 +137,65 @@
       "templates": ["base"],
       "wealth": "",
       "concept": "",
-      "backgrounds": {
-        "value": 5,
-        "min": 0,
-        "max": 5
-      }
+      "heropoints": 0,
+      "backgrounds": {},
+      "arcana": {
+        "name": "",
+        "virtue": {
+          "name": "",
+          "description": ""
+        },
+        "hubris": {
+          "name": "",
+          "description": ""
+        }
+      },
+      "stories": [{
+        "name": "",
+        "description": "",
+        "ending": "",
+        "reward": "",
+        "steps": []
+      }]
     },
-    "npc":{
+    "npc": {
+      "template": ["base"]
+    },
+    "villian": {
       "template": ["base"]
     }
   },
   "Item": {
-    "types": ["background", "advantage", "sorcery", "nation","secretsociety"],
+    "types": ["background", "advantage", "sorcery", "nation", "secretsociety", "ship"],
     "templates": {
       "base": {
+        "name": "",
         "description": ""
       }
     },
     "background": {
       "templates": ["base"],
-      "quantity": 1,
-      "weight": 0
+      "quirk": "",
+      "skills": [],
+      "advantages": []
     },
     "advantage": {
-      "templates": ["base"]
+      "templates": ["base"],
+      "points": 1
     },
     "secretsociety": {
       "templates": ["base"]
     },
     "nation": {
-      "templates": ["base"]
+      "templates": ["base"],
+      "traits": []
     },
     "sorcery": {
+      "templates": ["base"]
+    },
+    "ship": {
       "templates": ["base"],
-      "spellLevel": 1
+      "crew":[]
     }
   }
 }

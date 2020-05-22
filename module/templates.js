@@ -13,9 +13,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/svnsea2e/templates/actors/parts/actor-backgrounds.html',
     'systems/svnsea2e/templates/actors/parts/actor-sorcery.html',
 
-     // Item Sheet Partials
-    'systems/svnsea2e/templates/items/parts/item-action.html',
-    'systems/svnsea2e/templates/items/parts/item-activation.html',
+    // Item Sheet Partials
     'systems/svnsea2e/templates/items/parts/item-description.html'
   ]
 

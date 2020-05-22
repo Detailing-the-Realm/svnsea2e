@@ -1,4 +1,6 @@
 {
+  "SVNSEA2E.ActorName":"Name",
+  "SVNSEA2E.Description": "Description",
   "SVNSEA2E.Nation": "Nation",
   "SVNSEA2E.NationAvalon": "Avalon",
   "SVNSEA2E.NationInismore": "Inismore",
@@ -39,5 +41,7 @@
   "SVNSEA2E.Advantages": "Advantages",
   "SVNSEA2E.Arcana": "Arcana",
   "SVNSEA2E.Stories": "Stories",
-  "SVNSEA2E.Sorcery": "Sorcery"
+  "SVNSEA2E.Sorcery": "Sorcery",
+  "SVNSEA2E.DramaWounds":"Dramatic Wounds",
+  "SVNSEA2E.Wounds":"Wounds"
 }

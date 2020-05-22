@@ -4,7 +4,7 @@
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
         <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}"/></h1>
             {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
             use both the "grid" and "grid-Ncol" class where "N" can be any number
             from 1 to 12 and will create that number of columns.  --}}
@@ -13,11 +13,17 @@
               and it will add a small amount of padding, a border, and will
               center all of its child elements content and text. --}}
               <div class="resource flex-group-center">
-                  <label for="data.health.value" class="resource-label">Health</label>
+                  <label for="data.health.value" class="resource-label">{{localize "SVNSEA2E.Wounds"}}</label>
                   <div class="resource-content flexrow flex-center flex-between">
-                    <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
+                    <input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number"/>
+                    <span> / {{data.wounds.max}}</span>
+                  </div>
+              </div>
+              <div class="resource flex-group-center">
+                  <label for="data.health.value" class="resource-label">{{localize "SVNSEA2E.DramaWounds"}}</label>
+                  <div class="resource-content flexrow flex-center flex-between">
+                    <input type="text" name="data.dwounds.value" value="{{data.dwounds.value}}" data-dtype="Number"/>
+                    <span> / {{data.dwounds.max}}</span>
                   </div>
               </div>
           </div>
@@ -27,7 +33,7 @@
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="traits">{{localize "SVNSEA2E.Traits"}}</a>
-        <a class="item" data-tab="biography">{{localize "SVNSEA2E.Baiography"}}</a>
+        <a class="item" data-tab="biography">{{localize "SVNSEA2E.Biography"}}</a>
         <a class="item" data-tab="backgrounds">{{localize "SVNSEA2E.Backgrounds"}}</a>
         <a class="item" data-tab="advantages">{{localize "SVNSEA2E.Advantages"}}</a>
         <a class="item" data-tab="sorcery">{{localize "SVNSEA2E.Sorcery"}}</a>
