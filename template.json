@@ -14,10 +14,7 @@
           "max": 4
         },
         "biography": "",
-        "nation": {
-          "value": ""
-        },
-        "ssociety":[],
+        "nation": "",
         "religion": "",
         "age": 20,
         "reputation": "",
@@ -137,7 +134,7 @@
       "templates": ["base"],
       "wealth": "",
       "concept": "",
-      "heropoints": 0,
+      "heropts": 0,
       "backgrounds": {},
       "arcana": {
         "name": "",
@@ -170,7 +167,8 @@
     "templates": {
       "base": {
         "name": "",
-        "description": ""
+        "description": "",
+        "source": ""
       }
     },
     "background": {
@@ -181,7 +179,12 @@
     },
     "advantage": {
       "templates": ["base"],
-      "points": 1
+      "cost": {
+        "normal":1,
+        "specialreg":""
+      },
+      "knack":false,
+      "innate":false
     },
     "secretsociety": {
       "templates": ["base"]

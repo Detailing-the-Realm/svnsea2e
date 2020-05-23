@@ -1,24 +1,31 @@
-<h2 class="charname">{{localize "SVNSEA2E.Traits"}}</h2>
-{{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+<div class="tab traits" data-group="primary" data-tab="traits">
+  <h2 class="charname">{{localize "SVNSEA2E.Traits"}}</h2>
+  {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
 use both the "grid" and "grid-Ncol" class where "N" can be any number
 from 1 to 12 and will create that number of columns.  --}}
-<div class="traits grid grid-3col">
-  {{#each data.traits as |trait key|}}
-    <div class="trait flexrow flex-group-center">
-      <label for="data.traits.{{key}}.value" class="resource-label"><h3 class="trait-name">{{trait.label}}</h3></label>
-      <input type="text" name="data.traits.{{key}}.value" value="{{trait.value}}" data-dtype="Number"/>
-    </div>
-  {{/each}}
-</div>
-<h2 class="charname">{{localize "SVNSEA2E.Skills"}}</h2>
-{{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+  <div class="traits grid grid-3col">
+    {{#each data.traits as |trait key|}}
+      <div class="trait flexrow flex-group-center">
+        <label for="data.traits.{{key}}.value" class="resource-label">
+          <h3 class="trait-name">{{trait.label}}</h3>
+        </label>
+        <input type="text" name="data.traits.{{key}}.value" value="{{trait.value}}" data-dtype="Number" />
+      </div>
+    {{/each}}
+  </div>
+  <h2 class="charname">{{localize "SVNSEA2E.Skills"}}</h2>
+  {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
 use both the "grid" and "grid-Ncol" class where "N" can be any number
 from 1 to 12 and will create that number of columns.  --}}
-<div class="skills grid grid-3col">
-  {{#each data.skills as |skill key|}}
-    <div class="trait flexrow flex-group-center">
-      <label for="data.skills.{{key}}.value" class="resource-label"><h3 class="skil-name rollable">{{skill.label}}</h3></label>
-      <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number"/>
-    </div>
-  {{/each}}
+  <div class="skills grid grid-3col">
+    {{#each data.skills as |skill key|}}
+      <div class="trait flexrow flex-group-center">
+        <label for="data.skills.{{key}}.value" class="resource-label">
+          <h3 class="skil-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">{{skill.label}}</h3>
+        </label>
+        <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" />
+      </div>
+    {{/each}}
+  </div>
+  {{localize "SVNSEA2E.Languages"}}
 </div>

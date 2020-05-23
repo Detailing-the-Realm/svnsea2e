@@ -1,0 +1,61 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+    <div class="header-fields">
+      {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
+      <div class="resources grid grid-2;col">
+        <div class="resource flex-group-center">
+          <div class="resource flex-group-center">
+            <label for="data.heropts" class="resource-label">{{localize "SVNSEA2E.HeroPoints"}}</label>
+            <div class="resource-content flexrow flex-center flex-between">
+              <input type="text" name="data.heropts" value="{{data.heropts}}" />
+            </div>
+          </div>
+          <label for="data.nation" class="resource-label">{{localize "SVNSEA2E.Nation"}}</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="text" name="data.nation" value="{{data.nation}}" />
+          </div>
+        </div>
+        <div class="resources grid grid-2;col">
+          <div class="resource flex-group-center">
+            <label for="data.religion" class="resource-label">{{localize "SVNSEA2E.Religion"}}</label>
+            <div class="resource-content flexrow flex-center flex-between">
+              <input type="text" name="data.religion" value="{{data.religion}}" />
+            </div>
+          </div>
+          <div class="resource flex-group-center">
+            <label for="data.reputation" class="resource-label">{{localize "SVNSEA2E.Reputation"}}</label>
+            <div class="resource-content flexrow flex-center flex-between">
+              <input type="text" name="data.reputation" value="{{data.reputation}}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="traits">{{localize "SVNSEA2E.Traits"}}</a>
+    <a class="item" data-tab="features">{{localize "SVNSEA2E.Features"}}</a>
+    <a class="item" data-tab="sorcery">{{localize "SVNSEA2E.Sorcery"}}</a>
+    <a class="item" data-tab="stories">{{localize "SVNSEA2E.Stories"}}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    {{!-- Traits Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
+
+    {{!-- Features Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-features.html"}}
+
+    {{!-- Sorcery Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-sorcery.html"}}
+
+    {{!-- Stories Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-stories.html"}}
+  </section>
+</form>

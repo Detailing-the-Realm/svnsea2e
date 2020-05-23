@@ -1,3 +1,5 @@
+import { SVNSEA2E } from '../../config.js'
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -16,13 +18,13 @@ export class SvnSea2EItemSheet extends ItemSheet {
 
   /** @override */
   get template () {
-    const path = 'systems/svnsea2e/templates/item'
+    const path = 'systems/svnsea2e/templates/items'
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.html`;
 
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/item-${this.item.data.type}-sheet.html`
+    return `${path}/${this.item.data.type}.html`
   }
 
   /* -------------------------------------------- */
@@ -30,6 +32,8 @@ export class SvnSea2EItemSheet extends ItemSheet {
   /** @override */
   getData () {
     const data = super.getData()
+    console.log(SVNSEA2E)
+    data.itemType = SVNSEA2E.itemTypes[data.item.type] // this should be translated
     return data
   }
 
@@ -48,10 +52,10 @@ export class SvnSea2EItemSheet extends ItemSheet {
 
   /** @override */
   activateListeners (html) {
-    super.activateListeners(html);
+    super.activateListeners(html)
 
     // Everything below here is only needed if the sheet is editable
-    //if (!this.options.editable) return;
+    // if (!this.options.editable) return;
 
     // Roll handlers, click handlers, etc. would go here.
   }

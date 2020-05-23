@@ -8,12 +8,14 @@ export const preloadHandlebarsTemplates = async function () {
   const templatePaths = [
 
     // Actor Sheet Partials
+    'systems/svnsea2e/templates/actors/parts/actor-name.html',
     'systems/svnsea2e/templates/actors/parts/actor-traits.html',
-    'systems/svnsea2e/templates/actors/parts/actor-advantages.html',
-    'systems/svnsea2e/templates/actors/parts/actor-backgrounds.html',
+    'systems/svnsea2e/templates/actors/parts/actor-features.html',
     'systems/svnsea2e/templates/actors/parts/actor-sorcery.html',
+    'systems/svnsea2e/templates/actors/parts/actor-stories.html',
 
     // Item Sheet Partials
+    'systems/svnsea2e/templates/items/parts/item-header.html',
     'systems/svnsea2e/templates/items/parts/item-description.html'
   ]
 

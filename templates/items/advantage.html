@@ -1,0 +1,29 @@
+<form class="{{cssClass}}" autocomplete="off">
+  {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    <div class="tab flexrow active">
+      <div class="item-properties">
+        <div class="form-group">
+          <label for="data.cost.normal" class="resource-label">{{localize "SVNSEA2E.Cost"}}</label>
+          <input name="data.cost.normal" type="text" value="{{data.cost.normal}}" data-dtype="Number""/>
+        </div>
+        <div class=" form-group">
+          <label for="data.cost.reducecost" class="resource-label">{{localize "SVNSEA2E.ReducedCost"}}</label>
+          <input name="data.cost.reducecost" type="text" value="{{data.cost.reducecost}}" />
+        </div>
+        <div class="form-group">
+          <label for="data.knack" class="resource-label">{{localize "SVNSEA2E.Knack"}}</label>
+          <input type="checkbox" name="data.knack" value="{{data.knack}}" data-dtype="Boolean" {{checked data.knack}} />
+        </div>
+        <div class="form-group">
+          <label for="data.innate" class="resource-label">{{localize "SVNSEA2E.Innate"}}</label>
+          <input type="checkbox" name="data.innate" value="{{data.innate}}" data-dtype="Boolean" {{checked data.innate}} />
+        </div>
+      </div>
+
+      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>
