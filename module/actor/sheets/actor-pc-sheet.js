@@ -177,12 +177,11 @@ export class SvnSea2EActorSheet extends ActorSheet {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
-
     skillRoll({
       skill: dataset.roll,
       event: event,
       data: this.actor.data.data,
-      title: 'test',//game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
+      title: game.i18n.format("SVNSEA2E.SkillPromptTitle", { skill: CONFIG.SVNSEA2E.skills[dataset.label] }),
       speaker: ChatMessage.getSpeaker({actor: this})
     })
   }

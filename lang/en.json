@@ -19,6 +19,7 @@
   "SVNSEA2E.NationUssura": "Ussura",
   "SVNSEA2E.NationVesten": "Vesten",
   "SVNSEA2E.NationVodacce": "Vodacce",
+  "SVNSEA2E.Trait": "Trait",
   "SVNSEA2E.Traits": "Traits",
   "SVNSEA2E.TraitPanache": "Panache",
   "SVNSEA2E.TraitFinesse": "Finesse",
@@ -58,5 +59,7 @@
   "SVNSEA2E.ReducedCost": "Reduced Cost",
   "SVNSEA2E.Knack": "Knack",
   "SVNSEA2E.Innate": "Innate",
+  "SVNSEA2E.Roll": "Roll",
+  "SVNSEA2E.SkillPromptTitle": "{skill} Skill Roll",
   "SVNSEA2E.BonusDice": "Bonus Dice"
 }

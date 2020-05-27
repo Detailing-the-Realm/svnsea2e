@@ -1,5 +1,5 @@
 export async function skillRoll ({
-  skill,
+  skillnd,
   data = {},
   event = {},
   template,
@@ -14,7 +14,7 @@ export async function skillRoll ({
   speaker = speaker || ChatMessage.getSpeaker()
   let rolled = false;
   // Define inner roll function
-  const _roll = function (skill, form = null) {
+  const _roll = function (skillnd, form = null) {
     let roll = new Roll('10d10').roll()
     roll.toMessage({
       speaker: speaker,
@@ -44,12 +44,12 @@ export async function skillRoll ({
   let roll
   return new Promise(resolve => {
     new Dialog({
-      title: 'Skill Roll',
+      title: title,
       content: html,
       buttons: {
         roll: {
           label: game.i18n.localize("SVNSEA2E.Roll"),
-          callback: html => roll = _roll(skill, html[0].children[0])
+          callback: html => roll = _roll(skillnd, html[0].children[0])
         }
       },
       close: html => {
