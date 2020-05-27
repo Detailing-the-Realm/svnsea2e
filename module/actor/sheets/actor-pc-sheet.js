@@ -1,5 +1,5 @@
 import { SVNSEA2E } from '../../config.js'
-import { rollSkill } from '../../dice.js'
+import { skillRoll } from '../../dice.js'
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -8,7 +8,7 @@ import { rollSkill } from '../../dice.js'
 export class SvnSea2EActorSheet extends ActorSheet {
 
   /** @override */
-  static get defaultOptions() {
+  static get defaultOptions () {
     console.log('getting default options')
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor'],
@@ -26,7 +26,7 @@ export class SvnSea2EActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  getData () {
     const data = super.getData()
     data.dtypes = ['String', 'Number', 'Boolean']
 
@@ -42,7 +42,7 @@ export class SvnSea2EActorSheet extends ActorSheet {
       skl.label = CONFIG.SVNSEA2E.skills[s]
     }
     // Prepare items.
-    if (this.actor.data.type == 'character') {
+    if (this.actor.data.type === 'character') {
       this._prepareCharacterItems(data)
     }
     return data
@@ -55,7 +55,7 @@ export class SvnSea2EActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
-  _prepareCharacterItems(sheetData) {
+  _prepareCharacterItems (sheetData) {
     const actorData = sheetData.actor
 
     // Initialize containers.
@@ -146,7 +146,7 @@ export class SvnSea2EActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onItemCreate(event) {
+  _onItemCreate (event) {
     event.preventDefault()
     const header = event.currentTarget
     // Get the type of item to create.
@@ -177,9 +177,13 @@ export class SvnSea2EActorSheet extends ActorSheet {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
-    rollSkill({
-      skill: 3,
-      trait: 4
+
+    skillRoll({
+      skill: dataset.roll,
+      event: event,
+      data: this.actor.data.data,
+      title: 'test',//game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
+      speaker: ChatMessage.getSpeaker({actor: this})
     })
   }
 }

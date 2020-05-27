@@ -1,7 +1,14 @@
 <form>
-  <p>Which trait are you using for your Risk? </p>
+  <div class="form-group">
+    <label>{{ localize "SVNSEA2E.Trait" }}</label>
+    <select name="trait">
+    {{#each traits as |value label|}}
+        <option value="{{value}}">{{label}}</option>
+    {{/each}}
+    </select>
+  </div>
   <div class="form-group">
     <label for="bonusDice">{{ localize "SVNSEA2E.BonusDice"}}</label>
-    <input type="text" name="bonusDice" value="0" /></p>
+    <input type="text" name="bonusDice" value="0" />
   </div>
 </form>
