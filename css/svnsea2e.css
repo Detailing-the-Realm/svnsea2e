@@ -1,23 +1,61 @@
 @import url("https://fonts.googleapis.com/css2?family=Martel:wght@400;800&family=Roboto:wght@300;400;500&display=swap");
 /* Global styles */
+h1 {
+  font-size: 1.6em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-weight: normal;
+  font-size: 1.1em;
+}
+
+h6 {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-weight: normal;
+  font-size: 1em;
+}
+
+#chat-log .message {
+  font-size: 1em;
+}
+
+h4.message-sender {
+  font-weight: bold;
+}
+
 .window-app {
   font-family: "Roboto", sans-serif;
 }
 
-.window-app.svnsea2e.sheet.actor {
+.svnsea2e.sheet.actor {
   min-width: 700px;
   min-height: 750px;
 }
 
-.window-app.svnsea2e.sheet input[type="text"] {
+.svnsea2e.sheet input[type="text"] {
   min-width: 20px;
   text-align: left;
   border: 1px solid transparent;
   background: none;
 }
 
-.window-app.svnsea2e.sheet input[type="text"]:hover,
-.window-app.svnsea2e.sheet input[type="text"]:focus {
+.svnsea2e.sheet input[type="text"]:hover,
+.svnsea2e.sheet input[type="text"]:focus {
   -webkit-box-shadow: 0 0 8px red;
   box-shadow: 0 0 8px red;
   border: 1px solid #000;
@@ -134,6 +172,16 @@
 }
 
 /* Styles limited to svnsea2e sheets */
+.svnsea2e .chat-card.skill-roll .card-content,
+.svnsea2e .chat-card.skill-roll .card-header {
+  border-bottom: 1px solid #000;
+}
+
+.svnsea2e .chat-card.skill-roll .card-content .raises {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .svnsea2e .item-form {
   font-family: "Roboto", sans-serif;
 }
@@ -160,9 +208,10 @@
 
 .svnsea2e .sheet-header .profile-img {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
   height: 200px;
+  width: 200px;
   margin-right: 5px;
 }
 

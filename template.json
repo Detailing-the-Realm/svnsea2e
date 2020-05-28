@@ -1,8 +1,27 @@
 {
   "Actor": {
-    "types": ["character", "npc", "villian"],
+    "types": ["brute", "character", "npc", "villian"],
     "templates": {
       "base": {
+        "name":"",
+        "nation": "",
+        "religion": "",
+        "age": 20,
+        "reputation": "",
+        "languages": [],
+        "arcana": {
+          "name": "",
+          "virtue": {
+            "name": "",
+            "description": ""
+          },
+          "hubris": {
+            "name": "",
+            "description": ""
+          }
+      },
+      "pcnpc":{
+        "biography": "",
         "wounds": {
           "value": 0,
           "min": 0,
@@ -13,12 +32,6 @@
           "min": 0,
           "max": 4
         },
-        "biography": "",
-        "nation": "",
-        "religion": "",
-        "age": 20,
-        "reputation": "",
-        "languages": [],
         "traits": {
           "brawn": {
             "value": 2,
@@ -130,22 +143,20 @@
         }
       }
     },
+    "brute":{
+      "name":"",
+      "strength": 1,
+      "ability":{
+        "name":"",
+        "description":""
+      }
+    },
     "character": {
-      "templates": ["base"],
+      "templates": ["base","pcnpc"],
       "wealth": "",
       "concept": "",
       "heropts": 0,
-      "backgrounds": {},
-      "arcana": {
-        "name": "",
-        "virtue": {
-          "name": "",
-          "description": ""
-        },
-        "hubris": {
-          "name": "",
-          "description": ""
-        }
+      "backgrounds": {}
       },
       "stories": [{
         "name": "",
@@ -156,10 +167,19 @@
       }]
     },
     "npc": {
-      "template": ["base"]
+      "templates": ["base","pcnpc"]
     },
     "villian": {
-      "template": ["base"]
+      "templates": ["base"],
+      "traits":{
+        "influence":5,
+        "strength":5,
+        "villainy":10
+      },
+      "schemes":[{
+        "description":"",
+        "influence":0
+        }]
     }
   },
   "Item": {

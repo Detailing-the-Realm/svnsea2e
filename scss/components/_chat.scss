@@ -1,0 +1,12 @@
+.chat-card.skill-roll {
+  .card-content,
+  .card-header {
+    border-bottom: $border-main;
+  }
+
+  .card-content .raises{
+    font-size: $font-2xl;
+    font-weight: bold;
+  }
+
+}

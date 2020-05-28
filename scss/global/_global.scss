@@ -1,0 +1,32 @@
+h1{
+  font-size: $font-3xl;
+}
+h2{
+  font-size: $font-2xl;
+}
+h3{
+  font-size: $font-xl;
+}
+h4{
+  font-size: $font-lg;
+}
+h5 {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-weight: normal;
+  font-size: $font-md;
+}
+h6 {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-weight: normal;
+  font-size: $font-norm;
+}
+
+#chat-log .message{
+  font-size: $font-norm;
+}
+
+h4.message-sender{
+  font-weight:bold;
+}

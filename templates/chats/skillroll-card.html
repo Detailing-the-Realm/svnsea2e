@@ -1,17 +1,30 @@
-<div class="dnd5e chat-card item-card" data-actor-id="{{actor._id}}" data-skill="{{skill}}">
- <header class="card-header flexrow">
-     <h3 class="title">{{ title }}</h3>
- </header>
-    <div class="card-content flexrow">
-        <div class="flexrow"><h4 class="numdice">{{ localize "SVNSEA2E.NumDice" }}</h4><div>{{ formula }}</div></div>
-        <div>{{ rolls }}</div>
-        <div>{{ raises }}</div>
+<div class="svnsea2e">
+  <div class="chat-card skill-roll" data-actor-id="{{ actor._id }}" data-skill="{{ skill }}">
+    <header class="card-header">
+      <h4 class="skill-title">{{ title }}</h4>
+    </header>
+    <div class="card-content">
+      <div class="raises">{{ raises }} {{ localize "SVNSEA2E.Raises" }}</div>
     </div>
-
-    <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
-    </div>
-
     <footer class="card-footer">
+      <h5 class="">{{ localize "SVNSEA2E.RaiseCombos" }}</h5>
+      <div class="raise-combos">
+        {{ rCombos }}
+      </div>
+      <div class="skill-rolls">
+        <h5 class="">{{ localize "SVNSEA2E.Rolls" }}</h5>
+        <div class="">{{ rolls }}</div>
+      </div>
+      {{#if rerolled}}
+        <div class="skill-reroll">
+          {{ reroll }}
+        </div>
+      {{/if}}
+      {{#if exploded}}
+        <div class="skill-explosions">
+          {{ localize "SVNSEA2E.Exploded" }} {{ explosions }}
+        </div>
+      {{/if}}
     </footer>
+  </div>
 </div>

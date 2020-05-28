@@ -198,6 +198,10 @@ export class SvnSea2EActorSheet extends ActorSheet {
   }) {
     // Handle input arguments
     let rolled = false
+    let exploded = false
+    let explosions = 0
+
+
     // Define inner roll function
     const _roll = async function ({
       skill = {},
@@ -205,38 +209,162 @@ export class SvnSea2EActorSheet extends ActorSheet {
       data = {},
       form = {}
     }) {
-      const nd = skill.nd + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
-      const formula = nd.toString() + 'd10'
-      const d10 = new Die(10).roll(nd)
-      let raises = 0
-      if (skill.nd === 5) {
-        d10.explode(10)
+      const _getIndexes = function (rolls, tomatch) {
+        console.log('Matching these values: ' + tomatch.toString())
+        let values = []
+        values.push(rolls.indexOf(tomatch[0]))
+        if (tomatch[0] === tomatch[1]) {
+          values.push(rolls.indexOf(tomatch[1], values[0] + 1))
+        } else {
+          values.push(rolls.indexOf(tomatch[1]))
+        }
+        if (tomatch.length > 2) {
+          if (tomatch[0] === tomatch[2]) {
+            values.push(rolls.indexOf(tomatch[2], values[1] + 1))
+          } else {
+            values.push(rolls.indexOf(tomatch[2]))
+          }
+        }
+        console.log('Comparing these indexes: ' + values.toString())
+        return values
       }
-      const rolls = d10.results
-      for (let i = 0; i < rolls.length; i++) {
-        if (rolls[i] === 10) {
+
+      const _addRaise = function (threshold = 10) {
+        let raises = 1
+        if (threshold === 15) {
           raises++
         }
+        return raises
       }
-      console.log(d10.results)
+
+      const nd = skill.nd + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
+      const d10 = new Die(10).roll(nd)
+      let raises = 0
+      let threshold = 10
+      let raiseCombos = []
+      let matcharr = CONFIG.SVNSEA2E.match10
+
+      // if the character's skill is 4 or more then they can get 2 raises when matching to a 15
+      if (skill.nd >= 4) {
+        threshold = 15
+        matcharr = CONFIG.SVNSEA2E.match15
+      }
+
+      // explode the dice on 10s if the character has a high enough skill
+      if (skill.nd === 5) {
+        exploded = true
+        explosions++
+        d10.explode(10)
+      }
+
+      // deep copy of the rolls
+      const rolls = JSON.parse(JSON.stringify(d10.results))
+
+      rolls.sort(function (a, b) {
+        return a - b
+      })
+
+      console.log(rolls)
+
+      if (skill.nd < 4) {
+        let i = rolls.length
+        while (i--) {
+          if (rolls[i] === 10) {
+            raises++
+            raiseCombos.push('10')
+            rolls.splice(i, 1)
+          }
+        }
+      }
+      console.log(rolls)
+      for (let c = 0; c < matcharr.two.length; c++) {
+        let vals = _getIndexes(rolls, matcharr.two[c])
+        while (vals[0] > -1 && vals[1] > -1) {
+          console.log('adding a raise')
+          raises += _addRaise(threshold)
+          raiseCombos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString())
+          rolls.splice(vals[0], 1)
+          rolls.splice(rolls.indexOf(matcharr.two[c][1]), 1)
+          vals = _getIndexes(rolls, matcharr.two[c])
+        }
+      }
+
+      for (let c = 0; c < matcharr.three.length; c++) {
+        var vals = _getIndexes(rolls, matcharr.three[c])
+        while (vals[0] > -1 && vals[1] > -1 && vals[2] > -1) {
+          console.log('adding a raise')
+          raises += _addRaise(threshold)
+          raiseCombos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString() + ' + ' + rolls[vals[2]].toString())
+          rolls.splice(vals[0], 1)
+          rolls.splice(rolls.indexOf(matcharr.three[c][1]), 1)
+          rolls.splice(rolls.indexOf(matcharr.three[c][2]), 1)
+          vals = _getIndexes(rolls, matcharr.three[c])
+        }
+      }
+
+      let total = 0
+      let combo = ''
+      let i = rolls.length
+      let rerolled = false
+      let reroll = ''
+
+      // reroll the first die in our results if it is less than 5
+      if (i > 0 && skill.nd > 2 && rolls[0] < 5) {
+        const orgroll = rolls[0]
+        rolls[0] = Math.floor(Math.random() * 10) + 1
+        reroll = game.i18n.format('SVNSEA2E.Reroll', { roll1: orgroll, roll2: rolls[0] })
+        rerolled = true
+      }
+
+      console.log(rolls)
+      while (i--) {
+        if (i > 1 && total === 0) {
+          total += rolls[0] + rolls[i - 1]
+          combo = rolls[0].toString() + ' + ' + rolls[i - 1].toString()
+          rolls.splice(i - 1, 1)
+          rolls.splice(0, 1)
+          i-- // length needs to shrink twice because we removed two elements from the array
+        } else {
+          total += rolls[0]
+          combo = combo + ' + ' + rolls[0].toString()
+          rolls.splice(0, 1)
+        }
+        console.log('total', total)
+        if (total >= threshold) {
+          raises += _addRaise(threshold)
+          raiseCombos.push(combo)
+          combo = ''
+          total = 0
+        }
+      }
+
+      let sortedRolls = d10.results
+      sortedRolls.sort(function (a, b) {
+        return a - b
+      })
 
       const messageOptions = {
         rollmode: 'gmroll'
       }
 
+      console.log(form.trait[form.trait.selectedIndex].text)
       const templateData = {
-        title: game.i18n.localize('SVNSEA2E.ApproachRollChatTitle', {
-          skill: CONFIG.SVNSEA2E.skills[skill.label],
-          trait: CONFIG.SVNSEA2E.traits[form.trait.name]
+        title: game.i18n.format('SVNSEA2E.ApproachRollChatTitle', {
+          skill: CONFIG.SVNSEA2E.skills[skill.name],
+          trait: form.trait[form.trait.selectedIndex].text
         }),
         actor: actor,
-        formula: formula,
         skill: event.currentTarget.dataset.label,
-        trait: form.trait.name,
+        trait: form.trait[form.trait.selectedIndex].text,
         data: data,
         labels: data.labels,
-        rolls: d10.results,
-        raises: raises
+        rolls: sortedRolls.join(', '),
+        raises: raises,
+        rCombos: raiseCombos.join(', '),
+        rerolled: rerolled,
+        reroll: reroll,
+        exploded: exploded,
+        explosions: explosions
       }
 
       const template = 'systems/svnsea2e/templates/chats/skillroll-card.html'

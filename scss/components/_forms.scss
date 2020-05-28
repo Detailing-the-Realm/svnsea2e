@@ -13,8 +13,9 @@
   margin-bottom: $margin-md;
 
   .profile-img {
-    flex: 0 0 100px;
+    flex: 0 0 200px;
     height: 200px;
+    width: 200px;
     margin-right: $padding-sm;
   }
 
@@ -54,7 +55,8 @@
     padding: 0 8px;
   }
 }
-h3.skill-name{
+
+h3.skill-name {
   margin: 0 0.5rem;
 }
 

@@ -1,8 +1,5 @@
 <div class="tab traits" data-group="primary" data-tab="traits">
-  <h2 class="charname">{{localize "SVNSEA2E.Traits"}}</h2>
-  {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-use both the "grid" and "grid-Ncol" class where "N" can be any number
-from 1 to 12 and will create that number of columns.  --}}
+  <h2>{{localize "SVNSEA2E.Traits"}}</h2>
   <div class="traits grid grid-5col">
     {{#each data.traits as |trait key|}}
       <div class="trait flexrow flex-group flex-between">
@@ -13,10 +10,7 @@ from 1 to 12 and will create that number of columns.  --}}
       </div>
     {{/each}}
   </div>
-  <h2 class="charname">{{localize "SVNSEA2E.Skills"}}</h2>
-  {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-use both the "grid" and "grid-Ncol" class where "N" can be any number
-from 1 to 12 and will create that number of columns.  --}}
+  <h2>{{localize "SVNSEA2E.Skills"}}</h2>
   <div class="skills grid grid-5col">
     {{#each data.skills as |skill key|}}
       <div class="trait flexrow flex-group flex-between">
@@ -27,5 +21,5 @@ from 1 to 12 and will create that number of columns.  --}}
       </div>
     {{/each}}
   </div>
-  {{localize "SVNSEA2E.Languages"}}
+  <h2>{{localize "SVNSEA2E.Languages"}}</h2>
 </div>
