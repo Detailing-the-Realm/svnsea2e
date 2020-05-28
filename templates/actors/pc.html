@@ -5,34 +5,18 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
-      <div class="resources grid grid-2;col">
-        <div class="resource flex-group-center">
-          <div class="resource flex-group-center">
-            <label for="data.heropts" class="resource-label">{{localize "SVNSEA2E.HeroPoints"}}</label>
-            <div class="resource-content flexrow flex-center flex-between">
-              <input type="text" name="data.heropts" value="{{data.heropts}}" />
-            </div>
-          </div>
-          <label for="data.nation" class="resource-label">{{localize "SVNSEA2E.Nation"}}</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.nation" value="{{data.nation}}" />
-          </div>
+      <div class="grid grid-3col">
+        <div class="flex-group-left">
+            <input type="text" name="data.nation" value="{{data.nation}}" placeholder="{{localize "SVNSEA2E.Nation"}}" />
         </div>
-        <div class="resources grid grid-2;col">
-          <div class="resource flex-group-center">
-            <label for="data.religion" class="resource-label">{{localize "SVNSEA2E.Religion"}}</label>
-            <div class="resource-content flexrow flex-center flex-between">
-              <input type="text" name="data.religion" value="{{data.religion}}" />
-            </div>
-          </div>
-          <div class="resource flex-group-center">
-            <label for="data.reputation" class="resource-label">{{localize "SVNSEA2E.Reputation"}}</label>
-            <div class="resource-content flexrow flex-center flex-between">
-              <input type="text" name="data.reputation" value="{{data.reputation}}" />
-            </div>
-          </div>
+        <div class="flex-group-left">
+            <input type="text" name="data.religion" value="{{data.religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
+        </div>
+        <div class="flex-group-left">
+            <input type="text" name="data.reputation" value="{{data.reputation}}"  placeholder="{{localize "SVNSEA2E.Reputation"}}" />
         </div>
       </div>
+      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
     </div>
   </header>
 

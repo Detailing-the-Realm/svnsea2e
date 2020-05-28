@@ -19,12 +19,13 @@
 
 .tabs {
   height: 40px;
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
+  border-top: $border-main;
+  border-bottom: $border-main;
 
   .item {
     line-height: 40px;
     font-weight: bold;
+    text-transform: uppercase;
   }
 
   .item.active {

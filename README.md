@@ -34,3 +34,4 @@ I don't have a timeline for when I think this will be usable for games, gut esti
 Developed from then [FoundryVTT System Tutorial](https://gitlab.com/asacolips-projects/foundry-mods/foundryvtt-system-tutorial). With code and ideas from DnD5E System also by Atropos.
 
 This FoundryVTT System uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications LLC, which are used under Chaosium Inc’s Fan Material Policy. We are expressly prohibited from charging you to use or access this content. This [website, character sheet, or whatever it is] is not published, endorsed, or specifically approved by Chaosium Inc. For more information about Chaosium Inc’s products, please visit www.chaosium.com.
+

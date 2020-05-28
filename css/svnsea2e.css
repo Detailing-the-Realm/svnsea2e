@@ -4,6 +4,25 @@
   font-family: "Roboto", sans-serif;
 }
 
+.window-app.svnsea2e.sheet.actor {
+  min-width: 700px;
+  min-height: 750px;
+}
+
+.window-app.svnsea2e.sheet input[type="text"] {
+  min-width: 20px;
+  text-align: left;
+  border: 1px solid transparent;
+  background: none;
+}
+
+.window-app.svnsea2e.sheet input[type="text"]:hover,
+.window-app.svnsea2e.sheet input[type="text"]:focus {
+  -webkit-box-shadow: 0 0 8px red;
+  box-shadow: 0 0 8px red;
+  border: 1px solid #000;
+}
+
 .rollable:hover, .rollable:focus {
   color: #000;
   text-shadow: 0 0 10px red;
@@ -15,8 +34,8 @@
   display: grid;
   grid-column: span 2 / span 2;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin: 10px 0;
+  gap: 5px;
+  margin: 5px 0;
   padding: 0;
 }
 
@@ -80,8 +99,8 @@
   -ms-flex-align: center;
   align-items: center;
   text-align: center;
-  padding: 5px;
-  border: 1px solid #999;
+  padding: 2px;
+  border: 1px solid transparent;
 }
 
 .flex-group-left {
@@ -143,8 +162,8 @@
   -webkit-box-flex: 0;
   -ms-flex: 0 0 100px;
   flex: 0 0 100px;
-  height: 100px;
-  margin-right: 10px;
+  height: 200px;
+  margin-right: 5px;
 }
 
 .svnsea2e .sheet-header .header-fields {
@@ -186,20 +205,31 @@
   padding: 0 8px;
 }
 
+.svnsea2e h3.skill-name {
+  margin: 0 0.5rem;
+}
+
+.svnsea2e .sheet-header .wounds input[type="text"],
+.svnsea2e .sheet-body .trait input[type="text"],
+.svnsea2e .sheet-body .skill input[type="text"] {
+  max-width: 25px;
+  text-align: right;
+}
+
 .svnsea2e .resource-label {
   font-weight: bold;
-  text-transform: uppercase;
 }
 
 .svnsea2e .tabs {
   height: 40px;
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
 
 .svnsea2e .tabs .item {
   line-height: 40px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .svnsea2e .tabs .item.active {

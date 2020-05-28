@@ -1,15 +1,10 @@
-import { SVNSEA2E } from '../../config.js'
-import { skillRoll } from '../../dice.js'
-
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
  */
 export class SvnSea2EActorSheet extends ActorSheet {
-
   /** @override */
   static get defaultOptions () {
-    console.log('getting default options')
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor'],
       template: 'systems/svnsea2e/templates/actors/pc.html',
@@ -31,14 +26,12 @@ export class SvnSea2EActorSheet extends ActorSheet {
     data.dtypes = ['String', 'Number', 'Boolean']
 
     // Update trait labels
-    for (let [t, trait] of Object.entries(data.actor.data.traits)) {
-      console.log(t)
-      console.log(CONFIG.SVNSEA2E.traits[t])
+    for (const [t, trait] of Object.entries(data.actor.data.traits)) {
       trait.label = CONFIG.SVNSEA2E.traits[t]
     }
 
     // Update skill labels
-    for (let [s, skl] of Object.entries(data.actor.data.skills)) {
+    for (const [s, skl] of Object.entries(data.actor.data.skills)) {
       skl.label = CONFIG.SVNSEA2E.skills[s]
     }
     // Prepare items.
@@ -76,8 +69,8 @@ export class SvnSea2EActorSheet extends ActorSheet {
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
-    for (let i of sheetData.items) {
-      let item = i.data
+    for (const i of sheetData.items) {
+      const item = i.data
       i.img = i.img || DEFAULT_TOKEN
       // Append to gear.
       if (i.type === 'item') {
@@ -132,7 +125,7 @@ export class SvnSea2EActorSheet extends ActorSheet {
 
     // Drag events for macros.
     if (this.actor.owner) {
-      let handler = ev => this._onDragItemStart(ev)
+      const handler = ev => this._onDragItemStart(ev)
       html.find('li.item').each((i, li) => {
         if (li.classList.contains('inventory-header')) return
         li.setAttribute('draggable', true)
@@ -177,12 +170,136 @@ export class SvnSea2EActorSheet extends ActorSheet {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
-    skillRoll({
-      skill: dataset.roll,
+
+    this.skillRoll({
+      skill: {
+        name: dataset.label,
+        nd: parseInt(dataset.roll)
+      },
       event: event,
+      actor: this.actor,
       data: this.actor.data.data,
-      title: game.i18n.format("SVNSEA2E.SkillPromptTitle", { skill: CONFIG.SVNSEA2E.skills[dataset.label] }),
-      speaker: ChatMessage.getSpeaker({actor: this})
+      title: game.i18n.format('SVNSEA2E.ApproachPromptTitle', {
+        skill: CONFIG.SVNSEA2E.skills[dataset.label]
+      }),
+      speaker: ChatMessage.getSpeaker({
+        actor: this
+      })
+    })
+  }
+
+  async skillRoll ({
+    skill = {},
+    actor = {},
+    data = {},
+    event = {},
+    template,
+    title
+  }) {
+    // Handle input arguments
+    let rolled = false
+    // Define inner roll function
+    const _roll = async function ({
+      skill = {},
+      actor = {},
+      data = {},
+      form = {}
+    }) {
+      const nd = skill.nd + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
+      const formula = nd.toString() + 'd10'
+      const d10 = new Die(10).roll(nd)
+      let raises = 0
+      if (skill.nd === 5) {
+        d10.explode(10)
+      }
+      const rolls = d10.results
+      for (let i = 0; i < rolls.length; i++) {
+        if (rolls[i] === 10) {
+          raises++
+        }
+      }
+      console.log(d10.results)
+
+      const messageOptions = {
+        rollmode: 'gmroll'
+      }
+
+      const templateData = {
+        title: game.i18n.localize('SVNSEA2E.ApproachRollChatTitle', {
+          skill: CONFIG.SVNSEA2E.skills[skill.label],
+          trait: CONFIG.SVNSEA2E.traits[form.trait.name]
+        }),
+        actor: actor,
+        formula: formula,
+        skill: event.currentTarget.dataset.label,
+        trait: form.trait.name,
+        data: data,
+        labels: data.labels,
+        rolls: d10.results,
+        raises: raises
+      }
+
+      const template = 'systems/svnsea2e/templates/chats/skillroll-card.html'
+      const html = await renderTemplate(template, templateData)
+
+      // Basic chat mes'systems/svnsea2e/templates/chats/skillroll-card.html'
+      const chatData = {
+        user: game.user._id,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        content: html,
+        speaker: {
+          actor: actor._id,
+          token: actor.token,
+          alias: actor.name
+        }
+      }
+
+      // Toggle default roll mode
+      const rollMode = game.settings.get('core', 'rollMode')
+      if (['gmroll', 'blindroll'].includes(rollMode)) chatData.whisper = ChatMessage.getWhisperIDs('GM')
+      if (rollMode === 'blindroll') chatData.blind = true
+
+      // Create the chat message
+      const chatmsg = ChatMessage.create(chatData)
+      rolled = true
+      return d10
+    }
+
+    const traits = {}
+    for (const trait of Object.keys(data.traits)) {
+      traits[CONFIG.SVNSEA2E.traits[trait]] = data.traits[trait].value
+    }
+
+    // Render modal dialog
+    template = template || 'systems/svnsea2e/templates/chats/roll-dialog.html'
+    const dialogData = {
+      data: data,
+      traits: traits
+    }
+
+    const html = await renderTemplate(template, dialogData)
+
+    // Create the Dialog window
+    let roll
+    return new Promise(resolve => {
+      new Dialog({
+        title: title,
+        content: html,
+        buttons: {
+          roll: {
+            label: game.i18n.localize('SVNSEA2E.Roll'),
+            callback: html => roll = _roll({
+              skill: skill,
+              actor: actor,
+              data: data,
+              form: html[0].children[0]
+            })
+          }
+        },
+        close: html => {
+          resolve(rolled ? roll : false)
+        }
+      }, {}).render(true)
     })
   }
 }

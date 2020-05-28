@@ -37,32 +37,36 @@ Hooks.once('init', async function () {
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet)
   Actors.registerSheet('svnsea2e', SvnSea2EActorSheet,
-      {types: ['character'], makeDefault: true})
+    { types: ['character'], makeDefault: true })
   Actors.registerSheet('svnsea2e', SvnSea2EActorSheet,
-      {types: ['npc'], makeDefault: true})
+    { types: ['npc'], makeDefault: true })
   Items.unregisterSheet('core', ItemSheet)
-  Items.registerSheet('svnsea2e', SvnSea2EItemSheet, {makeDefault: true})
+  Items.registerSheet('svnsea2e', SvnSea2EItemSheet, { makeDefault: true })
 
   // If you need to add Handlebars helpers, here are a few useful examples:
-  Handlebars.registerHelper('concat', function() {
+  Handlebars.registerHelper('concat', function () {
     var outStr = ''
     for (var arg in arguments) {
-      if (typeof arguments[arg] != 'object') {
+      if (typeof arguments[arg] !== 'object') {
         outStr += arguments[arg]
       }
     }
     return outStr
   })
 
-  Handlebars.registerHelper('toLowerCase', function(str) {
+  Handlebars.registerHelper('toLowerCase', function (str) {
     return str.toLowerCase()
+  })
+
+  Handlebars.registerHelper('capitalize', function (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
   })
 
   // Preload Handlebars Templates
   preloadHandlebarsTemplates()
 })
 
-Hooks.once('ready', async function() {
+Hooks.once('ready', async function () {
   // Wait to register hotbar drop hook on ready so that
   // modules could register earlier if they want to
   Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
@@ -72,8 +76,7 @@ Hooks.once('ready', async function() {
  * This function runs after game data has been requested
  * and loaded from the servers, so entities exist
  */
-Hooks.once('setup', function() {
-  console.log('In setup')
+Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
     'nations', 'traits', 'skills'
@@ -84,17 +87,16 @@ Hooks.once('setup', function() {
   ]
 
   // Localize and sort CONFIG objects
-  for (let o of toLocalize) {
+  for (const o of toLocalize) {
     const localized = Object.entries(CONFIG.SVNSEA2E[o]).map(e => {
       return [e[0], game.i18n.localize(e[1])]
     })
     if (!noSort.includes(o)) localized.sort((a, b) => a[1].localeCompare(b[1]))
     CONFIG.SVNSEA2E[o] = localized.reduce((obj, e) => {
-      obj[e[0]] = e[1];
+      obj[e[0]] = e[1]
       return obj
     }, {})
   }
-  console.log('End setup')
 })
 
 /* -------------------------------------------- */

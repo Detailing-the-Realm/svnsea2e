@@ -2,11 +2,30 @@
   font-family: $font-primary;
 }
 
+.window-app.svnsea2e.sheet.actor {
+  min-width: 700px;
+  min-height: 750px;
+}
+
+.window-app.svnsea2e.sheet{
+  input[type="text"]{
+    min-width: 20px;
+    text-align: left;
+    border: $no-border;
+    background: none;
+  }
+  input[type="text"]:hover,
+  input[type="text"]:focus{
+    box-shadow: 0 0 8px red;
+    border: $border-main;
+  }
+}
+
 .rollable {
   &:hover,
   &:focus {
-    color: #000;
-    text-shadow: 0 0 10px red;
+    color: $f-c-primary;
+    text-shadow: 0 0 10px $c-secondary;
     cursor: pointer;
   }
 }

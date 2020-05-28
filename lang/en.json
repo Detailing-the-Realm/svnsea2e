@@ -60,6 +60,10 @@
   "SVNSEA2E.Knack": "Knack",
   "SVNSEA2E.Innate": "Innate",
   "SVNSEA2E.Roll": "Roll",
-  "SVNSEA2E.SkillPromptTitle": "{skill} Skill Roll",
-  "SVNSEA2E.BonusDice": "Bonus Dice"
+  "SVNSEA2E.ApproachPromptTitle": "{skill} Approach Roll",
+  "SVNSEA2E.ApproachRollChatTitle":"{trait} + {skill} Approach Roll",
+  "SVNSEA2E.BonusDice": "Bonus Dice",
+  "SVNSEA2E.NumDice":"Number of Dice Rolled",
+  "SVNSEA2E.HeroPoints":"Hero Points",
+  "SVNSEA2E.DangerDice":"Danger Dice"
 }
