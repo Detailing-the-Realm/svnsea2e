@@ -4,9 +4,14 @@ import { preloadHandlebarsTemplates } from './templates.js'
 
 // Import Applications
 import { SvnSea2EActor } from './actor/actor.js'
-import { SvnSea2EActorSheet } from './actor/sheets/actor-pc-sheet.js'
+import { ActorSheetSS2ePC } from './actor/sheets/pc.js'
+import { ActorSheetSS2eNPC } from './actor/sheets/npc.js'
+import { ActorSheetSS2eBrute } from './actor/sheets/brute.js'
+import { ActorSheetSS2eMonster } from './actor/sheets/monster.js'
+import { ActorSheetSS2eVillian } from './actor/sheets/villian.js'
 import { SvnSea2EItem } from './item/item.js'
 import { SvnSea2EItemSheet } from './item/sheets/item-sheet.js'
+import LanguageSelector from './apps/language-selector.js'
 
 Hooks.once('init', async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System\n
@@ -36,10 +41,16 @@ Hooks.once('init', async function () {
 
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet)
-  Actors.registerSheet('svnsea2e', SvnSea2EActorSheet,
+  Actors.registerSheet('svnsea2e', ActorSheetSS2ePC,
     { types: ['character'], makeDefault: true })
-  Actors.registerSheet('svnsea2e', SvnSea2EActorSheet,
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eNPC,
     { types: ['npc'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eBrute,
+    { types: ['npc'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eMonster,
+    { types: ['monster'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eVillian,
+    { types: ['villian'], makeDefault: true })
   Items.unregisterSheet('core', ItemSheet)
   Items.registerSheet('svnsea2e', SvnSea2EItemSheet, { makeDefault: true })
 
@@ -79,7 +90,7 @@ Hooks.once('ready', async function () {
 Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    'nations', 'traits', 'skills'
+    'nations', 'traits', 'skills', 'languages', 'itemTypes'
   ]
 
   // Exclude some from sorting where the default order matters

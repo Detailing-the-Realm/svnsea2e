@@ -1,9 +1,9 @@
 {
   "Actor": {
-    "types": ["brute", "character", "npc", "villian"],
+    "types": ["brute", "character", "npc", "villian", "monster"],
     "templates": {
       "base": {
-        "name":"",
+        "name": "",
         "nation": "",
         "religion": "",
         "age": 20,
@@ -19,8 +19,9 @@
             "name": "",
             "description": ""
           }
+        }
       },
-      "pcnpc":{
+      "pc_npc": {
         "biography": "",
         "wounds": {
           "value": 0,
@@ -143,82 +144,94 @@
         }
       }
     },
-    "brute":{
-      "name":"",
+    "brute": {
+      "name": "",
       "strength": 1,
-      "ability":{
-        "name":"",
-        "description":""
+      "ability": {
+        "name": "",
+        "description": ""
       }
     },
     "character": {
-      "templates": ["base","pcnpc"],
+      "templates": ["base", "pc_npc"],
       "wealth": "",
       "concept": "",
       "heropts": 0,
       "backgrounds": {}
-      },
-      "stories": [{
-        "name": "",
-        "description": "",
-        "ending": "",
-        "reward": "",
-        "steps": []
-      }]
     },
-    "npc": {
-      "templates": ["base","pcnpc"]
+    "stories": [{
+      "name": "",
+      "description": "",
+      "ending": "",
+      "reward": "",
+      "steps": []
+    }]
+  },
+  "monster": {
+    "templates": ["base"],
+    "traits": {
+      "influence": 5,
+      "strength": 5,
+      "villainy": 10
     },
-    "villian": {
-      "templates": ["base"],
-      "traits":{
-        "influence":5,
-        "strength":5,
-        "villainy":10
-      },
-      "schemes":[{
-        "description":"",
-        "influence":0
-        }]
+    "schemes": [{
+      "description": "",
+      "influence": 0
+    }]
+  },
+  "npc": {
+    "templates": ["base", "pc_npc"]
+  },
+  "villian": {
+    "templates": ["base"],
+    "traits": {
+      "influence": 5,
+      "strength": 5,
+      "villainy": 10
+    },
+    "schemes": [{
+      "description": "",
+      "influence": 0
+    }]
+  }
+},
+"Item": {
+  "types": ["background", "advantage", "sorcery", "nation", "secretsociety", "ship"],
+  "templates": {
+    "base": {
+      "name": "",
+      "description": "",
+      "source": ""
     }
   },
-  "Item": {
-    "types": ["background", "advantage", "sorcery", "nation", "secretsociety", "ship"],
-    "templates": {
-      "base": {
-        "name": "",
-        "description": "",
-        "source": ""
-      }
+  "background": {
+    "templates": ["base"],
+    "quirk": "",
+    "skills": [],
+    "advantages": []
+  },
+  "advantage": {
+    "templates": ["base"],
+    "cost": {
+      "normal": 1,
+      "specialreg": ""
     },
-    "background": {
-      "templates": ["base"],
-      "quirk": "",
-      "skills": [],
-      "advantages": []
-    },
-    "advantage": {
-      "templates": ["base"],
-      "cost": {
-        "normal":1,
-        "specialreg":""
-      },
-      "knack":false,
-      "innate":false
-    },
-    "secretsociety": {
-      "templates": ["base"]
-    },
-    "nation": {
-      "templates": ["base"],
-      "traits": []
-    },
-    "sorcery": {
-      "templates": ["base"]
-    },
-    "ship": {
-      "templates": ["base"],
-      "crew":[]
-    }
+    "knack": false,
+    "innate": false
+  },
+  "secretsociety": {
+    "templates": ["base"]
+  },
+  "nation": {
+    "templates": ["base"],
+    "traits": []
+  },
+  "sorcery": {
+    "templates": ["base"]
+  },
+  "ship": {
+    "templates": ["base"],
+    "crew": []
   }
+}
 }

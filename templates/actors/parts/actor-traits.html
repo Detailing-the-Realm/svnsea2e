@@ -1,5 +1,5 @@
 <div class="tab traits" data-group="primary" data-tab="traits">
-  <h2>{{localize "SVNSEA2E.Traits"}}</h2>
+  <h3>{{localize "SVNSEA2E.Traits"}}</h3>
   <div class="traits grid grid-5col">
     {{#each data.traits as |trait key|}}
       <div class="trait flexrow flex-group flex-between">
@@ -10,10 +10,10 @@
       </div>
     {{/each}}
   </div>
-  <h2>{{localize "SVNSEA2E.Skills"}}</h2>
+  <h3>{{localize "SVNSEA2E.Skills"}}</h3>
   <div class="skills grid grid-5col">
     {{#each data.skills as |skill key|}}
-      <div class="trait flexrow flex-group flex-between">
+      <div class="skill flexrow flex-group flex-between">
         <label for="data.skills.{{key}}.value" class="resource-label">
           <h3 class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">{{skill.label}}</h3>
         </label>
@@ -21,5 +21,13 @@
       </div>
     {{/each}}
   </div>
-  <h2>{{localize "SVNSEA2E.Languages"}}</h2>
+  <h3>{{localize "SVNSEA2E.Languages"}}</h3>
+    <div class="language flexrow flex-group flex-between">
+      <ul class="languages-list">
+      {{#each data.langnames as |k, v|}}
+          <li class="tag {{k}}">{{v}}</li>
+      {{/each}}
+      </ul>
+      <a class="language-selector" data-options="languages"><i class="fas fa-edit"></i></a>
+  </div>
 </div>

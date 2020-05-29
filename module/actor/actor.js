@@ -14,6 +14,7 @@ export class SvnSea2EActor extends Actor {
     const actorData = this.data
     const data = actorData.data
     const flags = actorData.flags
+    console.log(data)
 
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
     data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)

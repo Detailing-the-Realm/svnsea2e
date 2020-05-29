@@ -13,16 +13,48 @@ SVNSEA2E.itemTypes = {
 }
 
 SVNSEA2E.nations = {
+  anatol: 'SVNSEA2E.NationAnatol',
   avalon: 'SVNSEA2E.NationAvalon',
+  ashur: 'SVNSEA2E.NationAshur',
   inismore: 'SVNSEA2E.NationInismore',
   highland: 'SVNSEA2E.NationHighland',
   castille: 'SVNSEA2E.NationCastille',
   eisen: 'SVNSEA2E.NationEisen',
+  jaragua: 'SVNSEA2E.NationJargua',
+  kuraq: 'SVNSEA2E.NationKuraq',
+  labucca: 'SVNSEA2E.NationLaBucca',
   montaigne: 'SVNSEA2E.NationMontaigne',
+  nahuaca: 'SVNSEA2E.NationNahuaca',
+  numa: 'SVNSEA2E.NationNuma',
+  persis: 'SVNSEA2E.NationPersis',
+  rahuris: 'SVNSEA2E.NationRahuri',
   sarmatia: 'SVNSEA2E.NationSarmatia',
+  sarmion: 'SVNSEA2E.NationSarmion',
+  tribes: 'SVNSEA2E.NationTribes',
+  tzakkan: 'SVNSEA2E.NationTzakkan',
   ussura: 'SVNSEA2E.NationUssura',
-  vesten: 'SVNSEA2E.Nationvesten',
+  vesten: 'SVNSEA2E.NationVesten',
   vodacce: 'SVNSEA2E.NationVodacce'
+}
+
+SVNSEA2E.languages = {
+  avalon: 'SVNSEA2E.LanguageAvalonian',
+  castille: 'SVNSEA2E.LanguageCastillian',
+  eisen: 'SVNSEA2E.LanguageEisen',
+  highland: 'SVNSEA2E.LanguageHighlander',
+  jaragua: 'SVNSEA2E.LanguageJaragua',
+  inismore: 'SVNSEA2E.LanguageInish',
+  montaigne: 'SVNSEA2E.LanguageMontaigne',
+  numa: 'SVNSEA2E.LanguageNuma',
+  persis: 'SVNSEA2E.LanguagePersis',
+  pirate: 'SVNSEA2E.LanguagePirate',
+  rahuri: 'SVNSEA2E.LanguageRahuri',
+  sarmatia: 'SVNSEA2E.LanguageCuronian',
+  sarmion: 'SVNSEA2E.LanguageDibre',
+  thean: 'SVNSEA2E.LanguageThean',
+  ussura: 'SVNSEA2E.LanguageUssurian',
+  vesten: 'SVNSEA2E.LanguageVesten',
+  vodacce: 'SVNSEA2E.LanguageVodacce'
 }
 
 SVNSEA2E.traits = {
