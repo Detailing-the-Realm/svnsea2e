@@ -21,7 +21,7 @@
           }
         }
       },
-      "pc_npc": {
+      "pc": {
         "biography": "",
         "wounds": {
           "value": 0,
@@ -142,6 +142,13 @@
             "max": 5
           }
         }
+      },
+      "vbase": {
+        "traits": {
+          "influence": 5,
+          "strength": 5,
+          "villainy": 10
+        }
       }
     },
     "brute": {
@@ -153,7 +160,7 @@
       }
     },
     "character": {
-      "templates": ["base", "pc_npc"],
+      "templates": ["base", "pc"],
       "wealth": "",
       "concept": "",
       "heropts": 0,
@@ -165,73 +172,58 @@
       "ending": "",
       "reward": "",
       "steps": []
-    }]
-  },
-  "monster": {
-    "templates": ["base"],
-    "traits": {
-      "influence": 5,
-      "strength": 5,
-      "villainy": 10
+    }],
+    "monster": {
+      "templates": ["base", "vbase"]
     },
-    "schemes": [{
-      "description": "",
-      "influence": 0
-    }]
-  },
-  "npc": {
-    "templates": ["base", "pc_npc"]
-  },
-  "villian": {
-    "templates": ["base"],
-    "traits": {
-      "influence": 5,
-      "strength": 5,
-      "villainy": 10
+    "npc": {
+      "templates": ["base", "pc"]
     },
-    "schemes": [{
-      "description": "",
-      "influence": 0
-    }]
-  }
-},
-"Item": {
-  "types": ["background", "advantage", "sorcery", "nation", "secretsociety", "ship"],
-  "templates": {
-    "base": {
-      "name": "",
-      "description": "",
-      "source": ""
+    "villian": {
+      "templates": ["base", "vbase"],
+      "schemes": [{
+        "description": "",
+        "influence": 0
+      }]
     }
   },
-  "background": {
-    "templates": ["base"],
-    "quirk": "",
-    "skills": [],
-    "advantages": []
-  },
-  "advantage": {
-    "templates": ["base"],
-    "cost": {
-      "normal": 1,
-      "specialreg": ""
+  "Item": {
+    "types": ["background", "advantage", "sorcery", "nation", "secretsociety", "ship"],
+    "templates": {
+      "base": {
+        "name": "",
+        "description": "",
+        "source": ""
+      }
     },
-    "knack": false,
-    "innate": false
-  },
-  "secretsociety": {
-    "templates": ["base"]
-  },
-  "nation": {
-    "templates": ["base"],
-    "traits": []
-  },
-  "sorcery": {
-    "templates": ["base"]
-  },
-  "ship": {
-    "templates": ["base"],
-    "crew": []
+    "background": {
+      "templates": ["base"],
+      "quirk": "",
+      "skills": [],
+      "advantages": []
+    },
+    "advantage": {
+      "templates": ["base"],
+      "cost": {
+        "normal": 1,
+        "specialreg": ""
+      },
+      "knack": false,
+      "innate": false
+    },
+    "secretsociety": {
+      "templates": ["base"]
+    },
+    "nation": {
+      "templates": ["base"],
+      "traits": []
+    },
+    "sorcery": {
+      "templates": ["base"]
+    },
+    "ship": {
+      "templates": ["base"],
+      "crew": []
+    }
   }
-}
 }

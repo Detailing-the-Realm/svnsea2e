@@ -77,7 +77,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   _prepareLanguages (data) {
     data.langnames = []
-    console.log(data.languages.value)
+    console.log(data)
     for (let i = 0; i < Object.keys(data.languages).length; i++) {
       console.log(data.languages[i], CONFIG.SVNSEA2E.languages[data.languages[i]])
       data.langnames[i][data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
