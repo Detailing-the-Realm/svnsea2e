@@ -2,6 +2,11 @@
   border-top: $border-g-sm-main;
   border-bottom: $border-g-sm-main;
 
+  h2 {
+    border: $no-border;
+    font-size: $font-s-md;
+    margin:0;
+  }
 
   .item {
     font-weight: bold;

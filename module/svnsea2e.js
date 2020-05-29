@@ -90,7 +90,7 @@ Hooks.once('ready', async function () {
 Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    'nations', 'traits', 'skills', 'languages', 'itemTypes'
+    'nations', 'traits', 'skills', 'languages', 'itemTypes', 'status'
   ]
 
   // Exclude some from sorting where the default order matters

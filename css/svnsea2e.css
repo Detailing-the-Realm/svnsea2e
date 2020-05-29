@@ -8,12 +8,23 @@ a:hover {
   text-shadow: 0 0 8px #800000;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.75rem 0;
+  padding: 0;
+  font-weight: normal;
+}
+
 h1 {
-  font-size: 1.6em;
+  font-size: 2em;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.6em;
 }
 
 h3 {
@@ -25,16 +36,10 @@ h4 {
 }
 
 h5 {
-  margin: 0 0 0.5rem;
-  padding: 0;
-  font-weight: normal;
   font-size: 1.1em;
 }
 
 h6 {
-  margin: 0 0 0.5rem;
-  padding: 0;
-  font-weight: normal;
   font-size: 1em;
 }
 
@@ -49,6 +54,7 @@ h4.message-sender {
 input[type="text"],
 input[type="password"],
 input[type="datetime-local"] {
+  font-size: 1em;
   color: #000;
 }
 
@@ -191,10 +197,14 @@ input[type="datetime-local"] {
 }
 
 /* Styles limited to svnsea2e sheets */
+.svnsea2e h3 {
+  border-bottom: 1px solid #800000;
+}
+
 .svnsea2e .sheet-header {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 210px;
-  flex: 0 0 210px;
+  -ms-flex: 0 0 150px;
+  flex: 0 0 150px;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -213,10 +223,10 @@ input[type="datetime-local"] {
 
 .svnsea2e .sheet-header .profile-img {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 200px;
-  flex: 0 0 200px;
-  height: 200px;
-  width: 200px;
+  -ms-flex: 0 0 150px;
+  flex: 0 0 150px;
+  height: 150px;
+  width: 150px;
   margin-right: 5px;
 }
 
@@ -224,6 +234,15 @@ input[type="datetime-local"] {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+
+.svnsea2e .sheet-header .flex-group-center,
+.svnsea2e .sheet-header .flex-group-left {
+  padding: 0;
+}
+
+.svnsea2e .sheet-header .grid {
+  border-top: 1px solid #000;
 }
 
 .svnsea2e .sheet-header h1.charname {
@@ -268,10 +287,6 @@ input[type="datetime-local"] {
   padding: 0;
 }
 
-.svnsea2e .traits h3 {
-  border-bottom: 1px solid #800000;
-}
-
 .svnsea2e .sheet-header .wounds input[type="text"],
 .svnsea2e .sheet-body .trait input[type="text"],
 .svnsea2e .sheet-body .skill input[type="text"] {
@@ -285,7 +300,7 @@ input[type="datetime-local"] {
 }
 
 .svnsea2e .chat-card.skill-roll .card-content .raises {
-  font-size: 1.5em;
+  font-size: 1.6em;
   font-weight: bold;
 }
 
@@ -316,6 +331,12 @@ input[type="datetime-local"] {
 .svnsea2e .tabs {
   border-top: 1px groove #000;
   border-bottom: 1px groove #000;
+}
+
+.svnsea2e .tabs h2 {
+  border: 1px solid transparent;
+  font-size: 1.1em;
+  margin: 0;
 }
 
 .svnsea2e .tabs .item {

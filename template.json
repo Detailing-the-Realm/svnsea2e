@@ -164,15 +164,15 @@
       "wealth": "",
       "concept": "",
       "heropts": 0,
-      "backgrounds": {}
+      "stories": [{
+        "name": "",
+        "description": "",
+        "ending": "",
+        "reward": "",
+        "steps": "",
+        "status": ""
+      }]
     },
-    "stories": [{
-      "name": "",
-      "description": "",
-      "ending": "",
-      "reward": "",
-      "steps": []
-    }],
     "monster": {
       "templates": ["base", "vbase"]
     },

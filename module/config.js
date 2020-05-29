@@ -12,6 +12,14 @@ SVNSEA2E.itemTypes = {
   ship: 'SVNSEA2E.Ship'
 }
 
+SVNSEA2E.actorTypes = {
+  brute: 'SVNSEA2E.Brute',
+  character: 'SVNSEA2E.Character',
+  monster: 'SVNSEA2E.Monster',
+  villian: 'SVNSEA2E.Villain',
+  npc: 'SVNSEA2E.NPC'
+}
+
 SVNSEA2E.nations = {
   anatol: 'SVNSEA2E.NationAnatol',
   avalon: 'SVNSEA2E.NationAvalon',
@@ -82,6 +90,12 @@ SVNSEA2E.skills = {
   theft: 'SVNSEA2E.SkillTheft',
   warfare: 'SVNSEA2E.SkillWarfare',
   weaponry: 'SVNSEA2E.SkillWeaponry'
+}
+
+SVNSEA2E.status = {
+  abandoned: 'SVNSEA2E.StatusAbandoned',
+  complete: 'SVNSEA2E.StatusComplete',
+  inprogress: 'SVNSEA2E.StatusInProgress'
 }
 
 SVNSEA2E.match10 = {

@@ -1,5 +1,9 @@
+h3 {
+  border-bottom: $border-s-sm-secondary;
+}
+
 .sheet-header {
-  flex: 0 0 210px;
+  flex: 0 0 $profile-img-size;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -16,6 +20,15 @@
 
   .header-fields {
     flex: 1;
+  }
+
+  .flex-group-center,
+  .flex-group-left {
+    padding: 0;
+  }
+
+  .grid {
+    border-top: $border-s-sm-main;
   }
 
   h1.charname {
@@ -56,10 +69,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-
-  h3 {
-    border-bottom: $border-s-sm-secondary;
   }
 }
 
