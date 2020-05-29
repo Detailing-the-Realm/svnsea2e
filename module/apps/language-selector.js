@@ -8,12 +8,11 @@ export default class LanguageSelector extends FormApplication {
     return mergeObject(super.defaultOptions, {
       id: 'language-selector',
       classes: ['svnsea2e'],
-      title: 'Actor Trait Selection',
+      title: 'Actor Language Selection',
       template: 'systems/svnsea2e/templates/apps/language-selector.html',
       width: 320,
       height: 'auto',
       choices: {},
-      allowCustom: true,
       minimum: 0,
       maximum: null
     })
@@ -21,36 +20,24 @@ export default class LanguageSelector extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /**
-   * Return a reference to the target attribute
-   * @type {String}
-   */
-  get attribute () {
-    return this.options.name
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   getData () {
+    console.log('lang select get data: ', this.options.choices)
     // Get current values
-    const attr = getProperty(this.object.data, this.attribute) || {}
-    attr.value = attr.value || []
+    const langs = this.object.data.data.languages
 
     // Populate choices
     const choices = duplicate(this.options.choices)
     for (const [k, v] of Object.entries(choices)) {
       choices[k] = {
         label: v,
-        chosen: attr ? attr.value.includes(k) : false
+        chosen: langs ? langs.includes(k) : false
       }
     }
 
     // Return data
-	  return {
-      allowCustom: this.options.allowCustom,
-	    choices: choices,
-      custom: attr ? attr.custom : ''
+    return {
+      choices: choices
     }
   }
 
@@ -62,10 +49,24 @@ export default class LanguageSelector extends FormApplication {
 
     // Obtain choices
     const chosen = []
+    console.log(this.attribute)
     for (const [k, v] of Object.entries(formData)) {
-      if ((k !== 'custom') && v) chosen.push(k)
+      console.log(v)
+      if (v) {
+        chosen.push(k)
+      }
     }
-    updateData[`${this.attribute}.value`] = chosen
+    console.log(chosen)
+    updateData['data.languages'] = chosen
+
+    if (this.options.minimum && (chosen.length < this.options.minimum)) {
+      return ui.notifications.error(`You must choose at least ${this.options.minimum} options`)
+    }
+    if (this.options.maximum && (chosen.length > this.options.maximum)) {
+      return ui.notifications.error(`You may choose no more than ${this.options.maximum} options`)
+    }
+
+    console.log(updateData)
 
     // Update the object
     this.object.update(updateData)

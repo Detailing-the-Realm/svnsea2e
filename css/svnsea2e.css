@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Martel:wght@400;800&family=Roboto:wght@300;400;500&display=swap");
 /* Global styles */
+body {
+  font-size: 1em;
+}
+
+a:hover {
+  text-shadow: 0 0 8px #800000;
+}
+
 h1 {
   font-size: 1.6em;
 }
@@ -38,13 +46,24 @@ h4.message-sender {
   font-weight: bold;
 }
 
-.window-app {
-  font-family: "Roboto", sans-serif;
+input[type="text"],
+input[type="password"],
+input[type="datetime-local"] {
+  color: #000;
 }
 
-.svnsea2e.sheet.actor {
-  min-width: 700px;
-  min-height: 750px;
+.window-app {
+  font-family: "Roboto", sans-serif;
+  color: #000;
+}
+
+.window-app .window-content {
+  color: #000;
+}
+
+.window-app .window-header .window-title,
+.window-app .window-header a {
+  color: #fff;
 }
 
 .svnsea2e.sheet input[type="text"] {
@@ -56,14 +75,14 @@ h4.message-sender {
 
 .svnsea2e.sheet input[type="text"]:hover,
 .svnsea2e.sheet input[type="text"]:focus {
-  -webkit-box-shadow: 0 0 8px red;
-  box-shadow: 0 0 8px red;
+  -webkit-box-shadow: 0 0 8px #800000;
+  box-shadow: 0 0 8px #800000;
   border: 1px solid #000;
 }
 
-.rollable:hover, .rollable:focus {
+.rollable:focus, .rollable:hover {
   color: #000;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px #800000;
   cursor: pointer;
 }
 
@@ -172,20 +191,6 @@ h4.message-sender {
 }
 
 /* Styles limited to svnsea2e sheets */
-.svnsea2e .chat-card.skill-roll .card-content,
-.svnsea2e .chat-card.skill-roll .card-header {
-  border-bottom: 1px solid #000;
-}
-
-.svnsea2e .chat-card.skill-roll .card-content .raises {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.svnsea2e .item-form {
-  font-family: "Roboto", sans-serif;
-}
-
 .svnsea2e .sheet-header {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 210px;
@@ -223,7 +228,7 @@ h4.message-sender {
 
 .svnsea2e .sheet-header h1.charname {
   height: 50px;
-  padding: 0px;
+  padding: 0;
   margin: 5px 0;
   border-bottom: 0;
 }
@@ -232,6 +237,60 @@ h4.message-sender {
   width: 100%;
   height: 100%;
   margin: 0;
+}
+
+.svnsea2e .traits .tag {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 0 2px;
+  font-size: 1em;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.svnsea2e .traits .flexrow .languages-list {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 95%;
+  flex: 0 0 95%;
+}
+
+.svnsea2e .traits .flexrow .language-selector {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 2%;
+  flex: 0 0 2%;
+}
+
+.svnsea2e .traits .languages-list {
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.svnsea2e .traits h3 {
+  border-bottom: 1px solid #800000;
+}
+
+.svnsea2e .sheet-header .wounds input[type="text"],
+.svnsea2e .sheet-body .trait input[type="text"],
+.svnsea2e .sheet-body .skill input[type="text"] {
+  max-width: 25px;
+  text-align: right;
+}
+
+.svnsea2e .chat-card.skill-roll .card-content,
+.svnsea2e .chat-card.skill-roll .card-header {
+  border-bottom: 1px solid #000;
+}
+
+.svnsea2e .chat-card.skill-roll .card-content .raises {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.svnsea2e .item-form {
+  font-family: "Roboto", sans-serif;
 }
 
 .svnsea2e .sheet-tabs {
@@ -254,35 +313,19 @@ h4.message-sender {
   padding: 0 8px;
 }
 
-.svnsea2e h3.skill-name {
-  margin: 0 0.5rem;
-}
-
-.svnsea2e .sheet-header .wounds input[type="text"],
-.svnsea2e .sheet-body .trait input[type="text"],
-.svnsea2e .sheet-body .skill input[type="text"] {
-  max-width: 25px;
-  text-align: right;
-}
-
-.svnsea2e .resource-label {
-  font-weight: bold;
-}
-
 .svnsea2e .tabs {
-  height: 40px;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border-top: 1px groove #000;
+  border-bottom: 1px groove #000;
 }
 
 .svnsea2e .tabs .item {
-  line-height: 40px;
   font-weight: bold;
   text-transform: uppercase;
+  padding: 20px;
 }
 
 .svnsea2e .tabs .item.active {
-  text-decoration: underline;
+  border-bottom: 3px solid #800000;
   text-shadow: none;
 }
 

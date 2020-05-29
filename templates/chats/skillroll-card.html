@@ -7,22 +7,24 @@
       <div class="raises">{{ raises }} {{ localize "SVNSEA2E.Raises" }}</div>
     </div>
     <footer class="card-footer">
-      <h5 class="">{{ localize "SVNSEA2E.RaiseCombos" }}</h5>
+              <h5 class="">{{ localize "SVNSEA2E.RollDetails" }}</h5>
+      <div class="threshold">
+        {{ threshold }}
+      </div>
       <div class="raise-combos">
         {{ rCombos }}
       </div>
-      <div class="skill-rolls">
-        <h5 class="">{{ localize "SVNSEA2E.Rolls" }}</h5>
+      <div class="rolls">
         <div class="">{{ rolls }}</div>
       </div>
       {{#if rerolled}}
-        <div class="skill-reroll">
+        <div class="reroll">
           {{ reroll }}
         </div>
       {{/if}}
       {{#if exploded}}
-        <div class="skill-explosions">
-          {{ localize "SVNSEA2E.Exploded" }} {{ explosions }}
+        <div class="explosions">
+           {{ explosions }}
         </div>
       {{/if}}
     </footer>

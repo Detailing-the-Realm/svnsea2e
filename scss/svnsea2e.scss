@@ -12,9 +12,9 @@
 
 /* Styles limited to svnsea2e sheets */
 .svnsea2e {
+  @import 'components/actors';
   @import 'components/chat';
   @import 'components/forms';
-  @import 'components/resource';
   @import 'components/tabs';
   @import 'components/items';
 }

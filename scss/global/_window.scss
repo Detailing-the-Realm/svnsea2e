@@ -1,24 +1,35 @@
 .window-app {
   font-family: $font-primary;
+  color: $f-c-primary;
+
+  .window-content {
+    color: $f-c-primary;
+  }
+
+  .window-header .window-title,
+  .window-header a {
+    color: $c-white;
+  }
 }
 
-.svnsea2e.sheet{
-  input[type="text"]{
+.svnsea2e.sheet {
+  input[type="text"] {
     min-width: 20px;
     text-align: left;
     border: $no-border;
     background: none;
   }
+
   input[type="text"]:hover,
-  input[type="text"]:focus{
-    box-shadow: 0 0 8px red;
-    border: $border-main;
+  input[type="text"]:focus {
+    box-shadow: 0 0 8px $c-secondary;
+    border: $border-s-sm-main;
   }
 }
 
 .rollable {
-  &:hover,
-  &:focus {
+  &:focus,
+  &:hover {
     color: $f-c-primary;
     text-shadow: 0 0 10px $c-secondary;
     cursor: pointer;

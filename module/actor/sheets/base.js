@@ -76,13 +76,13 @@ export default class ActorSheetSS2e extends ActorSheet {
   }
 
   _prepareLanguages (data) {
-    data.langnames = []
+    data.selectedlangs = {}
     console.log(data)
-    for (let i = 0; i < Object.keys(data.languages).length; i++) {
+    for (let i = 0; i < data.languages.length; i++) {
       console.log(data.languages[i], CONFIG.SVNSEA2E.languages[data.languages[i]])
-      data.langnames[i][data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
+      data.selectedlangs[data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
     }
-    console.log(data.langnames)
+    console.log(data.selectedlangs)
   }
 
   /* -------------------------------------------- */
@@ -312,10 +312,11 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       console.log(rolls)
       while (i--) {
-        if (i > 1 && total === 0) {
-          total += rolls[0] + rolls[i - 1]
-          combo = rolls[0].toString() + ' + ' + rolls[i - 1].toString()
-          rolls.splice(i - 1, 1)
+        console.log('i', i)
+        if (i > 0 && total === 0) {
+          total += rolls[0] + rolls[i]
+          combo = rolls[0].toString() + ' + ' + rolls[i].toString()
+          rolls.splice(i, 1)
           rolls.splice(0, 1)
           i-- // length needs to shrink twice because we removed two elements from the array
         } else {
@@ -323,7 +324,7 @@ export default class ActorSheetSS2e extends ActorSheet {
           combo = combo + ' + ' + rolls[0].toString()
           rolls.splice(0, 1)
         }
-        console.log('total', total)
+        console.log('total', total, combo)
         if (total >= threshold) {
           raises += _addRaise(threshold)
           raiseCombos.push(combo)
@@ -351,14 +352,15 @@ export default class ActorSheetSS2e extends ActorSheet {
         skill: event.currentTarget.dataset.label,
         trait: form.trait[form.trait.selectedIndex].text,
         data: data,
+        exploded: exploded,
+        explosions: game.i18n.format('SVNSEA2E.RollsExploded', { explosions: explosions.toString() }),
         labels: data.labels,
-        rolls: sortedRolls.join(', '),
+        rolls: game.i18n.format('SVNSEA2E.Rolls', { rolls: sortedRolls.join(', ') }),
         raises: raises,
-        rCombos: raiseCombos.join(', '),
+        rCombos: game.i18n.format('SVNSEA2E.RaiseCombos', { combos: raiseCombos.join(', ') }),
         rerolled: rerolled,
         reroll: reroll,
-        exploded: exploded,
-        explosions: explosions
+        threshold: game.i18n.format('SVNSEA2E.RollThreshold', { threshold: threshold.toString() })
       }
 
       const template = 'systems/svnsea2e/templates/chats/skillroll-card.html'

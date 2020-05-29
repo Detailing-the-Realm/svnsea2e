@@ -1,32 +1,49 @@
-h1{
-  font-size: $font-3xl;
+body{
+  font-size: $font-s-norm;
 }
-h2{
-  font-size: $font-2xl;
+a:hover{
+  text-shadow: $txt-shadow-prim;
 }
-h3{
-  font-size: $font-xl;
+h1 {
+  font-size: $font-s-3xl;
 }
-h4{
-  font-size: $font-lg;
+
+h2 {
+  font-size: $font-s-2xl;
 }
+
+h3 {
+  font-size: $font-s-xl;
+}
+
+h4 {
+  font-size: $font-s-lg;
+}
+
 h5 {
   margin: 0 0 0.5rem;
   padding: 0;
   font-weight: normal;
-  font-size: $font-md;
+  font-size: $font-s-md;
 }
+
 h6 {
   margin: 0 0 0.5rem;
   padding: 0;
   font-weight: normal;
-  font-size: $font-norm;
+  font-size: $font-s-norm;
 }
 
-#chat-log .message{
-  font-size: $font-norm;
+#chat-log .message {
+  font-size: $font-s-norm;
 }
 
-h4.message-sender{
-  font-weight:bold;
+h4.message-sender {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="datetime-local"] {
+  color: $f-c-primary;
 }
