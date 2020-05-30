@@ -22,7 +22,6 @@
         }
       },
       "pc": {
-        "biography": "",
         "wounds": {
           "value": 0,
           "min": 0,
@@ -162,7 +161,7 @@
     "character": {
       "templates": ["base", "pc"],
       "wealth": "",
-      "concept": "",
+      "concept": "<h3>Concept</h3><h3>Biography></h3>",
       "heropts": 0,
       "stories": [{
         "name": "",
@@ -213,10 +212,6 @@
     },
     "secretsociety": {
       "templates": ["base"]
-    },
-    "nation": {
-      "templates": ["base"],
-      "traits": []
     },
     "sorcery": {
       "templates": ["base"]

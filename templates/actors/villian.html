@@ -1,0 +1,43 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+    <div class="header-fields">
+      {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
+      <div class="traits grid grid-3col">
+        {{#each data.traits as |trait key|}}
+          <div class="trait flexrow flex-group flex-between">
+            <label for="data.traits.{{key}}.value" class="trait-name">
+              {{trait.label}}
+            </label>
+            <input type="text" name="data.traits.{{key}}.value" value="{{trait.value}}" data-dtype="Number" />
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="advantages"><h2>{{localize "SVNSEA2E.Advantages"}}</h2></a>
+    <a class="item" data-tab="sorcery"><h2>{{localize "SVNSEA2E.Sorcery"}}</h2></a>
+    <a class="item" data-tab="arcana"><h2>{{localize "SVNSEA2E.Arcana"}}</h2></a>
+    <a class="item" data-tab="concept"><h2>{{localize "SVNSEA2E.Concept"}}</h2></a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    {{!-- Advantages Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-advantages.html"}}
+
+    {{!-- Sorcery Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-sorcery.html"}}
+
+    {{!-- Arcana Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-arcana.html"}}
+
+    {{!-- Concept Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-concept.html"}}
+  </section>
+</form>

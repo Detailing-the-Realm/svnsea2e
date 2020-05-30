@@ -19,7 +19,20 @@ export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   getData () {
     const data = super.getData()
-    data.dtypes = ['String', 'Number', 'Boolean']
+
+    const isOwner = this.entity.owner
+    mergeObject(data, {
+      owner: isOwner,
+      limited: this.entity.limited,
+      options: this.options,
+      editable: this.isEditable,
+      cssClass: isOwner ? 'editable' : 'locked',
+      isCharacter: this.entity.data.type === 'character',
+      isNPC: this.entity.data.type === 'npc',
+      config: CONFIG.SVNSEA2E,
+      dtypes: ['String', 'Number', 'Boolean']
+    })
+
     // Prepare items.
     if (this.actor.data.type === 'character') {
       this._prepareCharacterItems(data)

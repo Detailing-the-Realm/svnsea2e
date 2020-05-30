@@ -1,30 +1,19 @@
-import { SVNSEA2E } from '../../config.js'
+import {
+  SVNSEA2E
+} from '../../config.js'
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class SvnSea2EItemSheet extends ItemSheet {
-
+export class ItemSheetSS2e extends ItemSheet {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'item'],
       width: 520,
-      height: 480,
-      tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'description' }]
+      height: 480
     })
-  }
-
-  /** @override */
-  get template () {
-    const path = 'systems/svnsea2e/templates/items'
-    // Return a single sheet for all item types.
-    // return `${path}/item-sheet.html`;
-
-    // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/${this.item.data.type}.html`
   }
 
   /* -------------------------------------------- */
@@ -32,7 +21,6 @@ export class SvnSea2EItemSheet extends ItemSheet {
   /** @override */
   getData () {
     const data = super.getData()
-    console.log(SVNSEA2E)
     data.itemType = SVNSEA2E.itemTypes[data.item.type] // this should be translated
     return data
   }

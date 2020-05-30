@@ -1,28 +1,4 @@
 <div class="tab stories" data-group="primary" data-tab="stories">
-  <h3 class="">{{localize "SVNSEA2E.Arcana"}}</h3>
-  <div class="flex-group flex-between">
-    <div class="virtue flexrow flex-group">
-      <h4 class="">{{localize "SVNSEA2E.Virtue"}}</h4>
-    </div>
-    <div class="virtue flexrow flex-group flex-between">
-      <input type="text" name="data.virtue.name" value="{{data.virtue.name}}" data-dtype="String" placeholder="{{localize "SVNSEA2E.Name"}}"/>
-      </div>
-      <div class="virtue flexrow flex-group flex-between">
-      <label for="data.virtue.description" class="">{{localize "SVNSEA2E.Description"}}</label></div>
-      <div class="virtue flexrow flex-group flex-between">
-      {{editor content=data.virtue.description target="data.virtue.description" button=true owner=owner editable=editable}}
-    </div>
-    <div class="virtue flexrow flex-group">
-      <h4 class="">{{localize "SVNSEA2E.Hubris"}}</h4>
-    </div>
-    <div class="virtue flexrow flex-group">
-      <input type="text" name="data.hubris.name" value="{{data.hubris.name}}" data-dtype="String" placeholder="{{localize "SVNSEA2E.Name"}}"/></div>
-      <div class="virtue flexrow flex-group flex-between">
-      <label for="data.hubris.description" class="">{{localize "SVNSEA2E.Description"}}</label></div>
-      <div class="virtue flexrow flex-group flex-between">
-      {{editor content=data.hubris.description target="data.hubris.description" button=true owner=owner editable=editable}}
-    </div>
-  </div>
   <h3>{{localize "SVNSEA2E.Stories"}}</h3>
   <ol class="items-list">
     <li class="item flexrow item-header">
@@ -42,8 +18,4 @@
         </div>
       </li>
     {{/each}}
-    <h3 class="">{{localize "SVNSEA2E.Concept"}}</h3>
-    {{editor content=data.concept target="data.concept" button=true owner=owner editable=editable}}
-    <h3 class="biography">{{localize "SVNSEA2E.Biography"}}</h3>
-    {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
 </div>

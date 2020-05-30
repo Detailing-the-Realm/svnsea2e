@@ -10,7 +10,11 @@ import { ActorSheetSS2eBrute } from './actor/sheets/brute.js'
 import { ActorSheetSS2eMonster } from './actor/sheets/monster.js'
 import { ActorSheetSS2eVillian } from './actor/sheets/villian.js'
 import { SvnSea2EItem } from './item/item.js'
-import { SvnSea2EItemSheet } from './item/sheets/item-sheet.js'
+import { ItemSheetSS2eAdvantage } from './item/sheets/advantage.js'
+import { ItemSheetSS2eBackground } from './item/sheets/background.js'
+import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js'
+import { ItemSheetSS2eShip } from './item/sheets/ship.js'
+import { ItemSheetSS2eSorcery } from './item/sheets/sorcery.js'
 import LanguageSelector from './apps/language-selector.js'
 
 Hooks.once('init', async function () {
@@ -41,18 +45,18 @@ Hooks.once('init', async function () {
 
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet)
-  Actors.registerSheet('svnsea2e', ActorSheetSS2ePC,
-    { types: ['character'], makeDefault: true })
-  Actors.registerSheet('svnsea2e', ActorSheetSS2eNPC,
-    { types: ['npc'], makeDefault: true })
-  Actors.registerSheet('svnsea2e', ActorSheetSS2eBrute,
-    { types: ['npc'], makeDefault: true })
-  Actors.registerSheet('svnsea2e', ActorSheetSS2eMonster,
-    { types: ['monster'], makeDefault: true })
-  Actors.registerSheet('svnsea2e', ActorSheetSS2eVillian,
-    { types: ['villian'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2ePC, { types: ['character'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eNPC, { types: ['npc'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eBrute, { types: ['brute'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eMonster, { types: ['monster'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eVillian, { types: ['villian'], makeDefault: true })
+
   Items.unregisterSheet('core', ItemSheet)
-  Items.registerSheet('svnsea2e', SvnSea2EItemSheet, { makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eAdvantage, { types: ['advantage'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eBackground, { types: ['background'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eSecretSociety, { types: ['secretsociety'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eShip, { types: ['ship'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eSorcery, { types: ['sorcery'], makeDefault: true })
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function () {

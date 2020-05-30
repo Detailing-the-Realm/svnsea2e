@@ -1,0 +1,28 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
+      <div class="strength flexrow flex-group flex-between">
+        <label for="data.strength" class="strength">
+          {{localize "SVNSEA2E.Strength"}}
+        </label>
+        <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" />
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    {{!-- Ability Tab --}}
+    <h2>{{localize "SVNSEA2E.Ability"}}</h2>
+      <div class="flex-group flex-between">
+        <div class="virtue flexrow flex-group flex-between">
+          <input type="text" name="data.ability.name" value="{{data.ability.name}}" data-dtype="String" placeholder="{{localize "SVNSEA2E.Ability"}} {{localize "SVNSEA2E.Name"}}" />
+        </div>
+        <div class="virtue flexrow flex-group flex-between">
+          <textarea name="data.data.ability.name.description" rows="8" cols="80" data-dtype="String" placeholder="{{localize "SVNSEA2E.Ability"}}  {{localize "SVNSEA2E.Description"}}"></textarea>
+        </div>
+      </div>
+</form>

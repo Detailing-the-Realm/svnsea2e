@@ -203,8 +203,8 @@ input[type="datetime-local"] {
 
 .svnsea2e .sheet-header {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 150px;
-  flex: 0 0 150px;
+  -ms-flex: 0 0 175px;
+  flex: 0 0 175px;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -223,10 +223,10 @@ input[type="datetime-local"] {
 
 .svnsea2e .sheet-header .profile-img {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 150px;
-  flex: 0 0 150px;
-  height: 150px;
-  width: 150px;
+  -ms-flex: 0 0 175px;
+  flex: 0 0 175px;
+  height: 175px;
+  width: 175px;
   margin-right: 5px;
 }
 
@@ -287,6 +287,7 @@ input[type="datetime-local"] {
   padding: 0;
 }
 
+.svnsea2e .sheet-header .age input[type="text"],
 .svnsea2e .sheet-header .wounds input[type="text"],
 .svnsea2e .sheet-body .trait input[type="text"],
 .svnsea2e .sheet-body .skill input[type="text"] {
@@ -342,7 +343,7 @@ input[type="datetime-local"] {
 .svnsea2e .tabs .item {
   font-weight: bold;
   text-transform: uppercase;
-  padding: 20px;
+  padding: 10px 3px;
 }
 
 .svnsea2e .tabs .item.active {

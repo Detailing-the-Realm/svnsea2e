@@ -11,8 +11,7 @@ export class ActorSheetSS2eBrute extends ActorSheetSS2e {
       template: 'systems/svnsea2e/templates/actors/brute.html',
       tabs: [{
         navSelector: '.sheet-tabs',
-        contentSelector: '.sheet-body',
-        initial: 'traits'
+        contentS: 'ability'
       }]
     })
   }

@@ -15,16 +15,6 @@ export class SvnSea2EActor extends Actor {
     const data = actorData.data
     const flags = actorData.flags
 
-    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
-    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
-
-    for (const trait of Object.values(data.traits)) {
-      trait.value = this._validateMinMaxData(trait.value, trait.min, trait.max)
-    }
-
-    for (const skill of Object.values(data.skills)) {
-      skill.value = this._validateMinMaxData(skill.value, skill.min, skill.max)
-    }
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData)
@@ -45,6 +35,9 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareCharacterData (actorData) {
     const data = actorData.data
+    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
+    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
+    this._prepareTraits(data)
 
     // Make modifications to data here. For example:
   }
@@ -56,5 +49,15 @@ export class SvnSea2EActor extends Actor {
     const data = actorData.data
 
     // Make modifications to data here. For example:
+  }
+
+  _prepareTraits (data) {
+    for (const trait of Object.values(data.traits)) {
+      trait.value = this._validateMinMaxData(trait.value, trait.min, trait.max)
+    }
+
+    for (const skill of Object.values(data.skills)) {
+      skill.value = this._validateMinMaxData(skill.value, skill.min, skill.max)
+    }
   }
 }

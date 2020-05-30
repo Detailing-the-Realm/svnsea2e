@@ -1,7 +1,9 @@
 {
+  "SVNSEA2E.Ability": "Ability",
   "SVNSEA2E.ActorName": "Name",
   "SVNSEA2E.Advantage": "Advantage",
   "SVNSEA2E.Advantages": "Advantages",
+  "SVNSEA2E.Age": "Age",
   "SVNSEA2E.ApproachPromptTitle": "{skill} Approach Roll",
   "SVNSEA2E.ApproachRollChatTitle": "{trait} + {skill} Approach Roll",
   "SVNSEA2E.Arcana": "Arcana",
@@ -100,6 +102,7 @@
   "SVNSEA2E.StatusAbandoned": "Abandoned",
   "SVNSEA2E.StatusComplete": "Complete",
   "SVNSEA2E.StatusInProgress": "In Progress",
+  "SVNSEA2E.Strength": "Strength",
   "SVNSEA2E.Trait": "Trait",
   "SVNSEA2E.TraitBrawn": "Brawn",
   "SVNSEA2E.TraitFinesse": "Finesse",

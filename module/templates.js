@@ -10,8 +10,10 @@ export const preloadHandlebarsTemplates = async function () {
     // Actor Sheet Partials
     'systems/svnsea2e/templates/actors/parts/actor-name.html',
     'systems/svnsea2e/templates/actors/parts/actor-traits.html',
-    'systems/svnsea2e/templates/actors/parts/actor-features.html',
+    'systems/svnsea2e/templates/actors/parts/actor-concept.html',
+    'systems/svnsea2e/templates/actors/parts/actor-advantages.html',
     'systems/svnsea2e/templates/actors/parts/actor-sorcery.html',
+    'systems/svnsea2e/templates/actors/parts/actor-arcana.html',
     'systems/svnsea2e/templates/actors/parts/actor-stories.html',
     'systems/svnsea2e/templates/actors/parts/actor-wounds.html',
 

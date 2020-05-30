@@ -5,17 +5,6 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
-      <div class="grid grid-3col">
-        <div class="flex-group-left">
-            <input type="text" name="data.nation" value="{{data.nation}}" placeholder="{{localize "SVNSEA2E.Nation"}}" />
-        </div>
-        <div class="flex-group-left">
-            <input type="text" name="data.religion" value="{{data.religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
-        </div>
-        <div class="flex-group-left">
-            <input type="text" name="data.reputation" value="{{data.reputation}}"  placeholder="{{localize "SVNSEA2E.Reputation"}}" />
-        </div>
-      </div>
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
     </div>
   </header>
@@ -23,12 +12,11 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="traits"><h2>{{localize "SVNSEA2E.Traits"}}</h2></a>
-    <a class="item" data-tab="features"><h2>{{localize "SVNSEA2E.Advantages"}}</h2></a>
-    <a class="item" data-tab="features"><h2>{{localize "SVNSEA2E.Backgrounds"}}</h2></a>
+    <a class="item" data-tab="advantages"><h2>{{localize "SVNSEA2E.Advantages"}}</h2></a>
     <a class="item" data-tab="sorcery"><h2>{{localize "SVNSEA2E.Sorcery"}}</h2></a>
+    <a class="item" data-tab="arcana"><h2>{{localize "SVNSEA2E.Arcana"}}</h2></a>
     <a class="item" data-tab="stories"><h2>{{localize "SVNSEA2E.Stories"}}</h2></a>
-    <a class="item" data-tab="stories"><h2>{{localize "SVNSEA2E.Arcana"}}</h2></a>
-    <a class="item" data-tab="stories"><h2>{{localize "SVNSEA2E.Concept"}}</h2></a>
+    <a class="item" data-tab="concept"><h2>{{localize "SVNSEA2E.Concept"}}</h2></a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -36,13 +24,19 @@
     {{!-- Traits Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
 
-    {{!-- Features Tab --}}
-    {{> "systems/svnsea2e/templates/actors/parts/actor-features.html"}}
+    {{!-- Advantages Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-advantages.html"}}
 
     {{!-- Sorcery Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-sorcery.html"}}
 
+    {{!-- Arcana Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-arcana.html"}}
+
     {{!-- Stories Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-stories.html"}}
+
+    {{!-- Concept Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-concept.html"}}
   </section>
 </form>
