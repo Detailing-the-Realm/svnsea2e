@@ -1,23 +1,40 @@
 <form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
     {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+    <h3 class="language-title">{{localize "SVNSEA2E.Advantages"}}</h3>
+    <div class="language flexrow flex-group flex-left">
+      <ul class="languages-list">
+        {{#each data.selectedadvantages as |k v|}}
+          <li class="tag {{v}}">{{k}}</li>
+        {{/each}}
+      </ul>
+      <a class="advantages-selector" data-options="advantages"><i class="fas fa-edit"></i></a>
+    </div>
+    <h3 class="language-title">{{localize "SVNSEA2E.Skills"}}</h3>
+    <div class="language flexrow flex-group flex-left">
+      <ul class="languages-list">
+        {{#each data.selectedskills as |k v|}}
+          <li class="tag {{v}}">{{k}}</li>
+        {{/each}}
+      </ul>
+      <a class="skills-selector" data-options="skills"><i class="fas fa-edit"></i></a>
+    </div>
+    </div>
+  </header>
 
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="attributes">Attributes</a>
-    </nav>
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="quirk">
+      <h2>Quirk<h2>
+    </a>
+  </nav>
 
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
 
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-        </div>
-
-        {{!-- Attributes Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="attributes">
-            {{!-- As you add new fields, add them in here! --}}
-        </div>
-    </section>
+    {{!-- Details Tab --}}
+    <div class="tab" data-group="primary" data-tab="quirk">
+      {{editor content=data.quirk target="data.quirk" button=true owner=owner editable=editable}}
+    </div>
+  </section>
 </form>

@@ -44,7 +44,11 @@ h3 {
     }
   }
 }
-
+.arcana{
+  input[type="text"]{
+    width: 85%;
+  }
+}
 .traits {
   .tag {
     display: inline-block;

@@ -1,7 +1,7 @@
 <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
 <div class="grid grid-2col">
   <div class="form-group">
-    <label for="data.">{{localize "SVNSEA2E.Nation"}}</label>
+    <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
     <select class="nation" name="data.nation">
       {{#select data.nation}}
         <option value="none"></option>
@@ -23,5 +23,4 @@
   <div class="flex-group-left">
     <input type="text" name="data.reputation" value="{{data.reputation}}" placeholder="{{localize "SVNSEA2E.Reputation"}}" />
   </div>
-
 </div>

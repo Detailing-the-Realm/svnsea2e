@@ -1,7 +1,7 @@
 import { SVNSEA2E } from '../../config.js'
 import LanguageSelector from '../../apps/language-selector.js'
 /**
- * Extend the basic ActorSheet class to do all the D&D5e things!
+ * Extend the basic ActorSheet class to do all the 7th Sea things!
  * This sheet is an Abstract layer which is not used.
  * @extends {ActorSheet}
  */
@@ -48,27 +48,26 @@ export default class ActorSheetSS2e extends ActorSheet {
     super.activateListeners(html)
 
     // Editable Only Listeners
-    if (this.isEditable) {
-      html.find('.language-selector').click(this._onLanguageSelector.bind(this))
-      html.find('.story-create').click(this._onStoryCreate.bind(this))
-    }
+  //  if (this.isEditable) {
+//
+  //  }
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return
     // Trait Selector
 
-    // Add Inventory Item
-    html.find('.item-create').click(this._onItemCreate.bind(this))
+    html.find('.language-selector').click(this._onLanguageSelector.bind(this))
+    html.find('.story-create').click(this._onStoryCreate.bind(this))
 
     // Update Inventory Item
-    html.find('.item-edit').click(ev => {
+    html.find('.story-edit').click(ev => {
       const li = $(ev.currentTarget).parents('.item')
       const item = this.actor.getOwnedItem(li.data('itemId'))
       item.sheet.render(true)
     })
 
     // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
+    html.find('.story-delete').click(ev => {
       const li = $(ev.currentTarget).parents('.item')
       this.actor.deleteOwnedItem(li.data('itemId'))
       li.slideUp(200, () => this.render(false))
@@ -88,6 +87,13 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the Languages that the Actor has selected for use with the LanguageSelector application
+   * @param {Object} data       The data transfer
+   * @private
+   */
   _prepareLanguages (data) {
     data.selectedlangs = {}
     console.log(data)
@@ -95,13 +101,12 @@ export default class ActorSheetSS2e extends ActorSheet {
       console.log(data.languages[i], CONFIG.SVNSEA2E.languages[data.languages[i]])
       data.selectedlangs[data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
     }
-    console.log(data.selectedlangs)
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the TraitSelector application which allows a checkbox of multiple language options
+   * Handle spawning the languageSelector application which allows a checkbox of multiple language options
    * @param {Event} event   The click event which originated the selection
    * @private
    */
@@ -116,7 +121,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   }
 
   /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+   * Handle creating a new Story for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
    * @private
    */
@@ -127,6 +132,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const type = header.dataset.type
     // Grab any data associated with this control.
     const data = duplicate(header.dataset)
+
     // Initialize a default name.
     const name = `New ${type.capitalize()}`
     // Prepare the item object.
@@ -167,6 +173,57 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Finally, create the item!
     return this.actor.createOwnedItem(itemData)
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDrop (event) {
+    event.preventDefault()
+
+    // Get dropped data
+    let data
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text/plain'))
+    } catch (err) {
+      return false
+    }
+    if (!data) return false
+
+    // Case 1 - Dropped Item
+    if (data.type === 'Item') {
+      return this._onDropItem(event, data)
+    }
+
+    // Case 2 - Dropped Actor
+    if (data.type === 'Actor') {
+      return this._onDropActor(event, data)
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping an Actor on the sheet to trigger a Polymorph workflow
+   * @param {DragEvent} event   The drop event
+   * @param {Object} data       The data transfer
+   * @private
+   */
+  async _onDropActor (event, data) {
+
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping of an item reference or item data onto an Actor Sheet
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @return {Object}             OwnedItem data to create
+   * @private
+   */
+  async _onDropItem (event, data) {
+
   }
 
   /**
@@ -271,8 +328,6 @@ export default class ActorSheetSS2e extends ActorSheet {
         return a - b
       })
 
-      console.log(rolls)
-
       if (skill.nd < 4) {
         let i = rolls.length
         while (i--) {
@@ -283,7 +338,7 @@ export default class ActorSheetSS2e extends ActorSheet {
           }
         }
       }
-      console.log(rolls)
+
       for (let c = 0; c < matcharr.two.length; c++) {
         let vals = _getIndexes(rolls, matcharr.two[c])
         while (vals[0] > -1 && vals[1] > -1) {
@@ -355,7 +410,6 @@ export default class ActorSheetSS2e extends ActorSheet {
         rollmode: 'gmroll'
       }
 
-      console.log(form.trait[form.trait.selectedIndex].text)
       const templateData = {
         title: game.i18n.format('SVNSEA2E.ApproachRollChatTitle', {
           skill: CONFIG.SVNSEA2E.skills[skill.name],

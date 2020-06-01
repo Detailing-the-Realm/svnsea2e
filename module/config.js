@@ -8,7 +8,7 @@ SVNSEA2E.itemTypes = {
   background: 'SVNSEA2E.Background',
   sorcery: 'SVNSEA2E.Sorcery',
   nation: 'SVNSEA2E.Nation',
-  secretsociety: 'SVNSEA2E.SecretSociety',
+  'secret-society': 'SVNSEA2E.SecretSociety',
   ship: 'SVNSEA2E.Ship'
 }
 

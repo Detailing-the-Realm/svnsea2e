@@ -15,6 +15,7 @@ h6 {
   margin: 0.75rem 0;
   padding: 0;
   font-weight: normal;
+  font-family: $font-header;
 }
 
 h1 {
@@ -49,6 +50,10 @@ h4.message-sender {
   font-weight: bold;
 }
 
+textarea{
+  font-family: $font-body;
+  font-size: $font-s-norm;
+}
 input[type="text"],
 input[type="password"],
 input[type="datetime-local"] {

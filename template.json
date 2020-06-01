@@ -187,7 +187,7 @@
     }
   },
   "Item": {
-    "types": ["background", "advantage", "sorcery", "nation", "secretsociety", "ship"],
+    "types": ["background", "advantage", "sorcery", "secret-society", "ship"],
     "templates": {
       "base": {
         "name": "",
@@ -210,8 +210,12 @@
       "knack": false,
       "innate": false
     },
-    "secretsociety": {
-      "templates": ["base"]
+    "secret-society": {
+      "templates": ["base"],
+      "charter":"",
+      "concern":"",
+      "earnfavor":"",
+      "callupon":""
     },
     "sorcery": {
       "templates": ["base"]
