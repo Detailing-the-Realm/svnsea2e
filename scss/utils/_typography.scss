@@ -1,10 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Trade+Winds&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica:ital@0;1&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=Work+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+/* -------------------------------------------- */
 
+// Font families
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Trade+Winds&display=swap');
 $font-header:'Trade Winds', cursive;
 $font-body: 'Roboto', sans-serif;
 
+//@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica:ital@0;1&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+//$font-header: 'IM Fell Double Pica', serif;
+//$font-body: 'PT Sans', sans-serif;
+
+//@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=Work+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+//$font-header: 'Source Serif Pro', serif;
+//$font-body: 'Work Sans', sans-serif;
+
+/* -------------------------------------------- */
+
+// Font Sizes
 $font-s-sm:.8em;
 $font-s-norm: 1em;
 $font-s-md: 1.1em;
@@ -13,7 +24,7 @@ $font-s-xl: 1.3em;
 $font-s-2xl: 1.6em;
 $font-s-3xl: 2em;
 
-//$font-header: 'IM Fell Double Pica', serif;
-//$font-body: 'PT Sans', sans-serif;
-//$font-header: 'Source Serif Pro', serif;
-//$font-body: 'Work Sans', sans-serif;
+/* -------------------------------------------- */
+
+// Font Shadows
+$txt-shadow-prim: 0 0 8px $c-secondary;

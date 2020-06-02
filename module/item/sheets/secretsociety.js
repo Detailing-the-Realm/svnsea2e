@@ -13,7 +13,7 @@ export class ItemSheetSS2eSecretSociety extends ItemSheetSS2e {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      template: 'systems/svnsea2e/templates/items/secret-society.html',
+      template: 'systems/svnsea2e/templates/items/secretsociety.html',
       width: 700,
       height: 700,
       tabs: [{

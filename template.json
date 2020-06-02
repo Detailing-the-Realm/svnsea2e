@@ -10,12 +10,13 @@
         "reputation": "",
         "languages": [],
         "arcana": {
-          "name": "",
           "virtue": {
+            "arcana":"",
             "name": "",
             "description": ""
           },
           "hubris": {
+            "arcana":"",
             "name": "",
             "description": ""
           }
@@ -163,14 +164,7 @@
       "wealth": "",
       "concept": "<h3>Concept</h3><h3>Biography></h3>",
       "heropts": 0,
-      "stories": [{
-        "name": "",
-        "description": "",
-        "ending": "",
-        "reward": "",
-        "steps": "",
-        "status": ""
-      }]
+      "story": "<h3>Story Title</h3><p></p><h3>Endings</h3><ol><li>Ending 1</li><ol><h3>First Steps</h3><ol><li>Step 1</li><ol>"
     },
     "monster": {
       "templates": ["base", "vbase"]
@@ -187,7 +181,7 @@
     }
   },
   "Item": {
-    "types": ["background", "advantage", "sorcery", "secret-society", "ship"],
+    "types": ["background", "advantage", "sorcery", "secretsociety", "ship"],
     "templates": {
       "base": {
         "name": "",
@@ -198,8 +192,7 @@
     "background": {
       "templates": ["base"],
       "quirk": "",
-      "skills": [],
-      "advantages": []
+      "skills": []
     },
     "advantage": {
       "templates": ["base"],
@@ -210,12 +203,12 @@
       "knack": false,
       "innate": false
     },
-    "secret-society": {
+    "secretsociety": {
       "templates": ["base"],
-      "charter":"",
-      "concern":"",
-      "earnfavor":"",
-      "callupon":""
+      "charter": "",
+      "concern": "",
+      "earnfavor": "",
+      "callupon": ""
     },
     "sorcery": {
       "templates": ["base"]

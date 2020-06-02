@@ -1,6 +1,6 @@
 // Import utilities.
-@import 'utils/typography';
 @import 'utils/colors';
+@import 'utils/typography';
 @import 'utils/mixins';
 @import 'utils/variables';
 
@@ -12,10 +12,20 @@
 
 /* Styles limited to svnsea2e sheets */
 .svnsea2e {
-  @import 'components/actors';
+
   @import 'components/chat';
   @import 'components/forms';
   @import 'components/tabs';
+
+}
+
+.svnsea2e.actor{
+  @import 'components/actors';
+}
+.svnsea2e.item{
   @import 'components/items';
 }
 
+.svnsea2e.sheet{
+  @import 'components/sheet';
+}

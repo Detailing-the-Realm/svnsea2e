@@ -36,10 +36,21 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Prepare items.
     if (this.actor.data.type === 'character') {
       this._prepareCharacterItems(data)
-      // Update traits
+      // Update languages
       this._prepareLanguages(data.actor.data)
     }
     return data
+  }
+
+  _prepareButtonTitles (data) {
+    for (const item of Object.values(data)) {
+      item.editlabel = game.i18n.format('SVNSEA2E.EditLabel', {
+        label: data.name
+      })
+      item.deletelabel = game.i18n.format('SVNSEA2E.DeleteLabel', {
+        label: data.name
+      })
+    }
   }
 
   /* -------------------------------------------- */
@@ -48,9 +59,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     super.activateListeners(html)
 
     // Editable Only Listeners
-  //  if (this.isEditable) {
-//
-  //  }
+    //  if (this.isEditable) {
+    //
+    //  }
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return
@@ -68,6 +79,22 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Delete Inventory Item
     html.find('.story-delete').click(ev => {
+      const li = $(ev.currentTarget).parents('.item')
+      this.actor.deleteOwnedItem(li.data('itemId'))
+      li.slideUp(200, () => this.render(false))
+    })
+
+    html.find('.item-create').click(this._onItemCreate.bind(this))
+
+    // Update Inventory Item
+    html.find('.item-edit').click(ev => {
+      const li = $(ev.currentTarget).parents('.item')
+      const item = this.actor.getOwnedItem(li.data('itemId'))
+      item.sheet.render(true)
+    })
+
+    // Delete Inventory Item
+    html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents('.item')
       this.actor.deleteOwnedItem(li.data('itemId'))
       li.slideUp(200, () => this.render(false))
@@ -134,7 +161,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const data = duplicate(header.dataset)
 
     // Initialize a default name.
-    const name = `New ${type.capitalize()}`
+    const name = game.i18n.localize(`SVNSEA2E.New${type}`)
     // Prepare the item object.
     const itemData = {
       name: name,
@@ -161,7 +188,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Grab any data associated with this control.
     const data = duplicate(header.dataset)
     // Initialize a default name.
-    const name = `New ${type.capitalize()}`
+    const name = game.i18n.localize(`SVNSEA2E.New${type}`)
     // Prepare the item object.
     const itemData = {
       name: name,
@@ -223,7 +250,52 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _onDropItem (event, data) {
+    console.log('got a drag drop event')
+    if (!this.actor.owner) return false
+    let itemData = await this._getItemDropData(event, data)
 
+    // Handle item sorting within the same Actor
+    const actor = this.actor
+    const sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id))
+    if (sameActor) return this._onSortItem(event, itemData)
+
+    // Create the owned item
+    return this.actor.createEmbeddedEntity('OwnedItem', itemData)
+  }
+
+  /* -------------------------------------------- */
+
+  /* -------------------------------------------- */
+
+  /**
+     * TODO: A temporary shim method until Item.getDropData() is implemented
+     * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
+     * @private
+     */
+  async _getItemDropData (event, data) {
+    let itemData = null
+
+    // Case 1 - Import from a Compendium pack
+    if (data.pack) {
+      const pack = game.packs.get(data.pack)
+      if (pack.metadata.entity !== 'Item') return
+      itemData = await pack.getEntry(data.id)
+    }
+
+    // Case 2 - Data explicitly provided
+    else if (data.data) {
+      itemData = data.data
+    }
+
+    // Case 3 - Import from World entity
+    else {
+      const item = game.items.get(data.id)
+      if (!item) return
+      itemData = item.data
+    }
+
+    // Return a copy of the extracted data
+    return duplicate(itemData)
   }
 
   /**

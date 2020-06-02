@@ -39,45 +39,32 @@ export class ActorSheetSS2ePC extends ActorSheetSS2e {
     }
 
     // Initialize containers.
-    const gear = []
-    const features = []
-    const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: []
-    }
+    const advantages = []
+    const backgrounds = []
+    const sorcery = []
+    const secretsocieties = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
     for (const i of data.items) {
       const item = i.data
-      i.img = i.img || DEFAULT_TOKEN
-      // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i)
-      }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i)
-      }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.data.spellLevel != undefined) {
-          spells[i.data.spellLevel].push(i)
-        }
+
+      // Append to item types to their arrays
+      if (i.type === 'advantage') {
+        advantages.push(i)
+      } else if (i.type === 'background') {
+        backgrounds.push(i)
+      } else if (i.type === 'sorcery') {
+        sorcery.push(i)
+      } else if (i.type === 'secretsociety') {
+        secretsocieties.push(i)
       }
     }
 
     // Assign and return
-    actorData.gear = gear
-    actorData.features = features
-    actorData.spells = spells
+    actorData.advantages = advantages
+    actorData.backgrounds = backgrounds
+    actorData.sorcery = sorcery
+    actorData.secretsocieties = secretsocieties
   }
 }

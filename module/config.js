@@ -8,8 +8,10 @@ SVNSEA2E.itemTypes = {
   background: 'SVNSEA2E.Background',
   sorcery: 'SVNSEA2E.Sorcery',
   nation: 'SVNSEA2E.Nation',
-  'secret-society': 'SVNSEA2E.SecretSociety',
-  ship: 'SVNSEA2E.Ship'
+  secretsociety: 'SVNSEA2E.SecretSociety',
+  ship: 'SVNSEA2E.Ship',
+  hubris: 'SVNSEA2E.Hubris',
+  virtue: 'SVNSEA2E.Virtue'
 }
 
 SVNSEA2E.actorTypes = {
@@ -28,7 +30,7 @@ SVNSEA2E.nations = {
   highland: 'SVNSEA2E.NationHighland',
   castille: 'SVNSEA2E.NationCastille',
   eisen: 'SVNSEA2E.NationEisen',
-  jaragua: 'SVNSEA2E.NationJargua',
+  jaragua: 'SVNSEA2E.NationJaragua',
   kuraq: 'SVNSEA2E.NationKuraq',
   labucca: 'SVNSEA2E.NationLaBucca',
   montaigne: 'SVNSEA2E.NationMontaigne',

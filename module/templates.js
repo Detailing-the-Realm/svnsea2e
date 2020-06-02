@@ -14,7 +14,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/svnsea2e/templates/actors/parts/actor-advantages.html',
     'systems/svnsea2e/templates/actors/parts/actor-sorcery.html',
     'systems/svnsea2e/templates/actors/parts/actor-arcana.html',
-    'systems/svnsea2e/templates/actors/parts/actor-stories.html',
+    'systems/svnsea2e/templates/actors/parts/actor-story.html',
     'systems/svnsea2e/templates/actors/parts/actor-wounds.html',
 
     // Item Sheet Partials

@@ -1,14 +1,29 @@
+/* -------------------------------------------- */
+
+// Padding Sizes
 $padding-xs: 2px;
 $padding-sm: 5px;
 $padding-md: 10px;
 $padding-lg: 20px;
+
+/* -------------------------------------------- */
+
+// Margin Sizes
 $margin-xs: 2px;
 $margin-sm: 5px;
 $margin-md: 10px;
 $margin-lg: 20px;
+
+/* -------------------------------------------- */
+
+// Border Sizes
 $bs-sm: 1px;
 $bs-md: 2px;
 $bs-lg: 3px;
+
+/* -------------------------------------------- */
+
+// Border Types
 $border-s-sm-main: $bs-sm solid $c-primary;
 $border-s-md-main: $bs-md solid $c-primary;
 $border-s-lg-main: $bs-lg solid $c-primary;
@@ -19,5 +34,9 @@ $border-s-sm-secondary: $bs-sm solid $c-secondary;
 $border-s-md-secondary: $bs-md solid $c-secondary;
 $border-s-lg-secondary: $bs-lg solid $c-secondary;
 $no-border: $bs-sm solid transparent;
-$profile-img-size: 175px;
-$txt-shadow-prim: 0 0 8px $c-secondary;
+
+/* -------------------------------------------- */
+
+// Profile img sizes
+$actor-profile-img-size: 175px;
+$item-profile-img-size: 100px;

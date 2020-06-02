@@ -12,7 +12,7 @@ import { ActorSheetSS2eVillian } from './actor/sheets/villian.js'
 import { SvnSea2EItem } from './item/item.js'
 import { ItemSheetSS2eAdvantage } from './item/sheets/advantage.js'
 import { ItemSheetSS2eBackground } from './item/sheets/background.js'
-import { ItemSheetSS2eSecretSociety } from './item/sheets/secret-society.js'
+import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js'
 import { ItemSheetSS2eShip } from './item/sheets/ship.js'
 import { ItemSheetSS2eSorcery } from './item/sheets/sorcery.js'
 import LanguageSelector from './apps/language-selector.js'
@@ -54,7 +54,7 @@ Hooks.once('init', async function () {
   Items.unregisterSheet('core', ItemSheet)
   Items.registerSheet('svnsea2e', ItemSheetSS2eAdvantage, { types: ['advantage'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eBackground, { types: ['background'], makeDefault: true })
-  Items.registerSheet('svnsea2e', ItemSheetSS2eSecretSociety, { types: ['secret-society'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eSecretSociety, { types: ['secretsociety'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eShip, { types: ['ship'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eSorcery, { types: ['sorcery'], makeDefault: true })
 

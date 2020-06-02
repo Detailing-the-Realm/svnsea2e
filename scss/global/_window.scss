@@ -11,21 +11,6 @@
   }
 }
 
-.svnsea2e.sheet {
-  input[type="text"] {
-    min-width: 20px;
-    text-align: left;
-    border: $no-border;
-    background: none;
-  }
-
-  input[type="text"]:hover,
-  input[type="text"]:focus {
-    box-shadow: 0 0 8px $c-secondary;
-    border: $border-s-sm-main;
-  }
-}
-
 .rollable {
   &:focus,
   &:hover {

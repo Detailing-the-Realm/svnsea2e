@@ -1,15 +1,18 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
     {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+    </div>
   </header>
 
   {{!-- Sheet Body --}}
-  <section class="sheet-body">
+  <section class="sheet-body advantage">
     <div class="tab flexrow active">
       <div class="item-properties">
-        <div class="form-group">
+        <div class="form-group Cost">
           <label for="data.cost.normal" class="resource-label">{{localize "SVNSEA2E.Cost"}}</label>
-          <input name="data.cost.normal" type="text" value="{{data.cost.normal}}" data-dtype="Number""/>
+          <input name="data.cost.normal" type="text" value="{{data.cost.normal}}" data-dtype="Number"/>
         </div>
         <div class=" form-group">
           <label for="data.cost.reducecost" class="resource-label">{{localize "SVNSEA2E.ReducedCost"}}</label>
