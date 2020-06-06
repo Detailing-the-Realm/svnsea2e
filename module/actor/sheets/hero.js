@@ -26,12 +26,7 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
    */
   _prepareHeroItems (data) {
     const actorData = data.actor
-
-    // Update trait labels
-    for (const [t, trait] of Object.entries(data.actor.data.traits)) {
-      trait.label = CONFIG.SVNSEA2E.traits[t]
-    }
-
+    
     // Update skill labels
     for (const [s, skl] of Object.entries(data.actor.data.skills)) {
       skl.label = CONFIG.SVNSEA2E.skills[s]

@@ -6,19 +6,19 @@
         "name": "",
         "arcana": {
           "virtue": {
-            "arcana":"",
+            "arcana": "",
             "name": "",
             "description": ""
           },
           "hubris": {
-            "arcana":"",
+            "arcana": "",
             "name": "",
             "description": ""
           }
         },
         "concept": "<h3>Concept</h3><h3>Biography</h3>"
       },
-      "details":{
+      "details": {
         "nation": "",
         "religion": "",
         "age": 20,
@@ -148,15 +148,28 @@
       },
       "vbase": {
         "traits": {
-          "influence": 5,
-          "strength": 5,
-          "villainy": 10
+          "influence": {
+            "value": 5,
+            "min": 1,
+            "max": 20
+          },
+          "strength": {
+            "value": 5,
+            "min": 1,
+            "max": 20
+          }
         }
       }
     },
     "brute": {
       "name": "",
-      "strength": 1,
+      "traits": {
+        "strength": {
+          "value": 5,
+          "min": 1,
+          "max": 99
+        }
+      },
       "ability": {
         "name": "",
         "description": ""
@@ -165,8 +178,7 @@
     "playercharacter": {
       "templates": ["base", "details", "features"],
       "wealth": "",
-      "heropts": 0,
-      "story": "<h3>Story Title</h3><p></p><h3>Endings</h3><ol><li>Ending 1</li></ol><h3>First Steps</h3><ol><li>Step 1</li></ol>"
+      "heropts": 0
     },
     "monster": {
       "templates": ["base", "vbase"]
@@ -176,8 +188,8 @@
     },
     "villian": {
       "templates": ["base", "details", "vbase"],
-      "servants":"",
-      "redemption":""
+      "servants": "",
+      "redemption": ""
     }
   },
   "Item": {
@@ -219,12 +231,12 @@
     },
     "story": {
       "templates": ["base"],
-      "endings":"",
-      "steps":""
+      "endings": "",
+      "steps": ""
     },
     "scheme": {
       "templates": ["base"],
-      "influence":0
+      "influence": 0
     }
   }
 }

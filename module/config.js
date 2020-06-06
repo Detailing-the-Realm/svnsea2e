@@ -16,10 +16,10 @@ SVNSEA2E.itemTypes = {
 
 SVNSEA2E.actorTypes = {
   brute: 'SVNSEA2E.Brute',
-  character: 'SVNSEA2E.Character',
+  playercharacter: 'SVNSEA2E.PlayerCharacter',
   monster: 'SVNSEA2E.Monster',
   villian: 'SVNSEA2E.Villain',
-  npc: 'SVNSEA2E.NPC'
+  hero: 'SVNSEA2E.Hero'
 }
 
 SVNSEA2E.nations = {
@@ -72,7 +72,10 @@ SVNSEA2E.traits = {
   finesse: 'SVNSEA2E.TraitFinesse',
   resolve: 'SVNSEA2E.TraitResolve',
   wits: 'SVNSEA2E.TraitWits',
-  panache: 'SVNSEA2E.TraitPanache'
+  panache: 'SVNSEA2E.TraitPanache',
+  influence:'SVNSEA2E.TraitInfluence',
+  strength:'SVNSEA2E.TraitStrength',
+  villany:'SVNSEA2E.TraitVillany'
 }
 
 SVNSEA2E.skills = {

@@ -1,11 +1,17 @@
+{{#if isPlayerCharacter}}
 <div class="resources grid grid-3col wounds">
+  {{else}}
+  <div class="resources grid grid-2col wounds">
+  {{/if}}
+  {{#if isPlayerCharacter}}
   <div class="flex-group-center">
-    <label for="data.heropts" class="">{{localize "SVNSEA2E.HeroPoints"}}</label>
+    <label for="data.heropts" class="">{{ localize "SVNSEA2E.HeroPoints" }}</label>
     <div><input type="text" name="data.heropts" value="{{data.heropts}}" />
     </div>
   </div>
+  {{/if}}
   <div class="flex-group-center">
-    <label for="data.wounds.value" class="">{{localize "SVNSEA2E.Wounds"}}</label>
+    <label for="data.wounds.value" class="">{ {localize "SVNSEA2E.Wounds" }}</label>
     <div><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
       /{{data.wounds.max}}</div>
   </div>

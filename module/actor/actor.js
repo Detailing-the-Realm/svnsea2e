@@ -41,6 +41,7 @@ export class SvnSea2EActor extends Actor {
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
     data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
     this._prepareTraits(data)
+    this._prepareSkills(data)
   }
 
   /**
@@ -48,7 +49,10 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareHeroData (actorData) {
     const data = actorData.data
+    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
+    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
     this._prepareTraits(data)
+    this._prepareSkills(data)
   }
 
   /**
@@ -56,6 +60,11 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareVillianData (actorData) {
     const data = actorData.data
+    this._prepareTraits(data)
+    data.traits.villiany = {
+      value: (data.traits.strength.value + data.traits.influence.value),
+      label: CONFIG.SVNSEA2E.traits.villiany
+    }
   }
 
   /**
@@ -63,6 +72,11 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareMonsterData (actorData) {
     const data = actorData.data
+    this._prepareTraits(data)
+    data.traits.villiany = {
+      value: (data.traits.strength.value + data.traits.influence.value),
+      label: CONFIG.SVNSEA2E.traits.villiany
+    }
   }
 
   /**
@@ -70,13 +84,16 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareBruteData (actorData) {
     const data = actorData.data
+    data.traits.strength.value = this._validateMinMaxData(data.traits.strength.value, data.traits.strength.min, data.traits.strength.max)
   }
 
   _prepareTraits (data) {
     for (const trait of Object.values(data.traits)) {
       trait.value = this._validateMinMaxData(trait.value, trait.min, trait.max)
     }
+  }
 
+  _prepareSkills (data) {
     for (const skill of Object.values(data.skills)) {
       skill.value = this._validateMinMaxData(skill.value, skill.min, skill.max)
     }

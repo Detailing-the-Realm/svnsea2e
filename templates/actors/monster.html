@@ -5,7 +5,6 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
-      <h2 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h2>
       <div class="traits grid grid-5col">
         {{#each data.traits as |trait key|}}
           <div class="trait flexrow flex-group flex-between">
@@ -22,9 +21,9 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="advantages">
-      <h2>{{localize "SVNSEA2E.Qualities"}}</h2>
+      <h2>{{localize "SVNSEA2E.Features"}}</h2>
     </a>
-    <a class="item" data-tab="arcana">
+    <a class="item" data-tab="fate">
       <h2>{{localize "SVNSEA2E.Arcana"}}</h2>
     </a>
     <a class="item" data-tab="concept">
@@ -57,10 +56,9 @@
           {{/each}}
       </ol>
     </div>
-    {{/each}}
 
     {{!-- Arcana Tab --}}
-    {{> "systems/svnsea2e/templates/actors/parts/actor-arcana.html"}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-fate.html"}}
 
     {{!-- Concept Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-concept.html"}}

@@ -35,6 +35,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       dtypes: ['String', 'Number', 'Boolean']
     })
 
+    this._prepareTraits(data)
+
     // Prepare items.
     if (this.actor.data.type === 'playercharacter') {
       this._prepareCharacterItems(data)
@@ -61,15 +63,17 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
   }
 
+  _prepareTraits (data) {
+    // Update trait labels
+    for (const [t, trait] of Object.entries(data.actor.data.traits)) {
+      trait.label = CONFIG.SVNSEA2E.traits[t]
+    }
+  }
+
   /* -------------------------------------------- */
   /** @override */
   activateListeners (html) {
     super.activateListeners(html)
-
-    // Editable Only Listeners
-    //  if (this.isEditable) {
-    //
-    //  }
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return
@@ -217,7 +221,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _onDropItem (event, data) {
     console.log('got a drag drop event')
     if (!this.actor.owner) return false
-    let itemData = await this._getItemDropData(event, data)
+    const itemData = await this._getItemDropData(event, data)
 
     // Handle item sorting within the same Actor
     const actor = this.actor
