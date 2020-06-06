@@ -14,5 +14,4 @@ export class SvnSea2EItem extends Item {
     const actorData = this.actor ? this.actor.data : {}
     const data = itemData.data
   }
-
 }

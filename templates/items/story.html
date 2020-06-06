@@ -1,0 +1,40 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+    {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">
+      <h2>Description</h2>
+    </a>
+    <a class="item" data-tab="endings">
+      <h2>{{localize "SVNSEA2E.Endings"}}</h2>
+    </a>
+    <a class="item" data-tab="steps">
+      <h2>{{localize "SVNSEA2E.Steps"}}</h2>
+      </a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- CEndings Tab --}}
+    <div class="tab endings" data-group="primary" data-tab="endings">
+      {{editor content=data.endings target="data.endings" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Steps Tab --}}
+    <div class="tab steps" data-group="primary" data-tab="steps">
+      {{editor content=data.steps target="data.steps" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

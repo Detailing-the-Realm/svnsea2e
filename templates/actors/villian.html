@@ -20,22 +20,70 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="advantages"><h2>{{localize "SVNSEA2E.Advantages"}}</h2></a>
-    <a class="item" data-tab="sorcery"><h2>{{localize "SVNSEA2E.Sorcery"}}</h2></a>
-    <a class="item" data-tab="arcana"><h2>{{localize "SVNSEA2E.Arcana"}}</h2></a>
-    <a class="item" data-tab="concept"><h2>{{localize "SVNSEA2E.Concept"}}</h2></a>
+    <a class="item" data-tab="advantages">
+      <h2>{{localize "SVNSEA2E.Features"}}</h2>
+    </a>
+    <a class="item" data-tab="sorcery">
+      <h2>{{localize "SVNSEA2E.Sorcery"}}</h2>
+    </a>
+    <a class="item" data-tab="arcana">
+      <h2>{{localize "SVNSEA2E.Arcana"}}</h2>
+    </a>
+    <a class="item" data-tab="concept">
+      <h2>{{localize "SVNSEA2E.Concept"}}</h2>
+    </a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
-    {{!-- Advantages Tab --}}
-    {{> "systems/svnsea2e/templates/actors/parts/actor-advantages.html"}}
+    {{!-- Features Tab --}}
+    <div class="tab features" data-group="primary" data-tab="advantages">
+      <ol class="items-list">
+        <li class="flexrow item-header">
+          <h3 class="item-name flexrow">{{localize "SVNSEA2E.Advantage"}}</h3>
+          <div class="item-controls">
+            <a class="item-control item-create" title="{{{localize 'SVNSEA2E.AddAdvantage'}}" data-type="advantage" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                    <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
+                </a>
+            </div>
+        </li>
+        {{#each actor.advantages as |item id|}}
+          <li class="item flexrow" data-item-id="{{item._id}}">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
+            <h4 class="item-name">{{item.name}}</h4>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="{{item.editlabel}}"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="{{item.deletelabel}}"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+        {{/each}}
+
+        <li class="flexrow item-header">
+            <h3 class="item-name flexrow">{{localize "SVNSEA2E.Schemes"}}</h3>
+            <div class="item-controls">
+                <a class="item-control item-create" title="{{{localize 'SVNSEA2E.AddScheme'}}" data-type="scheme" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                    <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
+                </a>
+            </div>
+        </li>
+        {{#each actor.schemes as |item id|}}
+          <li class="item flexrow" data-item-id="{{item._id}}">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
+            <h4 class="item-name">{{item.name}}</h4>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="{{item.editlabel}}"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="{{item.deletelabel}}"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+        {{/each}}
+        </ol>
+        </div>
 
     {{!-- Sorcery Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-sorcery.html"}}
 
     {{!-- Arcana Tab --}}
-    {{> "systems/svnsea2e/templates/actors/parts/actor-arcana.html"}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-fate.html"}}
 
     {{!-- Concept Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-concept.html"}}

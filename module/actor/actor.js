@@ -17,8 +17,11 @@ export class SvnSea2EActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if (actorData.type === 'character') this._prepareCharacterData(actorData)
-    if (actorData.type === 'npc') this._prepareNPCData(actorData)
+    if (actorData.type === 'playercharacter') this._preparePlayerCharacterData(actorData)
+    if (actorData.type === 'hero') this._prepareHeroData(actorData)
+    if (actorData.type === 'villian') this._prepareVillianData(actorData)
+    if (actorData.type === 'monster') this._prepareMonsterData(actorData)
+    if (actorData.type === 'brute') this._prepareBruteData(actorData)
   }
 
   _validateMinMaxData (value, min, max) {
@@ -33,19 +36,40 @@ export class SvnSea2EActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData (actorData) {
+  _preparePlayerCharacterData (actorData) {
     const data = actorData.data
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
     data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
+    this._prepareTraits(data)
   }
 
   /**
-   * Prepare NPC type specific data
+   * Prepare Hero type specific data
    */
-  _prepareNPCData (actorData) {
+  _prepareHeroData (actorData) {
     const data = actorData.data
+    this._prepareTraits(data)
+  }
 
-    // Make modifications to data here. For example:
+  /**
+   * Prepare Villian type specific data
+   */
+  _prepareVillianData (actorData) {
+    const data = actorData.data
+  }
+
+  /**
+   * Prepare Villian type specific data
+   */
+  _prepareMonsterData (actorData) {
+    const data = actorData.data
+  }
+
+  /**
+   * Prepare Villian type specific data
+   */
+  _prepareBruteData (actorData) {
+    const data = actorData.data
   }
 
   _prepareTraits (data) {

@@ -1,14 +1,9 @@
 {
   "Actor": {
-    "types": ["brute", "character", "npc", "villian", "monster"],
+    "types": ["brute", "playercharacter", "hero", "villian", "monster"],
     "templates": {
       "base": {
         "name": "",
-        "nation": "",
-        "religion": "",
-        "age": 20,
-        "reputation": "",
-        "languages": [],
         "arcana": {
           "virtue": {
             "arcana":"",
@@ -20,9 +15,17 @@
             "name": "",
             "description": ""
           }
-        }
+        },
+        "concept": "<h3>Concept</h3><h3>Biography</h3>"
       },
-      "pc": {
+      "details":{
+        "nation": "",
+        "religion": "",
+        "age": 20,
+        "reputation": "",
+        "languages": []
+      },
+      "features": {
         "wounds": {
           "value": 0,
           "min": 0,
@@ -159,29 +162,26 @@
         "description": ""
       }
     },
-    "character": {
-      "templates": ["base", "pc"],
+    "playercharacter": {
+      "templates": ["base", "details", "features"],
       "wealth": "",
-      "concept": "<h3>Concept</h3><h3>Biography></h3>",
       "heropts": 0,
-      "story": "<h3>Story Title</h3><p></p><h3>Endings</h3><ol><li>Ending 1</li><ol><h3>First Steps</h3><ol><li>Step 1</li><ol>"
+      "story": "<h3>Story Title</h3><p></p><h3>Endings</h3><ol><li>Ending 1</li></ol><h3>First Steps</h3><ol><li>Step 1</li></ol>"
     },
     "monster": {
       "templates": ["base", "vbase"]
     },
-    "npc": {
-      "templates": ["base", "pc"]
+    "hero": {
+      "templates": ["base", "details", "features"]
     },
     "villian": {
-      "templates": ["base", "vbase"],
-      "schemes": [{
-        "description": "",
-        "influence": 0
-      }]
+      "templates": ["base", "details", "vbase"],
+      "servants":"",
+      "redemption":""
     }
   },
   "Item": {
-    "types": ["background", "advantage", "sorcery", "secretsociety", "ship"],
+    "types": ["background", "advantage", "sorcery", "secretsociety", "ship", "story", "scheme"],
     "templates": {
       "base": {
         "name": "",
@@ -216,6 +216,15 @@
     "ship": {
       "templates": ["base"],
       "crew": []
+    },
+    "story": {
+      "templates": ["base"],
+      "endings":"",
+      "steps":""
+    },
+    "scheme": {
+      "templates": ["base"],
+      "influence":0
     }
   }
 }

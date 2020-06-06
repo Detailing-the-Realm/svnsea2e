@@ -3,12 +3,12 @@ import ActorSheetSS2e from './base.js'
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
  */
-export class ActorSheetSS2ePC extends ActorSheetSS2e {
+export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor'],
-      template: 'systems/svnsea2e/templates/actors/pc.html',
+      template: 'systems/svnsea2e/templates/actors/playercharacter.html',
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
@@ -26,7 +26,6 @@ export class ActorSheetSS2ePC extends ActorSheetSS2e {
    */
   _prepareCharacterItems (data) {
     const actorData = data.actor
-    console.log(data.actor.data)
 
     // Update trait labels
     for (const [t, trait] of Object.entries(data.actor.data.traits)) {
@@ -43,6 +42,7 @@ export class ActorSheetSS2ePC extends ActorSheetSS2e {
     const backgrounds = []
     const sorcery = []
     const secretsocieties = []
+    const stories = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
@@ -58,6 +58,8 @@ export class ActorSheetSS2ePC extends ActorSheetSS2e {
         sorcery.push(i)
       } else if (i.type === 'secretsociety') {
         secretsocieties.push(i)
+      } else if (i.type === 'story') {
+        stories.push(i)
       }
     }
 
@@ -66,5 +68,6 @@ export class ActorSheetSS2ePC extends ActorSheetSS2e {
     actorData.backgrounds = backgrounds
     actorData.sorcery = sorcery
     actorData.secretsocieties = secretsocieties
+    actorData.stories = stories
   }
 }

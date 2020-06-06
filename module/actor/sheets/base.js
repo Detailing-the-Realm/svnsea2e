@@ -27,17 +27,25 @@ export default class ActorSheetSS2e extends ActorSheet {
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? 'editable' : 'locked',
-      isCharacter: this.entity.data.type === 'character',
-      isNPC: this.entity.data.type === 'npc',
+      isPlayerCharacter: this.entity.data.type === 'playercharacter',
+      isHero: this.entity.data.type === 'hero',
+      isVillian: this.entity.data.type === 'villian',
+      isMonster: this.entity.data.type === 'monster',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean']
     })
 
     // Prepare items.
-    if (this.actor.data.type === 'character') {
+    if (this.actor.data.type === 'playercharacter') {
       this._prepareCharacterItems(data)
       // Update languages
       this._prepareLanguages(data.actor.data)
+    } else if (this.actor.data.type === 'hero') {
+      this._prepareHeroItems(data)
+    } else if (this.actor.data.type === 'villian') {
+      this._prepareVillianItems(data)
+    } else if (this.actor.data.type === 'monster') {
+      this._prepareMonsterItems(data)
     }
     return data
   }
@@ -68,21 +76,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Trait Selector
 
     html.find('.language-selector').click(this._onLanguageSelector.bind(this))
-    html.find('.story-create').click(this._onStoryCreate.bind(this))
-
-    // Update Inventory Item
-    html.find('.story-edit').click(ev => {
-      const li = $(ev.currentTarget).parents('.item')
-      const item = this.actor.getOwnedItem(li.data('itemId'))
-      item.sheet.render(true)
-    })
-
-    // Delete Inventory Item
-    html.find('.story-delete').click(ev => {
-      const li = $(ev.currentTarget).parents('.item')
-      this.actor.deleteOwnedItem(li.data('itemId'))
-      li.slideUp(200, () => this.render(false))
-    })
 
     html.find('.item-create').click(this._onItemCreate.bind(this))
 
@@ -145,34 +138,6 @@ export default class ActorSheetSS2e extends ActorSheet {
       choices: CONFIG.SVNSEA2E[a.dataset.options]
     }
     new LanguageSelector(this.actor, options).render(true)
-  }
-
-  /**
-   * Handle creating a new Story for the actor using initial data defined in the HTML dataset
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  _onStoryCreate (event) {
-    event.preventDefault()
-    const header = event.currentTarget
-    // Get the type of item to create.
-    const type = header.dataset.type
-    // Grab any data associated with this control.
-    const data = duplicate(header.dataset)
-
-    // Initialize a default name.
-    const name = game.i18n.localize(`SVNSEA2E.New${type}`)
-    // Prepare the item object.
-    const itemData = {
-      name: name,
-      type: type,
-      data: data
-    }
-    // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.data.type
-
-    // Finally, create the item!
-    return this.actor.createOwnedItem(itemData)
   }
 
   /**
