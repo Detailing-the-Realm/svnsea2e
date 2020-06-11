@@ -3,12 +3,12 @@ import ActorSheetSS2e from './base.js'
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
  */
-export class ActorSheetSS2eVillian extends ActorSheetSS2e {
+export class ActorSheetSS2eVillain extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor'],
-      template: 'systems/svnsea2e/templates/actors/villian.html',
+      template: 'systems/svnsea2e/templates/actors/villain.html',
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
@@ -24,7 +24,7 @@ export class ActorSheetSS2eVillian extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareVillianItems (data) {
+  _prepareVillainItems (data) {
     const actorData = data.actor
 
     // Initialize containers.

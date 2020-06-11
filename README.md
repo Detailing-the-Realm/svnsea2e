@@ -15,20 +15,22 @@ What is done:
 
 ## Rough Road Map
 I don't have a timeline for when I think this will be usable for games, gut estimate is a 3-4 months. The things that I need to add to get this to a usable place, probably in priority order, are:
+1. Get Monster and Villain Villainy string displaying
+2. Finalize sorcery attributes
+3. Add sorcery attributes to the html form
+4. Support Advantage lists in Backgrounds
+5. Support Skill selection in Backgrounds
+6. Support Dramatic wounds into skill rolls
+7. Add card to chat for sorcery use
+8. Review Starfinder to determine if his way of assigning players to ships works for me.
+9. Build out adding actors to ships and ships to actors
+10. Get language selection working for Villains and Heroes
+
+These are nice to have items that could make the system more automated:
 1. Validate with Chaosium that I am creating the module in a way that meets the Fan Material Policy
-2. Skill rolling with raise calculation
-3. Displaying skill rolls in chat based on 7th sea's raises not total rolls
-4. If allowed under Fan material policy add nation selection
-5. If allowed under Fan material policy add trait selection from nation selection
-6. Working stories tab in the character sheet
-7. Backgrounds sheet design
-8. Character sheet support for drag and drop backgrounds and advantages
-9. Automate addition of advantages from backgrounds
-10. Automate skill additions based on backgrounds
-11. Sorcery sheet design
-12. Sorcery tab design on character sheet
-13. Drag and drop sorcery features to character sheet
-14. Limit maximum value of traits and skills to 5
+2. Add trait selection from nation selection
+3. Automate addition of advantages from backgrounds
+4. Automate skill additions based on backgrounds
 
 ## Credits
 Developed from then [FoundryVTT System Tutorial](https://gitlab.com/asacolips-projects/foundry-mods/foundryvtt-system-tutorial). With code and ideas from DnD5E System also by Atropos.

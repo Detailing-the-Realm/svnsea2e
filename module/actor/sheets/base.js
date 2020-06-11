@@ -1,4 +1,6 @@
-import { SVNSEA2E } from '../../config.js'
+import {
+  SVNSEA2E
+} from '../../config.js'
 import LanguageSelector from '../../apps/language-selector.js'
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
@@ -19,7 +21,6 @@ export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   getData () {
     const data = super.getData()
-
     const isOwner = this.entity.owner
     mergeObject(data, {
       owner: isOwner,
@@ -29,13 +30,19 @@ export default class ActorSheetSS2e extends ActorSheet {
       cssClass: isOwner ? 'editable' : 'locked',
       isPlayerCharacter: this.entity.data.type === 'playercharacter',
       isHero: this.entity.data.type === 'hero',
-      isVillian: this.entity.data.type === 'villian',
+      isVillain: this.entity.data.type === 'villain',
       isMonster: this.entity.data.type === 'monster',
+      hasSkills: typeof this.entity.data.data.skills !== 'undefined',
+      hasLanguages: typeof this.entity.data.data.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean']
     })
 
-    this._prepareTraits(data)
+    if (this.actor.data.type === 'ship') {
+      this._prepareShipActors(data)
+    } else {
+      this._prepareTraits(data)
+    }
 
     // Prepare items.
     if (this.actor.data.type === 'playercharacter') {
@@ -44,11 +51,14 @@ export default class ActorSheetSS2e extends ActorSheet {
       this._prepareLanguages(data.actor.data)
     } else if (this.actor.data.type === 'hero') {
       this._prepareHeroItems(data)
-    } else if (this.actor.data.type === 'villian') {
-      this._prepareVillianItems(data)
+      this._prepareLanguages(data.actor.data)
+    } else if (this.actor.data.type === 'villain') {
+      this._prepareVillainItems(data)
+      this._prepareLanguages(data.actor.data)
     } else if (this.actor.data.type === 'monster') {
       this._prepareMonsterItems(data)
     }
+
     return data
   }
 
@@ -120,7 +130,6 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   _prepareLanguages (data) {
     data.selectedlangs = {}
-    console.log(data)
     for (let i = 0; i < data.languages.length; i++) {
       console.log(data.languages[i], CONFIG.SVNSEA2E.languages[data.languages[i]])
       data.selectedlangs[data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
@@ -206,7 +215,17 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _onDropActor (event, data) {
+    console.log('Actor got a drag drop event')
+    if (!this.actor.owner) return false
+    const actorData = await this._getActorDropData(event, data)
 
+    // Handle item sorting within the same Actor
+    const actor = this.actor
+    const sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id))
+    if (sameActor) return this._onSortItem(event, actorData)
+
+    // Create the owned item
+    return this.actor.createEmbeddedEntity('OwnedItem', actorData)
   }
 
   /* -------------------------------------------- */
@@ -219,7 +238,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _onDropItem (event, data) {
-    console.log('got a drag drop event')
+    console.log('Item got a drag drop event')
     if (!this.actor.owner) return false
     const itemData = await this._getItemDropData(event, data)
 
@@ -234,13 +253,38 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * TODO: A temporary shim method until Item.getDropData() is implemented
+   * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
+   * @private
+   */
+  async _getActorDropData (event, data) {
+    let actorData = null
+
+    // Case 1 - Import from a Compendium pack
+    if (data.pack) {
+      const pack = game.packs.get(data.pack)
+      if (pack.metadata.entity !== 'Actor') return
+      actorData = await pack.getEntry(data.id)
+    } else if (data.data) { // Case 2 - Data explicitly provided
+      actorData = data.data
+    } else { // Case 3 - Import from World entity
+      const actor = game.actors.get(data.id)
+      if (!actor) return
+      actorData = actor.data
+    }
+
+    // Return a copy of the extracted data
+    return duplicate(actorData)
+  }
+
   /* -------------------------------------------- */
 
   /**
-     * TODO: A temporary shim method until Item.getDropData() is implemented
-     * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
-     * @private
-     */
+   * TODO: A temporary shim method until Item.getDropData() is implemented
+   * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
+   * @private
+   */
   async _getItemDropData (event, data) {
     let itemData = null
 
@@ -249,15 +293,9 @@ export default class ActorSheetSS2e extends ActorSheet {
       const pack = game.packs.get(data.pack)
       if (pack.metadata.entity !== 'Item') return
       itemData = await pack.getEntry(data.id)
-    }
-
-    // Case 2 - Data explicitly provided
-    else if (data.data) {
+    } else if (data.data) { // Case 2 - Data explicitly provided
       itemData = data.data
-    }
-
-    // Case 3 - Import from World entity
-    else {
+    } else { // Case 3 - Import from World entity
       const item = game.items.get(data.id)
       if (!item) return
       itemData = item.data
@@ -266,6 +304,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Return a copy of the extracted data
     return duplicate(itemData)
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Handle clickable rolls.
@@ -415,7 +455,10 @@ export default class ActorSheetSS2e extends ActorSheet {
       if (i > 0 && skill.nd > 2 && rolls[0] < 5) {
         const orgroll = rolls[0]
         rolls[0] = Math.floor(Math.random() * 10) + 1
-        reroll = game.i18n.format('SVNSEA2E.Reroll', { roll1: orgroll, roll2: rolls[0] })
+        reroll = game.i18n.format('SVNSEA2E.Reroll', {
+          roll1: orgroll,
+          roll2: rolls[0]
+        })
         rerolled = true
       }
 
@@ -461,14 +504,22 @@ export default class ActorSheetSS2e extends ActorSheet {
         trait: form.trait[form.trait.selectedIndex].text,
         data: data,
         exploded: exploded,
-        explosions: game.i18n.format('SVNSEA2E.RollsExploded', { explosions: explosions.toString() }),
+        explosions: game.i18n.format('SVNSEA2E.RollsExploded', {
+          explosions: explosions.toString()
+        }),
         labels: data.labels,
-        rolls: game.i18n.format('SVNSEA2E.Rolls', { rolls: sortedRolls.join(', ') }),
+        rolls: game.i18n.format('SVNSEA2E.Rolls', {
+          rolls: sortedRolls.join(', ')
+        }),
         raises: raises,
-        rCombos: game.i18n.format('SVNSEA2E.RaiseCombos', { combos: raiseCombos.join(', ') }),
+        rCombos: game.i18n.format('SVNSEA2E.RaiseCombos', {
+          combos: raiseCombos.join(', ')
+        }),
         rerolled: rerolled,
         reroll: reroll,
-        threshold: game.i18n.format('SVNSEA2E.RollThreshold', { threshold: threshold.toString() })
+        threshold: game.i18n.format('SVNSEA2E.RollThreshold', {
+          threshold: threshold.toString()
+        })
       }
 
       const template = 'systems/svnsea2e/templates/chats/skillroll-card.html'

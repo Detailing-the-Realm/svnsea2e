@@ -9,7 +9,6 @@ SVNSEA2E.itemTypes = {
   sorcery: 'SVNSEA2E.Sorcery',
   nation: 'SVNSEA2E.Nation',
   secretsociety: 'SVNSEA2E.SecretSociety',
-  ship: 'SVNSEA2E.Ship',
   hubris: 'SVNSEA2E.Hubris',
   virtue: 'SVNSEA2E.Virtue'
 }
@@ -18,7 +17,8 @@ SVNSEA2E.actorTypes = {
   brute: 'SVNSEA2E.Brute',
   playercharacter: 'SVNSEA2E.PlayerCharacter',
   monster: 'SVNSEA2E.Monster',
-  villian: 'SVNSEA2E.Villain',
+  villain: 'SVNSEA2E.Villain',
+  ship: 'SVNSEA2E.Ship',
   hero: 'SVNSEA2E.Hero'
 }
 
@@ -73,9 +73,9 @@ SVNSEA2E.traits = {
   resolve: 'SVNSEA2E.TraitResolve',
   wits: 'SVNSEA2E.TraitWits',
   panache: 'SVNSEA2E.TraitPanache',
-  influence:'SVNSEA2E.TraitInfluence',
-  strength:'SVNSEA2E.TraitStrength',
-  villany:'SVNSEA2E.TraitVillany'
+  influence: 'SVNSEA2E.TraitInfluence',
+  strength: 'SVNSEA2E.TraitStrength',
+  villainy: 'SVNSEA2E.TraitVillainy'
 }
 
 SVNSEA2E.skills = {
@@ -101,6 +101,17 @@ SVNSEA2E.status = {
   abandoned: 'SVNSEA2E.StatusAbandoned',
   complete: 'SVNSEA2E.StatusComplete',
   inprogress: 'SVNSEA2E.StatusInProgress'
+}
+
+SVNSEA2E.sorceryscale = {
+  major: 'SVNSEA2E.Major',
+  minor: 'SVNSEA2E.Minor'
+}
+
+SVNSEA2E.crewstatuses = {
+  happy: 'SVNSEA2E.Happy',
+  dissatisfied: 'SVNSEA2E.Dissatisfied',
+  mutinous: 'SVNSEA2E.Mutinous'
 }
 
 SVNSEA2E.match10 = {

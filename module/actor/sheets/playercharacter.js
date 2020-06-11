@@ -42,8 +42,6 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
     // Iterate through items, allocating to containers
     // let totalWeight = 0
     for (const i of data.items) {
-      const item = i.data
-
       // Append to item types to their arrays
       if (i.type === 'advantage') {
         advantages.push(i)

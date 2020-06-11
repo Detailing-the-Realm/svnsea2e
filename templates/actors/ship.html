@@ -1,0 +1,86 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
+      <div class="grid grid-3col">
+        <div class="flex-group-left">
+          <input type="text" name="data.class" value="{{data.class}}" placeholder="{{localize "SVNSEA2E.Class"}}" />
+        </div>
+        <div class="flex-group-left">
+          <input type="text" name="data.origin" value="{{data.origin}}" placeholder="{{localize "SVNSEA2E.Origin"}}" />
+        </div>
+        <div class="flex-group-left">
+          <label for="data.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
+          <select class="crewstatus" name="data.crewstatus">
+            {{#select data.crewstatus}}
+              <option value="none"></option>
+              {{#each config.crewstatuses as |label status|}}
+                <option value="{{status}}">{{label}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </div>
+      </div>
+      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+    </div>
+  </header>
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="roster">{{localize "SVNSEA2E.Roster"}}</a>
+    <a class="item" data-tab="cargo">{{localize "SVNSEA2E.Cargo"}}</a>
+    <a class="item" data-tab="background">{{localize "SVNSEA2E.Background"}}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    <div class="tab roster" data-group="primary" data-tab="roster">
+      <ol class="actors-list">
+        <li class="flexrow actor-header">
+          <h3 class="actor-name flexrow">{{localize "SVNSEA2E.PCS"}}</h3>
+          <div class="actor-controls">
+            <a class="actor-control actor-create" title="{{ localize "SVNSEA2E.AddPC" }}" data-type="playercharacter" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+              <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
+            </a>
+          </div>
+        </li>
+        {{#each actor.pcs as |actor id|}}
+          <li class="actor flexrow" data-actor-id="{{actor._id}}">
+            <div class="actor-image"><img src="{{actor.img}}" title="{{actor.name}}" /></div>
+            <h4 class="actor-name">{{actor.name}}</h4>
+            <div class="actor-controls">
+              <a class="actor-control actor-edit" title="{{actor.editlabel}}"><i class="fas fa-edit"></i></a>
+              <a class="actor-control actor-delete" title="{{actor.deletelabel}}"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+        {{/each}}
+        <li class="flexrow actor-header">
+          <h3 class="actor-name flexrow">{{localize "SVNSEA2E.NPCS"}}</h3>
+          <div class="actor-controls">
+            <a class="actor-control actor-create" title="{{ localize "SVNSEA2E.AddHero" }}" data-type="hero" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+              <i class="fas fa-plus"></i> {{localize "SVNSEA2E.AddHero"}}
+            </a>
+            <a class="actor-control actor-create" title="{{ localize "SVNSEA2E.AddVillain" }}" data-type="villain" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+              <i class="fas fa-plus"></i> {{localize "SVNSEA2E.AddVillain"}}
+            </a>
+          </div>
+          {{#each actor.npcs as |actor id|}}
+        <li class="actor flexrow" data-actor-id="{{actor._id}}">
+          <div class="actor-image"><img src="{{actor.img}}" title="{{actor.name}}" /></div>
+          <h4 class="actor-name">{{actor.name}}</h4>
+          <div class="actor-controls">
+            <a class="actor-control actor-edit" title="{{actor.editlabel}}"><i class="fas fa-edit"></i></a>
+            <a class="actor-control actor-delete" title="{{actor.deletelabel}}"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+    <div class="tab cargo" data-group="primary" data-tab="cargo">
+      {{editor content=data.cargo target="data.cargo" button=true owner=owner editable=editable}}
+    </div>
+    <div class="tab background" data-group="primary" data-tab="background">
+      {{editor content=data.background target="data.background" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

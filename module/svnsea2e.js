@@ -8,12 +8,12 @@ import { ActorSheetSS2ePlayerCharacter} from './actor/sheets/playercharacter.js'
 import { ActorSheetSS2eHero } from './actor/sheets/hero.js'
 import { ActorSheetSS2eBrute } from './actor/sheets/brute.js'
 import { ActorSheetSS2eMonster } from './actor/sheets/monster.js'
-import { ActorSheetSS2eVillian } from './actor/sheets/villian.js'
+import { ActorSheetSS2eVillain } from './actor/sheets/villain.js'
+import { ActorSheetSS2eShip } from './actor/sheets/ship.js'
 import { SvnSea2EItem } from './item/item.js'
 import { ItemSheetSS2eAdvantage } from './item/sheets/advantage.js'
 import { ItemSheetSS2eBackground } from './item/sheets/background.js'
 import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js'
-import { ItemSheetSS2eShip } from './item/sheets/ship.js'
 import { ItemSheetSS2eSorcery } from './item/sheets/sorcery.js'
 import { ItemSheetSS2eStory } from './item/sheets/story.js'
 import { ItemSheetSS2eScheme } from './item/sheets/scheme.js'
@@ -51,13 +51,13 @@ Hooks.once('init', async function () {
   Actors.registerSheet('svnsea2e', ActorSheetSS2eHero, { types: ['hero'], makeDefault: true })
   Actors.registerSheet('svnsea2e', ActorSheetSS2eBrute, { types: ['brute'], makeDefault: true })
   Actors.registerSheet('svnsea2e', ActorSheetSS2eMonster, { types: ['monster'], makeDefault: true })
-  Actors.registerSheet('svnsea2e', ActorSheetSS2eVillian, { types: ['villian'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eVillain, { types: ['villain'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eShip, { types: ['ship'], makeDefault: true })
 
   Items.unregisterSheet('core', ItemSheet)
   Items.registerSheet('svnsea2e', ItemSheetSS2eAdvantage, { types: ['advantage'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eBackground, { types: ['background'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eSecretSociety, { types: ['secretsociety'], makeDefault: true })
-  Items.registerSheet('svnsea2e', ItemSheetSS2eShip, { types: ['ship'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eSorcery, { types: ['sorcery'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eStory, { types: ['story'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eScheme, { types: ['scheme'], makeDefault: true })
@@ -98,7 +98,7 @@ Hooks.once('ready', async function () {
 Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    'nations', 'traits', 'skills', 'languages', 'itemTypes', 'status'
+    'itemTypes', 'actorTypes', 'nations', 'traits', 'skills', 'languages', 'itemTypes', 'status', 'crewstatuses', 'sorceryscale'
   ]
 
   // Exclude some from sorting where the default order matters

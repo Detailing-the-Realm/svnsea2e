@@ -1,4 +1,4 @@
-<div class="tab arcana" data-group="primary" data-tab="fate">
+<div class="tab fate" data-group="primary" data-tab="fate">
   <div class="flex-group flex-between">
     <div class="virtue flexrow flex-group">
       <h3 class="">{{localize "SVNSEA2E.Virtue"}}: <input type="text" name="data.virtue.arcana" value="{{data.virtue.arcana}}" data-dtype="String" placeholder="{{localize "SVNSEA2E.Arcana"}}" /></h3>
@@ -29,16 +29,36 @@
         </a>
       </div>
     </li>
-    {{#each actor.stories as |item id|}}
-      <li class="item flexrow" data-item-id="{{item._id}}">
-        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
-        <h4 class="item-name">{{item.name}}</h4>
-        <div class="item-controls">
-          <a class="item-control item-edit" title="{{item.editlabel}}"><i class="fas fa-edit"></i></a>
-          <a class="item-control item-delete" title="{{item.deletelabel}}"><i class="fas fa-trash"></i></a>
-        </div>
-      </li>
-      {{/each}}
-      {{/if}}
+  {{#each actor.stories as |item id|}}
+    <li class="item flexrow" data-item-id="{{item._id}}">
+      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
+      <h4 class="item-name">{{item.name}}</h4>
+      <div class="item-controls">
+        <a class="item-control item-edit" title="{{item.editlabel}}"><i class="fas fa-edit"></i></a>
+        <a class="item-control item-delete" title="{{item.deletelabel}}"><i class="fas fa-trash"></i></a>
+      </div>
+    </li>
+  {{/each}}
   </ol>
+  <div class="corruption flexrow flex-group">
+    <label for="data.corruptionpts" class="">{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
+    <div><input type="text" name="data.corruptionpts" value="{{data.corruptionpts}}" />
+    </div>
+  </div>
+  <div class="redemption flexrow flex-group">
+    <label for="data.redemption" class="">{{ localize "SVNSEA2E.Redemption" }}</label>
+  </div>
+  <div class="redemption flexrow flex-group flex-between">
+    <textarea name="data.redemption" rows="3" cols="80"></textarea>
+  </div>
+{{/if}}
+{{#if isVillain}}
+  <div class="redemption flexrow flex-group">
+    <h3 for="data.redemption" class="">{{ localize "SVNSEA2E.Redemption" }}</h3>
+  </div>
+  <div class="redemption flexrow flex-group flex-between">
+    <textarea name="data.redemption" rows="3" cols="80"></textarea>
+  </div>
+{{/if}}
+
 </div>

@@ -1,9 +1,26 @@
 {
   "Actor": {
-    "types": ["brute", "playercharacter", "hero", "villian", "monster"],
+    "types": ["brute", "playercharacter", "hero", "villain", "monster", "ship"],
     "templates": {
       "base": {
         "name": "",
+        "wounds": {
+          "value": 0,
+          "min": 0,
+          "max": 16
+        },
+        "dwounds": {
+          "value": 0,
+          "min": 0,
+          "max": 4
+        }
+      },
+      "details": {
+        "nation": "",
+        "religion": "",
+        "age": 20,
+        "reputation": "",
+        "languages": [],
         "arcana": {
           "virtue": {
             "arcana": "",
@@ -18,24 +35,7 @@
         },
         "concept": "<h3>Concept</h3><h3>Biography</h3>"
       },
-      "details": {
-        "nation": "",
-        "religion": "",
-        "age": 20,
-        "reputation": "",
-        "languages": []
-      },
       "features": {
-        "wounds": {
-          "value": 0,
-          "min": 0,
-          "max": 16
-        },
-        "dwounds": {
-          "value": 0,
-          "min": 0,
-          "max": 4
-        },
         "traits": {
           "brawn": {
             "value": 2,
@@ -146,7 +146,7 @@
           }
         }
       },
-      "vbase": {
+      "vtraits": {
         "traits": {
           "influence": {
             "value": 5,
@@ -162,7 +162,7 @@
       }
     },
     "brute": {
-      "name": "",
+      "templates": ["base"],
       "traits": {
         "strength": {
           "value": 5,
@@ -178,22 +178,33 @@
     "playercharacter": {
       "templates": ["base", "details", "features"],
       "wealth": "",
-      "heropts": 0
+      "heropts": 0,
+      "vile": 0,
+      "corruptionpts": 0,
+      "redemption":""
     },
     "monster": {
-      "templates": ["base", "vbase"]
+      "templates": ["base", "vtraits"]
     },
     "hero": {
       "templates": ["base", "details", "features"]
     },
-    "villian": {
-      "templates": ["base", "details", "vbase"],
+    "ship": {
+      "templates": ["base"],
+      "background":"",
+      "class": "",
+      "cargo": "",
+      "origin": "",
+      "crewstatus":""
+    },
+    "villain": {
+      "templates": ["base", "details", "vtraits"],
       "servants": "",
       "redemption": ""
     }
   },
   "Item": {
-    "types": ["background", "advantage", "sorcery", "secretsociety", "ship", "story", "scheme"],
+    "types": ["background", "advantage", "sorcery", "secretsociety", "story", "scheme"],
     "templates": {
       "base": {
         "name": "",
@@ -223,11 +234,9 @@
       "callupon": ""
     },
     "sorcery": {
-      "templates": ["base"]
-    },
-    "ship": {
       "templates": ["base"],
-      "crew": []
+      "type": "",
+      "scale": ""
     },
     "story": {
       "templates": ["base"],
@@ -237,6 +246,10 @@
     "scheme": {
       "templates": ["base"],
       "influence": 0
+    },
+    "artifact": {
+      "templates": ["base"],
+      "type": ""
     }
   }
 }

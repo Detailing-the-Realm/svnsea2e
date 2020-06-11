@@ -17,11 +17,12 @@ export class SvnSea2EActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if (actorData.type === 'playercharacter') this._preparePlayerCharacterData(actorData)
-    if (actorData.type === 'hero') this._prepareHeroData(actorData)
-    if (actorData.type === 'villian') this._prepareVillianData(actorData)
-    if (actorData.type === 'monster') this._prepareMonsterData(actorData)
-    if (actorData.type === 'brute') this._prepareBruteData(actorData)
+    if (actorData.type === 'playercharacter') this._preparePlayerCharacterData(data)
+    if (actorData.type === 'hero') this._prepareHeroData(data)
+    if (actorData.type === 'villain') this._prepareVillainData(data)
+    if (actorData.type === 'monster') this._prepareMonsterData(data)
+    if (actorData.type === 'brute') this._prepareBruteData(data)
+    if (actorData.type === 'ship') this._prepareShipData(data)
   }
 
   _validateMinMaxData (value, min, max) {
@@ -36,10 +37,8 @@ export class SvnSea2EActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _preparePlayerCharacterData (actorData) {
-    const data = actorData.data
-    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
-    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
+  _preparePlayerCharacterData (data) {
+    this._prepareWounds(data)
     this._prepareTraits(data)
     this._prepareSkills(data)
   }
@@ -47,44 +46,58 @@ export class SvnSea2EActor extends Actor {
   /**
    * Prepare Hero type specific data
    */
-  _prepareHeroData (actorData) {
-    const data = actorData.data
-    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
-    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
+  _prepareHeroData (data) {
+    this._prepareWounds(data)
     this._prepareTraits(data)
     this._prepareSkills(data)
   }
 
   /**
-   * Prepare Villian type specific data
+   * Prepare Villain type specific data
    */
-  _prepareVillianData (actorData) {
-    const data = actorData.data
-    this._prepareTraits(data)
-    data.traits.villiany = {
-      value: (data.traits.strength.value + data.traits.influence.value),
-      label: CONFIG.SVNSEA2E.traits.villiany
+  _prepareVillainData (data) {
+    const villainy = (data.traits.strength.value + data.traits.influence.value)
+    data.traits.villainy = {
+      value: villainy,
+      min: villainy,
+      max: villainy
     }
+    this._prepareTraits(data)
+    this._calculateMaxWounds(data)
+    this._prepareWounds(data)
   }
 
   /**
-   * Prepare Villian type specific data
+   * Prepare monster type specific data
    */
-  _prepareMonsterData (actorData) {
-    const data = actorData.data
-    this._prepareTraits(data)
-    data.traits.villiany = {
-      value: (data.traits.strength.value + data.traits.influence.value),
-      label: CONFIG.SVNSEA2E.traits.villiany
+  _prepareMonsterData (data) {
+    const villainy = (data.traits.strength.value + data.traits.influence.value)
+    data.traits.villainy = {
+      value: villainy,
+      min: 0,
+      max: villainy
     }
+    this._prepareTraits(data)
+    this._calculateMaxWounds(data)
+    this._prepareWounds(data)
   }
 
   /**
-   * Prepare Villian type specific data
+   * Prepare Brute type specific data
    */
-  _prepareBruteData (actorData) {
-    const data = actorData.data
+  _prepareBruteData (data) {
     data.traits.strength.value = this._validateMinMaxData(data.traits.strength.value, data.traits.strength.min, data.traits.strength.max)
+    data.wounds.max = data.traits.strength.value
+    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
+    data.dwounds.value = 0
+    data.dwounds.max = 0
+  }
+
+  /**
+   * Prepar Ship type specific data
+   */
+  _prepareShipData (data) {
+
   }
 
   _prepareTraits (data) {
@@ -97,5 +110,14 @@ export class SvnSea2EActor extends Actor {
     for (const skill of Object.values(data.skills)) {
       skill.value = this._validateMinMaxData(skill.value, skill.min, skill.max)
     }
+  }
+
+  _prepareWounds (data) {
+    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
+    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
+  }
+
+  _calculateMaxWounds (data) {
+    data.wounds.max = data.traits.strength.value * 4
   }
 }

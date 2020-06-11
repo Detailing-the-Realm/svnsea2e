@@ -21,7 +21,16 @@ export class ItemSheetSS2e extends ItemSheet {
   /** @override */
   getData () {
     const data = super.getData()
-    data.itemType = SVNSEA2E.itemTypes[data.item.type] // this should be translated
+    const isOwner = this.entity.owner
+    mergeObject(data, {
+      owner: isOwner,
+      itemType: SVNSEA2E.itemTypes[data.item.type],
+      options: this.options,
+      editable: this.isEditable,
+      cssClass: isOwner ? 'editable' : 'locked',
+      config: CONFIG.SVNSEA2E,
+      dtypes: ['String', 'Number', 'Boolean']
+    })
     return data
   }
 
@@ -41,10 +50,5 @@ export class ItemSheetSS2e extends ItemSheet {
   /** @override */
   activateListeners (html) {
     super.activateListeners(html)
-
-    // Everything below here is only needed if the sheet is editable
-    // if (!this.options.editable) return;
-
-    // Roll handlers, click handlers, etc. would go here.
   }
 }

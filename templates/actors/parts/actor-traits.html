@@ -10,30 +10,34 @@
       </div>
     {{/each}}
   </div>
-  <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
-  <div class="skills grid grid-5col">
-    {{#each data.skills as |skill key|}}
-      <div class="skill flexrow flex-group flex-between">
-        <label for="data.skills.{{key}}.value" class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">
-          {{skill.label}}
-        </label>
-        <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" />
-      </div>
-    {{/each}}
-  </div>
-  <h3 class="language-title">{{localize "SVNSEA2E.Languages"}}</h3>
-  <div class="language flexrow flex-group flex-left">
-    <ul class="languages-list">
-      {{#each data.selectedlangs as |k v|}}
-        <li class="tag {{v}}">{{k}}</li>
+  {{#if hasSkills}}
+    <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
+    <div class="skills grid grid-5col">
+      {{#each data.skills as |skill key|}}
+        <div class="skill flexrow flex-group flex-between">
+          <label for="data.skills.{{key}}.value" class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">
+            {{skill.label}}
+          </label>
+          <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" />
+        </div>
       {{/each}}
-    </ul>
-    <a class="language-selector" data-options="languages"><i class="fas fa-edit"></i></a>
-  </div>
+    </div>
+  {{/if}}
+  {{#if hasLanguages}}
+    <h3 class="language-title">{{localize "SVNSEA2E.Languages"}}</h3>
+    <div class="language flexrow flex-group flex-left">
+      <ul class="languages-list">
+        {{#each data.selectedlangs as |k v|}}
+          <li class="tag {{v}}">{{k}}</li>
+        {{/each}}
+      </ul>
+      <a class="language-selector" data-options="languages"><i class="fas fa-edit"></i></a>
+    </div>
+  {{/if}}
   {{#if isPlayerCharacter}}
-  <h3 class="language-title">{{localize "SVNSEA2E.WealthPts"}}</h3>
-  <div class="language flexrow flex-group flex-left">
-    <input type="text" name="data.wealth" value="{{data.wealth}}" data-dtype="String" />
-  </div>
+    <h3 class="language-title">{{localize "SVNSEA2E.WealthPts"}}</h3>
+    <div class="language flexrow flex-group flex-left">
+      <input type="text" name="data.wealth" value="{{data.wealth}}" data-dtype="String" />
+    </div>
   {{/if}}
 </div>

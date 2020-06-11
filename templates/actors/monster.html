@@ -5,26 +5,20 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
-      <div class="traits grid grid-5col">
-        {{#each data.traits as |trait key|}}
-          <div class="trait flexrow flex-group flex-between">
-            <label for="data.traits.{{key}}.value" class="trait-name">
-              {{trait.label}}
-            </label>
-            <input type="text" name="data.traits.{{key}}.value" value="{{trait.value}}" data-dtype="Number" />
-          </div>
-        {{/each}}
-      </div>
+      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
     </div>
   </header>
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="traits">
+      <h2>{{localize "SVNSEA2E.Traits"}}</h2>
+    </a>
     <a class="item" data-tab="advantages">
       <h2>{{localize "SVNSEA2E.Features"}}</h2>
     </a>
     <a class="item" data-tab="fate">
-      <h2>{{localize "SVNSEA2E.Arcana"}}</h2>
+      <h2>{{localize "SVNSEA2E.Fate"}}</h2>
     </a>
     <a class="item" data-tab="concept">
       <h2>{{localize "SVNSEA2E.Concept"}}</h2>
@@ -33,6 +27,9 @@
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
+    {{!-- Traits Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
+
     {{!-- Advantages Tab --}}
     <div class="tab features" data-group="primary" data-tab="advantages">
       <ol class="items-list">
@@ -57,7 +54,7 @@
       </ol>
     </div>
 
-    {{!-- Arcana Tab --}}
+    {{!-- Fate Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-fate.html"}}
 
     {{!-- Concept Tab --}}

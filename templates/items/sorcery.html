@@ -22,7 +22,20 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
-          
+          <div class="form-group">
+          <label for="data.scale">{{localize "SVNSEA2E.SorceryScale"}}</label>
+          <select class="scale" name="data.scale">
+            {{#select data.nation}}
+              <option value="none"></option>
+              {{#each config.sorceryscale as |label scale|}}
+                <option value="{{scale}}">{{label}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+          </div>
+          <div class="flex-group-left">
+            <input type="text" name="data.type" value="{{data.type}}" placeholder="{{localize "SVNSEA2E.SorceryType"}}" />
+          </div>
         </div>
     </section>
 </form>
