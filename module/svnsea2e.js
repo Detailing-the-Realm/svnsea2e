@@ -17,6 +17,9 @@ import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js'
 import { ItemSheetSS2eSorcery } from './item/sheets/sorcery.js'
 import { ItemSheetSS2eStory } from './item/sheets/story.js'
 import { ItemSheetSS2eScheme } from './item/sheets/scheme.js'
+import { ItemSheetSS2eDuelStyle } from './item/sheets/duelstyle.js'
+import { ItemSheetSS2eArtifact } from './item/sheets/artifact.js'
+import { ItemSheetSS2eShipAdventure } from './item/sheets/shipadventure.js'
 import LanguageSelector from './apps/language-selector.js'
 
 Hooks.once('init', async function () {
@@ -61,6 +64,9 @@ Hooks.once('init', async function () {
   Items.registerSheet('svnsea2e', ItemSheetSS2eSorcery, { types: ['sorcery'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eStory, { types: ['story'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eScheme, { types: ['scheme'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eDuelStyle, { types: ['duelstyle'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eArtifact, { types: ['artifact'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eShipAdventure, { types: ['shipadventure'], makeDefault: true })
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function () {

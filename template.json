@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["brute", "playercharacter", "hero", "villain", "monster", "ship"],
+    "types": ["brute", "hero", "monster", "playercharacter", "ship", "villain"],
     "templates": {
       "base": {
         "name": "",
@@ -181,7 +181,7 @@
       "heropts": 0,
       "vile": 0,
       "corruptionpts": 0,
-      "redemption":""
+      "redemption": ""
     },
     "monster": {
       "templates": ["base", "vtraits"]
@@ -191,11 +191,11 @@
     },
     "ship": {
       "templates": ["base"],
-      "background":"",
+      "background": "",
       "class": "",
       "cargo": "",
       "origin": "",
-      "crewstatus":""
+      "crewstatus": ""
     },
     "villain": {
       "templates": ["base", "details", "vtraits"],
@@ -204,18 +204,19 @@
     }
   },
   "Item": {
-    "types": ["background", "advantage", "sorcery", "secretsociety", "story", "scheme"],
+    "types": ["advantage", "artifact", "background", "duelstyle", "scheme", "secretsociety", "shipadventure", "sorcery", "story"],
     "templates": {
       "base": {
         "name": "",
         "description": "",
-        "source": ""
+        "infosource": ""
       }
     },
     "background": {
       "templates": ["base"],
       "quirk": "",
-      "skills": []
+      "skills": [],
+      "nation": ""
     },
     "advantage": {
       "templates": ["base"],
@@ -235,7 +236,9 @@
     },
     "sorcery": {
       "templates": ["base"],
-      "type": "",
+      "sorcsource": "",
+      "subsource": "",
+      "duration":"",
       "scale": ""
     },
     "story": {
@@ -250,6 +253,13 @@
     "artifact": {
       "templates": ["base"],
       "type": ""
+    },
+    "duelstyle": {
+      "templates": ["base"],
+      "bonus": ""
+    },
+    "shipadventure": {
+      "templates": ["base"]
     }
   }
 }

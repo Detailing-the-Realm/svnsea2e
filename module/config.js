@@ -103,9 +103,22 @@ SVNSEA2E.status = {
   inprogress: 'SVNSEA2E.StatusInProgress'
 }
 
+SVNSEA2E.sorcerysources = {
+  hex: 'SVNSEA2E.Hexenwerk',
+  knight: 'SVNSEA2E.AvalonKnight',
+  darm: 'SVNSEA2E.DarMatushki',
+  porte: 'SVNSEA2E.Porte'
+}
+SVNSEA2E.durations = {
+  scene: 'SVNSEA2E.Scene'
+
+}
+
 SVNSEA2E.sorceryscale = {
   major: 'SVNSEA2E.Major',
-  minor: 'SVNSEA2E.Minor'
+  minor: 'SVNSEA2E.Minor',
+  gros: 'SVNSEA2E.Gros',
+  ti: 'SVNSEA2E.Ti'
 }
 
 SVNSEA2E.crewstatuses = {

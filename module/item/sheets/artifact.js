@@ -9,11 +9,11 @@ import {
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class ItemSheetSS2eArcana extends ItemSheetSS2e {
+export class ItemSheetSS2eArtifact extends ItemSheetSS2e {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      template: 'systems/svnsea2e/templates/items/arcana.html',
+      template: 'systems/svnsea2e/templates/items/artifact.html',
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
