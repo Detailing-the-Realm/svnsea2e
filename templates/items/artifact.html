@@ -2,20 +2,30 @@
   <header class="sheet-header">
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
-    {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
-    <div class="form-group">
+      {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+      <div class="form-group">
       </div>
     </div>
   </header>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body description">
-    <div class="item-properties">
-      <div class="form-group Cost">
-        <label for="data.cost.normal" class="resource-label">{{localize "SVNSEA2E.Cost"}}</label>
-        <input name="data.cost.normal" type="text" value="{{data.cost.normal}}" data-dtype="Number"/>
+    <div class="tab flexrow active">
+      <div class="item-properties">
+        <div class="form-group ">
+          <label for="data.type">{{localize "SVNSEA2E.Type"}}</label>
+          <select class="type" name="data.type">
+            {{#select data.type}}
+              <option value="none"></option>
+              {{#each config.artifacttypes as |label type|}}
+                <option value="{{type}}">{{label}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </div>
       </div>
-      </div>
+
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+    </div>
   </section>
 </form>

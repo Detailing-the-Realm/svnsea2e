@@ -4,7 +4,7 @@ import { preloadHandlebarsTemplates } from './templates.js'
 
 // Import Applications
 import { SvnSea2EActor } from './actor/actor.js'
-import { ActorSheetSS2ePlayerCharacter} from './actor/sheets/playercharacter.js'
+import { ActorSheetSS2ePlayerCharacter } from './actor/sheets/playercharacter.js'
 import { ActorSheetSS2eHero } from './actor/sheets/hero.js'
 import { ActorSheetSS2eBrute } from './actor/sheets/brute.js'
 import { ActorSheetSS2eMonster } from './actor/sheets/monster.js'
@@ -104,7 +104,18 @@ Hooks.once('ready', async function () {
 Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    'itemTypes', 'actorTypes', 'nations', 'traits', 'skills', 'languages', 'itemTypes', 'status', 'crewstatuses', 'sorceryscale'
+    'itemTypes',
+    'actorTypes',
+    'nations',
+    'traits',
+    'skills',
+    'languages',
+    'status',
+    'crewstatuses',
+    'sorceryscales',
+    'artifacttypes',
+    'durations',
+    'sorcerysources'
   ]
 
   // Exclude some from sorting where the default order matters

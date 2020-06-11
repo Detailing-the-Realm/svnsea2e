@@ -2,7 +2,7 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
@@ -11,11 +11,24 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="traits"><h2>{{localize "SVNSEA2E.Traits"}}</h2></a>
-    <a class="item" data-tab="advantages"><h2>{{localize "SVNSEA2E.Advantages"}}</h2></a>
-    <a class="item" data-tab="sorcery"><h2>{{localize "SVNSEA2E.Sorcery"}}</h2></a>
-    <a class="item" data-tab="fate"><h2>{{localize "SVNSEA2E.Fate"}}</h2></a>
-    <a class="item" data-tab="concept"><h2>{{localize "SVNSEA2E.Concept"}}</h2></a>
+    <a class="item" data-tab="traits">
+      <h2>{{localize "SVNSEA2E.Traits"}}</h2>
+    </a>
+    <a class="item" data-tab="advantages">
+      <h2>{{localize "SVNSEA2E.Advantages"}}</h2>
+    </a>
+    <a class="item" data-tab="sorcery">
+      <h2>{{localize "SVNSEA2E.Sorcery"}}</h2>
+    </a>
+    <a class="item" data-tab="inventory">
+      <h2>{{localize "SVNSEA2E.Inventory"}}</h2>
+    </a>
+    <a class="item" data-tab="fate">
+      <h2>{{localize "SVNSEA2E.Fate"}}</h2>
+    </a>
+    <a class="item" data-tab="concept">
+      <h2>{{localize "SVNSEA2E.Concept"}}</h2>
+    </a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -28,6 +41,9 @@
 
     {{!-- Sorcery Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-sorcery.html"}}
+
+    {{!-- Inventory Tab --}}
+    {{> "systems/svnsea2e/templates/actors/parts/actor-inventory.html"}}
 
     {{!-- Fate Tab --}}
     {{> "systems/svnsea2e/templates/actors/parts/actor-fate.html"}}

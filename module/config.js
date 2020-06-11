@@ -114,7 +114,7 @@ SVNSEA2E.durations = {
 
 }
 
-SVNSEA2E.sorceryscale = {
+SVNSEA2E.sorceryscales = {
   major: 'SVNSEA2E.Major',
   minor: 'SVNSEA2E.Minor',
   gros: 'SVNSEA2E.Gros',
@@ -125,6 +125,9 @@ SVNSEA2E.crewstatuses = {
   happy: 'SVNSEA2E.Happy',
   dissatisfied: 'SVNSEA2E.Dissatisfied',
   mutinous: 'SVNSEA2E.Mutinous'
+}
+SVNSEA2E.artifacttypes = {
+  syrneth: 'SVNSEA2E.Syrneth'
 }
 
 SVNSEA2E.match10 = {

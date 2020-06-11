@@ -31,7 +31,8 @@
             "arcana": "",
             "name": "",
             "description": ""
-          }
+          },
+          "equipment": ""
         },
         "concept": "<h3>Concept</h3><h3>Biography</h3>"
       },
@@ -238,7 +239,7 @@
       "templates": ["base"],
       "sorcsource": "",
       "subsource": "",
-      "duration":"",
+      "duration": "",
       "scale": ""
     },
     "story": {

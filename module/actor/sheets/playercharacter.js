@@ -38,6 +38,8 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
     const sorcery = []
     const secretsocieties = []
     const stories = []
+    const duelstyles = []
+    const artifacts = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
@@ -53,6 +55,10 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
         secretsocieties.push(i)
       } else if (i.type === 'story') {
         stories.push(i)
+      } else if (i.type === 'duelstyle') {
+        duelstyles.push(i)
+      } else if (i.type === 'artifact') {
+        artifacts.push(i)
       }
     }
 
@@ -62,5 +68,7 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
     actorData.sorcery = sorcery
     actorData.secretsocieties = secretsocieties
     actorData.stories = stories
+    actorData.duelstyles = duelstyles
+    actorData.artifacts = artifacts
   }
 }
