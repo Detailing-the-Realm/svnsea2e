@@ -104,10 +104,26 @@ SVNSEA2E.status = {
 }
 
 SVNSEA2E.sorcerysources = {
-  hex: 'SVNSEA2E.Hexenwerk',
-  knight: 'SVNSEA2E.AvalonKnight',
-  darm: 'SVNSEA2E.DarMatushki',
-  porte: 'SVNSEA2E.Porte'
+  hex: 'SVNSEA2E.SorceryHexenwerk',
+  knight: 'SVNSEA2E.SorceryAvalonKnight',
+  darm: 'SVNSEA2E.SorceryDarMatushki',
+  porte: 'SVNSEA2E.SorceryPorte',
+  sanderis: 'SVNSEA2E.SorcerySanderis',
+  sorte: 'SVNSEA2E.SorcerySorte',
+  charter:'SVNSEA2E.SorceryCharter',
+  kapsevi:'SVNSEA2E.SorceryKapSevi',
+  mystirios:'SVNSEA2E.SorceryMystirios',
+  mohwoo:'SVNSEA2E.SorceryMohwoo',
+  prophet: 'SVNSEA2E.SorceryProphet',
+  chozeh:'SVNSEA2E.SorceryChozeh',
+  khahesh:'SVNSEA2E.SorceryKhaheshAhura',
+  mithaq:'SVNSEA2E.SorceryMithaq',
+  nawaru:'SVNSEA2E.SorceryNawaru',
+  wayak:'SVNSEA2E.SorceryWayak',
+  wanuy: 'SVNSEA2E.SorceryWanuy',
+  heka: 'SVNSEA2E.SorceryHeka',
+  melbur:'SVNSEA2E.SorceryMelbur',
+  redtouch:'SVNSEA2E.SorceryRedTouch'
 }
 SVNSEA2E.durations = {
   scene: 'SVNSEA2E.Scene'
@@ -117,8 +133,17 @@ SVNSEA2E.durations = {
 SVNSEA2E.sorceryscales = {
   major: 'SVNSEA2E.Major',
   minor: 'SVNSEA2E.Minor',
+  advanced: 'SVNSEA2E.Advanced',
   gros: 'SVNSEA2E.Gros',
-  ti: 'SVNSEA2E.Ti'
+  ti: 'SVNSEA2E.Ti',
+  amulet: 'SVNSEA2E.Amulet',
+  script: 'SVNSEA2E.Script',
+  common: 'SVNSEA2E.Common',
+  rare: 'SVNSEA2E.Rare',
+  bazan: 'SVNSEA2E.Baxan',
+  pixan: 'SVNSEA2E.Pixan',
+  manifestation: 'SVSEA2E.Manifestation',
+  turn: 'SVNSEA2E.Turn'
 }
 
 SVNSEA2E.crewstatuses = {
@@ -127,7 +152,11 @@ SVNSEA2E.crewstatuses = {
   mutinous: 'SVNSEA2E.Mutinous'
 }
 SVNSEA2E.artifacttypes = {
-  syrneth: 'SVNSEA2E.Syrneth'
+  syrneth: 'SVNSEA2E.Syrneth',
+  thiqa: 'SVNSEA2E.Thiqa',
+  tailsman: 'SVNSEA2E.Tailsman',
+  inscription: 'SVNSEA2E.Inscription',
+  mbey: 'SVNSEA2E.Mbey'
 }
 
 SVNSEA2E.match10 = {
