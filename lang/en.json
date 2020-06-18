@@ -222,5 +222,9 @@
   "SVNSEA2E.SorceryWanuy": "Wanuy Naqay",
   "SVNSEA2E.SorceryHeka": "Heka",
   "SVNSEA2E.SorceryMelbur": "Melbur",
-  "SVNSEA2E.SorceryRedTouch": "The Red Touch"
+  "SVNSEA2E.SorceryRedTouch": "The Red Touch",
+  "SVNSEA2E.AtLeastOptions": "You must choose at least {min} options.",
+  "SVNSEA2E.NoMoreThanOptions":"You may choose no more than {max} options.",
+  "SVNSEA2E.ActorLangSelect": "Actor Language Selection",
+  "SVNSEA2E.BackgroundSkillSelect": "Background Skill Selection"
 }

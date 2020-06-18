@@ -395,8 +395,8 @@ export default class ActorSheetSS2e extends ActorSheet {
         matcharr = CONFIG.SVNSEA2E.match15
       }
 
-      // explode the dice on 10s if the character has a high enough skill
-      if (skill.nd === 5) {
+      // explode the dice on 10s if the character has a high enough skill or has taken 3 dynamic wounds
+      if (skill.nd === 5 || data.dwounds === 3) {
         exploded = true
         explosions++
         d10.explode(10)
@@ -570,7 +570,8 @@ export default class ActorSheetSS2e extends ActorSheet {
         content: html,
         buttons: {
           roll: {
-            icon: '<i class="fas fa-dice-d20"></i>',
+            icon: '<img src="' + actor.img + '">',
+          //  icon: '<imgi class="fas fa-dice-d20"></i>',
             label: game.i18n.localize('SVNSEA2E.Roll'),
             callback: html => roll = _roll({
               skill: skill,

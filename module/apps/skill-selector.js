@@ -1,15 +1,15 @@
 /**
- * A specialized form used to select from a checklist of attributes, languages, or properties
+ * A specialized form used to select from a checklist of attributes, skilluages, or properties
  * @extends {FormApplication}
  */
-export default class LanguageSelector extends FormApplication {
+export default class SkillSelector extends FormApplication {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      id: 'language-selector',
+      id: 'skill-selector',
       classes: ['svnsea2e'],
-      title: game.i18n.localize('SVNSEA2E.ActorLangSelect'),
-      template: 'systems/svnsea2e/templates/apps/language-selector.html',
+      title: game.i18n.localize('SVNSEA2E.BackgroundSkillSelect'),
+      template: 'systems/svnsea2e/templates/apps/skill-selector.html',
       width: 320,
       height: 'auto',
       choices: {},
@@ -22,15 +22,16 @@ export default class LanguageSelector extends FormApplication {
 
   /** @override */
   getData () {
+    console.log('skill select get data: ', this.options.choices)
     // Get current values
-    const langs = this.object.data.data.languages
+    const skills = this.object.data.data.skills
 
     // Populate choices
     const choices = duplicate(this.options.choices)
     for (const [k, v] of Object.entries(choices)) {
       choices[k] = {
         label: v,
-        chosen: langs ? langs.includes(k) : false
+        chosen: skills ? skills.includes(k) : false
       }
     }
 
@@ -48,15 +49,14 @@ export default class LanguageSelector extends FormApplication {
 
     // Obtain choices
     const chosen = []
-
     for (const [k, v] of Object.entries(formData)) {
       console.log(v)
       if (v) {
         chosen.push(k)
       }
     }
-
-    updateData['data.languages'] = chosen
+    console.log(chosen)
+    updateData['data.skills'] = chosen
 
     if (this.options.minimum && (chosen.length < this.options.minimum)) {
       return ui.notifications.error(game.i18n.format('SVNSEA2E.AtLeastOptions', {

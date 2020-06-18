@@ -217,6 +217,7 @@
       "templates": ["base"],
       "quirk": "",
       "skills": [],
+      "advantages":[],
       "nation": ""
     },
     "advantage": {

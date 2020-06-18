@@ -21,6 +21,7 @@ import { ItemSheetSS2eDuelStyle } from './item/sheets/duelstyle.js'
 import { ItemSheetSS2eArtifact } from './item/sheets/artifact.js'
 import { ItemSheetSS2eShipAdventure } from './item/sheets/shipadventure.js'
 import LanguageSelector from './apps/language-selector.js'
+import SkillSelector from './apps/skill-selector.js'
 
 Hooks.once('init', async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System\n

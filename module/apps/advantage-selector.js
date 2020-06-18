@@ -1,15 +1,15 @@
 /**
- * A specialized form used to select from a checklist of attributes, languages, or properties
+ * A specialized form used to select from a checklist of attributes, advantageuages, or properties
  * @extends {FormApplication}
  */
-export default class LanguageSelector extends FormApplication {
+export default class AdvantageSelector extends FormApplication {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      id: 'language-selector',
+      id: 'advantage-selector',
       classes: ['svnsea2e'],
-      title: game.i18n.localize('SVNSEA2E.ActorLangSelect'),
-      template: 'systems/svnsea2e/templates/apps/language-selector.html',
+      title: game.i18n.localize('SVNSEA2E.BackgroundAdvantageSelect'),
+      template: 'systems/svnsea2e/templates/apps/advantage-selector.html',
       width: 320,
       height: 'auto',
       choices: {},
@@ -22,15 +22,17 @@ export default class LanguageSelector extends FormApplication {
 
   /** @override */
   getData () {
+    console.log('advantage select get data: ', this.options.choices)
+    console.log('object data: ', this)
     // Get current values
-    const langs = this.object.data.data.languages
+    const advantages = this.object.data.data.advantages
 
     // Populate choices
     const choices = duplicate(this.options.choices)
     for (const [k, v] of Object.entries(choices)) {
       choices[k] = {
         label: v,
-        chosen: langs ? langs.includes(k) : false
+        chosen: advantages ? advantages.includes(k) : false
       }
     }
 
@@ -48,15 +50,15 @@ export default class LanguageSelector extends FormApplication {
 
     // Obtain choices
     const chosen = []
-
+    console.log(this.attribute)
     for (const [k, v] of Object.entries(formData)) {
       console.log(v)
       if (v) {
         chosen.push(k)
       }
     }
-
-    updateData['data.languages'] = chosen
+    console.log(chosen)
+    updateData['data.advantages'] = chosen
 
     if (this.options.minimum && (chosen.length < this.options.minimum)) {
       return ui.notifications.error(game.i18n.format('SVNSEA2E.AtLeastOptions', {
@@ -68,6 +70,8 @@ export default class LanguageSelector extends FormApplication {
         max: this.options.maximum
       }))
     }
+
+    console.log(updateData)
 
     // Update the object
     this.object.update(updateData)
