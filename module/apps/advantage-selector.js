@@ -22,8 +22,6 @@ export default class AdvantageSelector extends FormApplication {
 
   /** @override */
   getData () {
-    console.log('advantage select get data: ', this.options.choices)
-    console.log('object data: ', this)
     // Get current values
     const advantages = this.object.data.data.advantages
 
@@ -50,14 +48,11 @@ export default class AdvantageSelector extends FormApplication {
 
     // Obtain choices
     const chosen = []
-    console.log(this.attribute)
     for (const [k, v] of Object.entries(formData)) {
-      console.log(v)
       if (v) {
         chosen.push(k)
       }
     }
-    console.log(chosen)
     updateData['data.advantages'] = chosen
 
     if (this.options.minimum && (chosen.length < this.options.minimum)) {
@@ -70,8 +65,6 @@ export default class AdvantageSelector extends FormApplication {
         max: this.options.maximum
       }))
     }
-
-    console.log(updateData)
 
     // Update the object
     this.object.update(updateData)

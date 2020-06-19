@@ -50,7 +50,6 @@ export default class LanguageSelector extends FormApplication {
     const chosen = []
 
     for (const [k, v] of Object.entries(formData)) {
-      console.log(v)
       if (v) {
         chosen.push(k)
       }

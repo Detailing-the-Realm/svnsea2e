@@ -22,7 +22,6 @@ export default class SkillSelector extends FormApplication {
 
   /** @override */
   getData () {
-    console.log('skill select get data: ', this.options.choices)
     // Get current values
     const skills = this.object.data.data.skills
 
@@ -50,12 +49,10 @@ export default class SkillSelector extends FormApplication {
     // Obtain choices
     const chosen = []
     for (const [k, v] of Object.entries(formData)) {
-      console.log(v)
       if (v) {
         chosen.push(k)
       }
     }
-    console.log(chosen)
     updateData['data.skills'] = chosen
 
     if (this.options.minimum && (chosen.length < this.options.minimum)) {

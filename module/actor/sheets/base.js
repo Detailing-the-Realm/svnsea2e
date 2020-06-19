@@ -185,9 +185,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     const itemid = li.dataset.itemId
 
     const item = this.actor.getOwnedItem(itemid)
-    console.log('itemid', itemid)
-    console.log('actor', this.actor)
-    console.log('item', item)
     if (item && item.data.type === 'background') await this._processBackgroundDelete(item.data.data)
 
     await this.actor.deleteOwnedItem(itemid)
@@ -243,12 +240,19 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _onDropItem (event, data) {
     if (!this.actor.owner) return false
     const itemData = await this._getItemDropData(event, data)
-    console.log('itemdata', itemData)
 
     if (itemData.type !== 'sorcery') {
       if (await this._doesActorHaveItem(itemData.type, itemData.name)) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
           type: itemData.type,
+          name: itemData.name
+        }))
+      }
+
+      if (itemData.data.nation !== 'none' && itemData.data.nation !== this.actor.data.data.nation) {
+        return ui.notifications.error(game.i18n.format('SVNSEA2E.WrongNation', {
+          bgnation: itemData.data.nation,
+          anation: this.actor.data.data.nation,
           name: itemData.name
         }))
       }
@@ -398,10 +402,8 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _doesActorHaveItem (type, name) {
-    console.log('type', type, 'name', name)
     let retVal = false
     this.actor.items.forEach(element => {
-      console.log('element type', element.type)
       if (element.type === type && element.name === name) {
         retVal = true
       }
