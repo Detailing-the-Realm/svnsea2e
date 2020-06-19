@@ -3,7 +3,6 @@
     "types": ["brute", "hero", "monster", "playercharacter", "ship", "villain"],
     "templates": {
       "base": {
-        "name": "",
         "wounds": {
           "value": 0,
           "min": 0,
@@ -208,7 +207,6 @@
     "types": ["advantage", "artifact", "background", "duelstyle", "scheme", "secretsociety", "shipadventure", "sorcery", "story"],
     "templates": {
       "base": {
-        "name": "",
         "description": "",
         "infosource": ""
       }

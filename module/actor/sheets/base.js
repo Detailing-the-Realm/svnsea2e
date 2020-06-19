@@ -101,11 +101,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     })
 
     // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      const li = $(ev.currentTarget).parents('.item')
-      this.actor.deleteOwnedItem(li.data('itemId'))
-      li.slideUp(200, () => this.render(false))
-    })
+    html.find('.item-delete').click(this._onItemDelete.bind(this))
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this))
@@ -131,7 +127,6 @@ export default class ActorSheetSS2e extends ActorSheet {
   _prepareLanguages (data) {
     data.selectedlangs = {}
     for (let i = 0; i < data.languages.length; i++) {
-      console.log(data.languages[i], CONFIG.SVNSEA2E.languages[data.languages[i]])
       data.selectedlangs[data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
     }
   }
@@ -153,6 +148,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     new LanguageSelector(this.actor, options).render(true)
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
@@ -163,21 +160,37 @@ export default class ActorSheetSS2e extends ActorSheet {
     const header = event.currentTarget
     // Get the type of item to create.
     const type = header.dataset.type
-    // Grab any data associated with this control.
-    const data = duplicate(header.dataset)
-    // Initialize a default name.
-    const name = game.i18n.localize(`SVNSEA2E.New${type}`)
     // Prepare the item object.
     const itemData = {
-      name: name,
+      name: game.i18n.localize(`SVNSEA2E.New${type}`),
       type: type,
-      data: data
+      data: duplicate(header.dataset)
     }
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data.type
 
     // Finally, create the item!
     return this.actor.createOwnedItem(itemData)
+  }
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting a new Owned Item for the actor using initial data defined in the HTML dataset
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async _onItemDelete (event) {
+    event.preventDefault()
+    const li = event.currentTarget.closest('.item')
+    const itemid = li.dataset.itemId
+
+    const item = this.actor.getOwnedItem(itemid)
+    console.log('itemid', itemid)
+    console.log('actor', this.actor)
+    console.log('item', item)
+    if (item && item.data.type === 'background') await this._processBackgroundDelete(item.data.data)
+
+    await this.actor.deleteOwnedItem(itemid)
   }
 
   /* -------------------------------------------- */
@@ -212,20 +225,10 @@ export default class ActorSheetSS2e extends ActorSheet {
    * Handle dropping an Actor on the sheet to trigger a Polymorph workflow
    * @param {DragEvent} event   The drop event
    * @param {Object} data       The data transfer
+   * @return {Object}           OwnedItem data to create
    * @private
    */
   async _onDropActor (event, data) {
-    console.log('Actor got a drag drop event')
-    if (!this.actor.owner) return false
-    const actorData = await this._getActorDropData(event, data)
-
-    // Handle item sorting within the same Actor
-    const actor = this.actor
-    const sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id))
-    if (sameActor) return this._onSortItem(event, actorData)
-
-    // Create the owned item
-    return this.actor.createEmbeddedEntity('OwnedItem', actorData)
   }
 
   /* -------------------------------------------- */
@@ -238,9 +241,19 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _onDropItem (event, data) {
-    console.log('Item got a drag drop event')
     if (!this.actor.owner) return false
     const itemData = await this._getItemDropData(event, data)
+    console.log('itemdata', itemData)
+
+    if (itemData.type !== 'sorcery') {
+      if (await this._doesActorHaveItem(itemData.type, itemData.name)) {
+        return ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
+          type: itemData.type,
+          name: itemData.name
+        }))
+      }
+      await this._processBackgroundDrop(itemData.data)
+    }
 
     // Handle item sorting within the same Actor
     const actor = this.actor
@@ -248,7 +261,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (sameActor) return this._onSortItem(event, itemData)
 
     // Create the owned item
-    return this.actor.createEmbeddedEntity('OwnedItem', itemData)
+    return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
   }
 
   /* -------------------------------------------- */
@@ -256,6 +269,8 @@ export default class ActorSheetSS2e extends ActorSheet {
   /**
    * TODO: A temporary shim method until Item.getDropData() is implemented
    * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
    * @private
    */
   async _getActorDropData (event, data) {
@@ -283,6 +298,8 @@ export default class ActorSheetSS2e extends ActorSheet {
   /**
    * TODO: A temporary shim method until Item.getDropData() is implemented
    * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
    * @private
    */
   async _getItemDropData (event, data) {
@@ -303,6 +320,143 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Return a copy of the extracted data
     return duplicate(itemData)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+ * Process for modifying the character sheet when a background is dropped on it.
+ * Backgrouds increase skills and add advantages
+ * @param itemData for the item that has been dropped on the character sheet
+ */
+  async _processBackgroundDrop (bkgData) {
+    const actorData = this.actor.data.data
+    const updateData = {}
+
+    for (let i = 0; i < bkgData.skills.length; i++) {
+      const skill = bkgData.skills[i]
+      updateData['data.skills.' + skill + '.value'] = actorData.skills[skill].value + 1
+    }
+    await this.actor.update(updateData)
+
+    for (let i = 0; i < bkgData.advantages.length; i++) {
+      // Probably need to improve this to look for backgrounds in compediums/packs too.
+      const item = game.items.get(bkgData.advantages[i])
+      if (!item) {
+        ui.notifications.error(game.i18n.format('SVNSEA2E.ItemDoesntExist', {
+          name: bkgData.advantages[i]
+        }))
+        continue
+      }
+      if (await this._doesActorHaveItem('advantage', item.name)) {
+        ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
+          name: item.name
+        }))
+        continue
+      }
+      await this.actor.createEmbeddedEntity('OwnedItem', duplicate(item.data))
+    }
+  }
+
+  /* -------------------------------------------- */
+  /**
+ * Process for modifying the character sheet when a background is dropped on it.
+ * Backgrouds increase skills and add advantages
+ * @param itemData data for the item that is being deleted
+ */
+  async _processBackgroundDelete (bkgData) {
+    const actorData = this.actor.data.data
+    const updateData = {}
+    for (let i = 0; i < bkgData.skills.length; i++) {
+      const skill = bkgData.skills[i]
+      updateData['data.skills.' + skill + '.value'] = actorData.skills[skill].value - 1
+    }
+    await this.actor.update(updateData)
+
+    const charAdvs = await this._getAdvantages()
+    for (let i = 0; i < bkgData.advantages.length; i++) {
+      const item = game.items.get(bkgData.advantages[i])
+
+      if (!item) {
+        ui.notifications.error(game.i18n.format('SVNSEA2E.ItemDoesntExist', {
+          name: bkgData.advantages[i]
+        }))
+        continue
+      }
+      for (let j = 0; j < charAdvs.length; j++) {
+        if (charAdvs[i].name === item.name) {
+          await this.actor.deleteOwnedItem(charAdvs[i].id)
+        }
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   *
+   * @private
+   */
+  async _doesActorHaveItem (type, name) {
+    console.log('type', type, 'name', name)
+    let retVal = false
+    this.actor.items.forEach(element => {
+      console.log('element type', element.type)
+      if (element.type === type && element.name === name) {
+        retVal = true
+      }
+    })
+    return retVal
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   *
+   * @private
+   */
+  async _getBackgroundNames () {
+    const advNames = []
+
+    this.actor.items.forEach(element => {
+      if (element.type === 'advantage') {
+        advNames.push(element.name)
+      }
+    })
+    return advNames
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   *
+   * @private
+   */
+  async _getAdvantageNames () {
+    const advNames = []
+
+    this.actor.items.forEach(element => {
+      if (element.type === 'advantage') {
+        advNames.push(element.name)
+      }
+    })
+    return advNames
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   *
+   * @private
+   */
+  async _getAdvantages () {
+    const advantages = []
+    this.actor.items.forEach(element => {
+      if (element.type === 'advantage') {
+        advantages.push(element)
+      }
+    })
+    return advantages
   }
 
   /* -------------------------------------------- */
@@ -571,7 +725,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         buttons: {
           roll: {
             icon: '<img src="' + actor.img + '">',
-          //  icon: '<imgi class="fas fa-dice-d20"></i>',
+            //  icon: '<imgi class="fas fa-dice-d20"></i>',
             label: game.i18n.localize('SVNSEA2E.Roll'),
             callback: html => roll = _roll({
               skill: skill,

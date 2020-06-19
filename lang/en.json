@@ -226,5 +226,7 @@
   "SVNSEA2E.AtLeastOptions": "You must choose at least {min} options.",
   "SVNSEA2E.NoMoreThanOptions":"You may choose no more than {max} options.",
   "SVNSEA2E.ActorLangSelect": "Actor Language Selection",
-  "SVNSEA2E.BackgroundSkillSelect": "Background Skill Selection"
+  "SVNSEA2E.BackgroundSkillSelect": "Background Skill Selection",
+  "SVNSEA2E.ItemExists": "The {type}: {name} is already assigned to the character.",
+  "SVNSEA2E.ItemDoesntExist": "{name} doesn't exist in the world's items."
 }
