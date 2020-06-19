@@ -251,8 +251,8 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       if (itemData.data.nation !== 'none' && itemData.data.nation !== this.actor.data.data.nation) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.WrongNation', {
-          bgnation: itemData.data.nation,
-          anation: this.actor.data.data.nation,
+          bgnation: game.i18n.localize(CONFIG.SVNSEA2E.nations[itemData.data.nation]),
+          anation: game.i18n.localize(CONFIG.SVNSEA2E.nations[this.actor.data.data.nation]),
           name: itemData.name
         }))
       }
