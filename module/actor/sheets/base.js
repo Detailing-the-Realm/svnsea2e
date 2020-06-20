@@ -103,6 +103,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Delete Inventory Item
     html.find('.item-delete').click(this._onItemDelete.bind(this))
 
+    html.find('.item h4.item-name').click(event => this._onItemSummary(event));
+
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this))
 
@@ -188,6 +190,34 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (item && item.data.type === 'background') await this._processBackgroundDelete(item.data.data)
 
     await this.actor.deleteOwnedItem(itemid)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * @private
+   */
+  _onItemSummary (event) {
+    event.preventDefault()
+    const li = $(event.currentTarget).parents('.item')
+    const item = this.actor.getOwnedItem(li.data('item-id'))
+    const itemData = item.data.data
+    console.log(item)
+
+    // Toggle summary
+    if (li.hasClass('expanded')) {
+      const summary = li.children('.item-summary')
+      summary.slideUp(200, () => summary.remove())
+    } else {
+      const div = $(`<div class="item-summary">${itemData.description}</div>`)
+    //  const props = $('<div class="item-properties"></div>')
+    //  item.data.properties.forEach(p => props.append(`<span class="tag">${p}</span>`))
+      //div.append(props)
+      li.append(div.hide())
+      div.slideDown(200)
+    }
+    li.toggleClass('expanded')
   }
 
   /* -------------------------------------------- */

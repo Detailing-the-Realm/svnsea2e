@@ -59,13 +59,16 @@ input[type="text"]:focus {
   margin: 7px 0;
   padding: 0;
   overflow-y: auto;
+  line-height: 30px;
+  border-bottom: 1px solid $c-secondary;
+
 
   .item-header {
     font-weight: bold;
   }
 
   .item {
-    height: 30px;
+    
     line-height: 24px;
     padding: 3px 0;
     border-bottom: 1px solid #BBB;
@@ -77,6 +80,77 @@ input[type="text"]:focus {
 
     img {
       display: block;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .item-weight {
+      flex: 0 0 60px;
+      border-left: 1px solid $c-secondary;
+      border-right: 1px solid $c-secondary;
+    }
+
+    .item-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    // Item Control Buttons
+    .item-controls {
+      flex: 0 0 44px;
+      justify-content: flex-end;
+
+      a {
+        flex: 0 0 22px;
+        font-size: 12px;
+        text-align: center;
+        color: $c-secondary;
+      }
+    }
+    // Item Dropdown Summary
+    .item-summary {
+      flex: 0 0 100%;
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0.25em 0.5em;
+      border-top: 1px solid $c-secondary;
+    }
+
+    .traits {
+      .tag {
+        display: inline-block;
+        margin: 0 $margin-xs 0 0;
+        padding: 0 $padding-xs;
+        font-size: $font-s-norm;
+        border: $border-s-sm-main;
+        border-radius: $bs-lg;
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .flexrow .languages-list {
+        flex: 0 0 95%;
+      }
+
+      .flexrow .language-selector {
+        flex: 0 0 2%;
+      }
+
+      .languages-list {
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .sheet-header .age input[type="text"],
+    .sheet-header .wounds input[type="text"],
+    .sheet-body .trait input[type="text"],
+    .sheet-body .skill input[type="text"] {
+      max-width: 25px;
+      text-align: right;
     }
   }
 

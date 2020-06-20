@@ -8,43 +8,8 @@
   }
 }
 
-.arcana{
-  input[type="text"]{
+.arcana {
+  input[type="text"] {
     width: 85%;
   }
-}
-
-.traits {
-  .tag {
-    display: inline-block;
-    margin: 0 $margin-xs 0 0;
-    padding: 0 $padding-xs;
-    font-size: $font-s-norm;
-    border: $border-s-sm-main;
-    border-radius: $bs-lg;
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .flexrow .languages-list {
-    flex: 0 0 95%;
-  }
-
-  .flexrow .language-selector {
-    flex: 0 0 2%;
-  }
-
-  .languages-list {
-    line-height: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-}
-
-.sheet-header .age input[type="text"],
-.sheet-header .wounds input[type="text"],
-.sheet-body .trait input[type="text"],
-.sheet-body .skill input[type="text"] {
-  max-width: 25px;
-  text-align: right;
 }

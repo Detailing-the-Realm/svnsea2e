@@ -270,43 +270,6 @@ input[type="datetime-local"] {
   width: 85%;
 }
 
-.svnsea2e.actor .traits .tag {
-  display: inline-block;
-  margin: 0 2px 0 0;
-  padding: 0 2px;
-  font-size: 1em;
-  border: 1px solid #000;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.svnsea2e.actor .traits .flexrow .languages-list {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 95%;
-  flex: 0 0 95%;
-}
-
-.svnsea2e.actor .traits .flexrow .language-selector {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 2%;
-  flex: 0 0 2%;
-}
-
-.svnsea2e.actor .traits .languages-list {
-  line-height: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.svnsea2e.actor .sheet-header .age input[type="text"],
-.svnsea2e.actor .sheet-header .wounds input[type="text"],
-.svnsea2e.actor .sheet-body .trait input[type="text"],
-.svnsea2e.actor .sheet-body .skill input[type="text"] {
-  max-width: 25px;
-  text-align: right;
-}
-
 .svnsea2e.item .sheet-header {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 100px;
@@ -393,6 +356,8 @@ input[type="datetime-local"] {
   margin: 7px 0;
   padding: 0;
   overflow-y: auto;
+  line-height: 30px;
+  border-bottom: 1px solid #800000;
 }
 
 .svnsea2e.sheet .items-list .item-header {
@@ -400,7 +365,6 @@ input[type="datetime-local"] {
 }
 
 .svnsea2e.sheet .items-list .item {
-  height: 30px;
   line-height: 24px;
   padding: 3px 0;
   border-bottom: 1px solid #BBB;
@@ -415,6 +379,89 @@ input[type="datetime-local"] {
 
 .svnsea2e.sheet .items-list .item img {
   display: block;
+}
+
+.svnsea2e.sheet .items-list .item:last-child {
+  border-bottom: none;
+}
+
+.svnsea2e.sheet .items-list .item .item-weight {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 60px;
+  flex: 0 0 60px;
+  border-left: 1px solid #800000;
+  border-right: 1px solid #800000;
+}
+
+.svnsea2e.sheet .items-list .item .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.svnsea2e.sheet .items-list .item .item-controls {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 44px;
+  flex: 0 0 44px;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.svnsea2e.sheet .items-list .item .item-controls a {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 22px;
+  flex: 0 0 22px;
+  font-size: 12px;
+  text-align: center;
+  color: #800000;
+}
+
+.svnsea2e.sheet .items-list .item .item-summary {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0.25em 0.5em;
+  border-top: 1px solid #800000;
+}
+
+.svnsea2e.sheet .items-list .item .traits .tag {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 0 2px;
+  font-size: 1em;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.svnsea2e.sheet .items-list .item .traits .flexrow .languages-list {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 95%;
+  flex: 0 0 95%;
+}
+
+.svnsea2e.sheet .items-list .item .traits .flexrow .language-selector {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 2%;
+  flex: 0 0 2%;
+}
+
+.svnsea2e.sheet .items-list .item .traits .languages-list {
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.svnsea2e.sheet .items-list .item .sheet-header .age input[type="text"],
+.svnsea2e.sheet .items-list .item .sheet-header .wounds input[type="text"],
+.svnsea2e.sheet .items-list .item .sheet-body .trait input[type="text"],
+.svnsea2e.sheet .items-list .item .sheet-body .skill input[type="text"] {
+  max-width: 25px;
+  text-align: right;
 }
 
 .svnsea2e.sheet .items-list .item-name {
