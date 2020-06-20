@@ -33,7 +33,7 @@ export class ItemSheetSS2e extends ItemSheet {
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean']
     })
-    console.log('get data: ', data)
+
     if (data.item.type === 'background') {
       this._prepareBackground(data.item.data)
     }

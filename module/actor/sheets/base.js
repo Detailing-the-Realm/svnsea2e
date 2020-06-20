@@ -727,7 +727,6 @@ export default class ActorSheetSS2e extends ActorSheet {
         buttons: {
           roll: {
             icon: '<img src="' + actor.img + '">',
-            //  icon: '<imgi class="fas fa-dice-d20"></i>',
             label: game.i18n.localize('SVNSEA2E.Roll'),
             callback: html => roll = _roll({
               skill: skill,

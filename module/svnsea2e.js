@@ -136,6 +136,20 @@ Hooks.once('setup', function () {
   }
 })
 
+/**
+* Set the default image for an item type instead of the mystery man
+**/
+Hooks.on('preCreateItem', function (entity, options, userId) {
+  entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
+})
+
+/**
+* Set the default image for an actor type instead of the mystery man
+**/
+Hooks.on('preCreateActor', function (entity, options, userId) {
+  entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
+})
+
 /* -------------------------------------------- */
 
 /* -------------------------------------------- */
