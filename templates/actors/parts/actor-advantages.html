@@ -1,6 +1,6 @@
 <div class="tab features" data-group="primary" data-tab="advantages">
   <ol class="items-list">
-    <li class="flexrow item-header">
+    <li class="flexrow item-header advantage">
         <h3 class="item-name flexrow">{{localize "SVNSEA2E.Advantage"}}</h3>
         <div class="item-controls">
             <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddAdvantage'}}" data-type="advantage" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
@@ -9,7 +9,7 @@
         </div>
     </li>
     {{#each actor.advantages as |item id|}}
-      <li class="item flexrow" data-item-id="{{item._id}}">
+      <li class="item flexrow advantage" data-item-id="{{item._id}}">
         <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
         <h4 class="item-name">{{item.name}}</h4>
         <div class="item-controls">
@@ -18,7 +18,7 @@
         </div>
       </li>
     {{/each}}
-    <li class="flexrow item-header">
+    <li class="flexrow item-header duelingstyle">
         <h3 class="item-name flexrow">{{localize "SVNSEA2E.DuelingStyles"}}</h3>
         <div class="item-controls">
             <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddDuelStyle'}}" data-type="duelstyle" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
@@ -27,7 +27,7 @@
         </div>
     </li>
     {{#each actor.duelstyles as |item id|}}
-      <li class="item flexrow" data-item-id="{{item._id}}">
+      <li class="item flexrow duelingstyle" data-item-id="{{item._id}}">
         <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
         <h4 class="item-name">{{item.name}}</h4>
         <div class="item-controls">
@@ -37,7 +37,7 @@
       </li>
       {{/each}}
       <li class="flexrow item-header">
-          <h3 class="item-name flexrow">{{localize "SVNSEA2E.Backgrounds"}}</h3>
+          <h3 class="item-name flexrow background">{{localize "SVNSEA2E.Backgrounds"}}</h3>
           <div class="item-controls">
               <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddBackground'}}" data-type="background" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                   <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
@@ -45,7 +45,7 @@
           </div>
       </li>
       {{#each actor.backgrounds as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
+        <li class="item flexrow background" data-item-id="{{item._id}}">
           <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
           <h4 class="item-name">{{item.name}}</h4>
           <div class="item-controls">
@@ -55,7 +55,7 @@
         </li>
       {{/each}}
       <li class="flexrow item-header">
-          <h3 class="item-name flexrow">{{localize "SVNSEA2E.SecretSociety"}}</h3>
+          <h3 class="item-name flexrow secretsociety">{{localize "SVNSEA2E.SecretSociety"}}</h3>
           <div class="item-controls">
               <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddSecretSociety'}}" data-type="secretsociety" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                   <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
@@ -63,7 +63,7 @@
           </div>
       </li>
       {{#each actor.secretsocieties as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
+        <li class="item flexrow secretsociety" data-item-id="{{item._id}}">
           <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
           <h4 class="item-name">{{item.name}}</h4>
           <div class="item-controls">

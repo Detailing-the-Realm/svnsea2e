@@ -21,7 +21,7 @@
   </div>
 {{#if isPlayerCharacter}}
   <ol class="items-list">
-    <li class="flexrow item-header">
+    <li class="flexrow item-header story">
       <h3 class="item-name flexrow">{{localize "SVNSEA2E.Stories"}}</h3>
       <div class="item-controls">
         <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddStory'}}" data-type="story" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
@@ -30,7 +30,7 @@
       </div>
     </li>
   {{#each actor.stories as |item id|}}
-    <li class="item flexrow" data-item-id="{{item._id}}">
+    <li class="item flexrow story" data-item-id="{{item._id}}">
       <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
       <h4 class="item-name">{{item.name}}</h4>
       <div class="item-controls">

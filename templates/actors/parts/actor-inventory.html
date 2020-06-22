@@ -1,6 +1,6 @@
 <div class="tab inventory" data-group="primary" data-tab="inventory">
   <ol class="items-list">
-    <li class="flexrow item-header">
+    <li class="flexrow item-header artifacts">
       <h3 class="item-name flexrow">{{localize "SVNSEA2E.Artifacts"}}</h3>
       <div class="item-controls">
         <a class="item-control item-create" title="{{localize 'SVNSEA2E.Artifact'}}" data-type="artifact" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
@@ -9,7 +9,7 @@
       </div>
     </li>
     {{#each actor.artifacts as |item id|}}
-      <li class="item flexrow" data-item-id="{{item._id}}">
+      <li class="item flexrow artifacts" data-item-id="{{item._id}}">
         <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
         <h4 class="item-name">{{item.name}}</h4>
         <div class="item-controls">
@@ -20,5 +20,5 @@
     {{/each}}
   </ol>
   <h3>{{localize "SVNSEA2E.Equipment"}}</h3>
-  <textarea name="data.equipment" value="data.equipment"></textarea>
+  <textarea name="data.equipment" value="data.equipment" class="equipment"></textarea>
 </div>

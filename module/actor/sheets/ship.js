@@ -19,43 +19,59 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
   }
 
   /**
-   * Organize and classify Items for Character sheets.
+   * Process any flags that the actor might have that would affect the sheet .
    *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
+   * @param {Obejct} data The data object to update with any flag data.
+   * @param {Object} flags The set of flags for the Actor
    */
-  _prepareShipActors (data) {
-    const actorData = data.actor
+  _processFlags (data, flags) {
+    let svnsea2e = flags.svnsea2e
 
-    // Initialize containers.
-    const pcs = []
-    const npcs = []
+    if (!starfinder) starfinder = {}
+    if (!starfinder.shipsCrew) starfinder.shipsCrew = {}
+    if (!starfinder.shipsCrew.members) starfinder.shipsCrew.members = []
 
-    // Iterate through items, allocating to containers
-    // let totalWeight = 0
-    for (const i of data.items) {
-      console.log(i)
-      if (i.type === 'playercharacter') {
-        pcs.push(i)
-      } else if (i.type === 'hero' || i.type === 'villain') {
-        npcs.push(i)
-      }
+    // TODO: There are two more roles added in the Character Operations Manual that need to be added.
+
+    const crew = {
+      midshipmen: { label: 'Midshipmen', actors: [], dataset: { type: 'shipsCrew', role: 'midshipmen' } },
+      captain: { label: 'Captain', actors: [], dataset: { type: 'shipsCrew', role: 'captain' } },
+      boatswain: { label: 'Boatswain', actors: [], dataset: { type: 'shipsCrew', role: 'boatswain' } },
+      shipsmaster: { label: 'Ship\'s Master', actors: [], dataset: { type: 'shipsCrew', role: 'shipsmaster' } },
+      mastergunner: { label: 'Master Gunner', actors: [], dataset: { type: 'shipsCrew', role: 'mastergunner' } },
+      mastermariner: { label: 'Master Mariner', actors: [], dataset: { type: 'shipsCrew', role: 'mastermariner' } },
+      ableseaman: { label: 'Able Seaman', actors: [], dataset: { type: 'shipsCrew', role: 'ableseaman' } },
+      seaman: { label: 'Seaman', actors: [], dataset: { type: 'shipsCrew', role: 'seaman' } },
+      surgeon: { label: 'Surgeon', actors: [], dataset: { type: 'shipsCrew', role: 'surgeon' } }
     }
 
-    // Assign and return
-    actorData.pcs = pcs
-    actorData.npcs = npcs
-  }
+    const [captian, engineers, gunners, pilot, scienceOfficers, passengers] = starfinder.shipsCrew.members.reduce((arr, id) => {
+      const actor = game.actors.get(id)
 
-  /**
-   * Organize and classify Items for Character sheets.
-   *
-   * @param {Object} actorData The actor to prepare.
-   *
-   * @return {undefined}
-   */
-  _prepareShipItems (data) {
-    const itemData = data.item
+      if (!actor) return arr
+
+      const crewMember = actor.getFlag('starfinder', 'crewMember') || null
+      if (!crewMember) return arr
+
+      actor.data.img = actor.data.img || DEFAULT_TOKEN
+
+      if (crewMember.role === 'captain') arr[0].push(actor)
+      else if (crewMember.role === 'engineers') arr[1].push(actor)
+      else if (crewMember.role === 'gunners') arr[2].push(actor)
+      else if (crewMember.role === 'pilot') arr[3].push(actor)
+      else if (crewMember.role === 'scienceOfficers') arr[4].push(actor)
+      else if (crewMember.role === 'passengers') arr[5].push(actor)
+
+      return arr
+    }, [[], [], [], [], [], []])
+
+    crew.captain.actors = captian
+    crew.engineers.actors = engineers
+    crew.gunners.actors = gunners
+    crew.pilot.actors = pilot
+    crew.scienceOfficers.actors = scienceOfficers
+    crew.passengers.actors = passengers
+
+    data.crew = Object.values(crew)
   }
 }

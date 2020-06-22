@@ -54,26 +54,7 @@
             </div>
           </li>
         {{/each}}
-        <li class="flexrow actor-header">
-          <h3 class="actor-name flexrow">{{localize "SVNSEA2E.NPCS"}}</h3>
-          <div class="actor-controls">
-            <a class="actor-control actor-create" title="{{ localize "SVNSEA2E.AddHero" }}" data-type="hero" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
-              <i class="fas fa-plus"></i> {{localize "SVNSEA2E.AddHero"}}
-            </a>
-            <a class="actor-control actor-create" title="{{ localize "SVNSEA2E.AddVillain" }}" data-type="villain" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
-              <i class="fas fa-plus"></i> {{localize "SVNSEA2E.AddVillain"}}
-            </a>
-          </div>
-          {{#each actor.npcs as |actor id|}}
-        <li class="actor flexrow" data-actor-id="{{actor._id}}">
-          <div class="actor-image"><img src="{{actor.img}}" title="{{actor.name}}" /></div>
-          <h4 class="actor-name">{{actor.name}}</h4>
-          <div class="actor-controls">
-            <a class="actor-control actor-edit" title="{{actor.editlabel}}"><i class="fas fa-edit"></i></a>
-            <a class="actor-control actor-delete" title="{{actor.deletelabel}}"><i class="fas fa-trash"></i></a>
-          </div>
-        </li>
-        {{/each}}
+
       </ol>
     </div>
     <div class="tab cargo" data-group="primary" data-tab="cargo">

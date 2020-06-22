@@ -198,21 +198,20 @@ export default class ActorSheetSS2e extends ActorSheet {
    * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
    * @private
    */
-  _onItemSummary (event) {
+  async _onItemSummary (event) {
     event.preventDefault()
     const li = $(event.currentTarget).parents('.item')
     const item = this.actor.getOwnedItem(li.data('item-id'))
     const chatData = item.getChatData({ secrets: this.actor.owner })
-console.log(chatData)
+    console.log(chatData.metadatahtml)
     // Toggle summary
     if (li.hasClass('expanded')) {
       const summary = li.children('.item-summary')
       summary.slideUp(200, () => summary.remove())
     } else {
       const div = $(`<div class="item-summary">${chatData.description}</div>`)
-      const mds = $('<div class="item-properties"></div>')
-      chatData.metadata.forEach(md => mds.append(`<span class="tag">${md}</span>`))
-      div.append(mds)
+      const metadata = $(`<div class="item-metdata">${chatData.metadatahtml}</div>`)
+      div.append(metadata)
       li.append(div.hide())
       div.slideDown(200)
     }

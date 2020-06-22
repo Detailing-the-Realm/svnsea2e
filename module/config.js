@@ -110,20 +110,20 @@ SVNSEA2E.sorcerysources = {
   porte: 'SVNSEA2E.SorceryPorte',
   sanderis: 'SVNSEA2E.SorcerySanderis',
   sorte: 'SVNSEA2E.SorcerySorte',
-  charter:'SVNSEA2E.SorceryCharter',
-  kapsevi:'SVNSEA2E.SorceryKapSevi',
-  mystirios:'SVNSEA2E.SorceryMystirios',
-  mohwoo:'SVNSEA2E.SorceryMohwoo',
+  charter: 'SVNSEA2E.SorceryCharter',
+  kapsevi: 'SVNSEA2E.SorceryKapSevi',
+  mystirios: 'SVNSEA2E.SorceryMystirios',
+  mohwoo: 'SVNSEA2E.SorceryMohwoo',
   prophet: 'SVNSEA2E.SorceryProphet',
-  chozeh:'SVNSEA2E.SorceryChozeh',
-  khahesh:'SVNSEA2E.SorceryKhaheshAhura',
-  mithaq:'SVNSEA2E.SorceryMithaq',
-  nawaru:'SVNSEA2E.SorceryNawaru',
-  wayak:'SVNSEA2E.SorceryWayak',
+  chozeh: 'SVNSEA2E.SorceryChozeh',
+  khahesh: 'SVNSEA2E.SorceryKhaheshAhura',
+  mithaq: 'SVNSEA2E.SorceryMithaq',
+  nawaru: 'SVNSEA2E.SorceryNawaru',
+  wayak: 'SVNSEA2E.SorceryWayak',
   wanuy: 'SVNSEA2E.SorceryWanuy',
   heka: 'SVNSEA2E.SorceryHeka',
-  melbur:'SVNSEA2E.SorceryMelbur',
-  redtouch:'SVNSEA2E.SorceryRedTouch'
+  melbur: 'SVNSEA2E.SorceryMelbur',
+  redtouch: 'SVNSEA2E.SorceryRedTouch'
 }
 SVNSEA2E.durations = {
   scene: 'SVNSEA2E.Scene'
@@ -157,6 +157,18 @@ SVNSEA2E.artifacttypes = {
   tailsman: 'SVNSEA2E.Tailsman',
   inscription: 'SVNSEA2E.Inscription',
   mbey: 'SVNSEA2E.Mbey'
+}
+
+SVNSEA2E.shiproles = {
+  midshipmen: 'SVNSEA2E.Midshipmen',
+  captain: 'SVNSEA2E.Captain',
+  boatswain: 'SVNSEA2E.Boatswain',
+  shipsmaster: 'SVNSEA2E.ShipsMaster',
+  mastergunner: 'SVNSEA2E.MasterGunner',
+  mastermariner: 'SVNSEA2E.MasterMariner',
+  ableseaman: 'SVNSEA2E.AbleSeaman',
+  seaman: 'SVNSEA2E.Seaman',
+  surgeon: 'SVNSEA2E.Surgeon'
 }
 
 SVNSEA2E.match10 = {

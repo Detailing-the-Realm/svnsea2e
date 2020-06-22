@@ -1,15 +1,7 @@
 <div class="tab sorcery" data-group="primary" data-tab="sorcery">
     <ol class="items-list">
-      <li class="flexrow item-header">
-        <h3 class="item-name flexrow">{{localize "SVNSEA2E.Sorcery"}}</h3>
-        <div class="item-controls">
-          <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddSorcery'}}" data-type="sorcery" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
-            <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
-          </a>
-        </div>
-      </li>
       {{#each actor.sorcery as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
+        <li class="item flexrow sorcery" data-item-id="{{item._id}}">
           <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
           <h4 class="item-name">{{item.name}}</h4>
           <div class="item-controls">
