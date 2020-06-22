@@ -1,10 +1,10 @@
 .sheet-header {
-  flex: 0 0 $actor-profile-img-size;
+  flex: 0 0 $profile-img-lg-size;
 
   .profile-img {
-    flex: 0 0 $actor-profile-img-size;
-    height: $actor-profile-img-size;
-    width: $actor-profile-img-size;
+    flex: 0 0 $profile-img-lg-size;
+    height: $profile-img-lg-size;
+    width: $profile-img-lg-size;
   }
 }
 

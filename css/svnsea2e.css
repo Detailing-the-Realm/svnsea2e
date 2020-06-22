@@ -195,6 +195,12 @@ input[type="datetime-local"] {
   justify-content: space-between;
 }
 
+.dialog .dialog-button .d10 {
+  height: 24px;
+  width: 24px;
+  border: 0;
+}
+
 /* Styles limited to svnsea2e sheets */
 .svnsea2e .chat-card.skill-roll .card-content,
 .svnsea2e .chat-card.skill-roll .card-header {

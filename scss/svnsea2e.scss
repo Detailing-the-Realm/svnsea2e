@@ -10,13 +10,15 @@
 @import 'global/grid';
 @import 'global/flex';
 
+.dialog{
+  @import 'components/dialogs';
+}
+
 /* Styles limited to svnsea2e sheets */
 .svnsea2e {
-
   @import 'components/chat';
   @import 'components/forms';
   @import 'components/tabs';
-
 }
 
 .svnsea2e.actor{

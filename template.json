@@ -222,7 +222,7 @@
       "templates": ["base"],
       "cost": {
         "normal": 1,
-        "specialreg": ""
+        "specialreq": ""
       },
       "knack": false,
       "innate": false

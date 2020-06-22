@@ -85,7 +85,7 @@ export class ItemSheetSS2e extends ItemSheet {
   }
 
   _getAllAdvantages () {
-    let advantages = {}
+    const advantages = {}
     const items = game.items.directory.entities
     for (let i = 0; i < items.length; i++) {
       if (items[i].type === 'advantage') {

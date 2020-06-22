@@ -1,9 +1,9 @@
 .sheet-header {
-  flex: 0 0 $item-profile-img-size;
+  flex: 0 0 $profile-img-md-size;
 
   .profile-img {
-    flex: 0 0 $item-profile-img-size;
-    height: $item-profile-img-size;
-    width: $item-profile-img-size;
+    flex: 0 0 $profile-img-md-size;
+    height: $profile-img-md-size;
+    width: $profile-img-md-size;
   }
 }
