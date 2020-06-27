@@ -1,0 +1,17 @@
+.sheet-header {
+  flex: 0 0 $profile-img-lg-size;
+  //background-image: linear-gradient(to left, $g-c-dk 90%, $g-c-lt 10%);
+
+  .profile-img {
+    flex: 0 0 $profile-img-md-size;
+    height: $profile-img-md-size;
+    width: $profile-img-md-size;
+    border: $brd-s-lg-dk;
+    border-radius: $profile-img-md-size;
+  }
+
+  .item-subtitle{
+    font-size: $f-s-sm;
+    opacity: 0.5;
+  }
+}

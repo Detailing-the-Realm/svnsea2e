@@ -250,7 +250,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    * Handle dropping an Actor on the sheet to trigger a Polymorph workflow
    * @param {DragEvent} event   The drop event
    * @param {Object} data       The data transfer
-   * @return {Object}           OwnedItem data to create
+   * @return {Object}           OwnedItem data _getIndexeso create
    * @private
    */
   async _onDropActor (event, data) {
@@ -269,6 +269,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (!this.actor.owner) return false
     const itemData = await this._getItemDropData(event, data)
 
+    // Handle item sorting within the same Actor
+    const actor = this.actor
+    const sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id))
+    if (sameActor) return this._onSortItem(event, itemData)
+
     if (itemData.type !== 'sorcery') {
       if (await this._doesActorHaveItem(itemData.type, itemData.name)) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
@@ -276,7 +281,9 @@ export default class ActorSheetSS2e extends ActorSheet {
           name: itemData.name
         }))
       }
+    }
 
+    if (itemData.type === 'background') {
       if (itemData.data.nation !== 'none' && itemData.data.nation !== this.actor.data.data.nation) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.WrongNation', {
           bgnation: game.i18n.localize(CONFIG.SVNSEA2E.nations[itemData.data.nation]),
@@ -284,16 +291,11 @@ export default class ActorSheetSS2e extends ActorSheet {
           name: itemData.name
         }))
       }
-      await this._processBackgroundDrop(itemData.data)
+      return await this._processBackgroundDrop(itemData.data)
+    } else {
+      // Create the owned item
+      return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
     }
-
-    // Handle item sorting within the same Actor
-    const actor = this.actor
-    const sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id))
-    if (sameActor) return this._onSortItem(event, itemData)
-
-    // Create the owned item
-    return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
   }
 
   /* -------------------------------------------- */

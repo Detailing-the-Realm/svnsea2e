@@ -4,27 +4,27 @@
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="form-group">
+        <label for="data.type">{{localize "SVNSEA2E.Type"}}</label>
+        <select class="type" name="data.type">
+          {{#select data.type}}
+            <option value="none"></option>
+            {{#each config.artifacttypes as |label type|}}
+              <option value="{{type}}">{{label}}</option>
+            {{/each}}
+          {{/select}}
       </div>
     </div>
   </header>
 
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">
+      <h2>{{localize "SVNSEA2E.Description"}}</h2>
+    </a>
+  </nav>
   {{!-- Sheet Body --}}
-  <section class="sheet-body description">
-    <div class="tab flexrow active">
-      <div class="item-properties">
-        <div class="form-group ">
-          <label for="data.type">{{localize "SVNSEA2E.Type"}}</label>
-          <select class="type" name="data.type">
-            {{#select data.type}}
-              <option value="none"></option>
-              {{#each config.artifacttypes as |label type|}}
-                <option value="{{type}}">{{label}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </div>
-      </div>
-
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="description">
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
     </div>
   </section>

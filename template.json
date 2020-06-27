@@ -211,13 +211,6 @@
         "infosource": ""
       }
     },
-    "background": {
-      "templates": ["base"],
-      "quirk": "",
-      "skills": [],
-      "advantages":[],
-      "nation": ""
-    },
     "advantage": {
       "templates": ["base"],
       "cost": {
@@ -227,39 +220,49 @@
       "knack": false,
       "innate": false
     },
-    "secretsociety": {
-      "templates": ["base"],
-      "charter": "",
-      "concern": "",
-      "earnfavor": "",
-      "callupon": ""
-    },
-    "sorcery": {
-      "templates": ["base"],
-      "sorcsource": "",
-      "subsource": "",
-      "duration": "",
-      "scale": ""
-    },
-    "story": {
-      "templates": ["base"],
-      "endings": "",
-      "steps": ""
-    },
-    "scheme": {
-      "templates": ["base"],
-      "influence": 0
-    },
     "artifact": {
       "templates": ["base"],
       "type": ""
+    },
+    "background": {
+      "templates": ["base"],
+      "quirk": "",
+      "skills": [],
+      "advantages": [],
+      "nation": ""
     },
     "duelstyle": {
       "templates": ["base"],
       "bonus": ""
     },
-    "shipadventure": {
-      "templates": ["base"]
+    "scheme": {
+      "templates": ["base"],
+      "influence": {
+        "value": 0,
+        "min": 0,
+        "max": 40
+      },
+      "secretsociety": {
+        "templates": ["base"],
+        "charter": "",
+        "concern": "",
+        "earnfavor": "",
+        "callupon": ""
+      },
+      "shipadventure": {
+        "templates": ["base"]
+      },
+      "sorcery": {
+        "templates": ["base"],
+        "sorcsource": "",
+        "subsource": "",
+        "duration": "",
+        "scale": ""
+      },
+      "story": {
+        "templates": ["base"],
+        "endings": "",
+        "steps": ""
+      }
     }
   }
-}

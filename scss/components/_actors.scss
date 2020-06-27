@@ -1,0 +1,12 @@
+.sheet-header {
+  flex: 0 0 $profile-img-lg-size;
+  //background-image: linear-gradient(to left, $g-c-dk 90%, $g-c-lt 10%);
+
+  .profile-img {
+    flex: 0 0 $profile-img-lg-size;
+    height: $profile-img-lg-size;
+    width: $profile-img-lg-size;
+    border: $brd-s-lg-dk;
+    border-radius: $profile-img-lg-size;
+  }
+}

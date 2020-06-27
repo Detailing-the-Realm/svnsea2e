@@ -5,12 +5,14 @@ SVNSEA2E.ASCII = '7TH SEA'
 
 SVNSEA2E.itemTypes = {
   advantage: 'SVNSEA2E.Advantage',
+  artifact: 'SVNSEA2E.Artifact',
   background: 'SVNSEA2E.Background',
-  sorcery: 'SVNSEA2E.Sorcery',
-  nation: 'SVNSEA2E.Nation',
+  duelstyle: 'SVNSEA2E.DuelStyle',
+  scheme: 'SVNSEA2E.Scheme',
   secretsociety: 'SVNSEA2E.SecretSociety',
-  hubris: 'SVNSEA2E.Hubris',
-  virtue: 'SVNSEA2E.Virtue'
+  shipadventure: 'SVNSEA2E.ShipAdventure',
+  sorcery: 'SVNSEA2E.Sorcery',
+  story: 'SVNSEA2E.Story'
 }
 
 SVNSEA2E.actorTypes = {

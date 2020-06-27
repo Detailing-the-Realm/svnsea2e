@@ -16,20 +16,13 @@ input[type="text"] {
 .sheet-header {
   overflow: hidden;
   display: flex;
-  flex: 0 0 $profile-img-lg-size;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-bottom: $margin-md;
-  //background-image: linear-gradient(to left, $g-c-dk 90%, $g-c-lt 10%);
 
   .profile-img {
-    flex: 0 0 $profile-img-lg-size;
-    height: $profile-img-lg-size;
-    width: $profile-img-lg-size;
     margin-right: $padding-sm;
-    border: $brd-s-lg-dk;
-    border-radius: $profile-img-lg-size;
   }
 
   .header-fields {
@@ -197,7 +190,7 @@ input[type="text"] {
   border: $brd-s-md-dk;
 }
 
-.brute .trait,
+.sheet-header .trait,
 .skills .skill,
 .traits .trait {
   background-image: linear-gradient(to right, $g-c-dk 90%, $g-c-lt 10%);

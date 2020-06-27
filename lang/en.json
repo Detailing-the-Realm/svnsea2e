@@ -90,7 +90,7 @@
   "SVNSEA2E.NationSarmatia": "Sarmatia",
   "SVNSEA2E.NationSarmion": "Sarmion",
   "SVNSEA2E.NationTribes": "Tribes of the 8th Sea",
-  "SVNSEA2E.NationTzakkan": "Tzak'Kan ",
+  "SVNSEA2E.NationTzakkan": "Tzak'Kan",
   "SVNSEA2E.NationUssura": "Ussura",
   "SVNSEA2E.NationVesten": "Vesten",
   "SVNSEA2E.NationVodacce": "Vodacce",
@@ -192,6 +192,7 @@
   "SVNSEA2E.AddDuelStyle": "Add Dueling Style",
   "SVNSEA2E.Inventory": "Inventory",
   "SVNSEA2E.Equipment": "Other Equipment",
+  "SVNSEA2E.Artifact": "Artifact",
   "SVNSEA2E.Artifacts": "Artifacts",
   "SVNSEA2E.NewArtifact": "New Artifact",
   "SVNSEA2E.Type": "Type",
@@ -234,6 +235,7 @@
   "SVNSEA2E.ChatAdvantageCost": "Cost: {cost} points{special}",
   "SVNSEA2E.ChatInfluence": "Influence: {influence}",
   "SVNSEA2E.ChatDuelStyleBonus": "Bonus: {bonus}",
+  "SVNSEA2E.Bonus": "Bonus",
   "SVNSEA2E.Midshipmen": "Midshipmen",
   "SVNSEA2E.Captain": "Captain",
   "SVNSEA2E.Boatswain": "Boatswain",
@@ -242,5 +244,11 @@
   "SVNSEA2E.MasterMariner": "Master Mariner",
   "SVNSEA2E.AbleSeaman": "AbleSeaman",
   "SVNSEA2E.Seaman": "Seaman",
-  "SVNSEA2E.Surgeon": "Surgeon"
+  "SVNSEA2E.Surgeon": "Surgeon",
+  "SVNSEA2E.Thiqa": "Thiqa",
+  "SVNSEA2E.Tailsman": "Tailsman",
+  "SVNSEA2E.Inscription": "Inscription",
+  "SVNSEA2E.Mbey": "Mbey",
+  "SVNSEA2E.DuelStyle": "Dueling Style",
+  "SVNSEA2E.ShipAdventure": "Ship Adventure"
 }

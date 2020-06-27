@@ -2,9 +2,13 @@
   <header class="sheet-header">
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
-    {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
-    <label for="data.influence">{{localize "SVNSEA2E.Influence"}}</label>
-    <input type="text" name="data.influence" data-type="Number" />
+      {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+      <div class="traits grid grid-3col">
+        <div class="trait flexrow">
+          <label for="data.influence.value" class="trait-name">{{localize "SVNSEA2E.Influence"}}</label>
+          <input type="text" name="data.influence.value" data-type="Number" />
+        </div>
+      </div>
     </div>
   </header>
 
