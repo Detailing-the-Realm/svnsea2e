@@ -15,8 +15,7 @@ export class SvnSea2EItem extends Item {
     const actorData = this.actor ? this.actor.data : {}
     const data = itemData.data
 
-    if (itemData.type === 'scheme') { this._prepareSchemeData(itemData.data) }
-    else if (itemData.type === 'advantage') { this._prepareAdvantageData(itemData.data) }
+    if (itemData.type === 'scheme') { this._prepareSchemeData(itemData.data) } else if (itemData.type === 'advantage') { this._prepareAdvantageData(itemData.data) }
   }
 
   /**
@@ -42,45 +41,40 @@ export class SvnSea2EItem extends Item {
    * @return {Object}               An object of chat data to render
    */
   _advantageChatData (data, htmlOptions) {
-    data.metadata.push({
-      name: 'cost',
-      txt: game.i18n.format('SVNSEA2E.ChatAdvantageCost', {
-        cost: data.cost.normal,
-        special: data.cost.specreq ? ' (' + data.cost.specreq + ')' : ''
-      })
-    }, {
-      name: 'knack',
-      txt: data.knack ? game.i18n.localize('SVNSEA2E.Knack') : ''
-    }, {
-      name: 'innate',
-      txt: data.innate ? game.i18n.localize('SVNSEA2E.Innate') : ''
-    })
+    const pts = data.cost.normal === 1 ? game.i18n.localize('SVNSEA2E.Point') : game.i18n.localize('SVNSEA2E.Points')
+    data.metadatahtml = `<ul class="details-list"><li class="tag">${data.cost.normal} ${pts}</li>`
+    data.metadatahtml += data.cost.specreq ? '<li class="tag">' + data.cost.specreq + '</li>' : ''
+    data.metadatahtml += data.knack ? '<li class="tag">' + game.i18n.localize('SVNSEA2E.Knack') + '</li>' : ''
+    data.metadatahtml += data.innate ? '<li class="tag">' + game.i18n.localize('SVNSEA2E.Innate') + '</li>' : ''
+    data.metadatahtml += '</ul>'
+
     return data
   }
 
   _artifactChatData (data, htmlOptions) {
-    data.metadatahtml = `${CONFIG.SVNSEA2E.artifacttypes[data.type]}`
+    const type = data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifacttypes[data.type]
+    data.metadatahtml = `<ul class="details-list"><li class="tag">${type}</li></ul>`
     return data
   }
 
   _backgroundChatData (data, htmlOptions) {
     let skillNames = ''
-    data.skills.forEach(skl => skillNames += `<li>${CONFIG.SVNSEA2E.skills[skl]}</li>`)
+    data.skills.forEach(skl => skillNames += `<li class="tag">${CONFIG.SVNSEA2E.skills[skl]}</li>`)
 
     let advNames = ''
     data.advantages.forEach(adv => {
       const item = game.items.get(adv)
-      advNames += `<li>${item.name}</li>`
+      advNames += `<li class="tag">${item.name}</li>`
     })
 
-    data.metadatahtml = `<h4>${game.i18n.localize('SVNSEA2E.Quirk')}</h4>
+    data.metadatahtml = `<h5>${game.i18n.localize('SVNSEA2E.Quirk')}</h5>
     <p>${data.quirk}</p>
-    <h4>${game.i18n.localize('SVNSEA2E.Skills')}</h4>
-    <ul class="skills">
+    <h5>${game.i18n.localize('SVNSEA2E.Skills')}</h5>
+    <ul class="skills-list">
     ${skillNames}
     </ul>
-    <h4>${game.i18n.localize('SVNSEA2E.Advantages')}</h4>
-    <ul class="advantages">
+    <h5>${game.i18n.localize('SVNSEA2E.Advantages')}</h5>
+    <ul class="advantages-list">
     ${advNames}
     </ul>
 `
@@ -88,46 +82,48 @@ export class SvnSea2EItem extends Item {
   }
 
   _duelstyleChatData (data, htmlOptions) {
-    data.metadatahtml = game.i18n.format('SVNSEA2E.ChatDuelStyleBonus', {
-      bonus: data.bonus.toString()
-    })
+    data.metadatahtml = `
+    <h5>${game.i18n.format('SVNSEA2E.Bonus')}</h5>
+    <p>${data.bonus}</p>
+      `
     return data
   }
 
   _schemeChatData (data, htmlOptions) {
-    data.metadata = game.i18n.format('SVNSEA2E.ChatInfluence', {
+    data.metadatahtml = '<p>' + game.i18n.format('SVNSEA2E.ChatInfluence', {
       influence: data.influence.toString()
-    })
+    }) + '</p>'
     return data
   }
 
   _secretsocietyChatData (data, htmlOptions) {
-    data.metadata = `
-    <h4>${game.i18n.localize('SVNSEA2E.Charter')}</h4>
+    data.metadatahtml = `
+    <h5>${game.i18n.localize('SVNSEA2E.Charter')}</h5>
     <p>${data.charter}</p>
-    <h4>${game.i18n.localize('SVNSEA2E.Concern')}</h4>
+    <h5>${game.i18n.localize('SVNSEA2E.Concern')}</h5>
     <p>${data.concern}</p>
-    <h4>${game.i18n.localize('SVNSEA2E.EarnFavor')}</h4>
+    <h5>${game.i18n.localize('SVNSEA2E.EarnFavor')}</h5>
     <p>${data.earnfavor}</p>
-    <h4>${game.i18n.localize('SVNSEA2E.UseFavor')}</h4>
+    <h5>${game.i18n.localize('SVNSEA2E.UseFavor')}</h5>
     <p>${data.callupon}</p>
 `
     return data
   }
 
   _sorceryChatData (data, htmlOptions) {
-    data.metadata = `
-    <p>${data.sorcsource},${data.subsource}</p>
-    <p>${game.i18n.format('SVNSEA2E.Scale')}: ${data.scale} ${game.i18n.format('SVNSEA2E.Duration')}: ${data.duration}</p>
+    data.metadatahtml = `
+    <h5>${game.i18n.localize('SVNSEA2E.Attributes')}</h5>
+    <p>${data.sorcsource}, ${data.subsource}</p>
+    <p>${game.i18n.localize('SVNSEA2E.SorceryScale')}: ${data.scale} ${game.i18n.localize('SVNSEA2E.Duration')}: ${data.duration}</p>
 `
     return data
   }
 
   _storyChatData (data, htmlOptions) {
-    data.metadata = `
-    <h4>${game.i18n.localize('SVNSEA2E.Endings')}</h4>
+    data.metadatahtml = `
+    <h5>${game.i18n.localize('SVNSEA2E.Endings')}</h5>
     <p>${data.endings}</p>
-    <h4>${game.i18n.localize('SVNSEA2E.Steps')}</h4>
+    <h5>${game.i18n.localize('SVNSEA2E.Steps')}</h5>
     <p>${data.steps}</p>
 `
     return data

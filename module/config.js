@@ -25,6 +25,7 @@ SVNSEA2E.actorTypes = {
 }
 
 SVNSEA2E.nations = {
+  none: 'SVNSEA2E.None',
   anatol: 'SVNSEA2E.NationAnatol',
   avalon: 'SVNSEA2E.NationAvalon',
   ashur: 'SVNSEA2E.NationAshur',
@@ -100,12 +101,14 @@ SVNSEA2E.skills = {
 }
 
 SVNSEA2E.status = {
+  none: 'SVNSEA2E.None',
   abandoned: 'SVNSEA2E.StatusAbandoned',
   complete: 'SVNSEA2E.StatusComplete',
   inprogress: 'SVNSEA2E.StatusInProgress'
 }
 
 SVNSEA2E.sorcerysources = {
+  none: 'SVNSEA2E.None',
   hex: 'SVNSEA2E.SorceryHexenwerk',
   knight: 'SVNSEA2E.SorceryAvalonKnight',
   darm: 'SVNSEA2E.SorceryDarMatushki',
@@ -128,11 +131,13 @@ SVNSEA2E.sorcerysources = {
   redtouch: 'SVNSEA2E.SorceryRedTouch'
 }
 SVNSEA2E.durations = {
+  none: 'SVNSEA2E.None',
   scene: 'SVNSEA2E.Scene'
 
 }
 
 SVNSEA2E.sorceryscales = {
+  none: 'SVNSEA2E.None',
   major: 'SVNSEA2E.Major',
   minor: 'SVNSEA2E.Minor',
   advanced: 'SVNSEA2E.Advanced',
@@ -149,11 +154,13 @@ SVNSEA2E.sorceryscales = {
 }
 
 SVNSEA2E.crewstatuses = {
+  none: 'SVNSEA2E.None',
   happy: 'SVNSEA2E.Happy',
   dissatisfied: 'SVNSEA2E.Dissatisfied',
   mutinous: 'SVNSEA2E.Mutinous'
 }
 SVNSEA2E.artifacttypes = {
+  none: 'SVNSEA2E.None',
   syrneth: 'SVNSEA2E.Syrneth',
   thiqa: 'SVNSEA2E.Thiqa',
   tailsman: 'SVNSEA2E.Tailsman',
