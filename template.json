@@ -241,28 +241,29 @@
         "value": 0,
         "min": 0,
         "max": 40
-      },
-      "secretsociety": {
-        "templates": ["base"],
-        "charter": "",
-        "concern": "",
-        "earnfavor": "",
-        "callupon": ""
-      },
-      "shipadventure": {
-        "templates": ["base"]
-      },
-      "sorcery": {
-        "templates": ["base"],
-        "sorcsource": "",
-        "subsource": "",
-        "duration": "",
-        "scale": ""
-      },
-      "story": {
-        "templates": ["base"],
-        "endings": "",
-        "steps": ""
       }
+    },
+    "secretsociety": {
+      "templates": ["base"],
+      "charter": "",
+      "concern": "",
+      "earnfavor": "",
+      "callupon": ""
+    },
+    "shipadventure": {
+      "templates": ["base"]
+    },
+    "sorcery": {
+      "templates": ["base"],
+      "sorcsource": "",
+      "subsource": "",
+      "duration": "",
+      "scale": ""
+    },
+    "story": {
+      "templates": ["base"],
+      "endings": "",
+      "steps": ""
     }
   }
+}
