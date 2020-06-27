@@ -10,6 +10,8 @@
 @import 'global/grid';
 @import 'global/flex';
 
+@import 'components/sidebar';
+
 .dialog{
   @import 'components/dialogs';
 }
@@ -21,13 +23,16 @@
   @import 'components/tabs';
 }
 
+.svnsea2e.sheet{
+  @import 'components/sheet';
+}
+
 .svnsea2e.actor{
   @import 'components/actors';
 }
+
 .svnsea2e.item{
   @import 'components/items';
 }
 
-.svnsea2e.sheet{
-  @import 'components/sheet';
-}
+

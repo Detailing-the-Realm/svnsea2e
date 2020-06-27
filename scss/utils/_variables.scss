@@ -2,38 +2,51 @@
 
 // Padding Sizes
 $padding-xs: 2px;
-$padding-sm: 5px;
-$padding-md: 10px;
-$padding-lg: 20px;
+$padding-sm: 4px;
+$padding-md: 8px;
+$padding-lg: 16px;
 
 /* -------------------------------------------- */
 
 // Margin Sizes
 $margin-xs: 2px;
-$margin-sm: 5px;
-$margin-md: 10px;
-$margin-lg: 20px;
+$margin-sm: 4px;
+$margin-md: 8px;
+$margin-lg: 16px;
 
 /* -------------------------------------------- */
 
 // Border Sizes
 $bs-sm: 1px;
 $bs-md: 2px;
-$bs-lg: 3px;
+$bs-lg: 4px;
+$bs-xl: 6px;
+$bs-2xl: 12px;
 
 /* -------------------------------------------- */
 
 // Border Types
-$border-s-sm-main: $bs-sm solid $c-primary;
-$border-s-md-main: $bs-md solid $c-primary;
-$border-s-lg-main: $bs-lg solid $c-primary;
-$border-g-sm-main: $bs-sm groove $c-primary;
-$border-g-md-main: $bs-md groove $c-primary;
-$border-g-lg-main: $bs-lg groove $c-primary;
-$border-s-sm-secondary: $bs-sm solid $c-secondary;
-$border-s-md-secondary: $bs-md solid $c-secondary;
-$border-s-lg-secondary: $bs-lg solid $c-secondary;
-$no-border: $bs-sm solid transparent;
+// solid
+$brd-s-sm-lt: $bs-sm solid $brd-c-lt;
+$brd-s-md-lt: $bs-md solid $brd-c-lt;
+$brd-s-lg-lt: $bs-lg solid $brd-c-lt;
+
+$brd-s-sm-dk: $bs-sm solid $brd-c-dk;
+$brd-s-md-dk: $bs-md solid $brd-c-dk;
+$brd-s-lg-dk: $bs-lg solid $brd-c-dk;
+
+$brd-s-sm-glow: $bs-sm solid $brd-c-glow;
+$brd-s-md-glow: $bs-md solid $brd-c-glow;
+$brd-s-lg-glow: $bs-lg solid $brd-c-glow;
+
+// Grooved
+$brd-g-sm-dk: $bs-sm groove $brd-c-dk;
+$brd-g-md-dk: $bs-md groove $brd-c-dk;
+$brd-g-lg-dk: $bs-lg groove $brd-c-dk;
+
+// None
+$no-border: 0 solid transparent;
+$no-brd-2xl: $bs-2xl solid transparent;
 
 /* -------------------------------------------- */
 
@@ -41,3 +54,10 @@ $no-border: $bs-sm solid transparent;
 $profile-img-lg-size: 175px;
 $profile-img-md-size: 100px;
 $profile-img-sm-size: 50px;
+
+// Inputs
+$max-input-width-xs: 25px;
+$min-input-width-xs: 20px;
+
+//circle
+$circle-size: 25px;

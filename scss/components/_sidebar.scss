@@ -1,0 +1,147 @@
+#sidebar {
+  width: 320px;
+
+  h2,
+  h3,
+  h4 {
+    color: $f-c-lt;
+  }
+
+  #sidebar-tabs > {
+    .item {
+      flex: 1;
+    }
+
+    .item.active {
+      color: #FFF;
+      border: $brd-s-sm-lt;
+      box-shadow: 0 0 6px inset $c-sec;
+    }
+  }
+
+  #sidebar-tabs {
+    border-bottom: $brd-s-sm-glow;
+    box-shadow: 0 0 10px $c-sec;
+  }
+
+  .tabs .item.active {
+    text-shadow: 0 0 10px $c-sec;
+  }
+
+  .sidebar-tab {
+    .directory-list {
+      .directory-item img {
+        border: $brd-s-md-dk;
+        border-radius: $profile-img-sm-size;
+        height: $profile-img-sm-size;
+        width: $profile-img-sm-size;
+        fill:$c-prim;
+        background:$bg-c-lt;
+      }
+
+      .entity {
+        border-bottom: $brd-g-md-dk;
+        border-top: 0;
+        background-image: linear-gradient(to left, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
+      }
+
+      .entity.journal{
+        background:$c-prim-lt;
+      }
+
+      .playlist-header h4,
+      h3 {
+        @include paint-bottom-border
+      }
+    }
+
+    .dice-result h4{
+      color: $f-c-dk;
+    }
+  }
+
+  #combat {
+    #combat-controls {
+      background: $bg-c-lt;
+      color: $f-c-dk;
+
+      .combat-control {
+        font-size: $f-s-lg;
+      }
+    }
+
+    #combat-round .encounters {
+      a,
+      a.combat-cycle {
+        color: $f-c-lt;
+        font-size: $f-s-norm;
+      }
+
+      h3,
+      h4 {
+        font-size: $f-s-lg;
+      }
+
+      h4{
+        color: $f-c-lt;
+      }
+    }
+    li.combatant{
+      border-bottom: $brd-g-md-dk;
+      border-top: 0;
+      background-image: linear-gradient(to left, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
+
+      .token-name .combatant-control{
+        color: $f-c-lt;
+      }
+    }
+  }
+
+  #chat {
+    #chat-controls div.roll-type-select select,
+    #chat-form textarea,
+    #chat-log .message {
+      background: $bg-c-lt;
+    }
+
+    #chat-log {
+      .chat-card.skill-roll {
+        .card-header {
+          @include paint-bottom-border
+        }
+
+        .card-content .raises {
+          font-weight: bold;
+        }
+      }
+
+      .message {
+        font-size: $f-s-norm;
+        color: $f-c-dk;
+        padding: 0;
+
+        .message-header {
+          color: $f-c-lt;
+          background: $brd-c-dk;
+
+          .message-sender {
+            padding-bottom: 2px;
+            font-weight: bold;
+            text-indent: 0.4em;
+            line-height: 1.3em;
+          }
+
+          h4 {
+            color: $f-c-lt;
+          }
+        }
+      }
+    }
+  }
+
+  #scenes {
+    .scene h3 {
+      color: $f-c-lt;
+    }
+  }
+}

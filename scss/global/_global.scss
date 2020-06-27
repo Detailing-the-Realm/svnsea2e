@@ -1,5 +1,6 @@
 body {
-  font-size: $font-s-norm;
+  font-size: $f-s-norm;
+  font-family: $f-body;
 }
 
 a:hover {
@@ -15,48 +16,107 @@ h6 {
   margin: 0.75rem 0;
   padding: 0;
   font-weight: normal;
-  font-family: $font-header;
+  font-family: $f-header;
+  color: $f-c-dk;
+  text-shadow: 1px 1px 4px $f-c-dk;
 }
 
 h1 {
-  font-size: $font-s-3xl;
+  font-size: $f-s-3xl;
 }
 
 h2 {
-  font-size: $font-s-2xl;
+  font-size: $f-s-2xl;
+  @include paint-bottom-border
 }
 
 h3 {
-  font-size: $font-s-xl;
+  font-size: $f-s-xl;
 }
 
 h4 {
-  font-size: $font-s-lg;
+  font-size: $f-s-lg;
 }
 
 h5 {
-  font-size: $font-s-md;
+  font-size: $f-s-md;
 }
 
 h6 {
-  font-size: $font-s-norm;
+  font-size: $f-s-norm;
 }
 
-#chat-log .message {
-  font-size: $font-s-norm;
+#players {
+  h3 {
+    color: $f-c-lt;
+  }
+
+  ol .player-name.self {
+    color: $f-c-lt;
+  }
 }
 
-h4.message-sender {
-  font-weight: bold;
+textarea {
+  border: $no-border;
+  margin-top: $margin-sm;
 }
 
-textarea{
-  font-family: $font-body;
-  font-size: $font-s-norm;
+button {
+  font-family: $f-body;
+  font-size: $f-s-norm;
+  color: $f-c-dk;
+  background: $bg-c-lt;
 }
+
+.tox-tinymce,
+textarea,
 input[type="text"],
 input[type="password"],
-input[type="datetime-local"] {
-  font-size: $font-s-norm;
-  color: $f-c-primary;
+input[type="datetime-local"],
+select {
+  font-family: $f-body;
+  font-size: $f-s-norm;
+  color: $f-c-dk;
+  background: rgba(255, 255, 255, .6);
+}
+
+textarea:hover,
+textarea:focus,
+button:hover,
+button:focus,
+.tox-tinymce:hover,
+.tox-tinymce:focus,
+input[type="text"]:hover,
+input[type="text"]:focus {
+  box-shadow: 0 0 8px $c-prim;
+}
+
+input[type=range]::-moz-range-thumb,
+input[type=range]::-webkit-slider-thumb{
+  background: $c-prim-lt;
+}
+
+#navigation #nav-toggle,
+.app {
+  background: $bg-c-rgba-dk;
+  color: $f-c-lt;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $c-prim;
+  border: $no-border;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+#navigation #scene-list .scene.view,
+#navigation #scene-list .scene.context{
+  border: 1px solid red;
+  background: $bg-c-rgba-dk;
+  color: $f-c-lt;
+  border: $brd-s-sm-lt;
+  box-shadow: 0 0 10px inset $c-sec;
+  border-bottom: $brd-s-sm-glow;
 }

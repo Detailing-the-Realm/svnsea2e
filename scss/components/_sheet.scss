@@ -1,30 +1,34 @@
+img {
+  border: $no-border;
+}
+
+h1.charname,
 h3 {
-  border-bottom: $border-s-sm-secondary;
+  @include paint-bottom-border
 }
 
 input[type="text"] {
-  min-width: 20px;
+  min-width: $min-input-width-xs;
   text-align: left;
   border: $no-border;
-  background: none;
-}
-
-input[type="text"]:hover,
-input[type="text"]:focus {
-  box-shadow: 0 0 8px $c-secondary;
-  border: $border-s-sm-main;
 }
 
 .sheet-header {
   overflow: hidden;
   display: flex;
+  flex: 0 0 $profile-img-lg-size;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-bottom: $margin-md;
 
   .profile-img {
+    flex: 0 0 $profile-img-lg-size;
+    height: $profile-img-lg-size;
+    width: $profile-img-lg-size;
     margin-right: $padding-sm;
+    border: $brd-s-lg-dk;
+    border-radius: $profile-img-lg-size;
   }
 
   .header-fields {
@@ -36,46 +40,114 @@ input[type="text"]:focus {
     padding: 0;
   }
 
-  .grid {
-    border-top: $border-s-sm-main;
+  .grid .relrep,
+  .grid .resources {
+    border-top: $brd-s-sm-dk;
   }
 
   h1.charname {
     height: 50px;
-    padding: 0;
     margin: $margin-sm 0;
-    border-bottom: 0;
+    text-indent: 0;
 
     input {
       width: 100%;
       height: 100%;
       margin: 0;
+      background: none;
+      text-indent: 15px;
     }
   }
+
+  .age input[type="text"],
+  .wounds input[type="text"] {
+    max-width: $max-input-width-xs;
+    text-align: right;
+  }
+}
+
+.sheet-body{
+  h3,h4,h5,h6 {
+    text-shadow:none;
+  }
+   .trait input[type="text"],
+.skill input[type="text"] {
+  text-align: center;
+  border-radius: $circle-size;
+  height: $circle-size;
+  max-width: $circle-size;
+  padding: $padding-sm;
+  background: white;
+  border: $brd-s-sm-dk;
+}
+
+.skills .skill,
+.traits .trait {
+  background-image: linear-gradient(to right, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
+  padding: 0;
+  border-radius: $circle-size;
+}
+
+.skill-name,
+.trait-name {
+  font-weight: 600;
+  margin-left: $margin-md;
+  margin-top: 3px;
+}
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 $margin-xs 0 0;
+  padding: $padding-sm;
+  font-size: $f-s-norm;
+  //border: $brd-s-sm-dk;
+  //border-radius: $bs-lg;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.flexrow {
+  .languages-list {
+    flex: 0 0 95%;
+  }
+
+  .language-selector {
+  flex: 0 0 2%;
+  }
+}
+
+.languages-list {
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.arcana {
+  text-indent: 15px;
+  width: 85%;
 }
 
 .items-list {
   list-style: none;
-  margin: 7px 0;
+  margin: $margin-md 0;
   padding: 0;
   overflow-y: auto;
   line-height: 30px;
-  border-bottom: 1px solid $c-secondary;
-
+  border-bottom: $brd-s-sm-lt;
 
   .item-header {
     font-weight: bold;
   }
 
   .item {
-    
     line-height: 24px;
     padding: 3px 0;
-    border-bottom: 1px solid #BBB;
+    border-bottom: $brd-s-sm-lt;
 
     .item-image {
       flex: 0 0 24px;
-      margin-right: 5px;
+      margin-right: $margin-sm;
     }
 
     img {
@@ -88,8 +160,8 @@ input[type="text"]:focus {
 
     .item-weight {
       flex: 0 0 60px;
-      border-left: 1px solid $c-secondary;
-      border-right: 1px solid $c-secondary;
+      border-left: $brd-s-sm-lt;
+      border-right: $brd-s-sm-lt;
     }
 
     .item-list {
@@ -106,51 +178,16 @@ input[type="text"]:focus {
         flex: 0 0 22px;
         font-size: 12px;
         text-align: center;
-        color: $c-secondary;
+        color: $c-sec;
       }
     }
     // Item Dropdown Summary
     .item-summary {
       flex: 0 0 100%;
-      font-size: 12px;
-      line-height: 16px;
-      padding: 0.25em 0.5em;
-      border-top: 1px solid $c-secondary;
-    }
-
-    .traits {
-      .tag {
-        display: inline-block;
-        margin: 0 $margin-xs 0 0;
-        padding: 0 $padding-xs;
-        font-size: $font-s-norm;
-        border: $border-s-sm-main;
-        border-radius: $bs-lg;
-        background: rgba(0, 0, 0, 0.05);
-      }
-
-      .flexrow .languages-list {
-        flex: 0 0 95%;
-      }
-
-      .flexrow .language-selector {
-        flex: 0 0 2%;
-      }
-
-      .languages-list {
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-    }
-
-    .sheet-header .age input[type="text"],
-    .sheet-header .wounds input[type="text"],
-    .sheet-body .trait input[type="text"],
-    .sheet-body .skill input[type="text"] {
-      max-width: 25px;
-      text-align: right;
+      font-size: $f-s-norm;
+      line-height: $f-s-lg;
+      padding: $padding-md;
+      border-top: $brd-s-lg-lt;
     }
   }
 

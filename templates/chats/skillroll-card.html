@@ -1,32 +1,26 @@
-<div class="svnsea2e">
-  <div class="chat-card skill-roll" data-actor-id="{{ actor._id }}" data-skill="{{ skill }}">
-    <header class="card-header">
-      <h4 class="skill-title">{{ title }}</h4>
-    </header>
-    <div class="card-content">
-      <div class="raises">{{ raises }} {{ localize "SVNSEA2E.Raises" }}</div>
+<div class="chat-card skill-roll" data-actor-id="{{ actor._id }}" data-skill="{{ skill }}">
+  <h5 class="skill-title">{{ title }}</h5>
+  <div class="raises">{{ raises }}{% if raises == 1 %}{{ localize "SVNSEA2E.Raise" }}{% else %} {{ localize "SVNSEA2E.Raises" }}{% end if %}</div>
+  <h6 class="details-title">{{ localize "SVNSEA2E.Details" }}</h6>
+  <div class="card-details">
+    <div class="raise-combos">
+      {{ rCombos }}
     </div>
-    <footer class="card-footer">
-              <h5 class="">{{ localize "SVNSEA2E.RollDetails" }}</h5>
-      <div class="threshold">
-        {{ threshold }}
+    <div class="rolls">
+      <div class="">{{ rolls }}</div>
+    </div>
+    {{#if rerolled}}
+      <div class="reroll">
+        {{ reroll }}
       </div>
-      <div class="raise-combos">
-        {{ rCombos }}
+    {{/if}}
+    {{#if exploded}}
+      <div class="explosions">
+        {{ explosions }}
       </div>
-      <div class="rolls">
-        <div class="">{{ rolls }}</div>
-      </div>
-      {{#if rerolled}}
-        <div class="reroll">
-          {{ reroll }}
-        </div>
-      {{/if}}
-      {{#if exploded}}
-        <div class="explosions">
-           {{ explosions }}
-        </div>
-      {{/if}}
-    </footer>
+    {{/if}}
+    <div class="threshold">
+      {{ threshold }}
+    </div>
   </div>
 </div>

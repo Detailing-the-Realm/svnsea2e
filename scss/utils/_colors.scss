@@ -1,8 +1,18 @@
-$c-white: #fff;
-$c-black: #000;
+$c-prim: #143A54; //;
+$c-sec: #EEE8BF;
+$c-prim-lt: #3498DB;
 
-$c-primary: $c-black;
-$c-secondary: #800000;
+//Backgrounds
+$bg-c-lt: $c-sec;
+$bg-c-dk: $c-prim;
+$bg-c-rgba-dk: rgba(20, 58, 84, 0.6);
+//$bg-c-rgba-dk: rgba(52, 152, 219, 0.6);
+
+//Borders
+$brd-c-lt: #DBD5B0;
+$brd-c-dk: $c-prim;
+$brd-c-glow: $c-sec;
 
 // Font Colors
-$f-c-primary: $c-black;
+$f-c-dk: #000;
+$f-c-lt: $c-sec;

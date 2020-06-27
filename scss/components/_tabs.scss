@@ -1,21 +1,36 @@
 .tabs {
-  border-top: $border-g-sm-main;
-  border-bottom: $border-g-sm-main;
+  border-bottom: $brd-g-sm-dk;
 
   h2 {
     border: $no-border;
-    font-size: $font-s-md;
+    font-size: $f-s-md;
     margin:0;
   }
 
   .item {
     font-weight: bold;
     text-transform: uppercase;
-    padding: $padding-md 3px;
+    border-top: $brd-s-md-dk;
+    border-left: $brd-s-md-dk;
+    border-right: $brd-s-md-dk;
+    border-bottom: 0;
+    border-top-left-radius: $padding-sm;
+    border-top-right-radius: $padding-sm;
+    padding: $padding-sm;
+    margin: $padding-sm $padding-sm 0 $padding-sm;
+    background: $c-prim;
+
+    h2 {
+      color: $f-c-lt;
+      background:none;
+    }
   }
 
   .item.active {
-    border-bottom: $border-s-lg-secondary;
-    text-shadow: none;
+    background: $c-sec;
+    h2 {
+      text-shadow: none;
+      color: $f-c-dk;
+    }
   }
 }

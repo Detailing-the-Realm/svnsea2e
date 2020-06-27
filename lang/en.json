@@ -110,7 +110,7 @@
   "SVNSEA2E.Reputation": "Reputation",
   "SVNSEA2E.Reroll": "Rerolled {roll1} and got {roll2}.",
   "SVNSEA2E.Roll": "Roll",
-  "SVNSEA2E.RollDetails": "Roll Details",
+  "SVNSEA2E.Details": "Details",
   "SVNSEA2E.Rolls": "The dice rolls were {rolls}.",
   "SVNSEA2E.RollsExploded": "Number of dice that exploded is {explosions}.",
   "SVNSEA2E.RollThreshold": "Roll threshold is {threshold}.",

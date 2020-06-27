@@ -1,21 +1,30 @@
 .window-app {
-  color: $f-c-primary;
+  //color: $f-c-dk;
 
   .window-content {
-    color: $f-c-primary;
+    color: $f-c-dk;
+    background: $c-sec;
   }
 
   .window-header .window-title,
   .window-header a {
-    color: $c-white;
+    color: $f-c-lt;
+  }
+
+  .window-header .window-title{
+    padding-left: $padding-sm;
+  }
+
+  .window-header{
+    border-bottom: $brd-s-sm-lt;
   }
 }
 
 .rollable {
   &:focus,
   &:hover {
-    color: $f-c-primary;
-    text-shadow: 0 0 10px $c-secondary;
+    color: $f-c-dk;
+    text-shadow: 0 0 10px $c-sec;
     cursor: pointer;
   }
 }

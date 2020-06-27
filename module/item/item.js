@@ -92,8 +92,8 @@ export class SvnSea2EItem extends Item {
 
   _schemeChatData (data, htmlOptions) {
     data.metadata = game.i18n.format('SVNSEA2E.ChatInfluence', {
-        influence: data.influence.toString()
-      })
+      influence: data.influence.toString()
+    })
     return data
   }
 

@@ -14,3 +14,11 @@
 @mixin hide {
   display: none;
 }
+
+@mixin paint-bottom-border {
+  padding-bottom: 2px;
+  background: url(/systems/svnsea2e/imgs/paint_border.png);
+  background-repeat: no-repeat;
+  background-size: 100% 6px;
+  background-position: left bottom;
+}
