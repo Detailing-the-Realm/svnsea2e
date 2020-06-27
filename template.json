@@ -215,7 +215,9 @@
       "templates": ["base"],
       "cost": {
         "normal": 1,
-        "specialreq": ""
+        "specialreq": "",
+        "min": 1,
+        "max": 5
       },
       "knack": false,
       "innate": false

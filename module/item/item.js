@@ -11,8 +11,12 @@ export class SvnSea2EItem extends Item {
 
     // Get the Item's data
     const itemData = this.data
+    console.log(itemData)
     const actorData = this.actor ? this.actor.data : {}
     const data = itemData.data
+
+    if (itemData.type === 'scheme') { this._prepareSchemeData(itemData.data) }
+    else if (itemData.type === 'advantage') { this._prepareAdvantageData(itemData.data) }
   }
 
   /**
@@ -127,5 +131,28 @@ export class SvnSea2EItem extends Item {
     <p>${data.steps}</p>
 `
     return data
+  }
+
+  _validateMinMaxData (value, min, max) {
+    if (value > max) {
+      return max
+    } else if (value < min) {
+      return min
+    }
+    return value
+  }
+
+  /**
+   * Prepare advantage type specific data
+   */
+  _prepareAdvantageData (data) {
+    data.cost.norm = this._validateMinMaxData(data.cost.norm, data.cost.min, data.cost.max)
+  }
+
+  /**
+   * Prepare scheme type specific data
+   */
+  _prepareSchemeData (data) {
+    data.influence.value = this._validateMinMaxData(data.influence.value, data.influence.min, data.influence.max)
   }
 }
