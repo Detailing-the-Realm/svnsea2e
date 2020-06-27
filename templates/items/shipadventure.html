@@ -6,8 +6,17 @@
     </div>
   </header>
 
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">
+      <h2>{{localize "SVNSEA2E.Description"}}</h2>
+    </a>
+  </nav>
+
   {{!-- Sheet Body --}}
-  <section class="sheet-body description">
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="description">
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+    </div>
   </section>
 </form>

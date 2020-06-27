@@ -1,3 +1,4 @@
+body#tinymce.mce-content-body,
 body {
   font-size: $f-s-norm;
   font-family: $f-body;
@@ -69,6 +70,8 @@ button {
   background: $bg-c-lt;
 }
 
+.tox .tox-edit-area,
+.app.sheet .editor-content,
 .tox-tinymce,
 textarea,
 input[type="text"],
@@ -78,7 +81,7 @@ select {
   font-family: $f-body;
   font-size: $f-s-norm;
   color: $f-c-dk;
-  background: rgba(255, 255, 255, .6);
+  background: $bg-c-rgba-lt;
 }
 
 textarea:hover,
@@ -95,6 +98,14 @@ input[type="text"]:focus {
 input[type=range]::-moz-range-thumb,
 input[type=range]::-webkit-slider-thumb{
   background: $c-prim-lt;
+}
+
+.editor-edit{
+  display:inline-block;
+}
+
+.app.sheet .editor-content{
+  padding: $padding-md;
 }
 
 #navigation #nav-toggle,

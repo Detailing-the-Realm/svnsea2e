@@ -10,7 +10,7 @@ export class ItemSheetSS2eSecretSociety extends ItemSheetSS2e {
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       template: 'systems/svnsea2e/templates/items/secretsociety.html',
-      width: 700,
+      width: 800,
       height: 700,
       tabs: [{
         navSelector: '.sheet-tabs',
