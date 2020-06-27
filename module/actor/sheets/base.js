@@ -12,7 +12,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       width: 700,
-      height: 700
+      height: 750
     })
   }
 

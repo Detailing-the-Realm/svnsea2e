@@ -5,18 +5,18 @@
   {{/if}}
   {{#if isPlayerCharacter}}
   <div class="flex-group-center">
-    <label for="data.heropts" class="">{{ localize "SVNSEA2E.HeroPoints" }}</label>
+    <label for="data.heropts" class="wound-title">{{ localize "SVNSEA2E.HeroPoints" }}</label>
     <div><input type="text" name="data.heropts" value="{{data.heropts}}" />
     </div>
   </div>
   {{/if}}
   <div class="flex-group-center">
-    <label for="data.wounds.value" class="">{{localize "SVNSEA2E.Wounds" }}</label>
+    <label for="data.wounds.value" class="wound-title">{{localize "SVNSEA2E.Wounds" }}</label>
     <div><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
       /{{data.wounds.max}}</div>
   </div>
   <div class="flex-group-center">
-    <label for="data.dwounds.value" class="">{{localize "SVNSEA2E.DramaWounds"}}</label>
+    <label for="data.dwounds.value" class="wound-title">{{localize "SVNSEA2E.DramaWounds"}}</label>
     <div>
       <input type="text" name="data.dwounds.value" value="{{data.dwounds.value}}" data-dtype="Number" />
       /{{data.dwounds.max}}

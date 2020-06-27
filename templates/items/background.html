@@ -45,7 +45,7 @@
     {{!-- Details Tab --}}
     <div class="tab" data-group="primary" data-tab="details">
       <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
-      <div class="skills form-group">
+      <div class="skills flexrow flex-group flex-left">
         <ul class="skills-list">
           {{#each data.selectedskills as |k v|}}
             <li class="tag {{v}}">{{k}}</li>
@@ -54,7 +54,7 @@
         <a class="skill-selector" data-options="skills"><i class="fas fa-edit"></i></a>
       </div>
       <h3 class="advantages-title">{{localize "SVNSEA2E.Advantages"}}</h3>
-      <div class="advantages form-group">
+      <div class="advantages flexrow flex-group flex-left">
         <ul class="advantages-list">
           {{#each data.selectedadvantages as |k v|}}
             <li class="tag {{v}}">{{k}}</li>

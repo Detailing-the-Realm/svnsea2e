@@ -36,8 +36,8 @@
         </div>
       </li>
       {{/each}}
-      <li class="flexrow item-header">
-          <h3 class="item-name flexrow background">{{localize "SVNSEA2E.Backgrounds"}}</h3>
+      <li class="flexrow item-header background">
+          <h3 class="item-name flexrow">{{localize "SVNSEA2E.Backgrounds"}}</h3>
           <div class="item-controls">
               <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddBackground'}}" data-type="background" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                   <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
@@ -54,8 +54,8 @@
           </div>
         </li>
       {{/each}}
-      <li class="flexrow item-header">
-          <h3 class="item-name flexrow secretsociety">{{localize "SVNSEA2E.SecretSociety"}}</h3>
+      <li class="flexrow item-header secretsociety">
+          <h3 class="item-name">{{localize "SVNSEA2E.SecretSociety"}}</h3>
           <div class="item-controls">
               <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddSecretSociety'}}" data-type="secretsociety" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                   <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}

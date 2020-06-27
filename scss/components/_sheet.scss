@@ -21,6 +21,7 @@ input[type="text"] {
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-bottom: $margin-md;
+  //background-image: linear-gradient(to left, $g-c-dk 90%, $g-c-lt 10%);
 
   .profile-img {
     flex: 0 0 $profile-img-lg-size;
@@ -50,12 +51,14 @@ input[type="text"] {
     margin: $margin-sm 0;
     text-indent: 0;
 
+
     input {
       width: 100%;
       height: 100%;
       margin: 0;
       background: none;
       text-indent: 15px;
+      font-family: $f-header;
     }
   }
 
@@ -66,34 +69,13 @@ input[type="text"] {
   }
 }
 
-.sheet-body{
-  h3,h4,h5,h6 {
-    text-shadow:none;
+.sheet-body {
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-shadow: none;
   }
-   .trait input[type="text"],
-.skill input[type="text"] {
-  text-align: center;
-  border-radius: $circle-size;
-  height: $circle-size;
-  max-width: $circle-size;
-  padding: $padding-sm;
-  background: white;
-  border: $brd-s-sm-dk;
-}
-
-.skills .skill,
-.traits .trait {
-  background-image: linear-gradient(to right, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
-  padding: 0;
-  border-radius: $circle-size;
-}
-
-.skill-name,
-.trait-name {
-  font-weight: 600;
-  margin-left: $margin-md;
-  margin-top: 3px;
-}
 }
 
 .tag {
@@ -107,15 +89,21 @@ input[type="text"] {
 }
 
 .flexrow {
+  .skills-list,
+  .advantages-list,
   .languages-list {
     flex: 0 0 95%;
   }
 
+  .skill-selector,
+  .advantage-selector
   .language-selector {
-  flex: 0 0 2%;
+    flex: 0 0 2%;
   }
 }
 
+.skills-list,
+.advantages-list,
 .languages-list {
   line-height: 20px;
   list-style: none;
@@ -124,7 +112,6 @@ input[type="text"] {
 }
 
 .arcana {
-  text-indent: 15px;
   width: 85%;
 }
 
@@ -134,7 +121,6 @@ input[type="text"] {
   padding: 0;
   overflow-y: auto;
   line-height: 30px;
-  border-bottom: $brd-s-sm-lt;
 
   .item-header {
     font-weight: bold;
@@ -176,9 +162,8 @@ input[type="text"] {
 
       a {
         flex: 0 0 22px;
-        font-size: 12px;
         text-align: center;
-        color: $c-sec;
+        color: $f-c-dk;
       }
     }
     // Item Dropdown Summary
@@ -199,4 +184,39 @@ input[type="text"] {
     flex: 0 0 86px;
     text-align: right;
   }
+}
+
+.trait input[type="text"],
+.skill input[type="text"] {
+  text-align: center;
+  border-radius: $circle-size;
+  height: $circle-size;
+  max-width: $circle-size;
+  padding: $padding-sm;
+  background: white;
+  border: $brd-s-md-dk;
+}
+
+.brute .trait,
+.skills .skill,
+.traits .trait {
+  background-image: linear-gradient(to right, $g-c-dk 90%, $g-c-lt 10%);
+  padding: 0;
+  border-radius: $circle-size;
+}
+
+.skill-name,
+.trait-name {
+  font-weight: 600;
+  margin-left: $margin-md;
+  margin-top: 5px;
+}
+
+.wound-title{
+  font-weight: 600;
+}
+
+// Brute specific stuff
+.brute h2.ability-title {
+  text-shadow:none;
 }

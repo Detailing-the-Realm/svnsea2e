@@ -13,8 +13,8 @@ export class ItemSheetSS2e extends ItemSheet {
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'item'],
-      width: 520,
-      height: 480
+      width: 600,
+      height: 700
     })
   }
 

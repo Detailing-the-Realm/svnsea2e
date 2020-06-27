@@ -55,9 +55,10 @@ $profile-img-lg-size: 175px;
 $profile-img-md-size: 100px;
 $profile-img-sm-size: 50px;
 
-// Inputs
-$max-input-width-xs: 25px;
-$min-input-width-xs: 20px;
-
 //circle
-$circle-size: 25px;
+$circle-size: 30px;
+
+// Inputs
+$max-input-width-xs: $circle-size;
+$min-input-width-xs: $circle-size;
+

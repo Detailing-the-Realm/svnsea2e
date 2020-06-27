@@ -1,29 +1,32 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="{{cssClass}} flexcol brute" autocomplete="off">
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
-      <div class="strength flexrow flex-group flex-between">
-        <label for="data.traits.strength.value" class="strength">
+      <div class="traits grid grid-4col">
+      <div class="trait flexrow">
+        <label for="data.traits.strength.value" class="trait-name">
           {{localize "SVNSEA2E.Strength"}}
         </label>
         <input type="text" name="data.traits.strength.value" value="{{data.traits.strength.value}}" data-dtype="Number" />
+      </div>
       </div>
     </div>
   </header>
 
   {{!-- Sheet Body --}}
-  <section class="sheet-body">
+  <section class="sheet-body ability">
     {{!-- Ability Tab --}}
-    <h2>{{localize "SVNSEA2E.Ability"}}</h2>
-      <div class="flex-group flex-between">
-        <div class="virtue flexrow flex-group flex-between">
-          <input type="text" name="data.ability.name" value="{{data.ability.name}}" data-dtype="String" placeholder="{{localize "SVNSEA2E.Ability"}} {{localize "SVNSEA2E.Name"}}" />
-        </div>
-        <div class="virtue flexrow flex-group flex-between">
-          <textarea name="data.data.ability.name.description" rows="8" cols="80" data-dtype="String" placeholder="{{localize "SVNSEA2E.Ability"}}  {{localize "SVNSEA2E.Description"}}"></textarea>
-        </div>
+    <h2 class="ability-title">{{localize "SVNSEA2E.Ability"}}</h2>
+    <div class="flex-group flex-between">
+      <div class=" flexrow flex-group flex-between">
+        <input type="text" name="data.ability.name" value="{{data.ability.name}}" data-dtype="String" placeholder="{{localize "SVNSEA2E.Ability"}} {{localize "SVNSEA2E.Name"}}" />
       </div>
+      <div class="virtue flexrow flex-group flex-between">
+        <textarea name="data.data.ability.name.description" rows="8" cols="80" data-dtype="String" placeholder="{{localize "SVNSEA2E.Ability"}}  {{localize "SVNSEA2E.Description"}}"></textarea>
+      </div>
+    </div>
+  </section>
 </form>

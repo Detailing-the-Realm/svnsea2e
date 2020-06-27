@@ -29,6 +29,7 @@ h6 {
   font-family: "Trade Winds", cursive;
   color: #000;
   text-shadow: 1px 1px 4px #000;
+  border: none;
 }
 
 h1 {
@@ -442,7 +443,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .svnsea2e .tabs {
-  border-bottom: 1px groove #143A54;
+  border-bottom: 2px solid #143A54;
 }
 
 .svnsea2e .tabs h2 {
@@ -493,7 +494,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .svnsea2e.sheet input[type="text"] {
-  min-width: 20px;
+  min-width: 30px;
   text-align: left;
   border: 0 solid transparent;
 }
@@ -557,43 +558,20 @@ input[type=range]::-webkit-slider-thumb {
   margin: 0;
   background: none;
   text-indent: 15px;
+  font-family: "Trade Winds", cursive;
 }
 
 .svnsea2e.sheet .sheet-header .age input[type="text"],
 .svnsea2e.sheet .sheet-header .wounds input[type="text"] {
-  max-width: 25px;
+  max-width: 30px;
   text-align: right;
 }
 
-.svnsea2e.sheet .sheet-body h3, .svnsea2e.sheet .sheet-body h4, .svnsea2e.sheet .sheet-body h5, .svnsea2e.sheet .sheet-body h6 {
+.svnsea2e.sheet .sheet-body h3,
+.svnsea2e.sheet .sheet-body h4,
+.svnsea2e.sheet .sheet-body h5,
+.svnsea2e.sheet .sheet-body h6 {
   text-shadow: none;
-}
-
-.svnsea2e.sheet .sheet-body .trait input[type="text"],
-.svnsea2e.sheet .sheet-body .skill input[type="text"] {
-  text-align: center;
-  border-radius: 25px;
-  height: 25px;
-  max-width: 25px;
-  padding: 4px;
-  background: white;
-  border: 1px solid #143A54;
-}
-
-.svnsea2e.sheet .sheet-body .skills .skill,
-.svnsea2e.sheet .sheet-body .traits .trait {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(90%, rgba(52, 152, 219, 0.5)), color-stop(10%, rgba(255, 0, 0, 0)));
-  background-image: -o-linear-gradient(left, rgba(52, 152, 219, 0.5) 90%, rgba(255, 0, 0, 0) 10%);
-  background-image: linear-gradient(to right, rgba(52, 152, 219, 0.5) 90%, rgba(255, 0, 0, 0) 10%);
-  padding: 0;
-  border-radius: 25px;
-}
-
-.svnsea2e.sheet .sheet-body .skill-name,
-.svnsea2e.sheet .sheet-body .trait-name {
-  font-weight: 600;
-  margin-left: 8px;
-  margin-top: 3px;
 }
 
 .svnsea2e.sheet .tag {
@@ -604,18 +582,24 @@ input[type=range]::-webkit-slider-thumb {
   background: rgba(0, 0, 0, 0.1);
 }
 
+.svnsea2e.sheet .flexrow .skills-list,
+.svnsea2e.sheet .flexrow .advantages-list,
 .svnsea2e.sheet .flexrow .languages-list {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 95%;
   flex: 0 0 95%;
 }
 
-.svnsea2e.sheet .flexrow .language-selector {
+.svnsea2e.sheet .flexrow .skill-selector,
+.svnsea2e.sheet .flexrow .advantage-selector
+.language-selector {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 2%;
   flex: 0 0 2%;
 }
 
+.svnsea2e.sheet .skills-list,
+.svnsea2e.sheet .advantages-list,
 .svnsea2e.sheet .languages-list {
   line-height: 20px;
   list-style: none;
@@ -624,7 +608,6 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .svnsea2e.sheet .arcana {
-  text-indent: 15px;
   width: 85%;
 }
 
@@ -634,7 +617,6 @@ input[type=range]::-webkit-slider-thumb {
   padding: 0;
   overflow-y: auto;
   line-height: 30px;
-  border-bottom: 1px solid #DBD5B0;
 }
 
 .svnsea2e.sheet .items-list .item-header {
@@ -689,9 +671,8 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 22px;
   flex: 0 0 22px;
-  font-size: 12px;
   text-align: center;
-  color: #EEE8BF;
+  color: #000;
 }
 
 .svnsea2e.sheet .items-list .item .item-summary {
@@ -713,4 +694,40 @@ input[type=range]::-webkit-slider-thumb {
   -ms-flex: 0 0 86px;
   flex: 0 0 86px;
   text-align: right;
+}
+
+.svnsea2e.sheet .trait input[type="text"],
+.svnsea2e.sheet .skill input[type="text"] {
+  text-align: center;
+  border-radius: 30px;
+  height: 30px;
+  max-width: 30px;
+  padding: 4px;
+  background: white;
+  border: 2px solid #143A54;
+}
+
+.svnsea2e.sheet .brute .trait,
+.svnsea2e.sheet .skills .skill,
+.svnsea2e.sheet .traits .trait {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(90%, rgba(52, 152, 219, 0.5)), color-stop(10%, rgba(255, 0, 0, 0)));
+  background-image: -o-linear-gradient(left, rgba(52, 152, 219, 0.5) 90%, rgba(255, 0, 0, 0) 10%);
+  background-image: linear-gradient(to right, rgba(52, 152, 219, 0.5) 90%, rgba(255, 0, 0, 0) 10%);
+  padding: 0;
+  border-radius: 30px;
+}
+
+.svnsea2e.sheet .skill-name,
+.svnsea2e.sheet .trait-name {
+  font-weight: 600;
+  margin-left: 8px;
+  margin-top: 5px;
+}
+
+.svnsea2e.sheet .wound-title {
+  font-weight: 600;
+}
+
+.svnsea2e.sheet .brute h2.ability-title {
+  text-shadow: none;
 }
