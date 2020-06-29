@@ -26,16 +26,22 @@ SVNSEA2E.actorTypes = {
 
 SVNSEA2E.nations = {
   none: 'SVNSEA2E.None',
+  aksum: 'SVNSEA2E.NationAksum',
   anatol: 'SVNSEA2E.NationAnatol',
-  avalon: 'SVNSEA2E.NationAvalon',
+  aragosta: 'SVNSEA2E.NationAragosta',
   ashur: 'SVNSEA2E.NationAshur',
-  inismore: 'SVNSEA2E.NationInismore',
-  highland: 'SVNSEA2E.NationHighland',
+  avalon: 'SVNSEA2E.NationAvalon',
   castille: 'SVNSEA2E.NationCastille',
   eisen: 'SVNSEA2E.NationEisen',
+  highland: 'SVNSEA2E.NationHighland',
+  inismore: 'SVNSEA2E.NationInismore',
   jaragua: 'SVNSEA2E.NationJaragua',
+  khemet: 'SVNSEA2E.NationKhemet',
   kuraq: 'SVNSEA2E.NationKuraq',
   labucca: 'SVNSEA2E.NationLaBucca',
+  maghreb: 'SVNSEA2E.NationMaghreb',
+  manden: 'SVNSEA2E.NationManden',
+  mbey: 'SVNSEA2E.NationMbey',
   montaigne: 'SVNSEA2E.NationMontaigne',
   nahuaca: 'SVNSEA2E.NationNahuaca',
   numa: 'SVNSEA2E.NationNuma',
@@ -130,6 +136,7 @@ SVNSEA2E.sorcerysources = {
   melbur: 'SVNSEA2E.SorceryMelbur',
   redtouch: 'SVNSEA2E.SorceryRedTouch'
 }
+
 SVNSEA2E.durations = {
   none: 'SVNSEA2E.None',
   scene: 'SVNSEA2E.Scene'

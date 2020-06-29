@@ -45,6 +45,9 @@ Hooks.once('init', async function () {
   }
 
   CONFIG.SVNSEA2E = SVNSEA2E
+  CONFIG.SVNSEA2E.advTypes = SVNSEA2E.nations
+  CONFIG.SVNSEA2E.advTypes.gisles = 'SVNSEA2E.RegionGlamourIsles'
+
   // Define custom Entity classes
   CONFIG.Actor.entityClass = SvnSea2EActor
   CONFIG.Item.entityClass = SvnSea2EItem
@@ -92,11 +95,15 @@ Hooks.once('init', async function () {
   preloadHandlebarsTemplates()
 })
 
+/* -------------------------------------------- */
+
 Hooks.once('ready', async function () {
   // Wait to register hotbar drop hook on ready so that
   // modules could register earlier if they want to
   Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
 })
+
+/* -------------------------------------------- */
 
 /**
  * This function runs after game data has been requested
@@ -105,18 +112,20 @@ Hooks.once('ready', async function () {
 Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    'itemTypes',
     'actorTypes',
+    'advTypes',
+    'artifacttypes',
+    'crewstatuses',
+    'durations',
+    'itemTypes',
+    'languages',
     'nations',
     'traits',
+    'shiproles',
     'skills',
-    'languages',
-    'status',
-    'crewstatuses',
     'sorceryscales',
-    'artifacttypes',
-    'durations',
-    'sorcerysources'
+    'sorcerysources',
+    'status'
   ]
 
   // Exclude some from sorting where the default order matters
@@ -136,6 +145,8 @@ Hooks.once('setup', function () {
   }
 })
 
+/* -------------------------------------------- */
+
 /**
 * Set the default image for an item type instead of the mystery man
 **/
@@ -143,14 +154,14 @@ Hooks.on('preCreateItem', function (entity, options, userId) {
   entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
 })
 
+/* -------------------------------------------- */
+
 /**
 * Set the default image for an actor type instead of the mystery man
 **/
 Hooks.on('preCreateActor', function (entity, options, userId) {
   entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
 })
-
-/* -------------------------------------------- */
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
