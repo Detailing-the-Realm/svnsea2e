@@ -11,6 +11,9 @@
     <a class="item" data-tab="description">
       <h2>{{localize "SVNSEA2E.Description"}}</h2>
     </a>
+    <a class="item" data-tab="reward">
+      <h2>{{localize "SVNSEA2E.Reward"}}</h2>
+    </a>
     <a class="item" data-tab="endings">
       <h2>{{localize "SVNSEA2E.Endings"}}</h2>
     </a>
@@ -27,7 +30,12 @@
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
     </div>
 
-    {{!-- CEndings Tab --}}
+    {{!-- Reward Tab --}}
+    <div class="tab endings" data-group="primary" data-tab="reward">
+      {{editor content=data.reward target="data.reward" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Endings Tab --}}
     <div class="tab endings" data-group="primary" data-tab="endings">
       {{editor content=data.endings target="data.endings" button=true owner=owner editable=editable}}
     </div>

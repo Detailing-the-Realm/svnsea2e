@@ -263,6 +263,7 @@
     },
     "story": {
       "templates": ["base"],
+      "reward": "",
       "endings": "",
       "steps": ""
     }
