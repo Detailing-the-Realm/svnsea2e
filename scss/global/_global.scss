@@ -1,5 +1,5 @@
-body#tinymce.mce-content-body,
-body {
+body,
+body#tinymce.mce-content-body {
   font-size: $f-s-norm;
   font-family: $f-body;
 }
@@ -58,6 +58,19 @@ h6 {
   }
 }
 
+#menu #menu-items {
+  li h4 {
+    color: $f-c-lt;
+    font-size: $f-s-lg;
+    text-shadow: none;
+  }
+
+  li > i {
+    color: $f-c-lt;
+    font-size: $f-s-lg;
+  }
+}
+
 textarea {
   border: $no-border;
   margin-top: $margin-sm;
@@ -70,41 +83,41 @@ button {
   background: $bg-c-lt;
 }
 
-.tox .tox-edit-area,
 .app.sheet .editor-content,
+.tox .tox-edit-area,
 .tox-tinymce,
-textarea,
 input[type="text"],
 input[type="password"],
 input[type="datetime-local"],
-select {
+select,
+textarea {
   font-family: $f-body;
   font-size: $f-s-norm;
   color: $f-c-dk;
   background: $bg-c-rgba-lt;
 }
 
-textarea:hover,
-textarea:focus,
-button:hover,
-button:focus,
-.tox-tinymce:hover,
 .tox-tinymce:focus,
+.tox-tinymce:hover,
+button:focus,
+button:hover,
 input[type="text"]:hover,
-input[type="text"]:focus {
+input[type="text"]:focus,
+textarea:focus,
+textarea:hover {
   box-shadow: 0 0 8px $c-prim;
 }
 
 input[type=range]::-moz-range-thumb,
-input[type=range]::-webkit-slider-thumb{
+input[type=range]::-webkit-slider-thumb {
   background: $c-prim-lt;
 }
 
-.editor-edit{
-  display:inline-block;
+.editor-edit {
+  display: inline-block;
 }
 
-.app.sheet .editor-content{
+.app.sheet .editor-content {
   padding: $padding-md;
 }
 
@@ -123,8 +136,8 @@ input[type=range]::-webkit-slider-thumb{
   width: 10px;
 }
 
-#navigation #scene-list .scene.view,
-#navigation #scene-list .scene.context{
+#navigation #scene-list .scene.context,
+#navigation #scene-list .scene.view {
   border: 1px solid red;
   background: $bg-c-rgba-dk;
   color: $f-c-lt;

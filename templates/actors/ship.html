@@ -3,13 +3,15 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
-      <div class="grid grid-3col">
+      <div class="grid grid-2col">
         <div class="flex-group-left">
           <input type="text" name="data.class" value="{{data.class}}" placeholder="{{localize "SVNSEA2E.Class"}}" />
         </div>
         <div class="flex-group-left">
           <input type="text" name="data.origin" value="{{data.origin}}" placeholder="{{localize "SVNSEA2E.Origin"}}" />
         </div>
+      </div>
+      <div class="grid grid-2col">
         <div class="flex-group-left">
           <label for="data.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
           <select class="crewstatus" name="data.crewstatus">
@@ -22,39 +24,43 @@
           </select>
         </div>
       </div>
-      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+
+    {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
     </div>
   </header>
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="roster">{{localize "SVNSEA2E.Roster"}}</a>
-    <a class="item" data-tab="cargo">{{localize "SVNSEA2E.Cargo"}}</a>
-    <a class="item" data-tab="background">{{localize "SVNSEA2E.Background"}}</a>
+    <a class="item" data-tab="roster">
+      <h2>{{localize "SVNSEA2E.Roster"}}</h2>
+    </a>
+    <a class="item" data-tab="cargo">
+      <h2>{{localize "SVNSEA2E.Cargo"}}</h2>
+    </a>
+    <a class="item" data-tab="background">
+      <h2>{{localize "SVNSEA2E.Background"}}</h2>
+    </a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     <div class="tab roster" data-group="primary" data-tab="roster">
-      <ol class="actors-list">
-        <li class="flexrow actor-header">
-          <h3 class="actor-name flexrow">{{localize "SVNSEA2E.PCS"}}</h3>
-          <div class="actor-controls">
-            <a class="actor-control actor-create" title="{{ localize "SVNSEA2E.AddPC" }}" data-type="playercharacter" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
-              <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
-            </a>
-          </div>
-        </li>
-        {{#each actor.pcs as |actor id|}}
-          <li class="actor flexrow" data-actor-id="{{actor._id}}">
-            <div class="actor-image"><img src="{{actor.img}}" title="{{actor.name}}" /></div>
-            <h4 class="actor-name">{{actor.name}}</h4>
-            <div class="actor-controls">
-              <a class="actor-control actor-edit" title="{{actor.editlabel}}"><i class="fas fa-edit"></i></a>
-              <a class="actor-control actor-delete" title="{{actor.deletelabel}}"><i class="fas fa-trash"></i></a>
-            </div>
+      <ol class="items-list crew">
+        {{#each crew as |role|}}
+          <li class="flexrow item-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+            <h3 class="item-name flexrow" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>{{role.label}}</h3>
           </li>
+          {{#each role.actors as |actor a|}}
+            <li class="item flexrow draggable {{role.cssClass}}" data-actor-id="{{actor.id}}">
+              <div class="item-image"><img src="{{actor.img}}" title="{{actor.name}}" /></div>
+              <h4 class="item-name">{{actor.name}}</h4>
+              <div class="item-controls">
+                <a class="item-control item-delete" title="{{localize 'SVNSEA2E.RemoveCrew'}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </div>
+            </li>
+          {{/each}}
         {{/each}}
-
       </ol>
     </div>
     <div class="tab cargo" data-group="primary" data-tab="cargo">

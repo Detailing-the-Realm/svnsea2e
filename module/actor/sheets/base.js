@@ -38,9 +38,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       dtypes: ['String', 'Number', 'Boolean']
     })
 
-    if (this.actor.data.type === 'ship') {
-      this._prepareShipActors(data)
-    } else {
+    if (this.actor.data.type !== 'ship') {
       this._prepareTraits(data)
     }
 
@@ -86,9 +84,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     super.activateListeners(html)
 
     // Everything below here is only needed if the sheet is editable
-    if (!this.options.editable) return
-    // Trait Selector
+    if (!this.options.editable || this.actor.data.type === 'ship') return
 
+    // language Selector
     html.find('.language-selector').click(this._onLanguageSelector.bind(this))
 
     html.find('.item-create').click(this._onItemCreate.bind(this))

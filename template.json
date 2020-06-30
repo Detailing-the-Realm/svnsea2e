@@ -247,7 +247,6 @@
     },
     "secretsociety": {
       "templates": ["base"],
-      "charter": "",
       "concern": "",
       "earnfavor": "",
       "callupon": ""

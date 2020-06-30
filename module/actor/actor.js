@@ -100,6 +100,18 @@ export class SvnSea2EActor extends Actor {
 
   }
 
+  async removeFromCrew () {
+    await this.unsetFlag('svnsea2e', 'crewMember')
+  }
+
+  async setCrewMemberRole (shipId, role) {
+    console.log(shipId, role)
+    return this.setFlag('svnsea2e', 'crewMember', {
+      shipId: shipId,
+      role: role
+    })
+  }
+
   _prepareTraits (data) {
     for (const trait of Object.values(data.traits)) {
       trait.value = this._validateMinMaxData(trait.value, trait.min, trait.max)

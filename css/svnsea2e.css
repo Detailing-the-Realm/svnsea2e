@@ -8,8 +8,8 @@
 /* -------------------------------------------- */
 /* -------------------------------------------- */
 /* Global styles */
-body#tinymce.mce-content-body,
-body {
+body,
+body#tinymce.mce-content-body {
   font-size: 1em;
   font-family: "Roboto", sans-serif;
 }
@@ -70,6 +70,17 @@ h6 {
   color: #EEE8BF;
 }
 
+#menu #menu-items li h4 {
+  color: #EEE8BF;
+  font-size: 1.2em;
+  text-shadow: none;
+}
+
+#menu #menu-items li > i {
+  color: #EEE8BF;
+  font-size: 1.2em;
+}
+
 textarea {
   border: 0 solid transparent;
   margin-top: 4px;
@@ -82,28 +93,28 @@ button {
   background: #EEE8BF;
 }
 
-.tox .tox-edit-area,
 .app.sheet .editor-content,
+.tox .tox-edit-area,
 .tox-tinymce,
-textarea,
 input[type="text"],
 input[type="password"],
 input[type="datetime-local"],
-select {
+select,
+textarea {
   font-family: "Roboto", sans-serif;
   font-size: 1em;
   color: #000;
   background: rgba(255, 255, 255, 0.6);
 }
 
-textarea:hover,
-textarea:focus,
-button:hover,
-button:focus,
-.tox-tinymce:hover,
 .tox-tinymce:focus,
+.tox-tinymce:hover,
+button:focus,
+button:hover,
 input[type="text"]:hover,
-input[type="text"]:focus {
+input[type="text"]:focus,
+textarea:focus,
+textarea:hover {
   -webkit-box-shadow: 0 0 8px #143A54;
   box-shadow: 0 0 8px #143A54;
 }
@@ -136,8 +147,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 10px;
 }
 
-#navigation #scene-list .scene.view,
-#navigation #scene-list .scene.context {
+#navigation #scene-list .scene.context,
+#navigation #scene-list .scene.view {
   border: 1px solid red;
   background: rgba(20, 58, 84, 0.6);
   color: #EEE8BF;

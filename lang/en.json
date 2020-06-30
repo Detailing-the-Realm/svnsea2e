@@ -250,7 +250,7 @@
   "SVNSEA2E.ShipsMaster": "Ship's Master",
   "SVNSEA2E.MasterGunner": "Master Gunner",
   "SVNSEA2E.MasterMariner": "Master Mariner",
-  "SVNSEA2E.AbleSeaman": "AbleSeaman",
+  "SVNSEA2E.AbleSeaman": "Able Seaman",
   "SVNSEA2E.Seaman": "Seaman",
   "SVNSEA2E.Surgeon": "Surgeon",
   "SVNSEA2E.Thiqa": "Thiqa",
@@ -258,5 +258,6 @@
   "SVNSEA2E.Inscription": "Inscription",
   "SVNSEA2E.Mbey": "Mbey",
   "SVNSEA2E.DuelStyle": "Dueling Style",
-  "SVNSEA2E.ShipAdventure": "Ship Adventure"
+  "SVNSEA2E.ShipAdventure": "Ship Adventure",
+  "SVNSEA2E.RemoveCrew":"Remove Crew Member"
 }

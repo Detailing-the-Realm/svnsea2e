@@ -1,7 +1,14 @@
 // Namespace D&D5e Configuration Values
 export const SVNSEA2E = {}
 
-SVNSEA2E.ASCII = '7TH SEA'
+SVNSEA2E.ASCII = `
+==================================================
+  _____ _   _       ____
+ |___  | |_| |__   / ___|  ___  __ _
+    / /| __| '_ \\  \\___ \\ / _ \\/ _\` |
+   / / | |_| | | |  ___) |  __/ (_| |
+  /_/   \\__|_| |_| |____/ \\___|\\__,_|
+==================================================`
 
 SVNSEA2E.itemTypes = {
   advantage: 'SVNSEA2E.Advantage',
