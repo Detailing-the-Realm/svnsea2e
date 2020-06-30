@@ -18,12 +18,31 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     })
   }
 
-  getData () {
-    const data = super.getData()
+  /**
+   * Organize and classify Items for Character sheets.
+   *
+   * @param {Object} actorData The actor to prepare.
+   *
+   * @return {undefined}
+   */
+  _prepareShipItems (data) {
+    const actorData = data.actor
 
-    this._processFlags(data, data.actor.flags)
+    // Initialize containers.
+    const adventures = []
+    console.log(data.items)
+    // Iterate through items, allocating to containers
+    // let totalWeight = 0
+    for (const i of data.items) {
+      console.log(i.type)
+      // Append to item types to their arrays
+      if (i.type === 'shipadventure') {
+        adventures.push(i)
+      }
+    }
 
-    return data
+    // Assign and return
+    actorData.adventures = adventures
   }
 
   /**
@@ -112,6 +131,20 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       li.addEventListener('dragenter', this._onCrewDragEnter, false)
       li.addEventListener('dragleave', this._onCrewDragLeave, false)
     })
+
+    html.find('.adventures .item-create').click(this._onItemCreate.bind(this))
+
+    // Update Inventory Item
+    html.find('.adventures .item-edit').click(ev => {
+      const li = $(ev.currentTarget).parents('.item')
+      const item = this.actor.getOwnedItem(li.data('itemId'))
+      item.sheet.render(true)
+    })
+
+    // Delete Inventory Item
+    html.find('.adventures .item-delete').click(this._onItemDelete.bind(this))
+
+    html.find('.adventures .item h4.item-name').click(event => this._onItemSummary(event))
   }
 
   /** @override */

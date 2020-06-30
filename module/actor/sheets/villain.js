@@ -29,6 +29,7 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
 
     // Initialize containers.
     const advantages = []
+    const artifacts = []
     const sorcery = []
     const schemes = []
 
@@ -45,11 +46,14 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
         sorcery.push(i)
       } else if (i.type === 'scheme') {
         schemes.push(i)
+      } else if (i.type === 'artifact') {
+        artifacts.push(i)
       }
     }
 
     // Assign and return
     actorData.advantages = advantages
+    actorData.artifacts = artifacts
     actorData.sorcery = sorcery
     actorData.schemes = schemes
   }

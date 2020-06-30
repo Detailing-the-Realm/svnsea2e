@@ -26,7 +26,7 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
    */
   _prepareHeroItems (data) {
     const actorData = data.actor
-    
+
     // Update skill labels
     for (const [s, skl] of Object.entries(data.actor.data.skills)) {
       skl.label = CONFIG.SVNSEA2E.skills[s]
@@ -34,23 +34,41 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
 
     // Initialize containers.
     const advantages = []
+    const backgrounds = []
     const sorcery = []
+    const secretsocieties = []
+    const stories = []
+    const duelstyles = []
+    const artifacts = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
     for (const i of data.items) {
-      const item = i.data
-
       // Append to item types to their arrays
       if (i.type === 'advantage') {
         advantages.push(i)
+      } else if (i.type === 'background') {
+        backgrounds.push(i)
       } else if (i.type === 'sorcery') {
         sorcery.push(i)
+      } else if (i.type === 'secretsociety') {
+        secretsocieties.push(i)
+      } else if (i.type === 'story') {
+        stories.push(i)
+      } else if (i.type === 'duelstyle') {
+        duelstyles.push(i)
+      } else if (i.type === 'artifact') {
+        artifacts.push(i)
       }
     }
 
     // Assign and return
     actorData.advantages = advantages
+    actorData.backgrounds = backgrounds
     actorData.sorcery = sorcery
+    actorData.secretsocieties = secretsocieties
+    actorData.stories = stories
+    actorData.duelstyles = duelstyles
+    actorData.artifacts = artifacts
   }
 }

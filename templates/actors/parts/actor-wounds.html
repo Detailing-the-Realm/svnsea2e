@@ -1,25 +1,24 @@
 {{#if isPlayerCharacter}}
-<div class="resources grid grid-3col wounds">
-  {{else}}
   <div class="resources grid grid-2col wounds">
-  {{/if}}
-  {{#if isPlayerCharacter}}
-  <div class="flex-group-center">
-    <label for="data.heropts" class="wound-title">{{ localize "SVNSEA2E.HeroPoints" }}</label>
-    <div><input type="text" name="data.heropts" value="{{data.heropts}}" />
+    <div class="flex-group-left">
+      <label for="data.heropts" class="wound-title">{{ localize "SVNSEA2E.HeroPoints" }}</label>
+      <span class="pts"><input type="text" name="data.heropts" value="{{data.heropts}}" /></span>
+    </div>
+    <div class="corruption flex-group-left">
+      <label for="data.corruptionpts" class="wound-title">{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
+      <span class="pts"><input type="text" name="data.corruptionpts" value="{{data.corruptionpts}}" /></span>
     </div>
   </div>
-  {{/if}}
-  <div class="flex-group-center">
+{{/if}}
+<div class="resources grid grid-2col wounds">
+  <div class="flex-group-left" >
     <label for="data.wounds.value" class="wound-title">{{localize "SVNSEA2E.Wounds" }}</label>
-    <div><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
-      /{{data.wounds.max}}</div>
+    <span class="pts {{#if isPlayerCharacter}}bigger{{/if}}"><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
+    /{{data.wounds.max}}</span>
   </div>
-  <div class="flex-group-center">
+  <div class="flex-group-left">
     <label for="data.dwounds.value" class="wound-title">{{localize "SVNSEA2E.DramaWounds"}}</label>
-    <div>
-      <input type="text" name="data.dwounds.value" value="{{data.dwounds.value}}" data-dtype="Number" />
-      /{{data.dwounds.max}}
-    </div>
+    <span class="pts"><input type="text" name="data.dwounds.value" value="{{data.dwounds.value}}" data-dtype="Number" />
+    /{{data.dwounds.max}}</span>
   </div>
 </div>

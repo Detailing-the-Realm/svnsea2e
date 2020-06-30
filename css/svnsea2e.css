@@ -444,6 +444,11 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* Styles limited to svnsea2e sheets */
+.svnsea2e form .form-group,
+.svnsea2e form .form-group-stacked {
+  margin: 4px;
+}
+
 .svnsea2e .item-form {
   font-family: "Roboto", sans-serif;
 }
@@ -564,7 +569,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .svnsea2e.sheet .sheet-header h1.charname {
   height: 50px;
-  margin: 4px 0;
+  margin: 4px;
   text-indent: 0;
 }
 
@@ -763,6 +768,14 @@ input[type=range]::-webkit-slider-thumb {
   width: 175px;
   border: 4px solid #143A54;
   border-radius: 175px;
+}
+
+.svnsea2e.actor .sheet-header .wounds .pts {
+  padding-left: 10px;
+}
+
+.svnsea2e.actor .sheet-header .wounds .pts.bigger {
+  padding-left: 37px;
 }
 
 .svnsea2e.item .sheet-header {

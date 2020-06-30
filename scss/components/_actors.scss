@@ -9,4 +9,11 @@
     border: $brd-s-lg-dk;
     border-radius: $profile-img-lg-size;
   }
+
+  .wounds .pts{
+    padding-left: 10px;
+  }
+  .wounds .pts.bigger{
+    padding-left: 37px;
+  }
 }

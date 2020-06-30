@@ -45,7 +45,7 @@ Hooks.once('init', async function () {
   }
 
   CONFIG.SVNSEA2E = SVNSEA2E
-  CONFIG.SVNSEA2E.advTypes = SVNSEA2E.nations
+  CONFIG.SVNSEA2E.advTypes = duplicate(SVNSEA2E.nations)
   CONFIG.SVNSEA2E.advTypes.gisles = 'SVNSEA2E.RegionGlamourIsles'
 
   // Define custom Entity classes

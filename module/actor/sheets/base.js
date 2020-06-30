@@ -55,6 +55,9 @@ export default class ActorSheetSS2e extends ActorSheet {
       this._prepareLanguages(data.actor.data)
     } else if (this.actor.data.type === 'monster') {
       this._prepareMonsterItems(data)
+    }else if (this.actor.data.type === 'ship') {
+      this._prepareShipItems(data)
+      this._processFlags(data, data.actor.flags)
     }
 
     return data
@@ -163,6 +166,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Prepare the item object.
     const itemData = {
       name: game.i18n.localize(`SVNSEA2E.New${type}`),
+      img: `systems/svnsea2e/icons/${type}.jpg`,
       type: type,
       data: duplicate(header.dataset)
     }

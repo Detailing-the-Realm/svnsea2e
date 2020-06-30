@@ -12,7 +12,7 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'traits'
+        initial: 'advantages'
       }]
     })
   }

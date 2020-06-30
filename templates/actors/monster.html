@@ -6,14 +6,31 @@
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+      <div class="traits grid grid-4col">
+        <div class="trait flexrow">
+          <label for="data.traits.influence.value" class="trait-name">
+            {{localize "SVNSEA2E.Influence"}}
+          </label>
+          <input type="text" name="data.traits.influence.value" value="{{data.traits.influence.value}}" data-dtype="Number" />
+        </div>
+        <div class="trait flexrow">
+          <label for="data.traits.strength.value" class="trait-name">
+            {{localize "SVNSEA2E.Strength"}}
+          </label>
+          <input type="text" name="data.traits.strength.value" value="{{data.traits.strength.value}}" data-dtype="Number" />
+        </div>
+        <div class="trait flexrow">
+          <label for="data.traits.villainy.value" class="trait-name">
+            {{localize "SVNSEA2E.Villainy"}}
+          </label>
+          <input type="text" name="data.traits.villainy.value" value="{{data.traits.villainy.value}}" data-dtype="Number" />
+        </div>
+      </div>
     </div>
   </header>
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="traits">
-      <h2>{{localize "SVNSEA2E.Traits"}}</h2>
-    </a>
     <a class="item" data-tab="advantages">
       <h2>{{localize "SVNSEA2E.Features"}}</h2>
     </a>
@@ -27,9 +44,6 @@
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
-    {{!-- Traits Tab --}}
-    {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
-
     {{!-- Advantages Tab --}}
     <div class="tab features" data-group="primary" data-tab="advantages">
       <ol class="items-list">
