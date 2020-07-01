@@ -10,6 +10,7 @@ import { ActorSheetSS2eBrute } from './actor/sheets/brute.js'
 import { ActorSheetSS2eMonster } from './actor/sheets/monster.js'
 import { ActorSheetSS2eVillain } from './actor/sheets/villain.js'
 import { ActorSheetSS2eShip } from './actor/sheets/ship.js'
+import { ActorSheetSS2eDangerPts } from './actor/sheets/dangerpts.js'
 import { SvnSea2EItem } from './item/item.js'
 import { ItemSheetSS2eAdvantage } from './item/sheets/advantage.js'
 import { ItemSheetSS2eBackground } from './item/sheets/background.js'
@@ -60,6 +61,7 @@ Hooks.once('init', async function () {
   Actors.registerSheet('svnsea2e', ActorSheetSS2eMonster, { types: ['monster'], makeDefault: true })
   Actors.registerSheet('svnsea2e', ActorSheetSS2eVillain, { types: ['villain'], makeDefault: true })
   Actors.registerSheet('svnsea2e', ActorSheetSS2eShip, { types: ['ship'], makeDefault: true })
+  Actors.registerSheet('svnsea2e', ActorSheetSS2eDangerPts, { types: ['dangerpts'], makeDefault: true })
 
   Items.unregisterSheet('core', ItemSheet)
   Items.registerSheet('svnsea2e', ItemSheetSS2eAdvantage, { types: ['advantage'], makeDefault: true })

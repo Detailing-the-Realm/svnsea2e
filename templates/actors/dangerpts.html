@@ -1,0 +1,27 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header dangerpts">
+    <img class="profile-img" src="/systems/svnsea2e/icons/dangerpts.jpg" data-edit="img" title="{{localize "SVNSEA2E.DangerPoints"}}" />
+    <div class="header-fields">
+      <h1 class="dangerpts-title">{{localize "SVNSEA2E.DangerPoints"}}
+    </div>
+  </header>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body danger-points">
+    <div class="grid grid-3col">
+      <div class="flex-group-right">
+        <button type="button" class="dpminus">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+      <div class="flex-group-center">
+        <input type="text" name="data.points" value="{{data.points}}">
+      </div>
+      <div class="flex-group-left">
+        <button type="button" class="dpplus">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+</form>

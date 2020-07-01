@@ -7,7 +7,7 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      classes: ['svnsea2e', 'sheet', 'actor'],
+      classes: ['svnsea2e', 'sheet', 'actor', 'hero'],
       template: 'systems/svnsea2e/templates/actors/hero.html',
       tabs: [{
         navSelector: '.sheet-tabs',

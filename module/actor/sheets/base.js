@@ -38,7 +38,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       dtypes: ['String', 'Number', 'Boolean']
     })
 
-    if (this.actor.data.type !== 'ship') {
+    if (this.actor.data.type !== 'ship' && this.actor.data.type !== 'dangerpts') {
       this._prepareTraits(data)
     }
 

@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["brute", "hero", "monster", "playercharacter", "ship", "villain"],
+    "types": ["brute", "dangerpts", "hero", "monster", "playercharacter", "ship", "villain"],
     "templates": {
       "base": {
         "wounds": {
@@ -175,6 +175,15 @@
         "description": ""
       }
     },
+    "dangerpts":{
+      "points":0
+    },
+    "hero": {
+      "templates": ["base", "details", "features"]
+    },
+    "monster": {
+      "templates": ["base", "vtraits"]
+    },
     "playercharacter": {
       "templates": ["base", "details", "features"],
       "wealth": "",
@@ -182,12 +191,6 @@
       "vile": 0,
       "corruptionpts": 0,
       "redemption": ""
-    },
-    "monster": {
-      "templates": ["base", "vtraits"]
-    },
-    "hero": {
-      "templates": ["base", "details", "features"]
     },
     "ship": {
       "templates": ["base"],

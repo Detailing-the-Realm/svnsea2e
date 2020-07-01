@@ -778,6 +778,29 @@ input[type=range]::-webkit-slider-thumb {
   padding-left: 37px;
 }
 
+.svnsea2e.actor .danger-points input[type="text"] {
+  font-size: 2em;
+  height: 2em;
+  width: 2em;
+  border: 4px solid #143A54;
+  border-radius: 2em;
+  text-align: center;
+}
+
+.svnsea2e.actor .danger-points button {
+  margin-top: 10px;
+}
+
+.svnsea2e.actor .sheet-header.dangerpts .profile-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 50px;
+  flex: 0 0 50px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid #143A54;
+  border-radius: 50px;
+}
+
 .svnsea2e.item .sheet-header {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 175px;
