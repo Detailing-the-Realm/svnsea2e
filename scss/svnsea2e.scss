@@ -16,9 +16,12 @@
   @import 'components/dialogs';
 }
 
+#chat {
+  @import 'components/chat';
+}
 /* Styles limited to svnsea2e sheets */
 .svnsea2e {
-  @import 'components/chat';
+
   @import 'components/forms';
   @import 'components/tabs';
 }

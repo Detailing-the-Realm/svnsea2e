@@ -1,26 +1,36 @@
-<div class="chat-card skill-roll" data-actor-id="{{ actor._id }}" data-skill="{{ skill }}">
-  <h5 class="skill-title">{{ title }}</h5>
-  <div class="raises">{{ raises }}{% if raises == 1 %}{{ localize "SVNSEA2E.Raise" }}{% else %} {{ localize "SVNSEA2E.Raises" }}{% end if %}</div>
-  <h6 class="details-title">{{ localize "SVNSEA2E.Details" }}</h6>
-  <div class="card-details">
-    <div class="raise-combos">
-      {{ rCombos }}
-    </div>
-    <div class="rolls">
-      <div class="">{{ rolls }}</div>
-    </div>
-    {{#if rerolled}}
-      <div class="reroll">
-        {{ reroll }}
-      </div>
-    {{/if}}
-    {{#if exploded}}
-      <div class="explosions">
-        {{ explosions }}
-      </div>
-    {{/if}}
-    <div class="threshold">
-      {{ threshold }}
+<div class="chat-card skill-roll dice-roll" data-actor-id="{{ actor._id }}" data-skill="{{ skill }}">
+  <div class="dice-result">
+    <h4 class="dice-total">{{ raises }} {{ raisetxt }}</h4>
+    <div class="dice-tooltip">
+      <section class="tooltip-part">
+        <div class="dice">
+          <ol class="dice-rolls">
+            {{#each rolls as |roll|}}
+              <li class="roll die d10"> {{ roll }}</li>
+            {{/each}}
+          </ol>
+          <h6>{{ rCombos }}</h6>
+          <div class="flexrow flex-group flex-left">
+            <ul  class="raise-combos-list">
+              {{#each combos as |combo|}}
+                <li class="tag combo"> {{ combo }}</li>
+              {{/each}}
+            </ul>
+          </div>
+
+          {{#if rerolled}}
+            <div class="rerolled">
+              {{ reroll }}
+            </div>
+          {{/if}}
+          {{#if exploded}}
+            <div class="explosions">
+              {{ explosions }}
+            </div>
+          {{/if}}
+          <div class="threshold">{{ threshold }}</div>
+        </div>
+      </section>
     </div>
   </div>
 </div>

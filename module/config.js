@@ -120,7 +120,7 @@ SVNSEA2E.status = {
   inprogress: 'SVNSEA2E.StatusInProgress'
 }
 
-SVNSEA2E.sorcerysources = {
+SVNSEA2E.sorceryTypes = {
   none: 'SVNSEA2E.None',
   hex: 'SVNSEA2E.SorceryHexenwerk',
   knight: 'SVNSEA2E.SorceryAvalonKnight',
@@ -150,21 +150,41 @@ SVNSEA2E.durations = {
 
 }
 
-SVNSEA2E.sorceryscales = {
+SVNSEA2E.sorcerycats = {
   none: 'SVNSEA2E.None',
+  ahura: 'SVNSEA2E.Ahura',
+  ahpulul: 'SVNSEA2E.Ahpulul',
+  amulet: 'SVNSEA2E.Amulet',
+  deal: 'SVNSEA2E.Deal',
+  disruption: 'SVNSEA2E.Disruption',
+  favor: 'SVNSEA2E.Favor',
+  gift: 'SVNSEA2E.Gift',
+  glamour: 'SVNSEA2E.Glamour',
+  gros: 'SVNSEA2E.Gros',
+  Inscription: 'SVNSEA2E.Inscription',
+  manifestation: 'SVSEA2E.Manifestation',
+  mark: 'SVNSEA2E.Mark',
+  miracle: 'SVNSEA2E.Miracle',
+  path: 'SVNSEA2E.Path',
+  restriction: 'SVNSEA2E.Restriction',
+  script: 'SVNSEA2E.Script',
+  talisman: 'SVNSEA2E.Talisman',
+  tesse: 'SVNSEA2E.Tesse',
+  thiqa: 'SVNSEA2E.Thiqa',
+  ti: 'SVNSEA2E.Ti',
+  turrus: 'SVNSEA2E.Turrus',
+  turn: 'SVNSEA2E.Turn'
+}
+
+SVNSEA2E.sorcerysubcats = {
+  none: 'SVNSEA2E.None',
+  advanced: 'SVNSEA2E.Advanced',
+  common: 'SVNSEA2E.Common',
+  baxan: 'SVNSEA2E.Baxan',
   major: 'SVNSEA2E.Major',
   minor: 'SVNSEA2E.Minor',
-  advanced: 'SVNSEA2E.Advanced',
-  gros: 'SVNSEA2E.Gros',
-  ti: 'SVNSEA2E.Ti',
-  amulet: 'SVNSEA2E.Amulet',
-  script: 'SVNSEA2E.Script',
-  common: 'SVNSEA2E.Common',
-  rare: 'SVNSEA2E.Rare',
-  bazan: 'SVNSEA2E.Baxan',
   pixan: 'SVNSEA2E.Pixan',
-  manifestation: 'SVSEA2E.Manifestation',
-  turn: 'SVNSEA2E.Turn'
+  rare: 'SVNSEA2E.Rare',
 }
 
 SVNSEA2E.crewstatuses = {
@@ -173,13 +193,17 @@ SVNSEA2E.crewstatuses = {
   dissatisfied: 'SVNSEA2E.Dissatisfied',
   mutinous: 'SVNSEA2E.Mutinous'
 }
+
 SVNSEA2E.artifacttypes = {
   none: 'SVNSEA2E.None',
+  deathtoken: 'SVNSEA2E.DeathToken',
   syrneth: 'SVNSEA2E.Syrneth',
   thiqa: 'SVNSEA2E.Thiqa',
   tailsman: 'SVNSEA2E.Tailsman',
   inscription: 'SVNSEA2E.Inscription',
-  mbey: 'SVNSEA2E.Mbey'
+  mbey: 'SVNSEA2E.Mbey',
+  wonder: 'SVNSEA2E.Wonder',
+  tatoo: 'SVNSEA2E.Tatoo',
 }
 
 SVNSEA2E.shiproles = {

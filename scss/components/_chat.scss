@@ -1,2 +1,71 @@
+#chat-controls div.roll-type-select select,
+#chat-form textarea,
+#chat-log .message {
+  background: $bg-c-lt;
+}
 
+#chat-log {
+  .chat-card.skill-roll {
+    .card-header {
+      @include paint-bottom-border
+    }
 
+    .card-content .raises {
+      font-weight: bold;
+    }
+  }
+
+  .message {
+    font-size: $f-s-norm;
+    color: $f-c-dk;
+    padding: 0;
+
+    .message-header {
+      color: $f-c-lt;
+      background: $brd-c-dk;
+      padding-left: $padding-md;
+      padding-right:$padding-md;
+
+      .message-sender {
+        padding-bottom: 2px;
+        font-weight: bold;
+        text-indent: 0.4em;
+        line-height: 1.3em;
+        flex:4;
+      }
+
+      h4 {
+        color: $f-c-lt;
+      }
+    }
+
+    .message-content {
+      padding: $padding-md;
+      margin-top:0;
+      margin-bottom: $margin-sm;
+
+      h3,
+      h4,
+      h5,
+      h6 {
+        text-shadow: none;
+        margin-top:0;
+        margin-bottom:$margin-sm;
+      }
+
+      .raise-combos-list{
+        list-style: none;
+        padding:0;
+        margin-top:0;
+        margin-bottom: $margin-sm;
+
+        .combo{
+          padding: $padding-sm;
+          margin:$margin-xs;
+          display: inline-block;
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}

@@ -18,25 +18,25 @@
   }
 }
 
-  .danger-points{
-
-   input[type="text"] {
+.danger-points {
+  input[type="text"] {
     font-size: $f-s-3xl;
     height: 2em;
     width: 2em;
-    border:$brd-s-lg-dk;
+    border: $brd-s-lg-dk;
     border-radius: 2em;
     text-align: center;
   }
-  button{
+
+  button {
     margin-top: 10px;
   }
 }
 
-  .sheet-header.dangerpts .profile-img {
-    flex: 0 0 $profile-img-sm-size;
-    height: $profile-img-sm-size;
-    width: $profile-img-sm-size;
-    border: $brd-s-sm-dk;
-    border-radius: $profile-img-sm-size;
-  }
+.sheet-header.dangerpts .profile-img {
+  flex: 0 0 $profile-img-sm-size;
+  height: $profile-img-sm-size;
+  width: $profile-img-sm-size;
+  border: $brd-s-sm-dk;
+  border-radius: $profile-img-sm-size;
+}

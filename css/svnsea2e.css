@@ -62,6 +62,10 @@ h6 {
   font-size: 1em;
 }
 
+label.checkbox {
+  font-size: 1em;
+}
+
 #players h3 {
   color: #EEE8BF;
 }
@@ -177,9 +181,12 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .rollable:focus, .rollable:hover {
-  color: #000;
   text-shadow: 0 0 10px #EEE8BF;
   cursor: pointer;
+  background-image: url("/systems/svnsea2e/icons/d10.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  padding-left: 20px;
 }
 
 .grid,
@@ -389,46 +396,6 @@ input[type=range]::-webkit-slider-thumb {
   color: #EEE8BF;
 }
 
-#sidebar #chat #chat-controls div.roll-type-select select,
-#sidebar #chat #chat-form textarea,
-#sidebar #chat #chat-log .message {
-  background: #EEE8BF;
-}
-
-#sidebar #chat #chat-log .chat-card.skill-roll .card-header {
-  padding-bottom: 2px;
-  background: url(/systems/svnsea2e/imgs/paint_border.png);
-  background-repeat: no-repeat;
-  background-size: 100% 6px;
-  background-position: left bottom;
-}
-
-#sidebar #chat #chat-log .chat-card.skill-roll .card-content .raises {
-  font-weight: bold;
-}
-
-#sidebar #chat #chat-log .message {
-  font-size: 1em;
-  color: #000;
-  padding: 0;
-}
-
-#sidebar #chat #chat-log .message .message-header {
-  color: #EEE8BF;
-  background: #143A54;
-}
-
-#sidebar #chat #chat-log .message .message-header .message-sender {
-  padding-bottom: 2px;
-  font-weight: bold;
-  text-indent: 0.4em;
-  line-height: 1.3em;
-}
-
-#sidebar #chat #chat-log .message .message-header h4 {
-  color: #EEE8BF;
-}
-
 #sidebar #scenes .scene h3 {
   color: #EEE8BF;
 }
@@ -441,6 +408,80 @@ input[type=range]::-webkit-slider-thumb {
 
 .dialog .dialog-content h3 {
   text-shadow: none;
+}
+
+#chat #chat-controls div.roll-type-select select,
+#chat #chat-form textarea,
+#chat #chat-log .message {
+  background: #EEE8BF;
+}
+
+#chat #chat-log .chat-card.skill-roll .card-header {
+  padding-bottom: 2px;
+  background: url(/systems/svnsea2e/imgs/paint_border.png);
+  background-repeat: no-repeat;
+  background-size: 100% 6px;
+  background-position: left bottom;
+}
+
+#chat #chat-log .chat-card.skill-roll .card-content .raises {
+  font-weight: bold;
+}
+
+#chat #chat-log .message {
+  font-size: 1em;
+  color: #000;
+  padding: 0;
+}
+
+#chat #chat-log .message .message-header {
+  color: #EEE8BF;
+  background: #143A54;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#chat #chat-log .message .message-header .message-sender {
+  padding-bottom: 2px;
+  font-weight: bold;
+  text-indent: 0.4em;
+  line-height: 1.3em;
+  -webkit-box-flex: 4;
+  -ms-flex: 4;
+  flex: 4;
+}
+
+#chat #chat-log .message .message-header h4 {
+  color: #EEE8BF;
+}
+
+#chat #chat-log .message .message-content {
+  padding: 8px;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+#chat #chat-log .message .message-content h3,
+#chat #chat-log .message .message-content h4,
+#chat #chat-log .message .message-content h5,
+#chat #chat-log .message .message-content h6 {
+  text-shadow: none;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+#chat #chat-log .message .message-content .raise-combos-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+#chat #chat-log .message .message-content .raise-combos-list .combo {
+  padding: 4px;
+  margin: 2px;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* Styles limited to svnsea2e sheets */

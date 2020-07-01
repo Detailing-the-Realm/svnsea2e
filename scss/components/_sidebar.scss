@@ -97,48 +97,6 @@
     }
   }
 
-  #chat {
-    #chat-controls div.roll-type-select select,
-    #chat-form textarea,
-    #chat-log .message {
-      background: $bg-c-lt;
-    }
-
-    #chat-log {
-      .chat-card.skill-roll {
-        .card-header {
-          @include paint-bottom-border
-        }
-
-        .card-content .raises {
-          font-weight: bold;
-        }
-      }
-
-      .message {
-        font-size: $f-s-norm;
-        color: $f-c-dk;
-        padding: 0;
-
-        .message-header {
-          color: $f-c-lt;
-          background: $brd-c-dk;
-
-          .message-sender {
-            padding-bottom: 2px;
-            font-weight: bold;
-            text-indent: 0.4em;
-            line-height: 1.3em;
-          }
-
-          h4 {
-            color: $f-c-lt;
-          }
-        }
-      }
-    }
-  }
-
   #scenes {
     .scene h3 {
       color: $f-c-lt;

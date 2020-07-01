@@ -55,7 +55,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       this._prepareLanguages(data.actor.data)
     } else if (this.actor.data.type === 'monster') {
       this._prepareMonsterItems(data)
-    }else if (this.actor.data.type === 'ship') {
+    } else if (this.actor.data.type === 'ship') {
       this._prepareShipItems(data)
       this._processFlags(data, data.actor.flags)
     }
@@ -673,6 +673,13 @@ export default class ActorSheetSS2e extends ActorSheet {
         }
       }
 
+      // if set make the intiative equal to the number of raises
+      if (form.setInitiative.checked) {
+        console.log(game.combat)
+        console.log(actor)
+        game.combat.setInitiative(actor.id, raises)
+      }
+
       const sortedRolls = d10.results
       sortedRolls.sort(function (a, b) {
         return a - b
@@ -683,26 +690,18 @@ export default class ActorSheetSS2e extends ActorSheet {
       }
 
       const templateData = {
-        title: game.i18n.format('SVNSEA2E.ApproachRollChatTitle', {
-          skill: CONFIG.SVNSEA2E.skills[skill.name],
-          trait: form.trait[form.trait.selectedIndex].text
-        }),
         actor: actor,
-        skill: event.currentTarget.dataset.label,
-        trait: form.trait[form.trait.selectedIndex].text,
+        raisetxt: (raises > 1) ? game.i18n.localize('SVNSEA2E.Raises') : game.i18n.localize('SVNSEA2E.Raise'),
         data: data,
         exploded: exploded,
         explosions: game.i18n.format('SVNSEA2E.RollsExploded', {
           explosions: explosions.toString()
         }),
         labels: data.labels,
-        rolls: game.i18n.format('SVNSEA2E.Rolls', {
-          rolls: sortedRolls.join(', ')
-        }),
+        rolls:sortedRolls,
         raises: raises,
-        rCombos: game.i18n.format('SVNSEA2E.RaiseCombos', {
-          combos: raiseCombos.join(', ')
-        }),
+        rCombos: game.i18n.localize('SVNSEA2E.RaiseCombos'),
+        combos: raiseCombos,
         rerolled: rerolled,
         reroll: reroll,
         threshold: game.i18n.format('SVNSEA2E.RollThreshold', {
@@ -718,11 +717,16 @@ export default class ActorSheetSS2e extends ActorSheet {
         user: game.user._id,
         type: CONST.CHAT_MESSAGE_TYPES.OTHER,
         content: html,
+        image: actor.img,
         speaker: {
           actor: actor._id,
           token: actor.token,
           alias: actor.name
-        }
+        },
+        flavor: game.i18n.format('SVNSEA2E.ApproachRollChatTitle', {
+          skill: CONFIG.SVNSEA2E.skills[skill.name],
+          trait: form.trait[form.trait.selectedIndex].text
+        })
       }
 
       // Toggle default roll mode

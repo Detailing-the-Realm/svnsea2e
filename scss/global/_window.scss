@@ -23,8 +23,11 @@
 .rollable {
   &:focus,
   &:hover {
-    color: $f-c-dk;
     text-shadow: 0 0 10px $c-sec;
     cursor: pointer;
+    background-image: url("/systems/svnsea2e/icons/d10.svg");
+    background-size:20px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
   }
 }

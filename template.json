@@ -259,10 +259,10 @@
     },
     "sorcery": {
       "templates": ["base"],
-      "sorcsource": "",
-      "subsource": "",
+      "type": "",
       "duration": "",
-      "scale": ""
+      "category": "",
+      "subcategory": ""
     },
     "story": {
       "templates": ["base"],

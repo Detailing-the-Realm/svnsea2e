@@ -125,8 +125,9 @@ Hooks.once('setup', function () {
     'traits',
     'shiproles',
     'skills',
-    'sorceryscales',
-    'sorcerysources',
+    'sorceryTypes',
+    'sorcerycats',
+    'sorcerysubcats',
     'status'
   ]
 

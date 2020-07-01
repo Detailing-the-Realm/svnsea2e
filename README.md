@@ -5,35 +5,38 @@
 
 Players take on the roles of heroes thrown into global conspiracies and sinister plots, exploring ancient ruins of a race long vanished and protecting the rightful kings and queens of Théah from murderous villains. It is a world of sharp blades and sharp wits, where a cutting retort can be just as deadly as a sword’s point.
 
-## Status
-The project is in its infancy. I will try to only update the code as I have a version that is usable. I won't update the version from 0.0.1 until I feel like the project is in a usable state. I am currently learning and designing the system and the forms. This is a part time project for me when I am not doing my full time work, running games, or working on maps for my patrons.
+## Usage
 
-What is done:
-1. Character sheet with basic character information and traits and skills.
-2. Advantages sheet ready for use
-3. Basics pop up for skill rolling from a skill.
+Because 7th Sea Second Edition doesn't have an SRD or anything other than the quick start the system lacks compendiums. GMs will need to create all of the advantages, backgrounds and other items they want to use for character creation.
 
-## Rough Road Map
-I don't have a timeline for when I think this will be usable for games, gut estimate is a 3-4 months. The things that I need to add to get this to a usable place, probably in priority order, are:
-1. Get Monster and Villain Villainy string displaying
-2. Finalize sorcery attributes
-3. Add sorcery attributes to the html form
-4. Support Advantage lists in Backgrounds
-5. Support Skill selection in Backgrounds
-6. Support Dramatic wounds into skill rolls
-7. Add card to chat for sorcery use
-8. Review Starfinder to determine if his way of assigning players to ships works for me.
-9. Build out adding actors to ships and ships to actors
-10. Get language selection working for Villains and Heroes
+### Item Creation
+
+I designed backgrounds to allow you to select existing advantages to associate with the background. When a background is dragged to a character (player, hero, or villain) all associated advantages are looked up and copied to the character. All skills selected with the background are also increased by 1. If a background is removed then the system attempts to remove the associated advantages and decrease all skills associated with the background by 1.
+
+I recommend taking the time and adding as many advantages as you have in you books before creating backgrounds. When associating advantages to backgrounds I use the advantages name to look up its id. The id to the global advantage is what is stored. If an advantage is deleted and recreated the background will need to be modified before being assigned to the character. If a background has already been assigned it may not deleted
+
+All other item types are independent of each other. Advantages can also be added separately without backgrounds.
+
+Stories are easier to create via the character sheet rather than created as an item and dragged and dropped to the character sheet. Stories tend to be specific to the character and individual not generic.
+
+### Character Creation
+
+Character creation is mostly manual, except when adding backgrounds. Selecting a nation DOES NOT add a point to a trait, this has to be done manually.
+
+### Starting a game
+
+Once you have created items and going through character creation I recommend also creating one danger dice actor to keep track of the danger dice the GM has.
+
+## Project Status
+The project has reached a usable state for games, but is still in a beta phase. I am looking for feedback and recommendations for improvements.
+
+### Rough Road Map
+
 
 These are nice to have items that could make the system more automated:
-1. Validate with Chaosium that I am creating the module in a way that meets the Fan Material Policy
-2. Add trait selection from nation selection
-3. Automate addition of advantages from backgrounds
-4. Automate skill additions based on backgrounds
+1. Add trait selection from nation selection
 
 ## Credits
 Developed from then [FoundryVTT System Tutorial](https://gitlab.com/asacolips-projects/foundry-mods/foundryvtt-system-tutorial). With code and ideas from DnD5E System also by Atropos.
 
 This FoundryVTT System uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications LLC, which are used under Chaosium Inc’s Fan Material Policy. We are expressly prohibited from charging you to use or access this content. This [website, character sheet, or whatever it is] is not published, endorsed, or specifically approved by Chaosium Inc. For more information about Chaosium Inc’s products, please visit www.chaosium.com.
-
