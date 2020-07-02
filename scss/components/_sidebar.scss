@@ -35,8 +35,8 @@
         border-radius: $profile-img-sm-size;
         height: $profile-img-sm-size;
         width: $profile-img-sm-size;
-        fill:$c-prim;
-        background:$bg-c-lt;
+        fill: $c-prim;
+        background: $bg-c-lt;
       }
 
       .entity {
@@ -45,17 +45,23 @@
         background-image: linear-gradient(to left, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
       }
 
-      .entity.journal{
-        background:$c-prim-lt;
+      .entity.journal {
+        background: rgba(52, 152, 219, 0.5);
       }
 
       .playlist-header h4,
       h3 {
         @include paint-bottom-border
       }
+
+      .directory-item.scene h3 {
+        background: none;
+      }
     }
 
-    .dice-result h4{
+    #scene {}
+
+    .dice-result h4 {
       color: $f-c-dk;
     }
   }
@@ -79,20 +85,23 @@
 
       h3,
       h4 {
-        font-size: $f-s-lg;
+        font-size: $f-s-md;
       }
 
-      h4{
+      h4 {
         color: $f-c-lt;
       }
     }
-    li.combatant{
+
+    li.combatant {
       border-bottom: $brd-g-md-dk;
       border-top: 0;
       background-image: linear-gradient(to left, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
 
-      .token-name .combatant-control{
-        color: $f-c-lt;
+      .token-name {
+        .combatant-control {
+          color: $f-c-lt;
+        }
       }
     }
   }

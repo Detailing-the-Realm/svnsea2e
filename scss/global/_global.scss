@@ -19,7 +19,6 @@ h6 {
   font-weight: normal;
   font-family: $f-header;
   color: $f-c-dk;
-  text-shadow: 1px 1px 4px $f-c-dk;
   border: none;
 }
 
@@ -34,24 +33,30 @@ h2 {
 
 h3 {
   font-size: $f-s-xl;
+  text-indent: 10px;
 }
 
 h4 {
   font-size: $f-s-lg;
+  text-indent: 8px;
 }
 
 h5 {
   font-size: $f-s-md;
+  text-indent: 6px;
 }
 
 h6 {
   font-size: $f-s-norm;
+  text-indent: 4px;
 }
-label.checkbox{
+
+label.checkbox {
   font-size: $f-s-norm;
 }
+
 #players {
-  h3 {
+  @include main-bg h3 {
     color: $f-c-lt;
   }
 
@@ -64,7 +69,6 @@ label.checkbox{
   li h4 {
     color: $f-c-lt;
     font-size: $f-s-lg;
-    text-shadow: none;
   }
 
   li > i {
@@ -123,10 +127,27 @@ input[type=range]::-webkit-slider-thumb {
   padding: $padding-md;
 }
 
-#navigation #nav-toggle,
-.app {
-  background: $bg-c-rgba-dk;
-  color: $f-c-lt;
+#navigation {
+  .nav-item {
+    border: $brd-s-sm-lt;
+  }
+
+  #nav-toggle {
+    @include main-bg :hover {
+      text-shadow: 0 0 10px $c-sec;
+    }
+  }
+
+  #scene-list {
+    .scene.gm {
+      @include main-bg
+    }
+
+    .scene.context,
+    .scene.view {
+      @include hover-highlight
+    }
+  }
 }
 
 ::-webkit-scrollbar-thumb {
@@ -138,12 +159,32 @@ input[type=range]::-webkit-slider-thumb {
   width: 10px;
 }
 
-#navigation #scene-list .scene.context,
-#navigation #scene-list .scene.view {
-  border: 1px solid red;
-  background: $bg-c-rgba-dk;
-  color: $f-c-lt;
-  border: $brd-s-sm-lt;
-  box-shadow: 0 0 10px inset $c-sec;
-  border-bottom: $brd-s-sm-glow;
+#controls {
+  .control-tool,
+  .scene-control {
+    @include main-bg
+  }
+
+  .control-tool.active,
+  .control-tool:hover,
+  .scene-control.active,
+  .scene-control:hover {
+    @include hover-highlight
+  }
+}
+
+#hotbar {
+  .bar-controls,
+  .macro {
+    @include main-bg
+  }
+
+  .bar-controls:hover,
+  .macro:hover {
+    @include hover-highlight
+  }
+}
+
+.app {
+  @include main-bg
 }
