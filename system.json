@@ -1,7 +1,7 @@
 {
   "name": "svnsea2e",
-  "title": "7th Sea Second Edition",
-  "description": "The 7th Sea Second Edition system for FoundryVTT!",
+  "title": "7th Sea Second Edition (Unofficial)",
+  "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
   "version": "0.1.0",
   "minimumCoreVersion": "0.6.0",
   "compatibleCoreVersion": "0.6.4",
