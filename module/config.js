@@ -179,7 +179,7 @@ SVNSEA2E.sorcerysubcats = {
   major: 'SVNSEA2E.Major',
   minor: 'SVNSEA2E.Minor',
   pixan: 'SVNSEA2E.Pixan',
-  rare: 'SVNSEA2E.Rare',
+  rare: 'SVNSEA2E.Rare'
 }
 
 SVNSEA2E.crewstatuses = {
