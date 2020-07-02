@@ -21,7 +21,7 @@
   "primaryTokenAttribute": "wounds",
   "secondaryTokenAttribute": "dwounds",
   "url": "https://github.com/Detailing-the-Realm/svnsea2e/",
-  "manifest": "https://raw.githubusercontent.com/Detailing-the-Realm/svnsea2e/master/system.json",
-  "download": "https://github.com/Detailing-the-Realm/svnsea2e/archive/master.zip",
+  "manifest": "https://raw.githubusercontent.com/Detailing-the-Realm/svnsea2e/0.1.0/system.json",
+  "download": "https://github.com/Detailing-the-Realm/svnsea2e/archive/0.1.0.zip",
   "license": "LICENSE.txt"
 }
