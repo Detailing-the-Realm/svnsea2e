@@ -3,6 +3,53 @@
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+      <div class="grid grid-2col">
+        <div class="form-group flex-group">
+          <label for="data.sorctype">{{localize "SVNSEA2E.Type"}}</label>
+          <select class="sorcery-type" name="data.sorctype">
+            {{#select data.sorctype}}
+              <option value="none"></option>
+              {{#each config.sorceryTypes as |label type|}}
+                <option value="{{type}}">{{label}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </div>
+        <div class="form-group flex-group">
+          <label for="data.sorcdur">{{localize "SVNSEA2E.Duration"}}</label>
+          <select class="sorcery-type" name="data.sorcdur">
+            {{#select data.sorcdur}}
+              <option value="none"></option>
+              {{#each config.durations as |label duration|}}
+                <option value="{{duration}}">{{label}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </div>
+      </div>
+      <div class="relrep grid grid-2col">
+        <div class="form-group flex-group">
+          <label for="data.sorccat">{{localize "SVNSEA2E.Category"}}</label>
+          <select class="sorcery-category" name="data.sorccat">
+            {{#select data.sorccat}}
+              <option value="none"></option>
+              {{#each config.sorcerycats as |label cat|}}
+                <option value="{{cat}}">{{label}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+          </div><div class="form-group flex-group">
+            <label for="data.sorcsubcat">{{localize "SVNSEA2E.SubCategory"}}</label>
+            <select class="sorcery-subcategory" name="data.sorcsubcat">
+              {{#select data.sorcsubcat}}
+                <option value="none"></option>
+                {{#each config.sorcerysubcats as |label cat|}}
+                  <option value="{{cat}}">{{label}}</option>
+                {{/each}}
+              {{/select}}
+            </select>
+            </div>
+      </div>
     </div>
   </header>
 
@@ -10,9 +57,6 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="description">
       <h2>{{localize "SVNSEA2E.Description"}}</h2>
-    </a>
-    <a class="item" data-tab="attributes">
-      <h2>{{localize "SVNSEA2E.Attributes"}}</h2>
     </a>
   </nav>
 
@@ -24,44 +68,5 @@
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
     </div>
 
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      <div class="form-group">
-        <label for="data.scale">{{localize "SVNSEA2E.SorceryScale"}}</label>
-        <select class="scale" name="data.scale">
-          {{#select data.scale}}
-            <option value="none"></option>
-            {{#each config.sorceryscales as |label scale|}}
-              <option value="{{scale}}">{{label}}</option>
-            {{/each}}
-          {{/select}}
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="data.sorcsource">{{localize "SVNSEA2E.SorcerySource"}}</label>
-        <select class="sorcsource" name="data.sorcsource">
-          {{#select data.sorcsource}}
-            <option value="none"></option>
-            {{#each config.sorcerysources as |label source|}}
-              <option value="{{source}}">{{label}}</option>
-            {{/each}}
-          {{/select}}
-        </select>
-      </div>
-      <div class="form-group">
-        <input type="text" name="data.subsource" value="{{data.ssubsource}}" placeholder="{{localize "SVNSEA2E.SorcerySubSource"}}" />
-      </div>
-      <div class="form-group">
-        <label for="data.duration">{{localize "SVNSEA2E.Duration"}}</label>
-        <select class="duration" name="data.duration">
-          {{#select data.duration}}
-            <option value="none"></option>
-            {{#each config.durations as |label duration|}}
-              <option value="{{duration}}">{{label}}</option>
-            {{/each}}
-          {{/select}}
-        </select>
-      </div>
-    </div>
   </section>
 </form>

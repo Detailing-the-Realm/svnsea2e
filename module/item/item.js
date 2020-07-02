@@ -111,10 +111,13 @@ export class SvnSea2EItem extends Item {
   }
 
   _sorceryChatData (data, htmlOptions) {
+
     data.metadatahtml = `
-    <h5>${game.i18n.localize('SVNSEA2E.Attributes')}</h5>
-    <p>${data.sorcsource}, ${data.subsource}</p>
-    <p>${game.i18n.localize('SVNSEA2E.SorceryScale')}: ${data.scale} ${game.i18n.localize('SVNSEA2E.Duration')}: ${data.duration}</p>
+    <ul class="tag-list">
+    <li class="tag">${CONFIG.SVNSEA2E.sorceryTypes[data.sorctype]}</li>
+    <li class="tag">${CONFIG.SVNSEA2E.sorcerysubcats[data.sorcsubcat]} ${CONFIG.SVNSEA2E.sorcerycats[data.sorccat]}</li>
+    <li class="tag">${game.i18n.localize('SVNSEA2E.Duration')}: ${CONFIG.SVNSEA2E.durations[data.sorcdur]}</li>
+    </ul>
 `
     return data
   }

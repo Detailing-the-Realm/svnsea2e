@@ -72,9 +72,7 @@ input[type="text"] {
 }
 
 .flexrow {
-  .skills-list,
-  .advantages-list,
-  .languages-list {
+  .tag-list {
     flex: 0 0 95%;
   }
 
@@ -86,9 +84,7 @@ input[type="text"] {
 }
 
 .details-list,
-.skills-list,
-.advantages-list,
-.languages-list {
+.tag-list {
   line-height: 20px;
   list-style: none;
   margin: 0;

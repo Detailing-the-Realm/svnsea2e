@@ -259,10 +259,10 @@
     },
     "sorcery": {
       "templates": ["base"],
-      "type": "",
-      "duration": "",
-      "category": "",
-      "subcategory": ""
+      "sorctype": "",
+      "sorcdur": "",
+      "sorccat": "",
+      "sorcsubcat": ""
     },
     "story": {
       "templates": ["base"],

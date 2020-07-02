@@ -598,6 +598,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .svnsea2e .tabs .item.active {
   background: #EEE8BF;
+  text-shadow: none;
 }
 
 .svnsea2e .tabs .item.active h2 {
@@ -689,9 +690,7 @@ input[type=range]::-webkit-slider-thumb {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.svnsea2e.sheet .flexrow .skills-list,
-.svnsea2e.sheet .flexrow .advantages-list,
-.svnsea2e.sheet .flexrow .languages-list {
+.svnsea2e.sheet .flexrow .tag-list {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 95%;
   flex: 0 0 95%;
@@ -706,9 +705,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .svnsea2e.sheet .details-list,
-.svnsea2e.sheet .skills-list,
-.svnsea2e.sheet .advantages-list,
-.svnsea2e.sheet .languages-list {
+.svnsea2e.sheet .tag-list {
   line-height: 20px;
   list-style: none;
   margin: 0;

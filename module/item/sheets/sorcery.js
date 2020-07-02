@@ -13,6 +13,7 @@ export class ItemSheetSS2eSorcery extends ItemSheetSS2e {
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
       template: 'systems/svnsea2e/templates/items/sorcery.html',
+      width: 750,
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
