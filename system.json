@@ -2,15 +2,13 @@
   "name": "svnsea2e",
   "title": "7th Sea Second Edition",
   "description": "The 7th Sea Second Edition system for FoundryVTT!",
-  "version": "0.0.1",
-  "minimumCoreVersion": "0.5.7",
-  "compatibleCoreVersion": "0.6.0",
+  "version": "0.1.0",
+  "minimumCoreVersion": "0.6.0",
+  "compatibleCoreVersion": "0.6.4",
   "templateVersion": 2,
   "author": "psychoph",
   "esmodules": ["module/svnsea2e.js"],
   "styles": ["css/svnsea2e.css"],
-  "scripts": [],
-  "packs": [],
   "languages": [
     {
       "lang": "en",
