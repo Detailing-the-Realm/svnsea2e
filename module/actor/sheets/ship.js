@@ -27,14 +27,12 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    */
   _prepareShipItems (data) {
     const actorData = data.actor
-
     // Initialize containers.
     const adventures = []
-    console.log(data.items)
+
     // Iterate through items, allocating to containers
     // let totalWeight = 0
     for (const i of data.items) {
-      console.log(i.type)
       // Append to item types to their arrays
       if (i.type === 'shipadventure') {
         adventures.push(i)
@@ -102,7 +100,6 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     crew.surgeon.actors = surgeon
 
     data.crew = Object.values(crew)
-    console.log(data.crew)
   }
 
   /**
@@ -174,8 +171,6 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {object} data  The data transfer object.
    */
   async _onCrewDrop (event, data) {
-    console.log('crew drop event', event, event.target.dataset)
-    console.log('crew drop data', data)
     event.preventDefault()
 
     $(event.target).css('background', '')
@@ -234,7 +229,6 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {Event} event Originating dragstart event
    */
   _onDragCrewStart (event) {
-    console.log('crew start', event)
     const actorId = event.currentTarget.dataset.actorId
     const actor = game.actors.get(actorId)
 

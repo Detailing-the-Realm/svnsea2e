@@ -105,7 +105,6 @@ export class SvnSea2EActor extends Actor {
   }
 
   async setCrewMemberRole (shipId, role) {
-    console.log(shipId, role)
     return this.setFlag('svnsea2e', 'crewMember', {
       shipId: shipId,
       role: role

@@ -71,7 +71,6 @@ export class ItemSheetSS2e extends ItemSheet {
   _prepareBackground (data) {
     data.selectedskills = {}
     for (let i = 0; i < data.skills.length; i++) {
-      console.log(data.skills[i], CONFIG.SVNSEA2E.skills[data.skills[i]])
       data.selectedskills[data.skills[i]] = CONFIG.SVNSEA2E.skills[data.skills[i]]
     }
 
@@ -79,7 +78,6 @@ export class ItemSheetSS2e extends ItemSheet {
 
     const alladvantages = this._getAllAdvantages()
     for (let i = 0; i < data.advantages.length; i++) {
-      console.log(data.advantages[i], alladvantages[i])
       data.selectedadvantages[data.advantages[i]] = alladvantages[data.advantages[i]]
     }
   }

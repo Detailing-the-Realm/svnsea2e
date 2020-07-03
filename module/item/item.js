@@ -11,7 +11,7 @@ export class SvnSea2EItem extends Item {
 
     // Get the Item's data
     const itemData = this.data
-    console.log(itemData)
+
     const actorData = this.actor ? this.actor.data : {}
     const data = itemData.data
 

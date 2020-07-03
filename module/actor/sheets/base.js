@@ -205,7 +205,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const li = $(event.currentTarget).parents('.item')
     const item = this.actor.getOwnedItem(li.data('item-id'))
     const chatData = item.getChatData({ secrets: this.actor.owner })
-    console.log(chatData.metadatahtml)
+
     // Toggle summary
     if (li.hasClass('expanded')) {
       const summary = li.children('.item-summary')
@@ -543,7 +543,6 @@ export default class ActorSheetSS2e extends ActorSheet {
       form = {}
     }) {
       const _getIndexes = function (rolls, tomatch) {
-        console.log('Matching these values: ' + tomatch.toString())
         const values = []
         values.push(rolls.indexOf(tomatch[0]))
         if (tomatch[0] === tomatch[1]) {
@@ -558,7 +557,6 @@ export default class ActorSheetSS2e extends ActorSheet {
             values.push(rolls.indexOf(tomatch[2]))
           }
         }
-        console.log('Comparing these indexes: ' + values.toString())
         return values
       }
 
@@ -611,7 +609,6 @@ export default class ActorSheetSS2e extends ActorSheet {
       for (let c = 0; c < matcharr.two.length; c++) {
         let vals = _getIndexes(rolls, matcharr.two[c])
         while (vals[0] > -1 && vals[1] > -1) {
-          console.log('adding a raise')
           raises += _addRaise(threshold)
           raiseCombos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString())
           rolls.splice(vals[0], 1)
@@ -623,7 +620,6 @@ export default class ActorSheetSS2e extends ActorSheet {
       for (let c = 0; c < matcharr.three.length; c++) {
         var vals = _getIndexes(rolls, matcharr.three[c])
         while (vals[0] > -1 && vals[1] > -1 && vals[2] > -1) {
-          console.log('adding a raise')
           raises += _addRaise(threshold)
           raiseCombos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString() + ' + ' + rolls[vals[2]].toString())
           rolls.splice(vals[0], 1)
@@ -650,9 +646,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         rerolled = true
       }
 
-      console.log(rolls)
       while (i--) {
-        console.log('i', i)
         if (i > 0 && total === 0) {
           total += rolls[0] + rolls[i]
           combo = rolls[0].toString() + ' + ' + rolls[i].toString()
@@ -664,7 +658,7 @@ export default class ActorSheetSS2e extends ActorSheet {
           combo = combo + ' + ' + rolls[0].toString()
           rolls.splice(0, 1)
         }
-        console.log('total', total, combo)
+
         if (total >= threshold) {
           raises += _addRaise(threshold)
           raiseCombos.push(combo)
@@ -675,8 +669,6 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       // if set make the intiative equal to the number of raises
       if (form.setInitiative.checked) {
-        console.log(game.combat)
-        console.log(actor)
         game.combat.setInitiative(actor.id, raises)
       }
 

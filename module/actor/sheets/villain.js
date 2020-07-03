@@ -37,7 +37,6 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
     // let totalWeight = 0
     for (const i of data.items) {
       const item = i.data
-      console.log(item)
 
       // Append to item types to their arrays
       if (i.type === 'advantage') {
