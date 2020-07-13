@@ -286,6 +286,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
 
     if (itemData.type === 'background') {
+      if (itemData.data.nation === 'gisles' && (this.actor.data.data.nation === 'highland' || this.actor.data.data.nation === 'avalon' || this.actor.data.data.nation === 'insmore')) {
+        return await this._processBackgroundDrop(itemData)
+      }
       if (itemData.data.nation !== 'none' && itemData.data.nation !== this.actor.data.data.nation) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.WrongNation', {
           bgnation: game.i18n.localize(CONFIG.SVNSEA2E.nations[itemData.data.nation]),
@@ -365,33 +368,58 @@ export default class ActorSheetSS2e extends ActorSheet {
  * Backgrouds increase skills and add advantages
  * @param itemData for the item that has been dropped on the character sheet
  */
-  async _processBackgroundDrop (bkgData) {
+  async _processBackgroundDrop (data) {
     const actorData = this.actor.data.data
+    let bkgData = null
     const updateData = {}
 
-    for (let i = 0; i < bkgData.skills.length; i++) {
-      const skill = bkgData.skills[i]
+    // Case 1 - Import from a Compendium pack
+    if (data.pack) {
+      const pack = game.packs.get(data.pack)
+      console.log(pack)
+      if (pack.metadata.entity !== 'Item') return
+      bkgData = await pack.getEntry(data.id)
+    } else if (data.data) { // Case 2 - Data explicitly provided
+      bkgData = data.data
+    } else { // Case 3 - Import from World entity
+      const item = game.items.get(data.id)
+      if (!item) return
+      bkgData = item.data
+    }
+
+    const skills = bkgData.skills
+
+    for (let i = 0; i < skills.length; i++) {
+      const skill = skills[i]
       updateData['data.skills.' + skill + '.value'] = actorData.skills[skill].value + 1
     }
     await this.actor.update(updateData)
-
+/*
     for (let i = 0; i < bkgData.advantages.length; i++) {
-      // Probably need to improve this to look for backgrounds in compediums/packs too.
+      //need to grab the advantage first from world then compendium
       const item = game.items.get(bkgData.advantages[i])
-      if (!item) {
+      const itemData = item.data
+      if (!itemData) {
+        // now we see if it is in a compendium
+        const pack = game.packs.get(bkgData.pack)
+        if (pack.metadata.entity !== 'Item') return
+        itemData = await pack.getEntry(bkgData.id)
+      }
+      if (!itemData) {
         ui.notifications.error(game.i18n.format('SVNSEA2E.ItemDoesntExist', {
-          name: bkgData.advantages[i]
+          name: bkgData.data.advantages[i]
         }))
         continue
       }
-      if (await this._doesActorHaveItem('advantage', item.name)) {
+      if (await this._doesActorHaveItem('advantage', itemData.name)) {
         ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
-          name: item.name
+          name: itemData.name
         }))
         continue
       }
-      await this.actor.createEmbeddedEntity('OwnedItem', duplicate(item.data))
+      await this.actor.createEmbeddedEntity('OwnedItem', duplicate(itemData))
     }
+    */
   }
 
   /* -------------------------------------------- */
@@ -690,7 +718,7 @@ export default class ActorSheetSS2e extends ActorSheet {
           explosions: explosions.toString()
         }),
         labels: data.labels,
-        rolls:sortedRolls,
+        rolls: sortedRolls,
         raises: raises,
         rCombos: game.i18n.localize('SVNSEA2E.RaiseCombos'),
         combos: raiseCombos,

@@ -15,7 +15,11 @@ export class SvnSea2EItem extends Item {
     const actorData = this.actor ? this.actor.data : {}
     const data = itemData.data
 
-    if (itemData.type === 'scheme') { this._prepareSchemeData(itemData.data) } else if (itemData.type === 'advantage') { this._prepareAdvantageData(itemData.data) }
+    if (itemData.type === 'scheme') {
+      this._prepareSchemeData(itemData.data)
+    } else if (itemData.type === 'advantage') {
+      this._prepareAdvantageData(itemData.data)
+    }
   }
 
   /**
@@ -62,10 +66,9 @@ export class SvnSea2EItem extends Item {
     data.skills.forEach(skl => skillNames += `<li class="tag">${CONFIG.SVNSEA2E.skills[skl]}</li>`)
 
     let advNames = ''
-    data.advantages.forEach(adv => {
-      const item = game.items.get(adv)
-      advNames += `<li class="tag">${item.name}</li>`
-    })
+    for (let i = 0; i < data.advantages.length; i++) {
+      advNames += `<li class="tag">${data.advantages[i]}</li>`
+    }
 
     data.metadatahtml = `<h5>${game.i18n.localize('SVNSEA2E.Quirk')}</h5>
     <p>${data.quirk}</p>
@@ -111,7 +114,6 @@ export class SvnSea2EItem extends Item {
   }
 
   _sorceryChatData (data, htmlOptions) {
-
     data.metadatahtml = `
     <ul class="tag-list">
     <li class="tag">${CONFIG.SVNSEA2E.sorceryTypes[data.sorctype]}</li>

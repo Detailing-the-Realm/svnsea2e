@@ -196,7 +196,7 @@ SVNSEA2E.artifacttypes = {
   inscription: 'SVNSEA2E.Inscription',
   mbey: 'SVNSEA2E.Mbey',
   wonder: 'SVNSEA2E.Wonder',
-  tatoo: 'SVNSEA2E.Tatoo',
+  tatoo: 'SVNSEA2E.Tatoo'
 }
 
 SVNSEA2E.shiproles = {

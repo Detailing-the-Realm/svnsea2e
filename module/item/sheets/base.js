@@ -74,20 +74,39 @@ export class ItemSheetSS2e extends ItemSheet {
       data.selectedskills[data.skills[i]] = CONFIG.SVNSEA2E.skills[data.skills[i]]
     }
 
-    data.selectedadvantages = {}
-
-    const alladvantages = this._getAllAdvantages()
-    for (let i = 0; i < data.advantages.length; i++) {
-      data.selectedadvantages[data.advantages[i]] = alladvantages[data.advantages[i]]
-    }
+    data.selectedadvantages = data.advantages
   }
 
-  _getAllAdvantages () {
-    const advantages = {}
+  _advCompare (object, value) {
+    for (const property in object) {
+      if (object[property] === value) {
+        return true
+      }
+    }
+    return false
+  }
+
+  async _getAllAdvantages () {
+    const advantages = []
     const items = game.items.directory.entities
     for (let i = 0; i < items.length; i++) {
       if (items[i].type === 'advantage') {
-        advantages[items[i]._id] = items[i].name
+        advantages.push(items[i].name)
+      }
+    }
+
+    const packs = game.packs.entries
+    const worldAdv = duplicate(advantages)
+    for (var i = 0; i < packs.length; i++) {
+      const pack = packs[i]
+      if (pack.metadata.entity === 'Item') {
+        const pitems = await pack.getIndex()
+        for (let j = 0; j < pitems.length; j++) {
+          const entry = await pack.getEntry(pitems[j]._id)
+          if (entry.type === 'advantage' && !worldAdv.includes(entry.name)) {
+            advantages.push(entry.name)
+          }
+        }
       }
     }
     return advantages
@@ -117,12 +136,11 @@ export class ItemSheetSS2e extends ItemSheet {
    * @param {Event} event   The click event which originated the selection
    * @private
    */
-  _onAdvantageSelector (event) {
+  async _onAdvantageSelector (event) {
     event.preventDefault()
-    const a = event.currentTarget
     const options = {
       title: game.i18n.localize('SVNSEA2E.Advantages'),
-      choices: this._getAllAdvantages()
+      choices: await this._getAllAdvantages()
     }
     new AdvantageSelector(this.item, options).render(true)
   }

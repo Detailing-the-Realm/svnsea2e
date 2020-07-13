@@ -14,6 +14,10 @@ body#tinymce.mce-content-body {
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  scrollbar-color: #3498DB #091B27;
+}
+
 a:hover {
   text-shadow: 0 0 8px #EEE8BF;
 }
@@ -378,6 +382,10 @@ input[type=range]::-webkit-slider-thumb {
 
 #sidebar .tabs .item.active {
   text-shadow: 0 0 10px #EEE8BF;
+}
+
+#sidebar .sidebar-tab .directory-header input[type="text"] {
+  text-align: left;
 }
 
 #sidebar .sidebar-tab .directory-list .directory-item img {

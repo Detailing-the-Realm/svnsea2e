@@ -46,8 +46,8 @@ Hooks.once('init', async function () {
   }
 
   CONFIG.SVNSEA2E = SVNSEA2E
-  CONFIG.SVNSEA2E.advTypes = duplicate(SVNSEA2E.nations)
-  CONFIG.SVNSEA2E.advTypes.gisles = 'SVNSEA2E.RegionGlamourIsles'
+  CONFIG.SVNSEA2E.natTypes = duplicate(SVNSEA2E.nations)
+  CONFIG.SVNSEA2E.natTypes.gisles = 'SVNSEA2E.RegionGlamourIsles'
 
   // Define custom Entity classes
   CONFIG.Actor.entityClass = SvnSea2EActor
@@ -115,7 +115,7 @@ Hooks.once('setup', function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
     'actorTypes',
-    'advTypes',
+    'natTypes',
     'artifacttypes',
     'crewstatuses',
     'durations',

@@ -4,6 +4,10 @@ body#tinymce.mce-content-body {
   font-family: $f-body;
 }
 
+body{
+  scrollbar-color: $c-prim-lt $c-prim-dk;
+}
+
 a:hover {
   text-shadow: $txt-shadow-prim;
 }

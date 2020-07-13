@@ -29,6 +29,9 @@
   }
 
   .sidebar-tab {
+    .directory-header input[type="text"]{
+      text-align: left;
+    }
     .directory-list {
       .directory-item img {
         border: $brd-s-md-dk;

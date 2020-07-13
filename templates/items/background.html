@@ -8,7 +8,7 @@
         <select class="nation" name="data.nation">
           {{#select data.nation}}
             <option value="none"></option>
-            {{#each config.nations as |label nation|}}
+            {{#each config.natTypes as |label nation|}}
               <option value="{{nation}}">{{label}}</option>
             {{/each}}
           {{/select}}
