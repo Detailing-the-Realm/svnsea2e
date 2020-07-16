@@ -286,6 +286,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
 
     if (itemData.type === 'background') {
+      console.log('background drop')
       if (itemData.data.nation === 'gisles' && (this.actor.data.data.nation === 'highland' || this.actor.data.data.nation === 'avalon' || this.actor.data.data.nation === 'insmore')) {
         return await this._processBackgroundDrop(itemData)
       }
@@ -296,11 +297,11 @@ export default class ActorSheetSS2e extends ActorSheet {
           name: itemData.name
         }))
       }
-      return await this._processBackgroundDrop(itemData.data)
-    } else {
-      // Create the owned item
-      return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
+      await this._processBackgroundDrop(itemData)
     }
+    // Create the owned item
+    return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
+
   }
 
   /* -------------------------------------------- */
@@ -369,6 +370,7 @@ export default class ActorSheetSS2e extends ActorSheet {
  * @param itemData for the item that has been dropped on the character sheet
  */
   async _processBackgroundDrop (data) {
+    console.log('process bg drop', data)
     const actorData = this.actor.data.data
     let bkgData = null
     const updateData = {}
@@ -397,9 +399,9 @@ export default class ActorSheetSS2e extends ActorSheet {
 /*
     for (let i = 0; i < bkgData.advantages.length; i++) {
       //need to grab the advantage first from world then compendium
-      const item = game.items.get(bkgData.advantages[i])
-      const itemData = item.data
-      if (!itemData) {
+      const advantage = game.items.get(bkgData.advantages[i])
+      const advData = item.data
+      if (!advData) {
         // now we see if it is in a compendium
         const pack = game.packs.get(bkgData.pack)
         if (pack.metadata.entity !== 'Item') return

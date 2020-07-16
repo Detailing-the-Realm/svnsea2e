@@ -101,8 +101,6 @@ export class SvnSea2EItem extends Item {
 
   _secretsocietyChatData (data, htmlOptions) {
     data.metadatahtml = `
-    <h5>${game.i18n.localize('SVNSEA2E.Charter')}</h5>
-    <p>${data.charter}</p>
     <h5>${game.i18n.localize('SVNSEA2E.Concern')}</h5>
     <p>${data.concern}</p>
     <h5>${game.i18n.localize('SVNSEA2E.EarnFavor')}</h5>
