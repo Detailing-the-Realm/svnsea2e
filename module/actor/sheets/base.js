@@ -288,7 +288,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (itemData.type === 'background') {
       console.log('background drop')
       if (itemData.data.nation === 'gisles' && (this.actor.data.data.nation === 'highland' || this.actor.data.data.nation === 'avalon' || this.actor.data.data.nation === 'insmore')) {
-        return await this._processBackgroundDrop(itemData)
+        await this._processBackgroundDrop(itemData)
+        return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
       }
       if (itemData.data.nation !== 'none' && itemData.data.nation !== this.actor.data.data.nation) {
         return ui.notifications.error(game.i18n.format('SVNSEA2E.WrongNation', {
@@ -371,7 +372,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _processBackgroundDrop (data) {
     console.log('process bg drop', data)
     const actorData = this.actor.data.data
-    let packAdvs = []
+    const packAdvs = game.svnsea2e.packAdvs
     let bkgData = null
     const updateData = {}
 
@@ -401,10 +402,6 @@ export default class ActorSheetSS2e extends ActorSheet {
       // need to grab the advantage first from world then compendium
       let advantage = game.items.entities.find(entry => entry.data.name === bkgData.advantages[a])
       if (!advantage) {
-        if (packAdvs.length === 0) {
-          packAdvs = await this._getAllPackAdvantages()
-          console.log(packAdvs)
-        }
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
           if (packAdvs[p].name === bkgData.advantages[a]) {
@@ -519,24 +516,6 @@ export default class ActorSheetSS2e extends ActorSheet {
         advantages.push(element)
       }
     })
-    return advantages
-  }
-
-  async _getAllPackAdvantages () {
-    const advantages = []
-    const packs = game.packs.entries
-    for (var i = 0; i < packs.length; i++) {
-      const pack = packs[i]
-      if (pack.metadata.entity === 'Item') {
-        const pitems = await pack.getIndex()
-        for (let j = 0; j < pitems.length; j++) {
-          const entry = await pack.getEntry(pitems[j]._id)
-          if (entry.type === 'advantage') {
-            advantages.push(entry)
-          }
-        }
-      }
-    }
     return advantages
   }
 

@@ -25,7 +25,7 @@ import LanguageSelector from './apps/language-selector.js'
 import SkillSelector from './apps/skill-selector.js'
 
 Hooks.once('init', async function () {
-  console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System\n
+  console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System
     ${SVNSEA2E.ASCII}`)
   game.svnsea2e = {
     applications: {
@@ -98,11 +98,13 @@ Hooks.once('init', async function () {
 
 /* -------------------------------------------- */
 
-//Hooks.once('ready', async function () {
+Hooks.once('ready', async function () {
+  game.svnsea2e.packAdvs = await getAllPackAdvantages()
+  console.log('7th Sea 2E | Loaded Compendium Advantages')
   // Wait to register hotbar drop hook on ready so that
   // modules could register earlier if they want to
-  //Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
-//})
+  // Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
+})
 
 /* -------------------------------------------- */
 
@@ -164,6 +166,24 @@ Hooks.on('preCreateItem', function (entity, options, userId) {
 Hooks.on('preCreateActor', function (entity, options, userId) {
   entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
 })
+
+async function getAllPackAdvantages() {
+  const advantages = []
+  const packs = game.packs.entries
+  for (var i = 0; i < packs.length; i++) {
+    const pack = packs[i]
+    if (pack.metadata.entity === 'Item') {
+      const pitems = await pack.getIndex()
+      for (let j = 0; j < pitems.length; j++) {
+        const entry = await pack.getEntry(pitems[j]._id)
+        if (entry.type === 'advantage') {
+          advantages.push(entry)
+        }
+      }
+    }
+  }
+  return advantages
+}
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
