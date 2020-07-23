@@ -371,7 +371,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _processBackgroundDrop (data) {
     console.log('process bg drop', data)
     const actorData = this.actor.data.data
-    const packAdvs = await this._getAllPackAdvantages()
+    let packAdvs = []
     let bkgData = null
     const updateData = {}
 
@@ -401,6 +401,10 @@ export default class ActorSheetSS2e extends ActorSheet {
       // need to grab the advantage first from world then compendium
       let advantage = game.items.entities.find(entry => entry.data.name === bkgData.advantages[a])
       if (!advantage) {
+        if (packAdvs.length === 0) {
+          packAdvs = await this._getAllPackAdvantages()
+          console.log(packAdvs)
+        }
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
           if (packAdvs[p].name === bkgData.advantages[a]) {
@@ -413,7 +417,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       if (!advantage) {
         ui.notifications.error(game.i18n.format('SVNSEA2E.ItemDoesntExist', {
-          name: bkgData.data.advantages[i]
+          name: bkgData.advantages[a]
         }))
         continue
       }
