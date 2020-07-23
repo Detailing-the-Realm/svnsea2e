@@ -301,7 +301,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
     // Create the owned item
     return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
-
   }
 
   /* -------------------------------------------- */
@@ -372,6 +371,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _processBackgroundDrop (data) {
     console.log('process bg drop', data)
     const actorData = this.actor.data.data
+    const packAdvs = await this._getAllPackAdvantages()
     let bkgData = null
     const updateData = {}
 
@@ -396,32 +396,35 @@ export default class ActorSheetSS2e extends ActorSheet {
       updateData['data.skills.' + skill + '.value'] = actorData.skills[skill].value + 1
     }
     await this.actor.update(updateData)
-/*
-    for (let i = 0; i < bkgData.advantages.length; i++) {
-      //need to grab the advantage first from world then compendium
-      const advantage = game.items.get(bkgData.advantages[i])
-      const advData = item.data
-      if (!advData) {
+
+    for (let a = 0; a < bkgData.advantages.length; a++) {
+      // need to grab the advantage first from world then compendium
+      let advantage = game.items.entities.find(entry => entry.data.name === bkgData.advantages[a])
+      if (!advantage) {
         // now we see if it is in a compendium
-        const pack = game.packs.get(bkgData.pack)
-        if (pack.metadata.entity !== 'Item') return
-        itemData = await pack.getEntry(bkgData.id)
+        for (var p = 0; p < packAdvs.length; p++) {
+          if (packAdvs[p].name === bkgData.advantages[a]) {
+            advantage = packAdvs[p]
+            console.log('found compedium advantage', advantage)
+            break
+          }
+        }
       }
-      if (!itemData) {
+
+      if (!advantage) {
         ui.notifications.error(game.i18n.format('SVNSEA2E.ItemDoesntExist', {
           name: bkgData.data.advantages[i]
         }))
         continue
       }
-      if (await this._doesActorHaveItem('advantage', itemData.name)) {
+      if (await this._doesActorHaveItem('advantage', advantage.name)) {
         ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
-          name: itemData.name
+          name: advantage.name
         }))
         continue
       }
-      await this.actor.createEmbeddedEntity('OwnedItem', duplicate(itemData))
+      await this.actor.createEmbeddedEntity('OwnedItem', duplicate(advantage))
     }
-    */
   }
 
   /* -------------------------------------------- */
@@ -441,17 +444,9 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     const charAdvs = await this._getAdvantages()
     for (let i = 0; i < bkgData.advantages.length; i++) {
-      const item = game.items.get(bkgData.advantages[i])
-
-      if (!item) {
-        ui.notifications.error(game.i18n.format('SVNSEA2E.ItemDoesntExist', {
-          name: bkgData.advantages[i]
-        }))
-        continue
-      }
       for (let j = 0; j < charAdvs.length; j++) {
-        if (charAdvs[i].name === item.name) {
-          await this.actor.deleteOwnedItem(charAdvs[i].id)
+        if (charAdvs[j].data.name === bkgData.advantages[i]) {
+          await this.actor.deleteOwnedItem(charAdvs[j].id)
         }
       }
     }
@@ -520,6 +515,24 @@ export default class ActorSheetSS2e extends ActorSheet {
         advantages.push(element)
       }
     })
+    return advantages
+  }
+
+  async _getAllPackAdvantages () {
+    const advantages = []
+    const packs = game.packs.entries
+    for (var i = 0; i < packs.length; i++) {
+      const pack = packs[i]
+      if (pack.metadata.entity === 'Item') {
+        const pitems = await pack.getIndex()
+        for (let j = 0; j < pitems.length; j++) {
+          const entry = await pack.getEntry(pitems[j]._id)
+          if (entry.type === 'advantage') {
+            advantages.push(entry)
+          }
+        }
+      }
+    }
     return advantages
   }
 
