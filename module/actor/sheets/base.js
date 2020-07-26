@@ -401,7 +401,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       if (!advantage) {
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
-          if (packAdvs[p].name === bkgData.advantages[a]) {
+          if (packAdvs[p].name.toLowerCase() === bkgData.advantages[a].toLowerCase()) {
             advantage = packAdvs[p]
             break
           }
