@@ -286,7 +286,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
 
     if (itemData.type === 'background') {
-      console.log('background drop')
       if (itemData.data.nation === 'gisles' && (this.actor.data.data.nation === 'highland' || this.actor.data.data.nation === 'avalon' || this.actor.data.data.nation === 'insmore')) {
         await this._processBackgroundDrop(itemData)
         return await this.actor.createEmbeddedEntity('OwnedItem', itemData)
@@ -370,7 +369,6 @@ export default class ActorSheetSS2e extends ActorSheet {
  * @param itemData for the item that has been dropped on the character sheet
  */
   async _processBackgroundDrop (data) {
-    console.log('process bg drop', data)
     const actorData = this.actor.data.data
     const packAdvs = game.svnsea2e.packAdvs
     let bkgData = null
@@ -379,7 +377,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack)
-      console.log(pack)
       if (pack.metadata.entity !== 'Item') return
       bkgData = await pack.getEntry(data.id)
     } else if (data.data) { // Case 2 - Data explicitly provided
@@ -406,7 +403,6 @@ export default class ActorSheetSS2e extends ActorSheet {
         for (var p = 0; p < packAdvs.length; p++) {
           if (packAdvs[p].name === bkgData.advantages[a]) {
             advantage = packAdvs[p]
-            console.log('found compedium advantage', advantage)
             break
           }
         }
@@ -418,11 +414,13 @@ export default class ActorSheetSS2e extends ActorSheet {
         }))
         continue
       }
-      if (await this._doesActorHaveItem('advantage', advantage.name)) {
-        ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
-          name: advantage.name
-        }))
-        continue
+      if (!advantage.name.toLowerCase().includes('sorcery')) {
+        if (await this._doesActorHaveItem('advantage', advantage.name)) {
+          ui.notifications.error(game.i18n.format('SVNSEA2E.ItemExists', {
+            name: advantage.name
+          }))
+          continue
+        }
       }
       await this.actor.createEmbeddedEntity('OwnedItem', duplicate(advantage))
     }
