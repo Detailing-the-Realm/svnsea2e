@@ -40,12 +40,14 @@
     </li>
   {{/each}}
   </ol>
+  {{#if isCorrupt}}
   <div class="redemption flexrow flex-group">
-    <label for="data.redemption" class="">{{ localize "SVNSEA2E.Redemption" }}</label>
+    <label for="data.redemption" class=""><h3 class="item-name">{{ localize "SVNSEA2E.Redemption" }}</h3></label>
   </div>
   <div class="redemption flexrow flex-group flex-between">
     <textarea name="data.redemption" rows="3" cols="80">{{ data.redemption }}</textarea>
   </div>
+  {{/if}}
 {{/if}}
 {{#if isVillain}}
   <div class="redemption flexrow flex-group">

@@ -1,6 +1,7 @@
 // Import Modules
 import { SVNSEA2E } from './config.js'
 import { preloadHandlebarsTemplates } from './templates.js'
+import { registerSystemSettings } from './settings.js'
 
 // Import Applications
 import { SvnSea2EActor } from './actor/actor.js'
@@ -24,6 +25,8 @@ import { ItemSheetSS2eShipAdventure } from './item/sheets/shipadventure.js'
 import LanguageSelector from './apps/language-selector.js'
 import SkillSelector from './apps/skill-selector.js'
 
+import * as migrations from './migration.js'
+
 Hooks.once('init', async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System
     ${SVNSEA2E.ASCII}`)
@@ -32,7 +35,8 @@ Hooks.once('init', async function () {
       SvnSea2EActor,
       SvnSea2EItem
     },
-    config: SVNSEA2E
+    config: SVNSEA2E,
+    migrations: migrations
   }
 
   /**
@@ -51,6 +55,9 @@ Hooks.once('init', async function () {
   // Define custom Entity classes
   CONFIG.Actor.entityClass = SvnSea2EActor
   CONFIG.Item.entityClass = SvnSea2EItem
+
+  // Register System Settings
+  registerSystemSettings()
 
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet)
@@ -104,6 +111,18 @@ Hooks.once('ready', async function () {
   // Wait to register hotbar drop hook on ready so that
   // modules could register earlier if they want to
   // Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
+  let currentVersion = game.settings.get('svnsea2e', 'systemMigrationVersion')
+  if (!currentVersion) {
+    currentVersion = 0.6
+  }
+  const NEEDS_MIGRATION_VERSION = 0.8
+  // const COMPATIBLE_MIGRATION_VERSION = 0.6
+  const needMigration = (currentVersion < NEEDS_MIGRATION_VERSION)
+
+  // Perform the migration
+  if (needMigration && game.user.isGM) {
+    migrations.migrateWorld()
+  }
 })
 
 /* -------------------------------------------- */
@@ -167,7 +186,7 @@ Hooks.on('preCreateActor', function (entity, options, userId) {
   entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
 })
 
-async function getAllPackAdvantages() {
+async function getAllPackAdvantages () {
   const advantages = []
   const packs = game.packs.entries
   for (var i = 0; i < packs.length; i++) {

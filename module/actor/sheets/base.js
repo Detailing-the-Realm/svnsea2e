@@ -27,11 +27,13 @@ export default class ActorSheetSS2e extends ActorSheet {
       limited: this.entity.limited,
       options: this.options,
       editable: this.isEditable,
+      isCorrupt: this.entity.data.data.corruptionpts > 0,
       cssClass: isOwner ? 'editable' : 'locked',
       isPlayerCharacter: this.entity.data.type === 'playercharacter',
       isHero: this.entity.data.type === 'hero',
       isVillain: this.entity.data.type === 'villain',
       isMonster: this.entity.data.type === 'monster',
+      isNotBrute: this.entity.data.type !== 'brute',
       hasSkills: typeof this.entity.data.data.skills !== 'undefined',
       hasLanguages: typeof this.entity.data.data.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
@@ -63,6 +65,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     return data
   }
 
+  /* -------------------------------------------- */
+
   _prepareButtonTitles (data) {
     for (const item of Object.values(data)) {
       item.editlabel = game.i18n.format('SVNSEA2E.EditLabel', {
@@ -73,6 +77,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       })
     }
   }
+
+  /* -------------------------------------------- */
 
   _prepareTraits (data) {
     // Update trait labels

@@ -125,7 +125,7 @@ export class SvnSea2EActor extends Actor {
 
   _prepareWounds (data) {
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
-    data.dwounds.value = this._validateMinMaxData(data.dwounds.value, data.dwounds.min, data.dwounds.max)
+    data.dwounds.value = Math.floor(data.wounds.value / 5)
   }
 
   _calculateMaxWounds (data) {

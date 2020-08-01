@@ -16,9 +16,11 @@
     <span class="pts {{#if isPlayerCharacter}}bigger{{/if}}"><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
     /{{data.wounds.max}}</span>
   </div>
+  {{#if isNotBrute}}
   <div class="flex-group-left">
     <label for="data.dwounds.value" class="wound-title">{{localize "SVNSEA2E.DramaWounds"}}</label>
-    <span class="pts"><input type="text" name="data.dwounds.value" value="{{data.dwounds.value}}" data-dtype="Number" />
+    <span class="pts">{{data.dwounds.value}}
     /{{data.dwounds.max}}</span>
   </div>
+  {{/if}}
 </div>
