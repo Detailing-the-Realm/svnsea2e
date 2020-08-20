@@ -34,8 +34,12 @@ export const migrateWorld = async function () {
 export const migrateActorData = function (actor) {
   const updateData = {}
 
-  if (actor.type !== 'ship' && actor.type !== 'dangerpts') {
+  if ((actor.type !== 'ship' && actor.type !== 'dangerpts' && actor.type !== 'brute') && actor.data.wounds.max !== 20) {
     updateData['data.wounds.max'] = 20
+  }
+
+  if ((actor.type === 'playercharacter' || actor.type === 'hero' || actor.type === 'villain') && actor.data.nation === 'rahuris') {
+    updateData['data.nation'] = 'rahuri'
   }
   return updateData
 }
