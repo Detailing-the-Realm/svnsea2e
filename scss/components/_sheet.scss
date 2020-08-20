@@ -63,10 +63,16 @@ input[type="text"] {
 
 .tag {
   display: inline-block;
-  margin: 0 $margin-xs 0 0;
+  margin: 0 $margin-xs $margin-xs 0;
   padding: $padding-sm;
   font-size: $f-s-norm;
   background: rgba(0, 0, 0, 0.1);
+}
+
+.secretsociety .tag {
+  flex-grow:0.25;
+  flex-shrink:0.25;
+  flex-basis: 10px;
 }
 
 .flexrow {

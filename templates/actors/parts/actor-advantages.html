@@ -65,7 +65,7 @@
       {{#each actor.secretsocieties as |item id|}}
         <li class="item flexrow secretsociety" data-item-id="{{item._id}}">
           <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
-          <h4 class="item-name">{{item.name}}</h4>
+          <h4 class="item-name">{{item.name}}</h4><span class="flavor tag"><strong >{{localize 'SVNSEA2E.Favor'}}</strong>: {{item.data.favor}}</span>
           <div class="item-controls">
             <a class="item-control item-edit" title="{{item.editlabel}}"><i class="fas fa-edit"></i></a>
             <a class="item-control item-delete" title="{{item.deletelabel}}"><i class="fas fa-trash"></i></a>

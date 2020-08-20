@@ -692,10 +692,20 @@ input[type=range]::-webkit-slider-thumb {
 
 .svnsea2e.sheet .tag {
   display: inline-block;
-  margin: 0 2px 0 0;
+  margin: 0 2px 2px 0;
   padding: 4px;
   font-size: 1em;
   background: rgba(0, 0, 0, 0.1);
+}
+
+.svnsea2e.sheet .secretsociety .tag {
+  -webkit-box-flex: 0.25;
+  -ms-flex-positive: 0.25;
+  flex-grow: 0.25;
+  -ms-flex-negative: 0.25;
+  flex-shrink: 0.25;
+  -ms-flex-preferred-size: 10px;
+  flex-basis: 10px;
 }
 
 .svnsea2e.sheet .flexrow .tag-list {
