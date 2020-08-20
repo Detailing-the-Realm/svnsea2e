@@ -52,7 +52,7 @@ SVNSEA2E.nations = {
   nahuaca: 'SVNSEA2E.NationNahuaca',
   numa: 'SVNSEA2E.NationNuma',
   persis: 'SVNSEA2E.NationPersis',
-  rahuris: 'SVNSEA2E.NationRahuri',
+  rahuri: 'SVNSEA2E.NationRahuri',
   sarmatia: 'SVNSEA2E.NationSarmatia',
   sarmion: 'SVNSEA2E.NationSarmion',
   tribes: 'SVNSEA2E.NationTribes',
