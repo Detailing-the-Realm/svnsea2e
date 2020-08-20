@@ -66,8 +66,6 @@ input[type="text"] {
   margin: 0 $margin-xs 0 0;
   padding: $padding-sm;
   font-size: $f-s-norm;
-  //border: $brd-s-sm-dk;
-  //border-radius: $bs-lg;
   background: rgba(0, 0, 0, 0.1);
 }
 
@@ -166,6 +164,7 @@ input[type="text"] {
   }
 }
 
+.favor input[type="text"],
 .trait input[type="text"],
 .skill input[type="text"] {
   text-align: center;
@@ -177,6 +176,7 @@ input[type="text"] {
   border: $brd-s-md-dk;
 }
 
+.sheet-header .favor,
 .sheet-header .trait,
 .skills .skill,
 .traits .trait {
@@ -185,6 +185,7 @@ input[type="text"] {
   border-radius: $circle-size;
 }
 
+.favor-label,
 .skill-name,
 .trait-name {
   font-weight: 600;

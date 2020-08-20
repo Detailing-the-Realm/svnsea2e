@@ -252,7 +252,8 @@
       "templates": ["base"],
       "concern": "",
       "earnfavor": "",
-      "callupon": ""
+      "callupon": "",
+      "favor": 0
     },
     "shipadventure": {
       "templates": ["base"]

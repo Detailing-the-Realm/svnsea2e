@@ -16,6 +16,19 @@ export const migrateWorld = async function () {
       console.error(err)
     }
   }
+
+  // Migrate World Items
+  for (const i of game.items.entities) {
+    try {
+      const updateData = migrateItemData(i.data)
+      if (!isObjectEmpty(updateData)) {
+        console.log(`Migrating Item entity ${i.name}`)
+        await i.update(updateData, { enforceTypes: false })
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
   // Set the migration as complete
   game.settings.set('svnsea2e', 'systemMigrationVersion', game.system.data.version)
   ui.notifications.info(`7th Sea 2E System Migration to version ${game.system.data.version} completed!`, { permanent: true })
@@ -41,5 +54,21 @@ export const migrateActorData = function (actor) {
   if ((actor.type === 'playercharacter' || actor.type === 'hero' || actor.type === 'villain') && actor.data.nation === 'rahuris') {
     updateData['data.nation'] = 'rahuri'
   }
+  return updateData
+}
+
+/**
+ * Migrate a single Actor entity to incorporate latest data model changes
+ * Return an Object of updateData to be applied
+ * @param {Actor} actor   The actor to Update
+ * @return {Object}       The updateData to apply
+ */
+export const migrateItemData = function (item) {
+  const updateData = {}
+
+  if (item.type === 'secretsociety') {
+    updateData['data.favor'] = 0
+  }
+  
   return updateData
 }

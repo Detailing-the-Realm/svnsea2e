@@ -809,6 +809,7 @@ input[type=range]::-webkit-slider-thumb {
   text-align: right;
 }
 
+.svnsea2e.sheet .favor input[type="text"],
 .svnsea2e.sheet .trait input[type="text"],
 .svnsea2e.sheet .skill input[type="text"] {
   text-align: center;
@@ -820,6 +821,7 @@ input[type=range]::-webkit-slider-thumb {
   border: 2px solid #091B27;
 }
 
+.svnsea2e.sheet .sheet-header .favor,
 .svnsea2e.sheet .sheet-header .trait,
 .svnsea2e.sheet .skills .skill,
 .svnsea2e.sheet .traits .trait {
@@ -830,6 +832,7 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 30px;
 }
 
+.svnsea2e.sheet .favor-label,
 .svnsea2e.sheet .skill-name,
 .svnsea2e.sheet .trait-name {
   font-weight: 600;
