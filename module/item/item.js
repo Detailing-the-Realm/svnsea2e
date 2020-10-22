@@ -31,7 +31,7 @@ export class SvnSea2EItem extends Item {
     const data = duplicate(this.data.data)
 
     // Rich text description
-
+    data.metadatahtml = ''
     data.description = TextEditor.enrichHTML(data.description, htmlOptions)
     const fn = this[`_${this.data.type}ChatData`]
     if (fn) fn.bind(this)(data, htmlOptions)
@@ -56,7 +56,7 @@ export class SvnSea2EItem extends Item {
   }
 
   _artifactChatData (data, htmlOptions) {
-    const type = data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifacttypes[data.type]
+    const type = data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.type]
     data.metadatahtml = `<ul class="details-list"><li class="tag">${type}</li></ul>`
     return data
   }
@@ -115,7 +115,7 @@ export class SvnSea2EItem extends Item {
     data.metadatahtml = `
     <ul class="tag-list">
     <li class="tag">${CONFIG.SVNSEA2E.sorceryTypes[data.sorctype]}</li>
-    <li class="tag">${CONFIG.SVNSEA2E.sorcerysubcats[data.sorcsubcat]} ${CONFIG.SVNSEA2E.sorcerycats[data.sorccat]}</li>
+    <li class="tag">${CONFIG.SVNSEA2E.sorcerySubcats[data.sorcsubcat]} ${CONFIG.SVNSEA2E.sorceryCats[data.sorccat]}</li>
     <li class="tag">${game.i18n.localize('SVNSEA2E.Duration')}: ${CONFIG.SVNSEA2E.durations[data.sorcdur]}</li>
     </ul>
 `
@@ -124,10 +124,14 @@ export class SvnSea2EItem extends Item {
 
   _storyChatData (data, htmlOptions) {
     data.metadatahtml = `
+    <h5>${game.i18n.localize('SVNSEA2E.Status')}</h5>
+    <p>${CONFIG.SVNSEA2E.storyStatuses[data.status]}</p>
     <h5>${game.i18n.localize('SVNSEA2E.Endings')}</h5>
     <p>${data.endings}</p>
     <h5>${game.i18n.localize('SVNSEA2E.Steps')}</h5>
     <p>${data.steps}</p>
+    <h5>${game.i18n.localize('SVNSEA2E.Rewards')}</h5>
+    <p>${data.rewards}</p>
 `
     return data
   }

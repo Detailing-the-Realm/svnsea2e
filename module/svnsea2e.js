@@ -14,14 +14,16 @@ import { ActorSheetSS2eShip } from './actor/sheets/ship.js'
 import { ActorSheetSS2eDangerPts } from './actor/sheets/dangerpts.js'
 import { SvnSea2EItem } from './item/item.js'
 import { ItemSheetSS2eAdvantage } from './item/sheets/advantage.js'
+import { ItemSheetSS2eArtifact } from './item/sheets/artifact.js'
 import { ItemSheetSS2eBackground } from './item/sheets/background.js'
+import { ItemSheetSS2eDuelStyle } from './item/sheets/duelstyle.js'
+import { ItemSheetSS2eMonsterQuality } from './item/sheets/monsterquality.js'
 import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js'
+import { ItemSheetSS2eScheme } from './item/sheets/scheme.js'
+import { ItemSheetSS2eShipAdventure } from './item/sheets/shipadventure.js'
+import { ItemSheetSS2eShipBackground } from './item/sheets/shipbackground.js'
 import { ItemSheetSS2eSorcery } from './item/sheets/sorcery.js'
 import { ItemSheetSS2eStory } from './item/sheets/story.js'
-import { ItemSheetSS2eScheme } from './item/sheets/scheme.js'
-import { ItemSheetSS2eDuelStyle } from './item/sheets/duelstyle.js'
-import { ItemSheetSS2eArtifact } from './item/sheets/artifact.js'
-import { ItemSheetSS2eShipAdventure } from './item/sheets/shipadventure.js'
 import LanguageSelector from './apps/language-selector.js'
 import SkillSelector from './apps/skill-selector.js'
 
@@ -71,14 +73,17 @@ Hooks.once('init', async function () {
 
   Items.unregisterSheet('core', ItemSheet)
   Items.registerSheet('svnsea2e', ItemSheetSS2eAdvantage, { types: ['advantage'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eArtifact, { types: ['artifact'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eBackground, { types: ['background'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eDuelStyle, { types: ['duelstyle'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eMonsterQuality, { types: ['monsterquality'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eScheme, { types: ['scheme'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eSecretSociety, { types: ['secretsociety'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eShipAdventure, { types: ['shipadventure'], makeDefault: true })
+  Items.registerSheet('svnsea2e', ItemSheetSS2eShipBackground, { types: ['shipbackground'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eSorcery, { types: ['sorcery'], makeDefault: true })
   Items.registerSheet('svnsea2e', ItemSheetSS2eStory, { types: ['story'], makeDefault: true })
-  Items.registerSheet('svnsea2e', ItemSheetSS2eScheme, { types: ['scheme'], makeDefault: true })
-  Items.registerSheet('svnsea2e', ItemSheetSS2eDuelStyle, { types: ['duelstyle'], makeDefault: true })
-  Items.registerSheet('svnsea2e', ItemSheetSS2eArtifact, { types: ['artifact'], makeDefault: true })
-  Items.registerSheet('svnsea2e', ItemSheetSS2eShipAdventure, { types: ['shipadventure'], makeDefault: true })
+
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function () {
@@ -136,19 +141,19 @@ Hooks.once('setup', function () {
   const toLocalize = [
     'actorTypes',
     'natTypes',
-    'artifacttypes',
-    'crewstatuses',
+    'artifactTypes',
+    'crewStatuses',
     'durations',
     'itemTypes',
     'languages',
     'nations',
     'traits',
-    'shiproles',
+    'shipRoles',
     'skills',
     'sorceryTypes',
-    'sorcerycats',
-    'sorcerysubcats',
-    'status'
+    'sorceryCats',
+    'sorcerySubcats',
+    'storyStatuses'
   ]
 
   // Exclude some from sorting where the default order matters

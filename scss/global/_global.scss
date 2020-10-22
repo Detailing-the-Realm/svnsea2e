@@ -55,6 +55,12 @@ h6 {
   text-indent: 4px;
 }
 
+#calendar-time-container h1,
+#calendar-time-container h2 {
+    color: rgba(255,255,255,.87);
+    background: none;
+}
+
 label.checkbox {
   font-size: $f-s-norm;
 }

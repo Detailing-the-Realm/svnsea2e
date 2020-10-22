@@ -33,7 +33,7 @@
           <select class="sorcery-category" name="data.sorccat">
             {{#select data.sorccat}}
               <option value="none"></option>
-              {{#each config.sorcerycats as |label cat|}}
+              {{#each config.sorceryCats as |label cat|}}
                 <option value="{{cat}}">{{label}}</option>
               {{/each}}
             {{/select}}
@@ -43,7 +43,7 @@
             <select class="sorcery-subcategory" name="data.sorcsubcat">
               {{#select data.sorcsubcat}}
                 <option value="none"></option>
-                {{#each config.sorcerysubcats as |label cat|}}
+                {{#each config.sorcerySubcats as |label cat|}}
                   <option value="{{cat}}">{{label}}</option>
                 {{/each}}
               {{/select}}

@@ -17,8 +17,10 @@
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
+    "gulp-cli": "^2.3.0",
     "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5"
+    "gulp-sourcemaps": "^2.6.5",
+    "node-sass": "^4.14.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.34.0",

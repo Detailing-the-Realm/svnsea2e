@@ -15,9 +15,11 @@ SVNSEA2E.itemTypes = {
   artifact: 'SVNSEA2E.Artifact',
   background: 'SVNSEA2E.Background',
   duelstyle: 'SVNSEA2E.DuelStyle',
+  monsterquality: 'SVNSEA2E.MonsterQuality',
   scheme: 'SVNSEA2E.Scheme',
   secretsociety: 'SVNSEA2E.SecretSociety',
   shipadventure: 'SVNSEA2E.ShipAdventure',
+  shipbackground: 'SVNSEA2E.ShipBackground',
   sorcery: 'SVNSEA2E.Sorcery',
   story: 'SVNSEA2E.Story'
 }
@@ -112,10 +114,11 @@ SVNSEA2E.skills = {
   weaponry: 'SVNSEA2E.SkillWeaponry'
 }
 
-SVNSEA2E.status = {
+SVNSEA2E.storyStatuses = {
   abandoned: 'SVNSEA2E.StatusAbandoned',
   complete: 'SVNSEA2E.StatusComplete',
-  inprogress: 'SVNSEA2E.StatusInProgress'
+  inprogress: 'SVNSEA2E.StatusInProgress',
+  future: 'SVNSEA2E.StatusFuture'
 }
 
 SVNSEA2E.sorceryTypes = {
@@ -145,7 +148,7 @@ SVNSEA2E.durations = {
   scene: 'SVNSEA2E.Scene'
 }
 
-SVNSEA2E.sorcerycats = {
+SVNSEA2E.sorceryCats = {
   ahura: 'SVNSEA2E.Ahura',
   ahpulul: 'SVNSEA2E.Ahpulul',
   amulet: 'SVNSEA2E.Amulet',
@@ -172,7 +175,7 @@ SVNSEA2E.sorcerycats = {
   unguents: 'SVNSEA2E.Unguents'
 }
 
-SVNSEA2E.sorcerysubcats = {
+SVNSEA2E.sorcerySubcats = {
   advanced: 'SVNSEA2E.Advanced',
   common: 'SVNSEA2E.Common',
   baxan: 'SVNSEA2E.Baxan',
@@ -182,13 +185,13 @@ SVNSEA2E.sorcerysubcats = {
   rare: 'SVNSEA2E.Rare'
 }
 
-SVNSEA2E.crewstatuses = {
+SVNSEA2E.crewStatuses = {
   happy: 'SVNSEA2E.Happy',
   dissatisfied: 'SVNSEA2E.Dissatisfied',
   mutinous: 'SVNSEA2E.Mutinous'
 }
 
-SVNSEA2E.artifacttypes = {
+SVNSEA2E.artifactTypes = {
   deathtoken: 'SVNSEA2E.DeathToken',
   syrneth: 'SVNSEA2E.Syrneth',
   thiqa: 'SVNSEA2E.Thiqa',
@@ -199,7 +202,7 @@ SVNSEA2E.artifacttypes = {
   tatoo: 'SVNSEA2E.Tatoo'
 }
 
-SVNSEA2E.shiproles = {
+SVNSEA2E.shipRoles = {
   midshipmen: 'SVNSEA2E.Midshipmen',
   captain: 'SVNSEA2E.Captain',
   boatswain: 'SVNSEA2E.Boatswain',

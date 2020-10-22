@@ -12,7 +12,7 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'advantages'
+        initial: 'features'
       }]
     })
   }
@@ -28,7 +28,7 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
     const actorData = data.actor
 
     // Initialize containers.
-    const advantages = []
+    const monsterqualities = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
@@ -36,12 +36,12 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
       const item = i.data
 
       // Append to item types to their arrays
-      if (i.type === 'advantage') {
-        advantages.push(i)
+      if (i.type === 'monsterquality') {
+        monsterqualities.push(i)
       }
     }
 
     // Assign and return
-    actorData.advantages = advantages
+    actorData.monsterqualities = monsterqualities
   }
 }

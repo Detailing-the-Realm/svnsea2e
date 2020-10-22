@@ -29,6 +29,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     const actorData = data.actor
     // Initialize containers.
     const adventures = []
+    const backgrounds = []
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0
@@ -36,11 +37,14 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       // Append to item types to their arrays
       if (i.type === 'shipadventure') {
         adventures.push(i)
+      } else if (i.type === 'shipbackground') {
+        backgrounds.push(i)
       }
     }
 
     // Assign and return
     actorData.adventures = adventures
+    actorData.backgrounds = backgrounds
   }
 
   /**
@@ -114,10 +118,10 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     html.find('.roster .item-delete').click(this._onRemoveFromCrew.bind(this))
 
-    const handler = ev => this._onDragCrewStart(ev)
+    const crewhandler = ev => this._onDragCrewStart(ev)
     html.find('.roster li.item').each((i, li) => {
       li.setAttribute('draggable', true)
-      li.addEventListener('dragstart', handler, false)
+      li.addEventListener('dragstart', crewhandler, false)
     })
 
     html.find('.roster .items-list').each((i, li) => {
@@ -129,19 +133,26 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       li.addEventListener('dragleave', this._onCrewDragLeave, false)
     })
 
-    html.find('.adventures .item-create').click(this._onItemCreate.bind(this))
+    html.find('.features .item-create').click(this._onItemCreate.bind(this))
 
     // Update Inventory Item
-    html.find('.adventures .item-edit').click(ev => {
+    html.find('.features .item-edit').click(ev => {
       const li = $(ev.currentTarget).parents('.item')
       const item = this.actor.getOwnedItem(li.data('itemId'))
       item.sheet.render(true)
     })
 
     // Delete Inventory Item
-    html.find('.adventures .item-delete').click(this._onItemDelete.bind(this))
+    html.find('.features .item-delete').click(this._onItemDelete.bind(this))
 
-    html.find('.adventures .item h4.item-name').click(event => this._onItemSummary(event))
+    html.find('.features .item h4.item-name').click(event => this._onItemSummary(event))
+
+    const featurehandler = ev => this._onDragItemStart(ev)
+    html.find('.features li.item').each((i, li) => {
+      if (li.classList.contains('inventory-header')) return
+      li.setAttribute('draggable', true)
+      li.addEventListener('dragstart', featurehandler, false)
+    })
   }
 
   /** @override */
@@ -158,7 +169,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     if (!data) return false
 
     // Case 1 - Dropped Item
-    if (data.type === 'Item') { return false }
+    if (data.type === 'Item') { return this._onDropItem(event, data) }
 
     // Case 2 - Dropped Actor
     if (data.type === 'Actor') { return this._onCrewDrop(event, data) }

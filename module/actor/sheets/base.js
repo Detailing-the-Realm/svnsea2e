@@ -479,23 +479,6 @@ export default class ActorSheetSS2e extends ActorSheet {
    *
    * @private
    */
-  async _getBackgroundNames () {
-    const advNames = []
-
-    this.actor.items.forEach(element => {
-      if (element.type === 'advantage') {
-        advNames.push(element.name)
-      }
-    })
-    return advNames
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   *
-   * @private
-   */
   async _getAdvantageNames () {
     const advNames = []
 
@@ -563,7 +546,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Handle input arguments
     let rolled = false
     let exploded = false
-    let explosions = 0
 
     // Define inner roll function
     const _roll = async function ({
@@ -597,9 +579,8 @@ export default class ActorSheetSS2e extends ActorSheet {
         }
         return raises
       }
-
       const nd = skill.nd + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
-      const d10 = new Die(10).roll(nd)
+      let d10 = new Die({faces: 10, number: nd}).evaluate()
       let raises = 0
       let threshold = 10
       const raiseCombos = []
@@ -614,12 +595,11 @@ export default class ActorSheetSS2e extends ActorSheet {
       // explode the dice on 10s if the character has a high enough skill or has taken 3 dynamic wounds
       if (skill.nd === 5 || data.dwounds === 3) {
         exploded = true
-        explosions++
-        d10.explode(10)
+        d10.explode("X", true)
       }
 
       // deep copy of the rolls
-      const rolls = JSON.parse(JSON.stringify(d10.results))
+      const rolls = d10.values
 
       rolls.sort(function (a, b) {
         return a - b
@@ -696,13 +676,24 @@ export default class ActorSheetSS2e extends ActorSheet {
           total = 0
         }
       }
-
+      /*
+      function logMapElements(value, key, map) {
+        console.log(value.combatants)
+        value.setInitiative(actor.id, 2)
+        console.log(`${actor.id} m[${key}] = ${value}`);
+      }
       // if set make the intiative equal to the number of raises
       if (form.setInitiative.checked) {
-        game.combat.setInitiative(actor.id, raises)
-      }
+        game.combats.forEach(logMapElements)
+        for(combat in game.combats){
+          console.log(combat)
+          //combat.setInitiative(actor.id, raises)
+        }
 
-      const sortedRolls = d10.results
+      }
+      */
+
+      const sortedRolls = d10.values
       sortedRolls.sort(function (a, b) {
         return a - b
       })
@@ -716,9 +707,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         raisetxt: (raises > 1) ? game.i18n.localize('SVNSEA2E.Raises') : game.i18n.localize('SVNSEA2E.Raise'),
         data: data,
         exploded: exploded,
-        explosions: game.i18n.format('SVNSEA2E.RollsExploded', {
-          explosions: explosions.toString()
-        }),
+        explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
         labels: data.labels,
         rolls: sortedRolls,
         raises: raises,
@@ -790,7 +779,7 @@ export default class ActorSheetSS2e extends ActorSheet {
               skill: skill,
               actor: actor,
               data: data,
-              form: html[0].children[0]
+              form: html[0].querySelector("form")
             })
           }
         },

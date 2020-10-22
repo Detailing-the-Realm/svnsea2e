@@ -21,21 +21,18 @@
 }
 /* Styles limited to svnsea2e sheets */
 .svnsea2e {
-
   @import 'components/forms';
   @import 'components/tabs';
 }
 
-.svnsea2e.sheet{
+.sheet {
   @import 'components/sheet';
 }
 
-.svnsea2e.actor{
+.actor {
   @import 'components/actors';
 }
 
-.svnsea2e.item{
+.item {
   @import 'components/items';
 }
-
-

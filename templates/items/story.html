@@ -2,7 +2,18 @@
   <header class="sheet-header">
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
-    {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+      {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
+      <div class="form-group">
+        <label for="data.nation">{{localize "SVNSEA2E.Status"}}</label>
+        <select class="status" name="data.status">
+          {{#select data.status}}
+            <option value="none"></option>
+            {{#each config.storyStatuses as |label status|}}
+              <option value="{{status}}">{{label}}</option>
+            {{/each}}
+          {{/select}}
+        </select>
+      </div>
     </div>
   </header>
 

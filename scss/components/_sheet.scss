@@ -13,6 +13,10 @@ input[type="text"] {
   border: $no-border;
 }
 
+nav.sheet-tabs {
+  height: auto;
+}
+
 .sheet-header {
   overflow: hidden;
   display: flex;

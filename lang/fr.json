@@ -121,7 +121,7 @@
   "SVNSEA2E.Roll": "Jet",
   "SVNSEA2E.Details": "Détails",
   "SVNSEA2E.Rolls": "Les dés jetés sont {rolls}.",
-  "SVNSEA2E.RollsExploded": "Nombre de dés qui ont explosés {explosions}.",
+  "SVNSEA2E.RollsExploded": "Les dés ont explosé et les 10 ont été relancés.",
   "SVNSEA2E.RollThreshold": "Raise threshold: {threshold}.",
   "SVNSEA2E.Roster": "Liste",
   "SVNSEA2E.Cargo": "Cargaison",
@@ -164,7 +164,7 @@
   "SVNSEA2E.StatusComplete": "Terminé",
   "SVNSEA2E.StatusInProgress": "En cours",
   "SVNSEA2E.Steps": "Etapes",
-  "SVNSEA2E.StoryStatus": "Statut",
+  "SVNSEA2E.storyStatuses": "Statut",
   "SVNSEA2E.Strength": "Puissance",
   "SVNSEA2E.Trait": "Caractéristique",
   "SVNSEA2E.TraitBrawn": "Force",
@@ -213,7 +213,7 @@
   "SVNSEA2E.Rare": "Rare",
   "SVNSEA2E.Baxan": "Baxan",
   "SVNSEA2E.Pixan": "Pixan",
-  "SVSEA2E.Manifestation": "Manifestation",
+  "SVNSEA2E.Manifestation": "Manifestation",
   "SVNSEA2E.Turn": "Tour",
   "SVNSEA2E.Miracle": "Miracle",
   "SVNSEA2E.Path": "Voie",
@@ -282,5 +282,7 @@
   "SVNSEA2E.Tesse": "Tesse",
   "SVNSEA2E.Turrus": "Turrus",
   "SVNSEA2E.Unguents": "Onguents",
-  "SVNSEA2E.Knight": "Chevalier"
+  "SVNSEA2E.Knight": "Chevalier",
+  "SVNSEA2E.Status": "Statut",
+  "SVNSEA2E.StatusFuture": "Futur"
 }

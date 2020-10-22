@@ -31,7 +31,7 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="advantages">
+    <a class="item" data-tab="features">
       <h2>{{localize "SVNSEA2E.Features"}}</h2>
     </a>
     <a class="item" data-tab="fate">
@@ -45,17 +45,17 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     {{!-- Advantages Tab --}}
-    <div class="tab features" data-group="primary" data-tab="advantages">
+    <div class="tab features" data-group="primary" data-tab="features">
       <ol class="items-list">
         <li class="flexrow item-header">
           <h3 class="item-name flexrow">{{localize "SVNSEA2E.MonsterQualities"}}</h3>
           <div class="item-controls">
-            <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddQuality'}}" data-type="advantage" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+            <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddMonsterQuality'}}" data-type="monsterquality" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
               <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
             </a>
           </div>
         </li>
-        {{#each actor.advantages as |item id|}}
+        {{#each actor.monsterqualities as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" /></div>
             <h4 class="item-name">{{item.name}}</h4>

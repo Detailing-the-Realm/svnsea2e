@@ -207,7 +207,7 @@
     }
   },
   "Item": {
-    "types": ["advantage", "artifact", "background", "duelstyle", "scheme", "secretsociety", "shipadventure", "sorcery", "story"],
+    "types": ["advantage", "artifact", "background", "duelstyle", "monsterquality", "scheme", "secretsociety", "shipadventure", "shipbackground", "sorcery", "story"],
     "templates": {
       "base": {
         "description": "",
@@ -240,6 +240,9 @@
       "templates": ["base"],
       "bonus": ""
     },
+    "monsterquality":{
+      "templates": ["base"]
+    },
     "scheme": {
       "templates": ["base"],
       "influence": {
@@ -258,6 +261,9 @@
     "shipadventure": {
       "templates": ["base"]
     },
+    "shipbackground": {
+      "templates": ["base"]
+    },
     "sorcery": {
       "templates": ["base"],
       "sorctype": "",
@@ -269,7 +275,8 @@
       "templates": ["base"],
       "reward": "",
       "endings": "",
-      "steps": ""
+      "steps": "",
+      "status": "current"
     }
   }
 }
