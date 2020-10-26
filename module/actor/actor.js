@@ -19,8 +19,7 @@ export class SvnSea2EActor extends Actor {
     // things organized.
     if (actorData.type === 'playercharacter') this._preparePlayerCharacterData(data)
     if (actorData.type === 'hero') this._prepareHeroData(data)
-    if (actorData.type === 'villain') this._prepareVillainData(data)
-    if (actorData.type === 'monster') this._prepareMonsterData(data)
+    if (actorData.type === 'villain' || actorData.type === 'monster') this._prepareVillainData(data)
     if (actorData.type === 'brute') this._prepareBruteData(data)
     if (actorData.type === 'ship') this._prepareShipData(data)
   }
@@ -56,27 +55,7 @@ export class SvnSea2EActor extends Actor {
    * Prepare Villain type specific data
    */
   _prepareVillainData (data) {
-    const villainy = (data.traits.strength.value + data.traits.influence.value)
-    data.traits.villainy = {
-      value: villainy,
-      min: villainy,
-      max: villainy
-    }
-    this._prepareTraits(data)
-    this._calculateMaxWounds(data)
-    this._prepareWounds(data)
-  }
-
-  /**
-   * Prepare monster type specific data
-   */
-  _prepareMonsterData (data) {
-    const villainy = (data.traits.strength.value + data.traits.influence.value)
-    data.traits.villainy = {
-      value: villainy,
-      min: 0,
-      max: villainy
-    }
+    data.villainy = (parseInt(data.traits.strength.value) + parseInt(data.traits.influence.value))
     this._prepareTraits(data)
     this._calculateMaxWounds(data)
     this._prepareWounds(data)

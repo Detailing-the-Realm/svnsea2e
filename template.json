@@ -151,12 +151,12 @@
           "influence": {
             "value": 5,
             "min": 1,
-            "max": 20
+            "max": 10
           },
           "strength": {
             "value": 5,
             "min": 1,
-            "max": 20
+            "max": 10
           }
         }
       }

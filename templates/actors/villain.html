@@ -5,6 +5,7 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
+      {{> "systems/svnsea2e/templates/actors/parts/actor-villainy.html"}}
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
     </div>
   </header>
@@ -34,7 +35,9 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     {{!-- Traits Tab --}}
-    {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
+    <div class="tab traits" data-group="primary" data-tab="traits">
+      {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
+    </div>
 
     {{!-- Features Tab --}}
     <div class="tab features" data-group="primary" data-tab="advantages">

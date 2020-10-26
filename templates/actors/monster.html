@@ -5,27 +5,8 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
+      {{> "systems/svnsea2e/templates/actors/parts/actor-villainy.html"}}
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
-      <div class="traits grid grid-4col">
-        <div class="trait flexrow">
-          <label for="data.traits.influence.value" class="trait-name">
-            {{localize "SVNSEA2E.Influence"}}
-          </label>
-          <input type="text" name="data.traits.influence.value" value="{{data.traits.influence.value}}" data-dtype="Number" />
-        </div>
-        <div class="trait flexrow">
-          <label for="data.traits.strength.value" class="trait-name">
-            {{localize "SVNSEA2E.Strength"}}
-          </label>
-          <input type="text" name="data.traits.strength.value" value="{{data.traits.strength.value}}" data-dtype="Number" />
-        </div>
-        <div class="trait flexrow">
-          <label for="data.traits.villainy.value" class="trait-name">
-            {{localize "SVNSEA2E.Villainy"}}
-          </label>
-          <input type="text" name="data.traits.villainy.value" value="{{data.traits.villainy.value}}" data-dtype="Number" />
-        </div>
-      </div>
     </div>
   </header>
 
@@ -44,8 +25,10 @@
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
-    {{!-- Advantages Tab --}}
+    {{!-- Features Tab --}}
     <div class="tab features" data-group="primary" data-tab="features">
+      {{> "systems/svnsea2e/templates/actors/parts/actor-traits.html"}}
+
       <ol class="items-list">
         <li class="flexrow item-header">
           <h3 class="item-name flexrow">{{localize "SVNSEA2E.MonsterQualities"}}</h3>

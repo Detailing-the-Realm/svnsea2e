@@ -104,6 +104,53 @@ Hooks.once('init', async function () {
     return str.charAt(0).toUpperCase() + str.slice(1)
   })
 
+  Handlebars.registerHelper('for', function(from, to, incr, block) {
+    var accum = '';
+
+    const count = from + to
+    for(var i = from; i < count; i+=incr) {
+        block.data.index = i;
+        block.data.first = i === 0;
+        block.data.last = i === to;
+        block.data.mod = Math.trunc(i / 5)
+        block.data.remain = i % 5
+        accum += block.fn(this);
+    }
+    return accum;
+});
+
+  Handlebars.registerHelper('iff', function(a, operator, b, opts) {
+    var bool = false
+    switch(operator) {
+       case '==':
+           bool = a == b
+           break
+       case '!=':
+           bool = a != b
+           break
+       case '>=':
+           bool = a >= b
+           break
+       case '<=':
+           bool = a <= b
+           break
+       case '>':
+           bool = a > b
+           break
+       case '<':
+           bool = a < b
+           break
+       default:
+           throw "Unknown operator " + operator
+    }
+
+    if (bool) {
+        return opts.fn(this)
+    } else {
+        return opts.inverse(this)
+    }
+})
+
   // Preload Handlebars Templates
   preloadHandlebarsTemplates()
 })
@@ -189,6 +236,9 @@ Hooks.on('preCreateItem', function (entity, options, userId) {
 **/
 Hooks.on('preCreateActor', function (entity, options, userId) {
   entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg'
+  if (entity.name == "") {
+    entity.name = "New " + (entity.type)[0].toUpperCase() + (entity.type).slice(1);
+  }
 })
 
 async function getAllPackAdvantages () {

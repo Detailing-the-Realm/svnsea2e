@@ -619,6 +619,29 @@ input[type=range]::-webkit-slider-thumb {
   color: #000;
 }
 
+.sheet {
+  /*.favor input[type="text"],
+.trait input[type="text"],
+.skill input[type="text"] {
+  text-align: center;
+  border-radius: $circle-size;
+  height: $circle-size;
+  max-width: $circle-size;
+  padding: $padding-sm;
+  background: white;
+  border: $brd-s-md-dk;
+}
+
+.sheet-header .favor,
+.sheet-header .trait,
+.skills .skill,
+.traits .trait {
+  background-image: linear-gradient(to right, $g-c-dk 90%, $g-c-lt 10%);
+  padding: 0;
+  border-radius: $circle-size;
+}*/
+}
+
 .sheet img {
   border: 0 solid transparent;
 }
@@ -829,39 +852,15 @@ input[type=range]::-webkit-slider-thumb {
   text-align: right;
 }
 
-.sheet .favor input[type="text"],
-.sheet .trait input[type="text"],
-.sheet .skill input[type="text"] {
-  text-align: center;
-  border-radius: 30px;
-  height: 30px;
-  max-width: 30px;
-  padding: 4px;
-  background: white;
-  border: 2px solid #091B27;
-}
-
-.sheet .sheet-header .favor,
-.sheet .sheet-header .trait,
-.sheet .skills .skill,
-.sheet .traits .trait {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(90%, rgba(52, 152, 219, 0.5)), color-stop(10%, rgba(255, 0, 0, 0)));
-  background-image: -o-linear-gradient(left, rgba(52, 152, 219, 0.5) 90%, rgba(255, 0, 0, 0) 10%);
-  background-image: linear-gradient(to right, rgba(52, 152, 219, 0.5) 90%, rgba(255, 0, 0, 0) 10%);
-  padding: 0;
-  border-radius: 30px;
-}
-
 .sheet .favor-label,
 .sheet .skill-name,
 .sheet .trait-name {
   font-weight: 600;
-  margin-left: 8px;
-  margin-top: 5px;
 }
 
 .sheet .wound-title {
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .sheet .brute h2.ability-title {
@@ -870,8 +869,8 @@ input[type=range]::-webkit-slider-thumb {
 
 .actor .sheet-header {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 175px;
-  flex: 0 0 175px;
+  -ms-flex: 0 0 195px;
+  flex: 0 0 195px;
 }
 
 .actor .sheet-header .profile-img {
@@ -913,6 +912,10 @@ input[type=range]::-webkit-slider-thumb {
   width: 50px;
   border: 1px solid #091B27;
   border-radius: 50px;
+}
+
+.actor .red {
+  color: red;
 }
 
 .item .sheet-header {

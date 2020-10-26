@@ -174,7 +174,7 @@ nav.sheet-tabs {
   }
 }
 
-.favor input[type="text"],
+/*.favor input[type="text"],
 .trait input[type="text"],
 .skill input[type="text"] {
   text-align: center;
@@ -193,18 +193,19 @@ nav.sheet-tabs {
   background-image: linear-gradient(to right, $g-c-dk 90%, $g-c-lt 10%);
   padding: 0;
   border-radius: $circle-size;
-}
+}*/
 
 .favor-label,
 .skill-name,
 .trait-name {
   font-weight: 600;
-  margin-left: $margin-md;
-  margin-top: 5px;
+//  margin-left: $margin-md;
+//  margin-top: 5px;
 }
 
 .wound-title{
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
 // Brute specific stuff

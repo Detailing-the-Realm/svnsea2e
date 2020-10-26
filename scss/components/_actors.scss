@@ -1,6 +1,6 @@
 .sheet-header {
-  flex: 0 0 $profile-img-lg-size;
-  //background-image: linear-gradient(to left, $g-c-dk 90%, $g-c-lt 10%);
+  flex: 0 0 195px;
+
   .profile-img {
     flex: 0 0 $profile-img-lg-size;
     height: $profile-img-lg-size;
@@ -39,4 +39,8 @@
   width: $profile-img-sm-size;
   border: $brd-s-sm-dk;
   border-radius: $profile-img-sm-size;
+}
+
+.red {
+  color: red;
 }

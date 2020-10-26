@@ -1,3 +1,11 @@
 <div class="tab concept" data-group="primary" data-tab="concept">
+  <div class="relrep grid grid-2col">
+    <div class="flex-group-left">
+      <input type="text" name="data.religion" value="{{data.religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
+    </div>
+    <div class="flex-group-left">
+      <input type="text" name="data.reputation" value="{{data.reputation}}" placeholder="{{localize "SVNSEA2E.Reputation"}}" />
+    </div>
+  </div>
   {{editor content=data.concept target="data.concept" button=true owner=owner editable=editable}}
 </div>

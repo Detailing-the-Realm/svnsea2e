@@ -115,6 +115,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this))
 
+    html.find('.fillable ').click(event => this._processCircle(event))
+
     // Drag events for macros.
     if (this.actor.owner) {
       const handler = ev => this._onDragItemStart(ev)
@@ -138,6 +140,39 @@ export default class ActorSheetSS2e extends ActorSheet {
     for (let i = 0; i < data.languages.length; i++) {
       data.selectedlangs[data.languages[i]] = CONFIG.SVNSEA2E.languages[data.languages[i]]
     }
+  }
+
+  _processCircle(event){
+    const actor = this.actor
+    const adata = actor.data.data
+    const data = event.target.dataset
+
+    let tval = 0
+
+    if(data.value == 1){
+      switch(data.type){
+        case 'skill':
+            tval = adata.skills[data.key].value
+          break;
+        case 'trait':
+              data.value = 2
+          break;
+        case 'corrupt':
+            tval = adata[data.key] == 1
+          break;
+        case 'wounds':
+        case 'dwounds':
+            tval = adata[data.type].value
+          break;
+      }
+      if (tval == 1){
+        data.value = 0
+      }
+    }
+
+    let updateObj = {}
+    updateObj[data.name] = data.value
+    actor.update(updateObj);
   }
 
   /* -------------------------------------------- */
@@ -517,6 +552,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
+    console.log(dataset)
 
     this.skillRoll({
       skill: {
