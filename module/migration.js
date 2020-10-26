@@ -96,6 +96,19 @@ export const migrateActorData = function (actor) {
   if ((actor.type === 'playercharacter' || actor.type === 'hero' || actor.type === 'villain') && actor.data.nation === 'rahuris') {
     updateData['data.nation'] = 'rahuri'
   }
+
+  if (actor.type === 'villain'){
+    updateData['data.traits.strength.max'] = 10
+    updateData['data.traits.influence.max'] = 10
+  }
+
+  if (actor.type === 'brute'){
+    updateData['data.traits.strength.max'] = 20
+  }
+
+  if(actor.type === 'dangerpts'){
+    updateData['data.points'] = 5
+  }
   return updateData
 }
 

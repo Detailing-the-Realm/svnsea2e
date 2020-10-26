@@ -65,23 +65,36 @@ SVNSEA2E.nations = {
 }
 
 SVNSEA2E.languages = {
+  amizagh: 'SVNSEA2E.LanguageAmizagh',
+  awkari: 'SVNSEA2E.LanguageAwkari',
   avalon: 'SVNSEA2E.LanguageAvalonian',
+  aztlani: 'SVNSEA2E.LanguageAztlani',
   castille: 'SVNSEA2E.LanguageCastillian',
   eisen: 'SVNSEA2E.LanguageEisen',
   highland: 'SVNSEA2E.LanguageHighlander',
-  jaragua: 'SVNSEA2E.LanguageJaragua',
+  hylicia: 'SVNSEA2E.LanguageHylicia',
   inismore: 'SVNSEA2E.LanguageInish',
+  jaragua: 'SVNSEA2E.LanguageJaragua',
+  katabic: 'SVNSEA2E.LanguageKatabic',
+  mande: 'SVNSEA2E.LanguageMande',
   montaigne: 'SVNSEA2E.LanguageMontaigne',
+  nahuati: 'SVNSEA2E.LanguageNahuati',
+  njaay: 'SVNSEA2E.LanguageNjaay',
   numa: 'SVNSEA2E.LanguageNuma',
   persis: 'SVNSEA2E.LanguagePersis',
   pirate: 'SVNSEA2E.LanguagePirate',
   rahuri: 'SVNSEA2E.LanguageRahuri',
+  rzeczpospolita: 'SVNSEA2E.LanguageRzeczpospolita',
   sarmatia: 'SVNSEA2E.LanguageCuronian',
   sarmion: 'SVNSEA2E.LanguageDibre',
+  sahidic: 'SVNSEA2E.LanguageSahidic',
+  taiya: 'SVNSEA2E.LanguageTaiya',
   thean: 'SVNSEA2E.LanguageThean',
   ussura: 'SVNSEA2E.LanguageUssurian',
   vesten: 'SVNSEA2E.LanguageVesten',
-  vodacce: 'SVNSEA2E.LanguageVodacce'
+  vodacce: 'SVNSEA2E.LanguageVodacce',
+  xweda: 'SVNSEA2E.LanguageXweda',
+  zeeg: 'SVNSEA2E.LanguageZeeg'
 }
 
 SVNSEA2E.traits = {

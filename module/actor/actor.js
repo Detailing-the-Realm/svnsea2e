@@ -24,6 +24,9 @@ export class SvnSea2EActor extends Actor {
     if (actorData.type === 'ship') this._prepareShipData(data)
   }
 
+  /**
+   * Keep the value within the minimum and maxium values
+   */
   _validateMinMaxData (value, min, max) {
     if (value > max) {
       return max
@@ -55,10 +58,10 @@ export class SvnSea2EActor extends Actor {
    * Prepare Villain type specific data
    */
   _prepareVillainData (data) {
-    data.villainy = (parseInt(data.traits.strength.value) + parseInt(data.traits.influence.value))
     this._prepareTraits(data)
-    this._calculateMaxWounds(data)
-    this._prepareWounds(data)
+    data.villainy = (parseInt(data.traits.strength.value) + parseInt(data.traits.influence.value))
+    data.wounds.max = (data.traits.strength.value * 5)
+    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
   }
 
   /**
@@ -66,23 +69,31 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareBruteData (data) {
     data.traits.strength.value = this._validateMinMaxData(data.traits.strength.value, data.traits.strength.min, data.traits.strength.max)
+    data.wounds.min = 2
     data.wounds.max = data.traits.strength.value
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
+    console.log('brute',data.wounds.value, data.traits.strength.value)
     data.dwounds.value = 0
     data.dwounds.max = 0
   }
 
   /**
-   * Prepar Ship type specific data
+   * Prepare Ship type specific data
    */
   _prepareShipData (data) {
 
   }
 
+  /**
+   * Remove a member from the crew
+   */
   async removeFromCrew () {
     await this.unsetFlag('svnsea2e', 'crewMember')
   }
 
+  /**
+   * Set a crew member's role
+   */
   async setCrewMemberRole (shipId, role) {
     return this.setFlag('svnsea2e', 'crewMember', {
       shipId: shipId,
@@ -90,24 +101,28 @@ export class SvnSea2EActor extends Actor {
     })
   }
 
+  /**
+   *
+   */
   _prepareTraits (data) {
     for (const trait of Object.values(data.traits)) {
       trait.value = this._validateMinMaxData(trait.value, trait.min, trait.max)
     }
   }
 
+  /**
+   *
+   */
   _prepareSkills (data) {
     for (const skill of Object.values(data.skills)) {
       skill.value = this._validateMinMaxData(skill.value, skill.min, skill.max)
     }
   }
 
+  /**
+   * Establish the wound values based on the min and max for the actor type
+   */
   _prepareWounds (data) {
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
-    data.dwounds.value = Math.floor(data.wounds.value / 5)
-  }
-
-  _calculateMaxWounds (data) {
-    data.wounds.max = data.traits.strength.value * 4
   }
 }

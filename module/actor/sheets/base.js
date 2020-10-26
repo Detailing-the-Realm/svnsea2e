@@ -115,7 +115,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this))
 
-    html.find('.fillable ').click(event => this._processCircle(event))
+    html.find('.fillable.fa-circle ').click(event => this._processCircle(event))
+    html.find('.fillable.fa-heart  ').click(event => this._processWounds(event))
 
     // Drag events for macros.
     if (this.actor.owner) {
@@ -142,10 +143,18 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Process the effects of clicking on a circle
+   * @param {Object} event      event sent
+   * @private
+   */
   _processCircle(event){
     const actor = this.actor
     const adata = actor.data.data
     const data = event.target.dataset
+    let updateObj = {}
 
     let tval = 0
 
@@ -160,18 +169,67 @@ export default class ActorSheetSS2e extends ActorSheet {
         case 'corrupt':
             tval = adata[data.key] == 1
           break;
-        case 'wounds':
-        case 'dwounds':
-            tval = adata[data.type].value
-          break;
       }
       if (tval == 1){
         data.value = 0
       }
     }
 
-    let updateObj = {}
+    if(adata.type === 'brute'){
+      updateObj['data.wounds.max'] = data.value
+    }
+
     updateObj[data.name] = data.value
+    actor.update(updateObj);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * When a wound heart is click properly set the values
+   * @param {Object} event      event sent
+   * @private
+   */
+  _processWounds(event){
+    const actor = this.actor
+    const data = this.actor.data.data
+    const edata = event.target.dataset
+    let updateObj = {}
+    let wounds = 0
+    let dwounds = 0
+
+    if (edata.type === 'wounds'){
+      wounds = edata.value
+      dwounds =  data.dwounds.value
+      const dwestimate = Math.trunc(wounds / 5)
+
+      if (dwestimate > data.dwounds.value){
+        dwounds = dwestimate
+      }
+    } else {
+      if(edata.value > data.dwounds.value){
+        dwounds = edata.value
+        if((edata.value * 5) > data.wounds.value){
+          wounds = edata.value * 5
+        } else {
+          wounds = data.wounds.value
+        }
+      } else if(edata.value == data.dwounds.value){
+        dwounds = data.dwounds.value - 1
+        wounds = data.wounds.value
+      } else {
+        dwounds = edata.value
+        if(data.wounds.value > (edata.value * 5)){
+          wounds = edata.value * 5
+        } else {
+          wounds = data.wounds.value
+        }
+      }
+    }
+
+    updateObj['data.wounds.value'] = wounds
+    updateObj['data.dwounds.value'] = dwounds
+
     actor.update(updateObj);
   }
 

@@ -3,9 +3,9 @@
   <div class="traits grid grid-3col">
     {{#each data.traits as |trait key|}}
       <div class="trait flexrow flex-group flex-left">
-        <label for="data.traits.{{key}}.value" class="trait-name">
+        <span class="trait-name">
           {{trait.label}}
-        </label>
+        </span>
         <!-- <input type="text" name="data.traits.{{key}}.value" value="{{trait.value}}" data-dtype="Number" /> -->
         <span>
         {{#for 1 trait.max 1}}
@@ -24,9 +24,9 @@
     <div class="skills grid grid-3col">
       {{#each data.skills as |skill key|}}
         <div class="skill flexrow flex-group flex-left">
-          <label for="data.skills.{{key}}.value" class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">
+          <span class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">
             {{skill.label}}
-          </label>
+          </span>
           <!-- <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" /> -->
           <span>
           {{#for 1 skill.max 1}}

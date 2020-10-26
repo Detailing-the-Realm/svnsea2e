@@ -167,7 +167,7 @@
         "strength": {
           "value": 5,
           "min": 1,
-          "max": 99
+          "max": 20
         }
       },
       "ability": {
@@ -176,7 +176,7 @@
       }
     },
     "dangerpts":{
-      "points":0
+      "points":5
     },
     "hero": {
       "templates": ["base", "details", "features"]

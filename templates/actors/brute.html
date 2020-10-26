@@ -5,20 +5,27 @@
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
       {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
-      <div class="traits grid grid-4col">
-        <div class="trait flexrow">
-          <label for="data.traits.strength.value" class="trait-name">
-            {{localize "SVNSEA2E.Strength"}}
-          </label>
-          <input type="text" name="data.traits.strength.value" value="{{data.traits.strength.value}}" data-dtype="Number" />
-        </div>
-      </div>
     </div>
   </header>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body ability">
     {{!-- Ability Tab --}}
+    <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
+    {{#each data.traits as |trait key|}}
+      <div class="trait flexrow flex-group flex-left">
+          {{trait.label}}
+      </div>
+      <div class="trait flexrow flex-group flex-left">
+        {{#for 1 trait.max 1}}
+          {{#iff trait.value '>=' @index}}
+            <i data-name="data.traits.{{key}}.value" data-value="{{@index}}" data-type="trait" data-key="{{key}}" class="fillable fas fa-circle"></i>
+          {{else}}
+            <i data-name="data.traits.{{key}}.value" data-value="{{@index}}" data-type="trait" data-key="{{key}}" class="fillable far fa-circle"></i>
+          {{/iff}}
+        {{/for}}
+      </div>
+    {{/each}}
     <h2 class="ability-title">{{localize "SVNSEA2E.Ability"}}</h2>
     <div class="flex-group flex-between">
       <div class=" flexrow flex-group flex-between">
