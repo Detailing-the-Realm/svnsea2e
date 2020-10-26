@@ -16,6 +16,7 @@
   "SVNSEA2E.Age": "Age",
   "SVNSEA2E.ApproachPromptTitle": "{skill} Approach Roll",
   "SVNSEA2E.ApproachRollChatTitle": "{trait} + {skill} Approach Roll",
+  "SVNSEA2E.TraitRollTitle": "{trait} Approach Roll",
   "SVNSEA2E.Arcana": "Arcana",
   "SVNSEA2E.Attributes": "Attributes",
   "SVNSEA2E.Background": "Background",
@@ -304,5 +305,8 @@
   "SVNSEA2E.Knight": "Knight",
   "SVNSEA2E.Status": "Status",
   "SVNSEA2E.StatusFuture": "Future",
-  "SVNSEA2E.VillainyRank": "Villainy Rank"
+  "SVNSEA2E.VillainyRank": "Villainy Rank",
+  "SVNSEA2E.SkillRank3": "Rank 3: Re-Roll a single die",
+  "SVNSEA2E.SkillRank4": "Rank 4: Sets of 15 = 2 Raises",
+  "SVNSEA2E.SkillRank5": "Rank 5: 10s explode (+1 die)"
 }

@@ -113,7 +113,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     html.find('.item h4.item-name').click(event => this._onItemSummary(event))
 
     // Rollable abilities.
-    html.find('.rollable').click(this._onRoll.bind(this))
+    if(this.actor.data.type === 'playercharacter' || this.actor.data.type === 'hero'){
+      html.find('.rollable').click(this._onHeroRoll.bind(this))
+    } else if (this.actor.data.type === 'villain' || this.actor.data.type === 'monster'){
+      html.find('.rollable').click(this._onVillainRoll.bind(this))
+    }
 
     html.find('.fillable.fa-circle ').click(event => this._processCircle(event))
     if(this.actor.data.type === 'brute'){
@@ -626,7 +630,36 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll (event) {
+  _onVillainRoll (event) {
+    event.preventDefault()
+    const element = event.currentTarget
+    const dataset = element.dataset
+
+    this.traitRoll({
+      trait: {
+        name: dataset.label,
+        nd: parseInt(dataset.roll)
+      },
+      event: event,
+      actor: this.actor,
+      data: this.actor.data.data,
+      title: game.i18n.format('SVNSEA2E.TraitRollTitle', {
+        trait: CONFIG.SVNSEA2E.traits[dataset.label]
+      }),
+      speaker: ChatMessage.getSpeaker({
+        actor: this
+      })
+    })
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clickable rolls.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onHeroRoll (event) {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
@@ -648,6 +681,214 @@ export default class ActorSheetSS2e extends ActorSheet {
     })
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clickable rolls.
+   * @param skill   The originating click event
+   * @param actor   The originating click event
+   * @param data   The originating click event
+   * @param {Event} event   The originating click event
+   * @param template   The originating click event
+   * @param title   The originating click event
+   *
+   */
+  async traitRoll ({
+    trait = {},
+    actor = {},
+    data = {},
+    event = {},
+    template,
+    title
+  }) {
+    const _roll = async function ({
+      trait = {},
+      actor = {},
+      data = {},
+      form = {},
+      parentObj = {}
+    }) {
+      const nd = trait.nd + parseInt(form.bonusDice.value)
+      let d10 = new Die({faces: 10, number: nd}).evaluate()
+      let raises = 0
+      let combos = []
+
+      // deep copy of the rolls
+      const rolls = d10.values
+
+      rolls.sort(function (a, b) {
+        return a - b
+      })
+
+      let i = rolls.length
+      while (i--) {
+        if (rolls[i] === 10) {
+          raises++
+          combos.push('10')
+          rolls.splice(i, 1)
+        }
+      }
+
+      rdata = parentObj._calcRaises(rolls, CONFIG.SVNSEA2E.match10)
+      rdata['raises'] += raises
+      rdata['combos'].push(combos)
+
+      const messageOptions = {
+        rollmode: 'gmroll'
+      }
+
+      const templateData = {
+        actor: actor,
+        raisetxt: (raises > 1) ? game.i18n.localize('SVNSEA2E.Raises') : game.i18n.localize('SVNSEA2E.Raise'),
+        data: data,
+        exploded: exploded,
+        explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
+        labels: data.labels,
+        rolls: sortedRolls,
+        raises: raises,
+        rCombos: game.i18n.localize('SVNSEA2E.RaiseCombos'),
+        combos: raiseCombos,
+        rerolled: rerolled,
+        reroll: reroll,
+        threshold: game.i18n.format('SVNSEA2E.RollThreshold', {
+          threshold: threshold.toString()
+        })
+      }
+
+      const template = 'systems/svnsea2e/templates/chats/trait-roll-card.html'
+      const html = await renderTemplate(template, templateData)
+
+      // Basic chat message
+      const chatData = {
+        user: game.user._id,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        content: html,
+        image: actor.img,
+        speaker: {
+          actor: actor._id,
+          token: actor.token,
+          alias: actor.name
+        },
+        flavor: game.i18n.format('SVNSEA2E.TraitRollTitle', {
+          trait: form.trait[form.trait.selectedIndex].text
+        })
+      }
+
+      // Toggle default roll mode
+      const rollMode = game.settings.get('core', 'rollMode')
+      if (['gmroll', 'blindroll'].includes(rollMode)) chatData.whisper = ChatMessage.getWhisperIDs('GM')
+      if (rollMode === 'blindroll') chatData.blind = true
+
+      // Create the chat message
+      const chatmsg = ChatMessage.create(chatData)
+      rolled = true
+      return d10
+    }
+    const traits = {}
+    for (const trait of Object.keys(data.traits)) {
+      traits[CONFIG.SVNSEA2E.traits[trait]] = data.traits[trait].value
+    }
+
+    // Render modal dialog
+    template = template || 'systems/svnsea2e/templates/chats/trait-roll-dialog.html'
+    const dialogData = {
+      data: data,
+      traits: traits
+    }
+
+    const html = await renderTemplate(template, dialogData)
+
+    // Create the Dialog window
+    let roll
+    return new Promise(resolve => {
+      new Dialog({
+        title: title,
+        content: html,
+        buttons: {
+          roll: {
+            icon: '<img src="systems/svnsea2e/icons/d10.svg" class="d10">',
+            label: game.i18n.localize('SVNSEA2E.Roll'),
+            callback: html => roll = _roll({
+              trait: trait,
+              actor: actor,
+              data: data,
+              form: html[0].querySelector("form"),
+              parentObj: this
+            })
+          }
+        },
+        close: html => {
+        //  resolve(rolled ? roll : false)
+        }
+      }, {}).render(true)
+    })
+  }
+
+  async _calcRaises(rolls, matcharr){
+    let raises = 0
+    const _getIndexes = function (rolls, tomatch) {
+      const values = []
+      values.push(rolls.indexOf(tomatch[0]))
+      if (tomatch[0] === tomatch[1]) {
+        values.push(rolls.indexOf(tomatch[1], values[0] + 1))
+      } else {
+        values.push(rolls.indexOf(tomatch[1]))
+      }
+      if (tomatch.length > 2) {
+        if (tomatch[0] === tomatch[2]) {
+          values.push(rolls.indexOf(tomatch[2], values[1] + 1))
+        } else {
+          values.push(rolls.indexOf(tomatch[2]))
+        }
+      }
+      return values
+    }
+
+    const _addRaise = function (threshold = 10) {
+      let raises = 1
+      let combos = []
+      if (threshold === 15) {
+        raises++
+      }
+      return raises
+    }
+    for (let c = 0; c < matcharr.two.length; c++) {
+      let vals = _getIndexes(rolls, matcharr.two[c])
+      while (vals[0] > -1 && vals[1] > -1) {
+        raises += _addRaise(threshold)
+        combos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString())
+        rolls.splice(vals[0], 1)
+        rolls.splice(rolls.indexOf(matcharr.two[c][1]), 1)
+        vals = _getIndexes(rolls, matcharr.two[c])
+      }
+    }
+
+    for (let c = 0; c < matcharr.three.length; c++) {
+      var vals = _getIndexes(rolls, matcharr.three[c])
+      while (vals[0] > -1 && vals[1] > -1 && vals[2] > -1) {
+        raises += _addRaise(threshold)
+        combos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString() + ' + ' + rolls[vals[2]].toString())
+        rolls.splice(vals[0], 1)
+        rolls.splice(rolls.indexOf(matcharr.three[c][1]), 1)
+        rolls.splice(rolls.indexOf(matcharr.three[c][2]), 1)
+        vals = _getIndexes(rolls, matcharr.three[c])
+      }
+    }
+    return {'raises': raises, 'combos': combos}
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clickable rolls.
+   * @param skill   The originating click event
+   * @param actor   The originating click event
+   * @param data   The originating click event
+   * @param {Event} event   The originating click event
+   * @param template   The originating click event
+   * @param title   The originating click event
+   *
+   */
   async skillRoll ({
     skill = {},
     actor = {},
@@ -692,6 +933,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         }
         return raises
       }
+
       const nd = skill.nd + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
       let d10 = new Die({faces: 10, number: nd}).evaluate()
       let raises = 0
@@ -708,7 +950,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       // explode the dice on 10s if the character has a high enough skill or has taken 3 dynamic wounds
       if (skill.nd === 5 || data.dwounds === 3) {
         exploded = true
-        d10.explode("X", true)
+        d10.explode("X", false)
       }
 
       // deep copy of the rolls
@@ -833,7 +1075,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         })
       }
 
-      const template = 'systems/svnsea2e/templates/chats/skillroll-card.html'
+      const template = 'systems/svnsea2e/templates/chats/skill-roll-card.html'
       const html = await renderTemplate(template, templateData)
 
       // Basic chat mes'systems/svnsea2e/templates/chats/skillroll-card.html'

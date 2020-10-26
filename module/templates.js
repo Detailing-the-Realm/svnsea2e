@@ -16,6 +16,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/svnsea2e/templates/actors/parts/actor-inventory.html',
     'systems/svnsea2e/templates/actors/parts/actor-fate.html',
     'systems/svnsea2e/templates/actors/parts/actor-villainy.html',
+    'systems/svnsea2e/templates/actors/parts/actor-vtraits.html',
     'systems/svnsea2e/templates/actors/parts/actor-wounds.html',
 
     // Item Sheet Partials

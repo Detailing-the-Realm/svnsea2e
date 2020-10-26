@@ -191,7 +191,7 @@
     },
     "playercharacter": {
       "templates": ["base", "details", "features"],
-      "wealth": "",
+      "wealth": 0,
       "heropts": 0,
       "vile": 0,
       "corruptionpts": 0,

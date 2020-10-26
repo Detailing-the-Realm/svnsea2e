@@ -1,4 +1,5 @@
 
+<div class="tab traits" data-group="primary" data-tab="traits">
   <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
   <div class="traits grid grid-3col">
     {{#each data.traits as |trait key|}}
@@ -40,6 +41,11 @@
         </div>
       {{/each}}
     </div>
+    <div class="skills grid grid-3col">
+      <div class="skill flexrow flex-group flex-left">{{localize "SVNSEA2E.SkillRank3"}}</div>
+      <div class="skill flexrow flex-group flex-left">{{localize "SVNSEA2E.SkillRank4"}}</div>
+      <div class="skill flexrow flex-group flex-left">{{localize "SVNSEA2E.SkillRank5"}}</div>
+    </div>
   {{/if}}
   {{#if hasLanguages}}
     <h3 class="language-title">{{localize "SVNSEA2E.Languages"}}</h3>
@@ -52,3 +58,4 @@
       <a class="language-selector" data-options="languages"><i class="fas fa-edit"></i></a>
     </div>
   {{/if}}
+</div>

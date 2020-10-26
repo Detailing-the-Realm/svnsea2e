@@ -281,7 +281,7 @@
   "SVNSEA2E.Reward": "Récompenses",
   "SVNSEA2E.Category": "Catégorie",
   "SVNSEA2E.SubCategory": "Sous-Catégorie",
-  "SVNSEA2E.SetInitiative": "Set Initiative to Raises",
+  "SVNSEA2E.SetInitiative": "Mettre l'initiative à Mises",
   "SVNSEA2E.RemoveCrew": "Retirer Membre d'Equipage",
   "SVNSEA2E.Ahpulul": "Ahpulul",
   "SVNSEA2E.Deal": "Transaction",
@@ -298,5 +298,8 @@
   "SVNSEA2E.Knight": "Chevalier",
   "SVNSEA2E.Status": "Statut",
   "SVNSEA2E.StatusFuture": "Futur",
-  "SVNSEA2E.VillainyRank": "Rang de Méchanceté"
+  "SVNSEA2E.VillainyRank": "Rang de Méchanceté",
+  "SVNSEA2E.SkillRank3": "Rang 3: Relancez un seul dé",
+  "SVNSEA2E.SkillRank4": "Rang 4: Ensembles de 15 = 2 Mises",
+  "SVNSEA2E.SkillRank5": "Rang 5: 10s explosent (+1 dé)"
 }

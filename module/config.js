@@ -104,8 +104,7 @@ SVNSEA2E.traits = {
   wits: 'SVNSEA2E.TraitWits',
   panache: 'SVNSEA2E.TraitPanache',
   influence: 'SVNSEA2E.TraitInfluence',
-  strength: 'SVNSEA2E.TraitStrength',
-  villainy: 'SVNSEA2E.TraitVillainy'
+  strength: 'SVNSEA2E.TraitStrength'
 }
 
 SVNSEA2E.skills = {
