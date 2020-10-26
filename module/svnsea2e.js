@@ -107,7 +107,7 @@ Hooks.once('init', async function () {
   Handlebars.registerHelper('for', function(from, to, incr, block) {
     var accum = '';
 
-    const count = from + to
+    const count = parseInt(from) + parseInt(to)
     for(var i = from; i < count; i+=incr) {
         block.data.index = i;
         block.data.first = i === 0;

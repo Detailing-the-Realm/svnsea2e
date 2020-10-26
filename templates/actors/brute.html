@@ -4,7 +4,20 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
-      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+      <div class="resources flex-group-left wound-title">
+        {{localize "SVNSEA2E.Wounds" }}
+        <!--<span class="pts {{#if isPlayerCharacter}}bigger{{/if}}"><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
+          /{{data.wounds.max}}</span> -->
+      </div>
+      <div class="resources flex-group-left wounds">
+        {{#for 1 data.wounds.max 1}}
+          {{#iff data.wounds.value '>=' @index}}
+            <i data-name="data.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable fas fa-heart fa-lg"></i>
+          {{else}}
+            <i data-name="data.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable far fa-heart fa-lg"></i>
+          {{/iff}}
+        {{/for}}
+      </div>
     </div>
   </header>
 

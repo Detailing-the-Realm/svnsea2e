@@ -162,7 +162,12 @@
       }
     },
     "brute": {
-      "templates": ["base"],
+      "templates": [],
+      "wounds": {
+        "value": 0,
+        "min": 0,
+        "max": 5
+      },
       "traits": {
         "strength": {
           "value": 5,

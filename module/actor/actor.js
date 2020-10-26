@@ -28,9 +28,9 @@ export class SvnSea2EActor extends Actor {
    * Keep the value within the minimum and maxium values
    */
   _validateMinMaxData (value, min, max) {
-    if (value > max) {
+    if (parseInt(value) > parseInt(max)) {
       return max
-    } else if (value < min) {
+    } else if (parseInt(value) < parseInt(min)) {
       return min
     }
     return value
@@ -60,7 +60,7 @@ export class SvnSea2EActor extends Actor {
   _prepareVillainData (data) {
     this._prepareTraits(data)
     data.villainy = (parseInt(data.traits.strength.value) + parseInt(data.traits.influence.value))
-    data.wounds.max = (data.traits.strength.value * 5)
+    data.wounds.max = (parseInt(data.traits.strength.value) * 5)
     data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
   }
 
@@ -69,12 +69,10 @@ export class SvnSea2EActor extends Actor {
    */
   _prepareBruteData (data) {
     data.traits.strength.value = this._validateMinMaxData(data.traits.strength.value, data.traits.strength.min, data.traits.strength.max)
-    data.wounds.min = 2
     data.wounds.max = data.traits.strength.value
-    data.wounds.value = this._validateMinMaxData(data.wounds.value, data.wounds.min, data.wounds.max)
-    console.log('brute',data.wounds.value, data.traits.strength.value)
-    data.dwounds.value = 0
-    data.dwounds.max = 0
+    if(parseInt(data.wounds.max) < parseInt(data.wounds.value)){
+      data.wounds.value = data.wounds.max
+    }
   }
 
   /**

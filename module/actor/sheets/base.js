@@ -116,7 +116,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     html.find('.rollable').click(this._onRoll.bind(this))
 
     html.find('.fillable.fa-circle ').click(event => this._processCircle(event))
-    html.find('.fillable.fa-heart  ').click(event => this._processWounds(event))
+    if(this.actor.data.type === 'brute'){
+      html.find('.fillable.fa-heart  ').click(event => this._processBruteWounds(event))
+    } else{
+      html.find('.fillable.fa-heart  ').click(event => this._processWounds(event))
+    }
 
     // Drag events for macros.
     if (this.actor.owner) {
@@ -164,7 +168,9 @@ export default class ActorSheetSS2e extends ActorSheet {
             tval = adata.skills[data.key].value
           break;
         case 'trait':
+          if(data.key !== 'strength'){
               data.value = 2
+          }
           break;
         case 'corrupt':
             tval = adata[data.key] == 1
@@ -175,11 +181,25 @@ export default class ActorSheetSS2e extends ActorSheet {
       }
     }
 
-    if(adata.type === 'brute'){
+    if(data.type === 'brute'){
       updateObj['data.wounds.max'] = data.value
     }
 
     updateObj[data.name] = data.value
+    actor.update(updateObj);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * When a wound heart is click properly set the values
+   * @param {Object} event      event sent
+   * @private
+   */
+  _processBruteWounds(event){
+    const actor = this.actor
+    let updateObj = {}
+    updateObj['data.wounds.value'] = event.target.dataset.value
     actor.update(updateObj);
   }
 
@@ -610,7 +630,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
-    console.log(dataset)
 
     this.skillRoll({
       skill: {
