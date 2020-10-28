@@ -1,5 +1,17 @@
 <form>
   <div class="form-group">
+    <label>{{ localize "SVNSEA2E.NumberTraitDice" }}</label>
+    <select name="trait">
+    {{#for 1 traitmax 1 }}
+      {{#iff @index '==' traitmax}}
+        <option value="{{@index}}" selected>{{ @index }}</option>
+      {{else}}
+          <option value="{{@index}}">{{ @index }}</option>
+      {{/iff}}
+    {{/for}}
+    </select>
+  </div>
+  <div class="form-group">
     <label for="bonusDice">{{ localize "SVNSEA2E.BonusDice" }}</label>
     <input type="text" name="bonusDice" value="0" />
   </div>

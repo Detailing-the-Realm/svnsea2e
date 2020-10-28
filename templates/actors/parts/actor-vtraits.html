@@ -3,7 +3,7 @@
   <div class="traits grid grid-2col">
     {{#each data.traits as |trait key|}}
       <div class="trait flexrow flex-group flex-left">
-        <span class="trait-name rollable">
+        <span class="trait-name rollable" data-roll="{{trait.value}}" data-label="{{key}}">
           {{trait.label}}
         </span>
         <!-- <input type="text" name="data.traits.{{key}}.value" value="{{trait.value}}" data-dtype="Number" /> -->
