@@ -185,10 +185,6 @@ export default class ActorSheetSS2e extends ActorSheet {
       }
     }
 
-    if(data.type === 'brute'){
-      updateObj['data.wounds.max'] = data.value
-    }
-
     updateObj[data.name] = data.value
     actor.update(updateObj);
   }
@@ -204,6 +200,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     const actor = this.actor
     let updateObj = {}
     updateObj['data.wounds.value'] = event.target.dataset.value
+    if(this.actor.data.data.wounds.value == 1 && event.target.dataset.value == 1)
+      updateObj['data.wounds.value'] = 0
+
     actor.update(updateObj);
   }
 
@@ -230,9 +229,16 @@ export default class ActorSheetSS2e extends ActorSheet {
       if (dwestimate > data.dwounds.value){
         dwounds = dwestimate
       }
+      
+      if(edata.value == 1 && data.wounds.value == 1){
+        wounds = 0
+      }
     } else {
+      // If the event dramatic wound is larger than the current dramatic wound
+      // increase the dramatic wound and the regular wounds
       if(edata.value > data.dwounds.value){
         dwounds = edata.value
+        // Only increase the regular wounds if they are less than 5x the dramatic wounds.
         if((edata.value * 5) > data.wounds.value){
           wounds = edata.value * 5
         } else {
@@ -550,6 +556,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
   /**
  * Process for modifying the character sheet when a background is dropped on it.
  * Backgrouds increase skills and add advantages
@@ -577,7 +584,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   *
+   * Determine if the actor as any item records associated with it.
    * @private
    */
   async _doesActorHaveItem (type, name) {
@@ -593,7 +600,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   *
+   * Retrive the names of advantages
    * @private
    */
   async _getAdvantageNames () {
@@ -610,7 +617,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   *
+   * Retrieve all advantages the character has assigned
    * @private
    */
   async _getAdvantages () {
@@ -777,6 +784,35 @@ export default class ActorSheetSS2e extends ActorSheet {
     template,
     title
   }) {
+    /**
+    * get the indexes in the rolls array that matches the dice combos
+    */
+    const _getIndexes = function (rolls, tomatch) {
+      const values = []
+      values.push(rolls.indexOf(tomatch[0]))
+      if (tomatch[0] === tomatch[1]) {
+        values.push(rolls.indexOf(tomatch[1], values[0] + 1))
+      } else {
+        values.push(rolls.indexOf(tomatch[1]))
+      }
+      if (tomatch.length > 2) {
+        if (tomatch[0] === tomatch[2]) {
+          values.push(rolls.indexOf(tomatch[2], values[1] + 1))
+        } else {
+          values.push(rolls.indexOf(tomatch[2]))
+        }
+      }
+      return values
+    }
+
+    // Increase the raise value based on the threshold matched.
+    const _addRaise = function (threshold = 10) {
+      let raises = 1
+      let combos = []
+      if (threshold === 15) raises++
+      return raises
+    }
+
     const nd = rolldata['skilldice'] + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
     let d10 = new Die({faces: 10, number: nd}).evaluate()
     let exploded = false
@@ -796,7 +832,45 @@ export default class ActorSheetSS2e extends ActorSheet {
       return a - b
     })
 
-    let raisedata = await this._calcRaises(rolls, rolldata['threshold'], matcharr)
+    let raises = 0
+    let combos = []
+
+    // If the threshold is 10 then count all 10s as raises
+    if (rolldata['threshold'] == 10) {
+      let i = rolls.length
+      while (i--) {
+        if (rolls[i] == 10) {
+          raises++
+          combos.push('10')
+          rolls.splice(i, 1)
+        }
+      }
+    }
+
+    // Loop through the dice and add raises for all two dice combos that match the threshold.
+    for (let c = 0; c < matcharr.two.length; c++) {
+      let vals = _getIndexes(rolls, matcharr.two[c])
+      while (vals[0] > -1 && vals[1] > -1) {
+        raises += _addRaise(rolldata['threshold'])
+        combos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString())
+        rolls.splice(vals[0], 1)
+        rolls.splice(rolls.indexOf(matcharr.two[c][1]), 1)
+        vals = _getIndexes(rolls, matcharr.two[c])
+      }
+    }
+
+    // Loop through the rolls and identify any three die combos and add raises for them.
+    for (let c = 0; c < matcharr.three.length; c++) {
+      var vals = _getIndexes(rolls, matcharr.three[c])
+      while (vals[0] > -1 && vals[1] > -1 && vals[2] > -1) {
+        raises += _addRaise(rolldata['threshold'])
+        combos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString() + ' + ' + rolls[vals[2]].toString())
+        rolls.splice(vals[0], 1)
+        rolls.splice(rolls.indexOf(matcharr.three[c][1]), 1)
+        rolls.splice(rolls.indexOf(matcharr.three[c][2]), 1)
+        vals = _getIndexes(rolls, matcharr.three[c])
+      }
+    }
 
     let i = rolls.length
     let rerolled = false
@@ -815,6 +889,8 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     let total = 0
     let combotxt = ''
+
+    //Loop through the left over rolls and create die combos that are greater than the threshold
     while (i--) {
       if (i > 0 && total === 0) {
         total += rolls[0] + rolls[i]
@@ -829,9 +905,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       }
 
       if (total >= rolldata['threshold']) {
-        raisedata['raises']++
-        if (rolldata['threshold'] === 15) raisedata['raises']++
-        raisedata['combos'].push(combotxt)
+        raises += _addRaise(rolldata['threshold'])
+        combos.push(combotxt)
         combotxt = ''
         total = 0
       }
@@ -848,15 +923,15 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     const templateData = {
       actor: actor,
-      raisetxt: (raisedata['raises'] > 1) ? game.i18n.localize('SVNSEA2E.Raises') : game.i18n.localize('SVNSEA2E.Raise'),
+      raisetxt: (raises > 1) ? game.i18n.localize('SVNSEA2E.Raises') : game.i18n.localize('SVNSEA2E.Raise'),
       data: data,
       exploded: exploded,
       explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
       labels: data.labels,
       rolls: sortedRolls,
-      raises: raisedata['raises'],
+      raises: raises,
       rCombos: game.i18n.localize('SVNSEA2E.RaiseCombos'),
-      combos: raisedata['combos'],
+      combos: combos,
       rerolled: rerolled,
       reroll: reroll,
       threshold: game.i18n.format('SVNSEA2E.RollThreshold', {
@@ -888,77 +963,5 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Create the chat message
     const chatmsg = ChatMessage.create(chatData)
     return d10
-  }
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clickable rolls.
-   * @param rolls
-   * @param threshold
-   * @param matcharr
-   * @private
-   */
-  async _calcRaises(rolls, threshold, matcharr){
-    const _getIndexes = function (rolls, tomatch) {
-      const values = []
-      values.push(rolls.indexOf(tomatch[0]))
-      if (tomatch[0] === tomatch[1]) {
-        values.push(rolls.indexOf(tomatch[1], values[0] + 1))
-      } else {
-        values.push(rolls.indexOf(tomatch[1]))
-      }
-      if (tomatch.length > 2) {
-        if (tomatch[0] === tomatch[2]) {
-          values.push(rolls.indexOf(tomatch[2], values[1] + 1))
-        } else {
-          values.push(rolls.indexOf(tomatch[2]))
-        }
-      }
-      return values
-    }
-
-    const _addRaise = function (threshold = 10) {
-      let raises = 1
-      let combos = []
-      if (threshold === 15) raises++
-      return raises
-    }
-
-    let raises = 0
-    let combos = []
-    if (threshold == 10) {
-      let i = rolls.length
-      while (i--) {
-        if (rolls[i] == 10) {
-          raises++
-          combos.push('10')
-          rolls.splice(i, 1)
-        }
-      }
-    }
-
-    for (let c = 0; c < matcharr.two.length; c++) {
-      let vals = _getIndexes(rolls, matcharr.two[c])
-      while (vals[0] > -1 && vals[1] > -1) {
-        raises += _addRaise(threshold)
-        combos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString())
-        rolls.splice(vals[0], 1)
-        rolls.splice(rolls.indexOf(matcharr.two[c][1]), 1)
-        vals = _getIndexes(rolls, matcharr.two[c])
-      }
-    }
-
-    for (let c = 0; c < matcharr.three.length; c++) {
-      var vals = _getIndexes(rolls, matcharr.three[c])
-      while (vals[0] > -1 && vals[1] > -1 && vals[2] > -1) {
-        raises += _addRaise(threshold)
-        combos.push(rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString() + ' + ' + rolls[vals[2]].toString())
-        rolls.splice(vals[0], 1)
-        rolls.splice(rolls.indexOf(matcharr.three[c][1]), 1)
-        rolls.splice(rolls.indexOf(matcharr.three[c][2]), 1)
-        vals = _getIndexes(rolls, matcharr.three[c])
-      }
-    }
-    return {'raises': raises, 'combos': combos}
   }
 }
