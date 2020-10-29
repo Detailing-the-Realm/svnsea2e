@@ -229,7 +229,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       if (dwestimate > data.dwounds.value){
         dwounds = dwestimate
       }
-      
+
       if(edata.value == 1 && data.wounds.value == 1){
         wounds = 0
       }
@@ -813,7 +813,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       return raises
     }
 
-    const nd = rolldata['skilldice'] + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
+    const nd = parseInt(rolldata['skilldice']) + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
+
     let d10 = new Die({faces: 10, number: nd}).evaluate()
     let exploded = false
     let matcharr = CONFIG.SVNSEA2E.match10
@@ -957,7 +958,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Toggle default roll mode
     const rollMode = game.settings.get('core', 'rollMode')
-    if (['gmroll', 'blindroll'].includes(rollMode)) chatData.whisper = ChatMessage.getWhisperIDs('GM')
+    if (['gmroll', 'blindroll'].includes(rollMode)) chatData.whisper = ChatMessage.getWhisperRecipients('GM')
     if (rollMode === 'blindroll') chatData.blind = true
 
     // Create the chat message
