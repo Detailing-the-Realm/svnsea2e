@@ -238,6 +238,7 @@
   "SVNSEA2E.Ahura": "Ahura",
   "SVNSEA2E.SorceryHexenwerk": "Hexenwerk",
   "SVNSEA2E.SorceryAvalonKnight": "Knights of Avalon",
+  "SVNSEA2E.SorceryAlquimia": "Alquimia",
   "SVNSEA2E.SorceryDarMatushki": "Mother's Touch",
   "SVNSEA2E.SorceryPorte": "Porte",
   "SVNSEA2E.SorcerySanderis": "Sanderis",
@@ -256,6 +257,11 @@
   "SVNSEA2E.SorceryHeka": "Heka",
   "SVNSEA2E.SorceryMelbur": "Melbur",
   "SVNSEA2E.SorceryRedTouch": "The Red Touch",
+  "SVNSEA2E.Juvenilia": "Juvenilia",
+  "SVNSEA2E.MagnumOpus": "Magnum Opus",
+  "SVNSEA2E.SorceryGaldr": "Galdr",
+  "SVNSEA2E.Rune": "Rune",
+  "SVNSEA2E.Patron": "Patron",
   "SVNSEA2E.AtLeastOptions": "You must choose at least {min} options.",
   "SVNSEA2E.NoMoreThanOptions": "You may choose no more than {max} options.",
   "SVNSEA2E.ActorLangSelect": "Actor Language Selection",
@@ -283,7 +289,6 @@
   "SVNSEA2E.DuelStyle": "Dueling Style",
   "SVNSEA2E.ShipAdventure": "Ship Adventure",
   "SVNSEA2E.ShipBackground": "Ship Background",
-  "SVNSEA2E.MonsterQuality": "MonsterQuality",
   "SVNSEA2E.Adventures": "Adventures",
   "SVNSEA2E.Reward": "Reward",
   "SVNSEA2E.Category": "Category",
@@ -309,5 +314,7 @@
   "SVNSEA2E.SkillRank3": "Rank 3: Re-Roll a single die",
   "SVNSEA2E.SkillRank4": "Rank 4: Sets of 15 = 2 Raises",
   "SVNSEA2E.SkillRank5": "Rank 5: 10s explode (+1 die)",
-  "SVNSEA2E.NumberTraitDice": "Number of Trait Dice"
+  "SVNSEA2E.NumberTraitDice": "Number of Trait Dice",
+  "SVNSEA2E.Fear": "Fear Rank",
+  "SETTINGS.None": "None"
 }

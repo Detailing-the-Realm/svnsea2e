@@ -10,7 +10,7 @@
   "SVNSEA2E.AddSecretSociety": "Ajout Société Secrète",
   "SVNSEA2E.Advantage": "Avantage",
   "SVNSEA2E.Advantages": "Avantages",
-  "SVNSEA2E.AddQuality": "Ajout Propriétés Monstrueuses",
+  "SVNSEA2E.AddMonsterQuality": "Ajout Propriétés Monstrueuses",
   "SVNSEA2E.Age": "Âge",
   "SVNSEA2E.ApproachPromptTitle": "Jet d'approche {skill}",
   "SVNSEA2E.ApproachRollChatTitle": "Jet d'approche {trait} + {skill}",
@@ -82,6 +82,7 @@
   "SVNSEA2E.LanguageZeeg": "Ze'eg",
   "SVNSEA2E.Monster": "Monstre",
   "SVNSEA2E.MonsterQualities": "Propriétés Monstrueuses",
+  "SVNSEA2E.MonsterQuality": "Qualité Monstre",
   "SVNSEA2E.Name": "Nom",
   "SVNSEA2E.Nation": "Nation",
   "SVNSEA2E.NationAksum": "Aksum",
@@ -116,6 +117,7 @@
   "SVNSEA2E.GISLES": "Îles du Glamour",
   "SVNSEA2E.Newadvantage": "Nouvel Avantage",
   "SVNSEA2E.Newbackground": "Nouvel Historique",
+  "SVNSEA2E.Newmonsterquality": "Nouvelle Qualité de Monstre",
   "SVNSEA2E.Newsorcery": "Nouvelle Sorcellerie",
   "SVNSEA2E.Newshipadventure": "Nouveau Navire d'Aventure",
   "SVNSEA2E.Newstory": "Nouvelle Histoire",
@@ -301,5 +303,6 @@
   "SVNSEA2E.VillainyRank": "Rang de Méchanceté",
   "SVNSEA2E.SkillRank3": "Rang 3: Relancez un seul dé",
   "SVNSEA2E.SkillRank4": "Rang 4: Ensembles de 15 = 2 Mises",
-  "SVNSEA2E.SkillRank5": "Rang 5: 10s explosent (+1 dé)"
+  "SVNSEA2E.SkillRank5": "Rang 5: 10s explosent (+1 dé)",
+  "SVNSEA2E.Fear": "Rang de Peur"
 }

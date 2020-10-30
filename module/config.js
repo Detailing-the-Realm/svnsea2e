@@ -136,6 +136,8 @@ SVNSEA2E.storyStatuses = {
 SVNSEA2E.sorceryTypes = {
   hex: 'SVNSEA2E.SorceryHexenwerk',
   knight: 'SVNSEA2E.SorceryAvalonKnight',
+  alchemy: 'SVNSEA2E.SorceryAlquimia',
+  galdr: 'SVNSEA2E.SorceryGaldr',
   darm: 'SVNSEA2E.SorceryDarMatushki',
   porte: 'SVNSEA2E.SorceryPorte',
   sanderis: 'SVNSEA2E.SorcerySanderis',
@@ -172,7 +174,7 @@ SVNSEA2E.sorceryCats = {
   gros: 'SVNSEA2E.Gros',
   inscription: 'SVNSEA2E.Inscription',
   knight: 'SVNSEA2E.Knight',
-  manifestation: 'SVSEA2E.Manifestation',
+  manifestation: 'SVNSEA2E.Manifestation',
   mark: 'SVNSEA2E.Mark',
   miracle: 'SVNSEA2E.Miracle',
   path: 'SVNSEA2E.Path',
@@ -184,6 +186,10 @@ SVNSEA2E.sorceryCats = {
   ti: 'SVNSEA2E.Ti',
   turrus: 'SVNSEA2E.Turrus',
   turn: 'SVNSEA2E.Turn',
+  juvenilia: 'SVNSEA2E.Juvenilia',
+  magnum: 'SVNSEA2E.MagnumOpus',
+  rune: 'SVNSEA2E.Rune',
+  patron: 'SVNSEA2E.Patron',
   unguents: 'SVNSEA2E.Unguents'
 }
 
@@ -194,7 +200,8 @@ SVNSEA2E.sorcerySubcats = {
   major: 'SVNSEA2E.Major',
   minor: 'SVNSEA2E.Minor',
   pixan: 'SVNSEA2E.Pixan',
-  rare: 'SVNSEA2E.Rare'
+  rare: 'SVNSEA2E.Rare',
+  mark: 'SVNSEA2E.Mark'
 }
 
 SVNSEA2E.crewStatuses = {

@@ -187,7 +187,12 @@
       "templates": ["base", "details", "features"]
     },
     "monster": {
-      "templates": ["base", "vtraits"]
+      "templates": ["base", "vtraits"],
+      "fear": {
+        "value": 0,
+        "min": 0,
+        "max": 5
+      }
     },
     "playercharacter": {
       "templates": ["base", "details", "features"],

@@ -119,11 +119,11 @@ export default class ActorSheetSS2e extends ActorSheet {
       html.find('.rollable').click(this._onVillainRoll.bind(this))
     }
 
-    html.find('.fillable.fa-circle ').click(event => this._processCircle(event))
+    html.find('.fillable.fa-circle').click(event => this._processCircle(event))
     if(this.actor.data.type === 'brute'){
-      html.find('.fillable.fa-heart  ').click(event => this._processBruteWounds(event))
+      html.find('.fillable.fa-heart').click(event => this._processBruteWounds(event))
     } else{
-      html.find('.fillable.fa-heart  ').click(event => this._processWounds(event))
+      html.find('.fillable.fa-heart').click(event => this._processWounds(event))
     }
 
     // Drag events for macros.
@@ -159,6 +159,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _processCircle(event){
+    console.log(event)
     const actor = this.actor
     const adata = actor.data.data
     const data = event.target.dataset
@@ -178,6 +179,9 @@ export default class ActorSheetSS2e extends ActorSheet {
           break;
         case 'corrupt':
             tval = adata[data.key] == 1
+          break;
+        case 'fear':
+            tval = adata[data.key].value
           break;
       }
       if (tval == 1){

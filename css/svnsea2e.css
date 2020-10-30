@@ -226,6 +226,10 @@ input[type=range]::-webkit-slider-thumb {
   border: 1px solid #091B27;
 }
 
+#players h3 i {
+  margin: 0;
+}
+
 .window-app .window-content {
   color: #000;
   background: #EEE8BF;
@@ -892,16 +896,17 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .actor .danger-points input[type="text"] {
-  font-size: 2em;
-  height: 2em;
-  width: 2em;
+  font-size: 6em;
+  height: 1.5em;
+  width: 1.5em;
   border: 4px solid #091B27;
   border-radius: 2em;
   text-align: center;
 }
 
 .actor .danger-points button {
-  margin-top: 10px;
+  margin-top: 3em;
+  width: auto;
 }
 
 .actor .sheet-header.dangerpts .profile-img {

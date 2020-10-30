@@ -13,8 +13,8 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
       tabs: [{
         contentSelector: '.sheet-body'
       }],
-      width: 400,
-      height: 400
+      width: 450,
+      height: 250
     })
   }
 
@@ -26,15 +26,17 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
   activateListeners (html) {
     super.activateListeners(html)
 
-    html.find('.dpminus').click(this._decreaseDP.bind(this))
+    html.find('.dpminus').click(this._decreaseDP.bind(this, 1))
+    html.find('.dpmminus').click(this._decreaseDP.bind(this, 2))
 
-    html.find('.dpplus').click(this._increaseDP.bind(this))
+    html.find('.dpplus').click(this._increaseDP.bind(this, 1))
+    html.find('.dppplus').click(this._increaseDP.bind(this, 2))
   }
 
-  _decreaseDP (event) {
+  _decreaseDP (value, event) {
     let dp = 0
-    if (this.actor.data.data.points > 1) {
-      dp = this.actor.data.data.points - 1
+    if (this.actor.data.data.points > value) {
+      dp = parseInt(this.actor.data.data.points) - parseInt(value)
     }
 
     this.actor.update({
@@ -42,8 +44,8 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
     }).then(this.render(false))
   }
 
-  _increaseDP (event) {
-    const dp = this.actor.data.data.points + 1
+  _increaseDP (value, event) {
+    const dp = parseInt(this.actor.data.data.points) + parseInt(value)
 
     this.actor.update({
       'data.points': dp

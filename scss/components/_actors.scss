@@ -20,16 +20,17 @@
 
 .danger-points {
   input[type="text"] {
-    font-size: $f-s-3xl;
-    height: 2em;
-    width: 2em;
+    font-size: $f-s-4xl;
+    height: 1.5em;
+    width: 1.5em;
     border: $brd-s-lg-dk;
     border-radius: 2em;
     text-align: center;
   }
 
   button {
-    margin-top: 10px;
+    margin-top: 3em;
+    width: auto;
   }
 }
 

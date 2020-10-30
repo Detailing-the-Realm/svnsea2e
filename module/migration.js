@@ -109,6 +109,12 @@ export const migrateActorData = function (actor) {
   if(actor.type === 'dangerpts'){
     updateData['data.points'] = 5
   }
+
+  if(actor.type === 'monster'){
+    updateData['data.fear.value'] = 0
+    updateData['data.fear.min'] = 0
+    updateData['data.fear.max'] = 5
+  }
   return updateData
 }
 

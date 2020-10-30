@@ -198,3 +198,7 @@ input[type=range]::-webkit-slider-thumb {
 .app {
   @include main-bg
 }
+
+#players h3 i {
+  margin:0;
+}
