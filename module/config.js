@@ -188,7 +188,7 @@ SVNSEA2E.sorceryCats = {
   turn: 'SVNSEA2E.Turn',
   juvenilia: 'SVNSEA2E.Juvenilia',
   magnum: 'SVNSEA2E.MagnumOpus',
-  rune: 'SVNSEA2E.Rune',
+  futhark: 'SVNSEA2E.Futhark',
   patron: 'SVNSEA2E.Patron',
   unguents: 'SVNSEA2E.Unguents'
 }
@@ -201,7 +201,8 @@ SVNSEA2E.sorcerySubcats = {
   minor: 'SVNSEA2E.Minor',
   pixan: 'SVNSEA2E.Pixan',
   rare: 'SVNSEA2E.Rare',
-  mark: 'SVNSEA2E.Mark'
+  great: 'SVNSEA2E.Great',
+  small: 'SVNSEA2E.Small'
 }
 
 SVNSEA2E.crewStatuses = {

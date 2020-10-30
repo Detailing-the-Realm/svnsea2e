@@ -260,7 +260,7 @@
   "SVNSEA2E.Juvenilia": "Juvenilia",
   "SVNSEA2E.MagnumOpus": "Magnum Opus",
   "SVNSEA2E.SorceryGaldr": "Galdr",
-  "SVNSEA2E.Rune": "Rune",
+  "SVNSEA2E.Futhark": "Futhark",
   "SVNSEA2E.Patron": "Patron",
   "SVNSEA2E.AtLeastOptions": "You must choose at least {min} options.",
   "SVNSEA2E.NoMoreThanOptions": "You may choose no more than {max} options.",
@@ -316,5 +316,7 @@
   "SVNSEA2E.SkillRank5": "Rank 5: 10s explode (+1 die)",
   "SVNSEA2E.NumberTraitDice": "Number of Trait Dice",
   "SVNSEA2E.Fear": "Fear Rank",
-  "SETTINGS.None": "None"
+  "SETTINGS.None": "None",
+  "SVNSEA2E.Great": "Great",
+  "SVNSEA2E.Small": "Small"
 }
