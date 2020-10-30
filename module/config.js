@@ -136,7 +136,7 @@ SVNSEA2E.storyStatuses = {
 SVNSEA2E.sorceryTypes = {
   hex: 'SVNSEA2E.SorceryHexenwerk',
   knight: 'SVNSEA2E.SorceryAvalonKnight',
-  alchemy: 'SVNSEA2E.SorceryAlquimia',
+  alquimia: 'SVNSEA2E.SorceryAlquimia',
   galdr: 'SVNSEA2E.SorceryGaldr',
   darm: 'SVNSEA2E.SorceryDarMatushki',
   porte: 'SVNSEA2E.SorceryPorte',
