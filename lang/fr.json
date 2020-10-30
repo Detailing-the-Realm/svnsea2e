@@ -304,5 +304,13 @@
   "SVNSEA2E.SkillRank3": "Rang 3: Relancez un seul dé",
   "SVNSEA2E.SkillRank4": "Rang 4: Ensembles de 15 = 2 Mises",
   "SVNSEA2E.SkillRank5": "Rang 5: 10s explosent (+1 dé)",
-  "SVNSEA2E.Fear": "Rang de Peur"
+  "SVNSEA2E.Fear": "Rang de Peur",
+  "SVNSEA2E.SorceryTurasTouch": "Tură's Toucher",
+  "SVNSEA2E.Juvenilia": "Juvenilia",
+  "SVNSEA2E.MagnumOpus": "Magnum Opus",
+  "SVNSEA2E.Task": "Tâche",
+  "SVNSEA2E.SorceryAlquimia": "Alquimia",
+  "SETTINGS.None": "Aucun",
+  "SVNSEA2E.Great": "Génial",
+  "SVNSEA2E.Small": "Petit"
 }
