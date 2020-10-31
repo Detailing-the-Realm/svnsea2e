@@ -61,18 +61,23 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     if (!svnsea2e.shipsCrew.members) svnsea2e.shipsCrew.members = []
 
     const crew = {
-      ableseaman: { label: game.i18n.localize('SVNSEA2E.AbleSeaman'), cssClass: 'ableseaman', actors: [], dataset: { type: 'shipsCrew', role: 'ableseaman' } },
-      boatswain: { label: game.i18n.localize('SVNSEA2E.Boatswain'), cssClass: 'boatswain', actors: [], dataset: { type: 'shipsCrew', role: 'boatswain' } },
       captain: { label: game.i18n.localize('SVNSEA2E.Captain'), cssClass: 'captain', actors: [], dataset: { type: 'shipsCrew', role: 'captain' } },
+      firstmate: { label: game.i18n.localize('SVNSEA2E.FirstMate'), cssClass: 'firstmate', actors: [], dataset: { type: 'shipsCrew', role: 'firstmate' } },
+      quartermaster: { label: game.i18n.localize('SVNSEA2E.QuaterMaster'), cssClass: 'quartermaster', actors: [], dataset: { type: 'shipsCrew', role: 'quartermaster' } },
+      accountant: { label: game.i18n.localize('SVNSEA2E.Accountant'), cssClass: 'accountant', actors: [], dataset: { type: 'shipsCrew', role: 'accountant' } },
+      boatswain: { label: game.i18n.localize('SVNSEA2E.Boatswain'), cssClass: 'boatswain', actors: [], dataset: { type: 'shipsCrew', role: 'boatswain' } },
+      shipsmaster: { label: game.i18n.localize('SVNSEA2E.ShipsMaster'), cssClass: 'shipsmaster', actors: [], dataset: { type: 'shipsCrew', role: 'shipsmaster' } },
+      captaintops: { label: game.i18n.localize('SVNSEA2E.CaptainTops'), cssClass: 'captaintops', actors: [], dataset: { type: 'shipsCrew', role: 'captaintops' } },
+      surgeon: { label: game.i18n.localize('SVNSEA2E.Surgeon'), cssClass: 'surgeon', actors: [], dataset: { type: 'shipsCrew', role: 'surgeon' } },
+      cook: { label: game.i18n.localize('SVNSEA2E.Cook'), cssClass: 'cook', actors: [], dataset: { type: 'shipsCrew', role: 'cook' } },
       mastergunner: { label: game.i18n.localize('SVNSEA2E.MasterGunner'), cssClass: 'mastergunner', actors: [], dataset: { type: 'shipsCrew', role: 'mastergunner' } },
       mastermariner: { label: game.i18n.localize('SVNSEA2E.MasterMariner'), cssClass: 'mastermariner', actors: [], dataset: { type: 'shipsCrew', role: 'mastermariner' } },
       midshipmen: { label: game.i18n.localize('SVNSEA2E.Midshipmen'), cssClass: 'midshipmen', actors: [], dataset: { type: 'shipsCrew', role: 'midshipmen' } },
-      seaman: { label: game.i18n.localize('SVNSEA2E.Seaman'), cssClass: 'seaman', actors: [], dataset: { type: 'shipsCrew', role: 'seaman' } },
-      shipsmaster: { label: game.i18n.localize('SVNSEA2E.ShipsMaster'), cssClass: 'shipsmaster', actors: [], dataset: { type: 'shipsCrew', role: 'shipsmaster' } },
-      surgeon: { label: game.i18n.localize('SVNSEA2E.Surgeon'), cssClass: 'surgeon', actors: [], dataset: { type: 'shipsCrew', role: 'surgeon' } }
+      ableseaman: { label: game.i18n.localize('SVNSEA2E.AbleSeaman'), cssClass: 'ableseaman', actors: [], dataset: { type: 'shipsCrew', role: 'ableseaman' } },
+      seaman: { label: game.i18n.localize('SVNSEA2E.Seaman'), cssClass: 'seaman', actors: [], dataset: { type: 'shipsCrew', role: 'seaman' } }
     }
 
-    const [ableseaman, boatswain, captain, mastergunner, mastermariner, midshipmen, seaman, shipsmaster, surgeon] = svnsea2e.shipsCrew.members.reduce((arr, id) => {
+    const [ableseaman, accountant, boatswain, captain, captaintops, cook, firstmate, mastergunner, mastermariner, midshipmen, quartermaster, seaman, shipsmaster, surgeon] = svnsea2e.shipsCrew.members.reduce((arr, id) => {
       const actor = game.actors.get(id)
 
       if (!actor) return arr

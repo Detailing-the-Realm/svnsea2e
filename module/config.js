@@ -225,15 +225,20 @@ SVNSEA2E.artifactTypes = {
 }
 
 SVNSEA2E.shipRoles = {
-  midshipmen: 'SVNSEA2E.Midshipmen',
   captain: 'SVNSEA2E.Captain',
+  firstmate: 'SVNSEA2E.FirstMate',
+  quartermaster: 'SVNSEA2E.QuaterMaster',
+  accountant: 'SVNSEA2E.Accountant',
   boatswain: 'SVNSEA2E.Boatswain',
   shipsmaster: 'SVNSEA2E.ShipsMaster',
   mastergunner: 'SVNSEA2E.MasterGunner',
   mastermariner: 'SVNSEA2E.MasterMariner',
+  captaintops: 'SVNSEA2E.CaptainTops',
+  cook: 'SVNSEA2E.Cook',
+  surgeon: 'SVNSEA2E.Surgeon',
+  midshipmen: 'SVNSEA2E.Midshipmen',
   ableseaman: 'SVNSEA2E.AbleSeaman',
-  seaman: 'SVNSEA2E.Seaman',
-  surgeon: 'SVNSEA2E.Surgeon'
+  seaman: 'SVNSEA2E.Seaman'
 }
 
 SVNSEA2E.match10 = {
