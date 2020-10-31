@@ -86,24 +86,34 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       if (!crewMember) return arr
 
       if (crewMember.role === 'ableseaman') arr[0].push(actor)
-      else if (crewMember.role === 'boatswain') arr[1].push(actor)
-      else if (crewMember.role === 'captain') arr[2].push(actor)
-      else if (crewMember.role === 'mastergunner') arr[3].push(actor)
-      else if (crewMember.role === 'mastermariner') arr[4].push(actor)
-      else if (crewMember.role === 'midshipmen') arr[5].push(actor)
-      else if (crewMember.role === 'seaman') arr[6].push(actor)
-      else if (crewMember.role === 'shipsmaster') arr[7].push(actor)
-      else if (crewMember.role === 'surgeon') arr[8].push(actor)
+      else if (crewMember.role === 'accountant') arr[1].push(actor)
+      else if (crewMember.role === 'boatswain') arr[2].push(actor)
+      else if (crewMember.role === 'captain') arr[3].push(actor)
+      else if (crewMember.role === 'captaintops') arr[4].push(actor)
+      else if (crewMember.role === 'cook') arr[5].push(actor)
+      else if (crewMember.role === 'firstmate') arr[6].push(actor)
+      else if (crewMember.role === 'mastergunner') arr[7].push(actor)
+      else if (crewMember.role === 'mastermariner') arr[8].push(actor)
+      else if (crewMember.role === 'midshipmen') arr[9].push(actor)
+      else if (crewMember.role === 'quartermaster') arr[10].push(actor)
+      else if (crewMember.role === 'seaman') arr[11].push(actor)
+      else if (crewMember.role === 'shipsmaster') arr[12].push(actor)
+      else if (crewMember.role === 'surgeon') arr[13].push(actor)
 
       return arr
-    }, [[], [], [], [], [], [], [], [], []])
+    }, [[], [], [], [], [], [], [], [], [], [], [], [], [], []])
 
     crew.ableseaman.actors = ableseaman
+    crew.accountant.actors = accountant
     crew.boatswain.actors = boatswain
     crew.captain.actors = captain
+    crew.captaintops.actors = captaintops
+    crew.cook.actors = cook
+    crew.firstmate.actors = firstmate
     crew.mastergunner.actors = mastergunner
     crew.mastermariner.actors = mastermariner
     crew.midshipmen.actors = midshipmen
+    crew.quartermaster.actors = quartermaster
     crew.seaman.actors = seaman
     crew.shipsmaster.actors = shipsmaster
     crew.surgeon.actors = surgeon
