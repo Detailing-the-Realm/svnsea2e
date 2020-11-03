@@ -89,7 +89,7 @@ export const migrateCompendium = async function(pack) {
 export const migrateActorData = function (actor) {
   const updateData = {}
 
-  if ((actor.type !== 'ship' && actor.type !== 'dangerpts' && actor.type !== 'brute') && actor.data.wounds.max !== 20) {
+  if ((actor.type !== 'dangerpts' && actor.type !== 'brute') && actor.data.wounds.max != 20) {
     updateData['data.wounds.max'] = 20
   }
 
@@ -97,24 +97,31 @@ export const migrateActorData = function (actor) {
     updateData['data.nation'] = 'rahuri'
   }
 
-  if (actor.type === 'villain'){
+  if ((actor.type === 'villain' || actor.type === 'monster') && actor.data.traits.strength.max != 10) {
     updateData['data.traits.strength.max'] = 10
     updateData['data.traits.influence.max'] = 10
+    updateData['data.traits.influence.min'] = 0
   }
 
-  if (actor.type === 'brute'){
+  if (actor.type === 'brute') {
     updateData['data.traits.strength.max'] = 20
   }
 
-  if(actor.type === 'dangerpts'){
+  if(actor.type === 'dangerpts' && actor.data.points < 5) {
     updateData['data.points'] = 5
   }
 
-  if(actor.type === 'monster'){
+  if(actor.type === 'monster' && actor.data.fear.max != 5) {
     updateData['data.fear.value'] = 0
     updateData['data.fear.min'] = 0
     updateData['data.fear.max'] = 5
   }
+
+  if(actor.type === 'ship' && actor.data.crewstatus == null ) {
+    console.log('ship migration')
+    updateData['data.crewstatus'] = ""
+  }
+
   return updateData
 }
 

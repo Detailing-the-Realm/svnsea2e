@@ -557,8 +557,15 @@ input[type=range]::-webkit-slider-thumb {
 
 /* Styles limited to svnsea2e sheets */
 .svnsea2e form .form-group,
-.svnsea2e form .form-group-stacked {
+.svnsea2e form .form-group-stacked,
+.svnsea2e form .wounds {
   margin: 4px;
+}
+
+.svnsea2e form .form-group > label {
+  -webkit-box-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
 }
 
 .svnsea2e .item-form {
@@ -686,6 +693,10 @@ input[type=range]::-webkit-slider-thumb {
   margin-bottom: 8px;
 }
 
+.sheet .sheet-header .villanyrank {
+  margin-left: 8px;
+}
+
 .sheet .sheet-header .profile-img {
   margin-right: 4px;
 }
@@ -721,8 +732,7 @@ input[type=range]::-webkit-slider-thumb {
   font-family: "Trade Winds", cursive;
 }
 
-.sheet .sheet-header .age input[type="text"],
-.sheet .sheet-header .wounds input[type="text"] {
+.sheet .sheet-header .twodigit input[type="text"] {
   max-width: 30px;
   text-align: right;
 }

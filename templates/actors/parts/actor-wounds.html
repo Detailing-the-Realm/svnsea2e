@@ -1,21 +1,20 @@
 {{#if isPlayerCharacter}}
-  <div class="resources grid grid-2col wounds">
-    <div class="flex-group-left">
-      <label for="data.heropts" class="wound-title">{{ localize "SVNSEA2E.HeroPoints" }}</label>
-      <span class="pts"><input type="text" name="data.heropts" value="{{data.heropts}}" /></span>
-    </div>
-    <div class="flex-group-left">
-      <label for="data.wealth" class="wound-title">{{localize "SVNSEA2E.WealthPts"}}</label>
-      <span class="pts">
+  <div class="resources flex-row">
+    <div class="form-group flex-group">
+      <label for="data.heropts">{{ localize "SVNSEA2E.HeroPoints" }}</label>
+      <span class="twodigit">
+        <input type="text" name="data.heropts" value="{{data.heropts}}" />
+      </span>
+      <label for="data.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
+      <span class="twodigit">
         <input type="text" name="data.wealth" value="{{data.wealth}}" data-dtype="String" />
       </span>
     </div>
   </div>
-  <div class="grid grid-2col corruption">
-    <div class="flex-group-left">
-      <label for="data.corruptionpts" class="wound-title">{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
-    </div>
-    <div class="flex-group-right">
+  <div class="flex-row corruption">
+    <div class="form-group flex-group-left">
+      <label for="data.corruptionpts">{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
+      <span class="flex-group-right">
       {{#for 1 10 1}}
         {{#iff data.corruptionpts '>=' @index}}
           <i data-name="data.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable fas fa-circle"></i>
@@ -23,15 +22,14 @@
           <i data-name="data.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable far fa-circle"></i>
         {{/iff}}
       {{/for}}
+      </span>
     </div>
   </div>
 {{/if}}
-<div class="resources flex-group-left wound-title">
+<div class="flex-group-left wounds">
   {{localize "SVNSEA2E.Wounds" }}
-  <!--<span class="pts {{#if isPlayerCharacter}}bigger{{/if}}"><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
-    /{{data.wounds.max}}</span> -->
 </div>
-<div class="resources flex-group-left wounds">
+<div class="flex-group-left wounds">
   {{#for 1 data.wounds.max 1}}
     {{#iff @remain '!=' 0}}
       {{#iff data.wounds.value '>=' @index}}

@@ -130,8 +130,8 @@ export class SvnSea2EItem extends Item {
     <p>${data.endings}</p>
     <h5>${game.i18n.localize('SVNSEA2E.Steps')}</h5>
     <p>${data.steps}</p>
-    <h5>${game.i18n.localize('SVNSEA2E.Rewards')}</h5>
-    <p>${data.rewards}</p>
+    <h5>${game.i18n.localize('SVNSEA2E.Reward')}</h5>
+    <p>${data.reward}</p>
 `
     return data
   }

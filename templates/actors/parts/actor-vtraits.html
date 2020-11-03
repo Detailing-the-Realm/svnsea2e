@@ -1,5 +1,4 @@
 <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
-<div class="traits grid grid-2col">
   {{#each data.traits as |trait key|}}
     <div class="trait flexrow flex-group flex-left">
       <span class="trait-name rollable" data-roll="{{trait.value}}" data-label="{{key}}">
@@ -32,7 +31,6 @@
     </span>
   </div>
   {{/if}}
-</div>
 {{#if hasLanguages}}
   <h3 class="language-title">{{localize "SVNSEA2E.Languages"}}</h3>
   <div class="language flexrow flex-group flex-left">

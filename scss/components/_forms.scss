@@ -1,6 +1,10 @@
 form .form-group,
-form .form-group-stacked{
+form .form-group-stacked,
+form .wounds {
   margin: $margin-sm;
+}
+form .form-group > label {
+  flex: 3;
 }
 .item-form {
   font-family: $f-body;

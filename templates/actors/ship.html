@@ -4,15 +4,17 @@
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
       <div class="grid grid-2col">
-        <div class="flex-group-left">
+        <div class="form-group flex-group">
+          <label for="data.class">{{localize "SVNSEA2E.Class"}}</label>
           <input type="text" name="data.class" value="{{data.class}}" placeholder="{{localize "SVNSEA2E.Class"}}" />
         </div>
-        <div class="flex-group-left">
+        <div class="form-group flex-group">
+          <label for="data.origin">{{localize "SVNSEA2E.Origin"}}</label>
           <input type="text" name="data.origin" value="{{data.origin}}" placeholder="{{localize "SVNSEA2E.Origin"}}" />
         </div>
       </div>
       <div class="grid grid-2col">
-        <div class="flex-group-left">
+        <div class="form-group flex-group-left">
           <label for="data.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
           <select class="crewstatus" name="data.crewstatus">
             {{#select data.crewstatus}}

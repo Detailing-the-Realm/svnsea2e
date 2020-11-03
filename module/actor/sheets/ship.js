@@ -73,11 +73,12 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       mastergunner: { label: game.i18n.localize('SVNSEA2E.MasterGunner'), cssClass: 'mastergunner', actors: [], dataset: { type: 'shipsCrew', role: 'mastergunner' } },
       mastermariner: { label: game.i18n.localize('SVNSEA2E.MasterMariner'), cssClass: 'mastermariner', actors: [], dataset: { type: 'shipsCrew', role: 'mastermariner' } },
       midshipmen: { label: game.i18n.localize('SVNSEA2E.Midshipmen'), cssClass: 'midshipmen', actors: [], dataset: { type: 'shipsCrew', role: 'midshipmen' } },
+      powdermonkey: { label: game.i18n.localize('SVNSEA2E.PowderMonkey'), cssClass: 'powdermonkey', actors: [], dataset: { type: 'shipsCrew', role: 'powdermonkey' } },
       ableseaman: { label: game.i18n.localize('SVNSEA2E.AbleSeaman'), cssClass: 'ableseaman', actors: [], dataset: { type: 'shipsCrew', role: 'ableseaman' } },
       seaman: { label: game.i18n.localize('SVNSEA2E.Seaman'), cssClass: 'seaman', actors: [], dataset: { type: 'shipsCrew', role: 'seaman' } }
     }
 
-    const [ableseaman, accountant, boatswain, captain, captaintops, cook, firstmate, mastergunner, mastermariner, midshipmen, quartermaster, seaman, shipsmaster, surgeon] = svnsea2e.shipsCrew.members.reduce((arr, id) => {
+    const [ableseaman, accountant, boatswain, captain, captaintops, cook, firstmate, mastergunner, mastermariner, midshipmen, powdermonkey, quartermaster, seaman, shipsmaster, surgeon] = svnsea2e.shipsCrew.members.reduce((arr, id) => {
       const actor = game.actors.get(id)
 
       if (!actor) return arr
@@ -95,13 +96,14 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       else if (crewMember.role === 'mastergunner') arr[7].push(actor)
       else if (crewMember.role === 'mastermariner') arr[8].push(actor)
       else if (crewMember.role === 'midshipmen') arr[9].push(actor)
-      else if (crewMember.role === 'quartermaster') arr[10].push(actor)
-      else if (crewMember.role === 'seaman') arr[11].push(actor)
-      else if (crewMember.role === 'shipsmaster') arr[12].push(actor)
-      else if (crewMember.role === 'surgeon') arr[13].push(actor)
+        else if (crewMember.role === 'powdermonkey') arr[10].push(actor)
+      else if (crewMember.role === 'quartermaster') arr[11].push(actor)
+      else if (crewMember.role === 'seaman') arr[12].push(actor)
+      else if (crewMember.role === 'shipsmaster') arr[13].push(actor)
+      else if (crewMember.role === 'surgeon') arr[14].push(actor)
 
       return arr
-    }, [[], [], [], [], [], [], [], [], [], [], [], [], [], []])
+    }, [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []])
 
     crew.ableseaman.actors = ableseaman
     crew.accountant.actors = accountant
@@ -113,6 +115,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     crew.mastergunner.actors = mastergunner
     crew.mastermariner.actors = mastermariner
     crew.midshipmen.actors = midshipmen
+    crew.powdermonkey.actors = powdermonkey
     crew.quartermaster.actors = quartermaster
     crew.seaman.actors = seaman
     crew.shipsmaster.actors = shipsmaster

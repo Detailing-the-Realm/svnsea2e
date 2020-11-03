@@ -150,7 +150,7 @@
         "traits": {
           "influence": {
             "value": 5,
-            "min": 1,
+            "min": 0,
             "max": 10
           },
           "strength": {
@@ -208,7 +208,7 @@
       "class": "",
       "cargo": "",
       "origin": "",
-      "crewstatus": ""
+      "crewstatus": "happy"
     },
     "villain": {
       "templates": ["base", "details", "vtraits"],

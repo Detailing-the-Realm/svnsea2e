@@ -25,6 +25,10 @@ nav.sheet-tabs {
   justify-content: flex-start;
   margin-bottom: $margin-md;
 
+  .villanyrank {
+    margin-left: $margin-md;
+  }
+
   .profile-img {
     margin-right: $padding-sm;
   }
@@ -58,8 +62,7 @@ nav.sheet-tabs {
     }
   }
 
-  .age input[type="text"],
-  .wounds input[type="text"] {
+  .twodigit input[type="text"] {
     max-width: $max-input-width-xs;
     text-align: right;
   }

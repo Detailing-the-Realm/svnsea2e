@@ -11,7 +11,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      width: 700,
+      width: 730,
       height: 750
     })
   }
@@ -93,7 +93,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     super.activateListeners(html)
 
     // Everything below here is only needed if the sheet is editable
-    if (!this.options.editable || this.actor.data.type === 'ship') return
+    if (!this.options.editable) return
 
     // language Selector
     html.find('.language-selector').click(this._onLanguageSelector.bind(this))
@@ -122,7 +122,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     html.find('.fillable.fa-circle').click(event => this._processCircle(event))
     if(this.actor.data.type === 'brute'){
       html.find('.fillable.fa-heart').click(event => this._processBruteWounds(event))
-    } else{
+    } else {
       html.find('.fillable.fa-heart').click(event => this._processWounds(event))
     }
 
@@ -173,8 +173,10 @@ export default class ActorSheetSS2e extends ActorSheet {
             tval = adata.skills[data.key].value
           break;
         case 'trait':
-          if(data.key !== 'strength'){
-              data.value = 2
+          if(data.key === 'influence' || data.key === 'strength'){
+            tval = adata.traits[data.key].value
+          } else {
+            data.value = 2
           }
           break;
         case 'corrupt':
@@ -184,7 +186,9 @@ export default class ActorSheetSS2e extends ActorSheet {
             tval = adata[data.key].value
           break;
       }
-      if (tval == 1){
+      console.log(data.name, tval)
+      if (parseInt(tval) == 1){
+        console.log(tval)
         data.value = 0
       }
     }
@@ -222,8 +226,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     const data = this.actor.data.data
     const edata = event.target.dataset
     let updateObj = {}
-    let wounds = 0
-    let dwounds = 0
+    let wounds = data.wounds.value
+    let dwounds = data.dwounds.value
 
     if (edata.type === 'wounds'){
       wounds = edata.value
@@ -696,7 +700,10 @@ export default class ActorSheetSS2e extends ActorSheet {
               data: data,
               form: html[0].querySelector("form"),
               template: 'systems/svnsea2e/templates/chats/roll-card.html',
-              title: title
+              title: game.i18n.format('SVNSEA2E.ApproachRollChatTitle', {
+                      trait: html[0].querySelector("form").trait[html[0].querySelector("form").trait.selectedIndex].text,
+                      skill: CONFIG.SVNSEA2E.skills[dataset.label]
+                  })
             })
           }
         },
