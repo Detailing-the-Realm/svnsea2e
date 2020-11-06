@@ -1,7 +1,7 @@
 <form>
   <div class="form-group">
-    <label>{{ localize "SVNSEA2E.Trait" }}</label>
-    <select name="trait">
+    <label for="trait">{{ localize "SVNSEA2E.Trait" }}</label>
+    <select id="trait" name="trait">
     {{#each traits as |value label|}}
         <option value="{{value}}">{{ label }}</option>
     {{/each}}
@@ -9,7 +9,11 @@
   </div>
   <div class="form-group">
     <label for="bonusDice">{{ localize "SVNSEA2E.BonusDice" }}</label>
-    <input type="text" name="bonusDice" value="0" />
+    <input type="text" id="bonusDice" name="bonusDice" value="0" />
+  </div>
+  <div class="form-group">
+    <label for="increaseThreshold">{{ localize "SVNSEA2E.IncreaseThreshold" }}</label>
+    <input type="checkbox" id="increaseThreshold" name="increaseThreshold" value="1" />
   </div>
   <!-- <div class="form-group">
     <label for="setInitiative">{{ localize "SVNSEA2E.SetInitiative" }}</label>

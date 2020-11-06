@@ -318,5 +318,7 @@
   "SVNSEA2E.SorceryAlquimia": "Alquimia",
   "SETTINGS.None": "Aucun",
   "SVNSEA2E.Great": "Génial",
-  "SVNSEA2E.Small": "Petit"
+  "SVNSEA2E.Small": "Petit",
+  "SVNSEA2E.IncreaseThreshold": "Augmenter le seuil de 5",
+  "SVNSEA2E.GMIncreasedThreshold": "(GM a augmenté le seuil de 5)"
 }

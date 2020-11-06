@@ -151,12 +151,12 @@
           "influence": {
             "value": 5,
             "min": 0,
-            "max": 10
+            "max": 20
           },
           "strength": {
             "value": 5,
             "min": 1,
-            "max": 10
+            "max": 20
           }
         }
       }
@@ -166,7 +166,7 @@
       "wounds": {
         "value": 0,
         "min": 0,
-        "max": 5
+        "max": 20
       },
       "traits": {
         "strength": {

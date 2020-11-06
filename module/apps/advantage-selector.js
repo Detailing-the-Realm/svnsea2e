@@ -24,7 +24,7 @@ export default class AdvantageSelector extends FormApplication {
   getData () {
     // Get current values
     const advantages = this.object.data.data.advantages
-    console.log(this.options.choices)
+
     // Populate choices
     const choices = duplicate(this.options.choices)
     for (const [k, v] of Object.entries(choices)) {
@@ -33,8 +33,7 @@ export default class AdvantageSelector extends FormApplication {
         chosen: advantages ? advantages.includes(v) : false
       }
     }
-
-    console.log(choices)
+    
     // Return data
     return {
       choices: choices
