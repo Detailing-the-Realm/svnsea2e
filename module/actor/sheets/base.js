@@ -841,7 +841,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
 
     const nd = parseInt(rolldata['skilldice']) + parseInt(form.trait.value) + parseInt(form.bonusDice.value)
-    let incThreshold =form.increaseThreshold.checked
+    let incThreshold = 0
+    if (form.increaseThreshold !== undefined) incThreshold = form.increaseThreshold.checked
     let d10 = new Die({faces: 10, number: nd}).evaluate()
     let exploded = false
 
