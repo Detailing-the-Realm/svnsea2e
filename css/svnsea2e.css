@@ -230,6 +230,12 @@ input[type=range]::-webkit-slider-thumb {
   margin: 0;
 }
 
+.sheet header.sheet-header {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
 .window-app .window-content {
   color: #000;
   background: #EEE8BF;
@@ -677,7 +683,6 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .sheet .sheet-header {
-  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
