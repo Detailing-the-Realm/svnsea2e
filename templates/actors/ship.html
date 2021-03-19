@@ -25,6 +25,10 @@
             {{/select}}
           </select>
         </div>
+        <div class="form-group flex-group">
+          <label for="data.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
+          <input type="text" name="data.wealth" value="{{data.wealth}}" placeholder="{{localize "SVNSEA2E.WealthPts"}}" />
+        </div>
       </div>
 
     {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}

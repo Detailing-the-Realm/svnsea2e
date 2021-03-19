@@ -208,7 +208,8 @@
       "class": "",
       "cargo": "",
       "origin": "",
-      "crewstatus": "happy"
+      "crewstatus": "happy",
+      "wealth": 0
     },
     "villain": {
       "templates": ["base", "details", "vtraits"],

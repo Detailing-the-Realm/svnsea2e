@@ -6,7 +6,7 @@ import ActorSheetSS2e from './base.js'
  */
 export class ActorSheetSS2eShip extends ActorSheetSS2e {
   /** @override */
-  static get defaultOptions () {
+  static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor', 'ship'],
       template: 'systems/svnsea2e/templates/actors/ship.html',
@@ -25,7 +25,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareShipItems (data) {
+  _prepareShipItems(data) {
     const actorData = data.actor
     // Initialize containers.
     const adventures = []
@@ -53,7 +53,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {Obejct} data The data object to update with any flag data.
    * @param {Object} flags The set of flags for the Actor
    */
-  _processFlags (data, flags) {
+  _processFlags(data, flags) {
     let svnsea2e = flags.svnsea2e
 
     if (!svnsea2e) svnsea2e = {}
@@ -61,21 +61,141 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     if (!svnsea2e.shipsCrew.members) svnsea2e.shipsCrew.members = []
 
     const crew = {
-      captain: { label: game.i18n.localize('SVNSEA2E.Captain'), cssClass: 'captain', actors: [], dataset: { type: 'shipsCrew', role: 'captain' } },
-      firstmate: { label: game.i18n.localize('SVNSEA2E.FirstMate'), cssClass: 'firstmate', actors: [], dataset: { type: 'shipsCrew', role: 'firstmate' } },
-      quartermaster: { label: game.i18n.localize('SVNSEA2E.QuaterMaster'), cssClass: 'quartermaster', actors: [], dataset: { type: 'shipsCrew', role: 'quartermaster' } },
-      accountant: { label: game.i18n.localize('SVNSEA2E.Accountant'), cssClass: 'accountant', actors: [], dataset: { type: 'shipsCrew', role: 'accountant' } },
-      boatswain: { label: game.i18n.localize('SVNSEA2E.Boatswain'), cssClass: 'boatswain', actors: [], dataset: { type: 'shipsCrew', role: 'boatswain' } },
-      shipsmaster: { label: game.i18n.localize('SVNSEA2E.ShipsMaster'), cssClass: 'shipsmaster', actors: [], dataset: { type: 'shipsCrew', role: 'shipsmaster' } },
-      captaintops: { label: game.i18n.localize('SVNSEA2E.CaptainTops'), cssClass: 'captaintops', actors: [], dataset: { type: 'shipsCrew', role: 'captaintops' } },
-      surgeon: { label: game.i18n.localize('SVNSEA2E.Surgeon'), cssClass: 'surgeon', actors: [], dataset: { type: 'shipsCrew', role: 'surgeon' } },
-      cook: { label: game.i18n.localize('SVNSEA2E.Cook'), cssClass: 'cook', actors: [], dataset: { type: 'shipsCrew', role: 'cook' } },
-      mastergunner: { label: game.i18n.localize('SVNSEA2E.MasterGunner'), cssClass: 'mastergunner', actors: [], dataset: { type: 'shipsCrew', role: 'mastergunner' } },
-      mastermariner: { label: game.i18n.localize('SVNSEA2E.MasterMariner'), cssClass: 'mastermariner', actors: [], dataset: { type: 'shipsCrew', role: 'mastermariner' } },
-      midshipmen: { label: game.i18n.localize('SVNSEA2E.Midshipmen'), cssClass: 'midshipmen', actors: [], dataset: { type: 'shipsCrew', role: 'midshipmen' } },
-      powdermonkey: { label: game.i18n.localize('SVNSEA2E.PowderMonkey'), cssClass: 'powdermonkey', actors: [], dataset: { type: 'shipsCrew', role: 'powdermonkey' } },
-      ableseaman: { label: game.i18n.localize('SVNSEA2E.AbleSeaman'), cssClass: 'ableseaman', actors: [], dataset: { type: 'shipsCrew', role: 'ableseaman' } },
-      seaman: { label: game.i18n.localize('SVNSEA2E.Seaman'), cssClass: 'seaman', actors: [], dataset: { type: 'shipsCrew', role: 'seaman' } }
+      captain: {
+        label: game.i18n.localize('SVNSEA2E.Captain'),
+        cssClass: 'captain',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'captain'
+        }
+      },
+      firstmate: {
+        label: game.i18n.localize('SVNSEA2E.FirstMate'),
+        cssClass: 'firstmate',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'firstmate'
+        }
+      },
+      quartermaster: {
+        label: game.i18n.localize('SVNSEA2E.QuaterMaster'),
+        cssClass: 'quartermaster',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'quartermaster'
+        }
+      },
+      accountant: {
+        label: game.i18n.localize('SVNSEA2E.Accountant'),
+        cssClass: 'accountant',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'accountant'
+        }
+      },
+      boatswain: {
+        label: game.i18n.localize('SVNSEA2E.Boatswain'),
+        cssClass: 'boatswain',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'boatswain'
+        }
+      },
+      shipsmaster: {
+        label: game.i18n.localize('SVNSEA2E.ShipsMaster'),
+        cssClass: 'shipsmaster',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'shipsmaster'
+        }
+      },
+      captaintops: {
+        label: game.i18n.localize('SVNSEA2E.CaptainTops'),
+        cssClass: 'captaintops',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'captaintops'
+        }
+      },
+      surgeon: {
+        label: game.i18n.localize('SVNSEA2E.Surgeon'),
+        cssClass: 'surgeon',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'surgeon'
+        }
+      },
+      cook: {
+        label: game.i18n.localize('SVNSEA2E.Cook'),
+        cssClass: 'cook',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'cook'
+        }
+      },
+      mastergunner: {
+        label: game.i18n.localize('SVNSEA2E.MasterGunner'),
+        cssClass: 'mastergunner',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'mastergunner'
+        }
+      },
+      mastermariner: {
+        label: game.i18n.localize('SVNSEA2E.MasterMariner'),
+        cssClass: 'mastermariner',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'mastermariner'
+        }
+      },
+      midshipmen: {
+        label: game.i18n.localize('SVNSEA2E.Midshipmen'),
+        cssClass: 'midshipmen',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'midshipmen'
+        }
+      },
+      powdermonkey: {
+        label: game.i18n.localize('SVNSEA2E.PowderMonkey'),
+        cssClass: 'powdermonkey',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'powdermonkey'
+        }
+      },
+      ableseaman: {
+        label: game.i18n.localize('SVNSEA2E.AbleSeaman'),
+        cssClass: 'ableseaman',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'ableseaman'
+        }
+      },
+      seaman: {
+        label: game.i18n.localize('SVNSEA2E.Seaman'),
+        cssClass: 'seaman',
+        actors: [],
+        dataset: {
+          type: 'shipsCrew',
+          role: 'seaman'
+        }
+      }
     }
 
     const [ableseaman, accountant, boatswain, captain, captaintops, cook, firstmate, mastergunner, mastermariner, midshipmen, powdermonkey, quartermaster, seaman, shipsmaster, surgeon] = svnsea2e.shipsCrew.members.reduce((arr, id) => {
@@ -96,14 +216,30 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       else if (crewMember.role === 'mastergunner') arr[7].push(actor)
       else if (crewMember.role === 'mastermariner') arr[8].push(actor)
       else if (crewMember.role === 'midshipmen') arr[9].push(actor)
-        else if (crewMember.role === 'powdermonkey') arr[10].push(actor)
+      else if (crewMember.role === 'powdermonkey') arr[10].push(actor)
       else if (crewMember.role === 'quartermaster') arr[11].push(actor)
       else if (crewMember.role === 'seaman') arr[12].push(actor)
       else if (crewMember.role === 'shipsmaster') arr[13].push(actor)
       else if (crewMember.role === 'surgeon') arr[14].push(actor)
 
       return arr
-    }, [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []])
+    }, [
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ])
 
     crew.ableseaman.actors = ableseaman
     crew.accountant.actors = accountant
@@ -129,7 +265,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
    */
-  activateListeners (html) {
+  activateListeners(html) {
     super.activateListeners(html)
 
     if (!this.options.editable) return
@@ -150,31 +286,10 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
       li.addEventListener('dragenter', this._onCrewDragEnter, false)
       li.addEventListener('dragleave', this._onCrewDragLeave, false)
     })
-
-    html.find('.features .item-create').click(this._onItemCreate.bind(this))
-
-    // Update Inventory Item
-    html.find('.features .item-edit').click(ev => {
-      const li = $(ev.currentTarget).parents('.item')
-      const item = this.actor.getOwnedItem(li.data('itemId'))
-      item.sheet.render(true)
-    })
-
-    // Delete Inventory Item
-    html.find('.features .item-delete').click(this._onItemDelete.bind(this))
-
-    html.find('.features .item h4.item-name').click(event => this._onItemSummary(event))
-
-    const featurehandler = ev => this._onDragItemStart(ev)
-    html.find('.features li.item').each((i, li) => {
-      if (li.classList.contains('inventory-header')) return
-      li.setAttribute('draggable', true)
-      li.addEventListener('dragstart', featurehandler, false)
-    })
   }
 
   /** @override */
-  async _onDrop (event) {
+  async _onDrop(event) {
     event.preventDefault()
 
     let data
@@ -187,10 +302,14 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     if (!data) return false
 
     // Case 1 - Dropped Item
-    if (data.type === 'Item') { return this._onDropItem(event, data) }
+    if (data.type === 'Item') {
+      return this._onDropItem(event, data)
+    }
 
     // Case 2 - Dropped Actor
-    if (data.type === 'Actor') { return this._onCrewDrop(event, data) }
+    if (data.type === 'Actor') {
+      return this._onCrewDrop(event, data)
+    }
   }
 
   /**
@@ -199,7 +318,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {Event}  event The originating drop event
    * @param {object} data  The data transfer object.
    */
-  async _onCrewDrop (event, data) {
+  async _onCrewDrop(event, data) {
     event.preventDefault()
 
     $(event.target).css('background', '')
@@ -240,7 +359,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * Handles dragenter for the crews tab
    * @param {Event} event The originating dragenter event
    */
-  _onCrewDragEnter (event) {
+  _onCrewDragEnter(event) {
     $(event.target).css('background', 'rgba(0,0,0,0.3)')
   }
 
@@ -248,7 +367,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * Handles dragleave for the crews tab
    * @param {Event} event The originating dragleave event
    */
-  _onCrewDragLeave (event) {
+  _onCrewDragLeave(event) {
     $(event.target).css('background', '')
   }
 
@@ -257,7 +376,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @param {Event} event Originating dragstart event
    */
-  _onDragCrewStart (event) {
+  _onDragCrewStart(event) {
     const actorId = event.currentTarget.dataset.actorId
     const actor = game.actors.get(actorId)
 
@@ -276,7 +395,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @param {Event} event Orgininating ondragover event
    */
-  _onCrewDragOver (event) {
+  _onCrewDragOver(event) {
     event.preventDefault()
     event.dataTransfer.dropEffect = 'move'
   }
@@ -286,7 +405,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @param {Event} event The originating click event
    */
-  async _onChangeCrewRole (event) {
+  async _onChangeCrewRole(event) {
     event.preventDefault()
 
     const actorId = event.currentTarget.parentElement.dataset.actorId
@@ -300,7 +419,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @param {Event} event The originating click event
    */
-  async _onRemoveFromCrew (event) {
+  async _onRemoveFromCrew(event) {
     event.preventDefault()
 
     const actorId = $(event.currentTarget).parents('.item').data('actorId')
@@ -314,6 +433,8 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     const updateData = shipsCrew.members.filter((val) => val !== actor.id)
 
-    await this.actor.update({ 'flags.svnsea2e.shipsCrew.members': updateData })
+    await this.actor.update({
+      'flags.svnsea2e.shipsCrew.members': updateData
+    })
   }
 }
