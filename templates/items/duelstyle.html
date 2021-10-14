@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
     </div>
@@ -17,10 +17,10 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
     </div>
     <div class="tab" data-group="primary" data-tab="bonus">
-      {{editor content=data.bonus target="data.bonus" button=true owner=owner editable=editable}}
+      {{editor content=bonus target="data.bonus" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

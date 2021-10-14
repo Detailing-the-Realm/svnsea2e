@@ -1,13 +1,13 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="grid grid-2col">
         <div class="form-group flex-group">
           <label for="data.sorctype">{{localize "SVNSEA2E.Type"}}</label>
-          <select class="sorcery-type" name="data.sorctype">
-            {{#select data.sorctype}}
+          <select class="sorcery-type" id="data.sorctype" name="data.sorctype">
+            {{#select sorceryType}}
               <option value="none"></option>
               {{#each config.sorceryTypes as |label type|}}
                 <option value="{{type}}">{{label}}</option>
@@ -17,8 +17,8 @@
         </div>
         <div class="form-group flex-group">
           <label for="data.sorcdur">{{localize "SVNSEA2E.Duration"}}</label>
-          <select class="sorcery-type" name="data.sorcdur">
-            {{#select data.sorcdur}}
+          <select class="sorcery-type" id="data.sorcdur" name="data.sorcdur">
+            {{#select sorceryDuration}}
               <option value="none"></option>
               {{#each config.durations as |label duration|}}
                 <option value="{{duration}}">{{label}}</option>
@@ -30,8 +30,8 @@
       <div class="relrep grid grid-2col">
         <div class="form-group flex-group">
           <label for="data.sorccat">{{localize "SVNSEA2E.Category"}}</label>
-          <select class="sorcery-category" name="data.sorccat">
-            {{#select data.sorccat}}
+          <select class="sorcery-category" id="data.sorccat" name="data.sorccat">
+            {{#select sorceryCategory}}
               <option value="none"></option>
               {{#each config.sorceryCats as |label cat|}}
                 <option value="{{cat}}">{{label}}</option>
@@ -40,8 +40,8 @@
           </select>
           </div><div class="form-group flex-group">
             <label for="data.sorcsubcat">{{localize "SVNSEA2E.SubCategory"}}</label>
-            <select class="sorcery-subcategory" name="data.sorcsubcat">
-              {{#select data.sorcsubcat}}
+            <select class="sorcery-subcategory" id="data.sorcsubcat" name="data.sorcsubcat">
+              {{#select sorcerySubCategory}}
                 <option value="none"></option>
                 {{#each config.sorcerySubcats as |label cat|}}
                   <option value="{{cat}}">{{label}}</option>
@@ -65,7 +65,7 @@
 
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
     </div>
 
   </section>

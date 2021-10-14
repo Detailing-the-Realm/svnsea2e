@@ -1,5 +1,5 @@
 <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
-  {{#each data.traits as |trait key|}}
+  {{#each traits as |trait key|}}
     <div class="trait flexrow flex-group flex-left">
       <span class="trait-name rollable" data-roll="{{trait.value}}" data-label="{{key}}">
         {{trait.label}}
@@ -21,8 +21,8 @@
       {{localize "SVNSEA2E.Fear"}}
     </span>
     <span>
-    {{#for 1 data.fear.max 1}}
-      {{#iff data.fear.value '>=' @index}}
+    {{#for 1 fear.max 1}}
+      {{#iff fear.value '>=' @index}}
         <i data-name="data.fear.value" data-value="{{@index}}" data-type="fear" data-key="fear" class="fillable fas fa-circle"></i>
       {{else}}
         <i data-name="data.fear.value" data-value="{{@index}}" data-type="fear" data-key="fear" class="fillable far fa-circle"></i>

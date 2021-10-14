@@ -1,9 +1,9 @@
-<h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SVNSEA2E.ActorName"}}" /></h1>
+<h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
 <div class="nation flex-row">
   <div class="form-group flex-group">
     <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
-    <select class="nation" name="data.nation">
-      {{#select data.nation}}
+    <select class="nation" name="data.nation" id="data.nation">
+      {{#select nation}}
         <option value="none"></option>
         {{#each config.nations as |label nation|}}
           <option value="{{nation}}">{{label}}</option>
@@ -12,7 +12,7 @@
     </select>
     <span class="flex-group-right twodigit">
       <label for="data.age">{{localize "SVNSEA2E.Age"}}</label>
-      <input type="text" name="data.age" value="{{data.age}}" />
+      <input type="text" name="data.age" value="{{age}}" id="data.age" />
     </span>
   </div>
 </div>

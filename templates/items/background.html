@@ -1,12 +1,12 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="form-group">
         <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
-        <select class="nation" name="data.nation">
-          {{#select data.nation}}
+        <select id="data.nation" class="nation" name="data.nation">
+          {{#select nation}}
             <option value="none"></option>
             {{#each config.natTypes as |label nation|}}
               <option value="{{nation}}">{{label}}</option>
@@ -34,12 +34,12 @@
   <section class="sheet-body">
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Quirk Tab --}}
     <div class="tab" data-group="primary" data-tab="quirk">
-      {{editor content=data.quirk target="data.quirk" button=true owner=owner editable=editable}}
+      {{editor content=quirk target="data.quirk" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Details Tab --}}
@@ -47,7 +47,7 @@
       <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
       <div class="skills flexrow flex-group flex-left">
         <ul class="tag-list">
-          {{#each data.selectedskills as |k v|}}
+          {{#each selectedskills as |k v|}}
             <li class="tag {{v}}">{{k}}</li>
           {{/each}}
         </ul>
@@ -56,7 +56,7 @@
       <h3 class="advantages-title">{{localize "SVNSEA2E.Advantages"}}</h3>
       <div class="advantages flexrow flex-group flex-left">
         <ul class="tag-list">
-          {{#each data.selectedadvantages as |k v|}}
+          {{#each selectedadvantages as |k v|}}
             <li class="tag {{v}}">{{k}}</li>
           {{/each}}
         </ul>

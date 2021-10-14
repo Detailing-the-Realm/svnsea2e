@@ -1,19 +1,18 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es2021": true,
+        "node": true,
+        "jquery": true
     },
-    "extends": [
-        "standard"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 11,
+        "requireConfigFile": false,
         "sourceType": "module"
     },
+    "plugins": [
+        "jsdoc"
+    ],
     "rules": {
     }
 }

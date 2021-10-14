@@ -1,12 +1,12 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="traits grid grid-3col">
         <div class="trait flexrow">
           <label for="data.influence.value" class="trait-name">{{localize "SVNSEA2E.Influence"}}</label>
-          <input type="text" name="data.influence.value" value="{{ data.influence.value }}"data-dtype="Number" />
+          <input type="text" id="data.influence.value" name="data.influence.value" value="{{ influence.value }}"data-dtype="Number" />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
 
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

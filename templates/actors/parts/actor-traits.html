@@ -2,7 +2,7 @@
 <div class="tab traits" data-group="primary" data-tab="traits">
   <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
   <div class="traits grid grid-3col">
-    {{#each data.traits as |trait key|}}
+    {{#each traits as |trait key|}}
       <div class="trait flexrow flex-group flex-left">
         <span class="trait-name">
           {{trait.label}}
@@ -10,9 +10,9 @@
         <span>
         {{#for 1 trait.max 1}}
           {{#iff trait.value '>=' @index}}
-            <i data-name="data.traits.{{key}}.value" data-value="{{@index}}" data-type="trait" data-key="{{key}}" class="fillable fas fa-circle"></i>
+            <i data-name="data.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable fas fa-circle"></i>
           {{else}}
-            <i data-name="data.traits.{{key}}.value" data-value="{{@index}}" data-type="trait" data-key="{{key}}" class="fillable far fa-circle"></i>
+            <i data-name="data.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable far fa-circle"></i>
           {{/iff}}
         {{/for}}
         </span>
@@ -22,17 +22,17 @@
   {{#if hasSkills}}
     <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
     <div class="skills grid grid-3col">
-      {{#each data.skills as |skill key|}}
+      {{#each skills as |skill key|}}
         <div class="skill flexrow flex-group flex-left">
-          <span class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{key}}">
+          <span class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{skill.name}}">
             {{skill.label}}
           </span>
           <span>
           {{#for 1 skill.max 1}}
             {{#iff skill.value '>=' @index}}
-              <i data-name="data.skills.{{key}}.value" data-value="{{@index}}" data-type="skill" data-key="{{key}}" class="fillable fas fa-circle"></i>
+              <i data-name="data.skills.{{skill.name}}.value" data-value="{{@index}}" data-type="skill" data-key="{{skill.name}}" class="fillable fas fa-circle"></i>
             {{else}}
-              <i data-name="data.skills.{{key}}.value" data-value="{{@index}}" data-type="skill" data-key="{{key}}" class="fillable far fa-circle"></i>
+              <i data-name="data.skills.{{skill.name}}.value" data-value="{{@index}}" data-type="skill" data-key="{{skill.name}}" class="fillable far fa-circle"></i>
             {{/iff}}
           {{/for}}
           </span>
@@ -49,7 +49,7 @@
     <h3 class="language-title">{{localize "SVNSEA2E.Languages"}}</h3>
     <div class="language flexrow flex-group flex-left">
       <ul class="tag-list">
-        {{#each data.selectedlangs as |k v|}}
+        {{#each selectedlangs as |k v|}}
           <li class="tag {{v}}">{{k}}</li>
         {{/each}}
       </ul>
