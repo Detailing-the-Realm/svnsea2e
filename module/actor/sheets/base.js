@@ -55,6 +55,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       religion: baseData.data.data.religion,
       reputation: baseData.data.data.reputation,
       concept: baseData.data.data.concept,
+      arcana: baseData.data.data.arcana,
 
       // Inventory Tab
       equipment: baseData.data.data.equipment,
@@ -76,6 +77,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       this._processFlags(baseData, baseData.data.flags, sheetData);
     } else if (this.actor.data.type === "dangerpts") {
       sheetData.points = baseData.data.data.points;
+    } else if (this.actor.data.type === "brute") {
+      sheetData.ability = baseData.data.data.ability;
     }
     return sheetData;
   }
