@@ -280,7 +280,7 @@
   "SVNSEA2E.Cook": "Cuisinier",
   "SVNSEA2E.Accountant": "Comptable",
   "SVNSEA2E.Thiqa": "Thiqa",
-  "SVNSEA2E.Tailsman": "Tailsman",
+  "SVNSEA2E.Tailsman": "Talisman",
   "SVNSEA2E.Inscription": "Inscription",
   "SVNSEA2E.Mbey": "Mbey",
   "SVNSEA2E.DuelStyle": "Style de Duel",
@@ -320,5 +320,8 @@
   "SVNSEA2E.Great": "Génial",
   "SVNSEA2E.Small": "Petit",
   "SVNSEA2E.IncreaseThreshold": "Augmenter le seuil de 5",
-  "SVNSEA2E.GMIncreasedThreshold": "(GM a augmenté le seuil de 5)"
+  "SVNSEA2E.GMIncreasedThreshold": "(GM a augmenté le seuil de 5)",
+  "SVNSEA2E.DeathToken": "Jeton de mort",
+  "SVNSEA2E.Wonder": "Merveille",
+  "SVNSEA2E.Tatoo": "Tatouage"
 }
