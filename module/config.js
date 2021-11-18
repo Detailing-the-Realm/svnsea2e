@@ -21,7 +21,9 @@ SVNSEA2E.itemTypes = {
   shipadventure: 'SVNSEA2E.ShipAdventure',
   shipbackground: 'SVNSEA2E.ShipBackground',
   sorcery: 'SVNSEA2E.Sorcery',
-  story: 'SVNSEA2E.Story'
+  story: 'SVNSEA2E.Story',
+  hubris: 'SVNSEA2E.Hubris',
+  virtue: 'SVNSEA2E.Virtue'
 }
 
 SVNSEA2E.actorTypes = {

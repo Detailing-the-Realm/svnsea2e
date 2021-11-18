@@ -28,6 +28,8 @@ import LanguageSelector from "./apps/language-selector.js";
 import SkillSelector from "./apps/skill-selector.js";
 
 import * as migrations from "./migration.js";
+import { ItemSheetSS2eVirtue } from "./item/sheets/virtue.js";
+import { ItemSheetSS2eHubris } from "./item/sheets/hubris.js";
 
 Hooks.once("init", async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System
@@ -136,6 +138,14 @@ Hooks.once("init", async function () {
   Items.registerSheet("svnsea2e", ItemSheetSS2eStory, {
     types: ["story"],
     makeDefault: true,
+  });
+  Items.registerSheet("svnsea2e", ItemSheetSS2eVirtue, {
+    types: ["virtue"],
+    makeDefault: true
+  });
+  Items.registerSheet("svnsea2e", ItemSheetSS2eHubris, {
+    types: ["hubris"],
+    makeDefault: true
   });
 
   // If you need to add Handlebars helpers, here are a few useful examples:

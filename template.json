@@ -218,7 +218,7 @@
     }
   },
   "Item": {
-    "types": ["advantage", "artifact", "background", "duelstyle", "monsterquality", "scheme", "secretsociety", "shipadventure", "shipbackground", "sorcery", "story"],
+    "types": ["advantage", "artifact", "background", "duelstyle", "monsterquality", "scheme", "secretsociety", "shipadventure", "shipbackground", "sorcery", "story", "virtue", "hubris"],
     "templates": {
       "base": {
         "description": "",
@@ -273,6 +273,12 @@
       "templates": ["base"]
     },
     "shipbackground": {
+      "templates": ["base"]
+    },
+    "virtue": {
+      "templates": ["base"]
+    },
+    "hubris": {
       "templates": ["base"]
     },
     "sorcery": {
