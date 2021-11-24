@@ -3,20 +3,20 @@
     <div class="form-group flex-group">
       <label for="data.heropts">{{ localize "SVNSEA2E.HeroPoints" }}</label>
       <span class="twodigit">
-        <input type="text" name="data.heropts" value="{{data.heropts}}" />
+        <input type="text" name="data.heropts" value="{{heropts}}" id="data.heropts"/>
       </span>
       <label for="data.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
       <span class="twodigit">
-        <input type="text" name="data.wealth" value="{{data.wealth}}" data-dtype="String" />
+        <input type="text" name="data.wealth" value="{{wealth}}" data-dtype="String" id="data.wealth" />
       </span>
     </div>
   </div>
   <div class="flex-row corruption">
     <div class="form-group flex-group-left">
-      <label for="data.corruptionpts">{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
+      <label>{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
       <span class="flex-group-right">
       {{#for 1 10 1}}
-        {{#iff data.corruptionpts '>=' @index}}
+        {{#iff corruptionpts '>=' @index}}
           <i data-name="data.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable fas fa-circle"></i>
         {{else}}
           <i data-name="data.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable far fa-circle"></i>
@@ -30,16 +30,16 @@
   {{localize "SVNSEA2E.Wounds" }}
 </div>
 <div class="flex-group-left wounds">
-  {{#for 1 data.wounds.max 1}}
+  {{#for 1 wounds.max 1}}
     {{#iff @remain '!=' 0}}
-      {{#iff data.wounds.value '>=' @index}}
+      {{#iff wounds.value '>=' @index}}
         <i data-name="data.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable fas fa-heart fa-lg"></i>
       {{else}}
         <i data-name="data.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable far fa-heart fa-lg"></i>
       {{/iff}}
     {{else}}
       {{#if isNotBrute}}
-        {{#iff data.dwounds.value '>=' @mod}}
+        {{#iff dwounds.value '>=' @mod}}
           <i data-name="data.dwounds.value" data-value="{{@mod}}" data-type="dwounds" class="fillable fas fa-heart red fa-lg"></i>
         {{else}}
           <i data-name="data.dwounds.value" data-value="{{@mod}}" data-type="dwounds" class="fillable far fa-heart red fa-lg"></i>

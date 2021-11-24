@@ -2,12 +2,12 @@
   <div class="grid grid-2col">
     <div class="form-group flex-group">
       <label for="data.religion">{{localize "SVNSEA2E.Religion"}}</label>
-      <input type="text" name="data.religion" value="{{data.religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
+      <input type="text" id="data.religion" name="data.religion" value="{{religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
     </div>
     <div class="form-group flex-group">
       <label for="data.reputation">{{localize "SVNSEA2E.Reputation"}}</label>
-      <input type="text" name="data.reputation" value="{{data.reputation}}" placeholder="{{localize "SVNSEA2E.Reputation"}}" />
+      <input type="text" id="data.reputation" name="data.reputation" value="{{reputation}}" placeholder="{{localize "SVNSEA2E.Reputation"}}" />
     </div>
   </div>
-  {{editor content=data.concept target="data.concept" button=true owner=owner editable=editable}}
+  {{editor content=concept target="data.concept" button=true owner=owner editable=editable}}
 </div>

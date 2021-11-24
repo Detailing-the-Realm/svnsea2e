@@ -1,20 +1,32 @@
-import ActorSheetSS2e from './base.js'
+import ActorSheetSS2e from "./base.js";
+import {
+  getAdvantageItems,
+  getArtifactItems,
+  getBackgroundItems,
+  getDuelStyleItems,
+  getSecretSocietyItems,
+  getSorceryItems,
+  getStoryItems,
+  skillsToSheetData,
+} from "../../helpers.js";
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
  */
 export class ActorSheetSS2eHero extends ActorSheetSS2e {
   /** @override */
-  static get defaultOptions () {
+  static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ['svnsea2e', 'sheet', 'actor', 'hero'],
-      template: 'systems/svnsea2e/templates/actors/hero.html',
-      tabs: [{
-        navSelector: '.sheet-tabs',
-        contentSelector: '.sheet-body',
-        initial: 'traits'
-      }]
-    })
+      classes: ["svnsea2e", "sheet", "actor", "hero"],
+      template: "systems/svnsea2e/templates/actors/hero.html",
+      tabs: [
+        {
+          navSelector: ".sheet-tabs",
+          contentSelector: ".sheet-body",
+          initial: "traits",
+        },
+      ],
+    });
   }
 
   /**
@@ -24,51 +36,15 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareHeroItems (data) {
-    const actorData = data.actor
-
-    // Update skill labels
-    for (const [s, skl] of Object.entries(data.actor.data.skills)) {
-      skl.label = CONFIG.SVNSEA2E.skills[s]
-    }
-
-    // Initialize containers.
-    const advantages = []
-    const backgrounds = []
-    const sorcery = []
-    const secretsocieties = []
-    const stories = []
-    const duelstyles = []
-    const artifacts = []
-
-    // Iterate through items, allocating to containers
-    // let totalWeight = 0
-    for (const i of data.items) {
-      // Append to item types to their arrays
-      if (i.type === 'advantage') {
-        advantages.push(i)
-      } else if (i.type === 'background') {
-        backgrounds.push(i)
-      } else if (i.type === 'sorcery') {
-        sorcery.push(i)
-      } else if (i.type === 'secretsociety') {
-        secretsocieties.push(i)
-      } else if (i.type === 'story') {
-        stories.push(i)
-      } else if (i.type === 'duelstyle') {
-        duelstyles.push(i)
-      } else if (i.type === 'artifact') {
-        artifacts.push(i)
-      }
-    }
-
+  _prepareHeroItems(baseData, sheetData) {
     // Assign and return
-    actorData.advantages = advantages
-    actorData.backgrounds = backgrounds
-    actorData.sorcery = sorcery
-    actorData.secretsocieties = secretsocieties
-    actorData.stories = stories
-    actorData.duelstyles = duelstyles
-    actorData.artifacts = artifacts
+    sheetData.skills = skillsToSheetData(baseData, CONFIG);
+    sheetData.advantages = getAdvantageItems(baseData);
+    sheetData.backgrounds = getBackgroundItems(baseData);
+    sheetData.sorcery = getSorceryItems(baseData);
+    sheetData.secretsocieties = getSecretSocietyItems(baseData);
+    sheetData.stories = getStoryItems(baseData);
+    sheetData.duelstyles = getDuelStyleItems(baseData);
+    sheetData.artifacts = getArtifactItems(baseData);
   }
 }
