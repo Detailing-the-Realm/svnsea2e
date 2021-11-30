@@ -2,9 +2,9 @@
   "name": "svnsea2e",
   "title": "7th Sea Second Edition (Unofficial)",
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
-  "version": 2.7,
+  "version": 2.8,
   "minimumCoreVersion": "0.7.0",
-  "compatibleCoreVersion": "0.7.9",
+  "compatibleCoreVersion": "0.8.9",
   "templateVersion": 2,
   "author": "psychoph",
   "esmodules": ["module/svnsea2e.js"],
@@ -37,6 +37,6 @@
   "secondaryTokenAttribute": "dwounds",
   "url": "https://github.com/Detailing-the-Realm/svnsea2e/",
   "manifest": "https://raw.githubusercontent.com/Detailing-the-Realm/svnsea2e/master/system.json",
-  "download": "https://github.com/Detailing-the-Realm/svnsea2e/archive/2.7.zip",
+  "download": "https://github.com/Detailing-the-Realm/svnsea2e/archive/2.8.zip",
   "license": "LICENSE"
 }
