@@ -29,3 +29,7 @@ export const getShipBackgroundItems = (baseData) =>
   baseData.items.filter((item) => item.type === "shipbackground");
 export const getMonsterQualityItems = (baseData) =>
   baseData.items.filter((item) => item.type === "monsterquality");
+export const getVirtueItems = (baseData) =>
+  baseData.items.filter((item) => item.type === "virtue");
+  export const getHubrisItems = (baseData) =>
+  baseData.items.filter((item) => item.type === "hubris");

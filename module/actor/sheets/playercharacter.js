@@ -4,9 +4,11 @@ import {
   getArtifactItems,
   getBackgroundItems,
   getDuelStyleItems,
+  getHubrisItems,
   getSecretSocietyItems,
   getSorceryItems,
   getStoryItems,
+  getVirtueItems,
   skillsToSheetData,
 } from "../../helpers.js";
 
@@ -47,5 +49,7 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
     sheetData.stories = getStoryItems(baseData);
     sheetData.duelstyles = getDuelStyleItems(baseData);
     sheetData.artifacts = getArtifactItems(baseData);
+    sheetData.virtues = getVirtueItems(baseData);
+    sheetData.hubriss = getHubrisItems(baseData);
   }
 }

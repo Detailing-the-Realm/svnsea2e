@@ -2,8 +2,10 @@ import ActorSheetSS2e from "./base.js";
 import {
   getAdvantageItems,
   getArtifactItems,
+  getHubrisItems,
   getSchemeItems,
   getSorceryItems,
+  getVirtueItems,
 } from "../../helpers.js";
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -38,5 +40,7 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
     sheetData.artifacts = getArtifactItems(baseData);
     sheetData.sorcery = getSorceryItems(baseData);
     sheetData.schemes = getSchemeItems(baseData);
+    sheetData.virtues = getVirtueItems(baseData);
+    sheetData.hubriss = getHubrisItems(baseData);
   }
 }
