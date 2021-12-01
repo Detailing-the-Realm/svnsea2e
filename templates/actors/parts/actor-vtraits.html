@@ -1,15 +1,15 @@
 <h3 class="trait-title">{{localize "SVNSEA2E.Traits"}}</h3>
   {{#each traits as |trait key|}}
     <div class="trait flexrow flex-group flex-left">
-      <span class="trait-name rollable" data-roll="{{trait.value}}" data-label="{{key}}">
+      <span class="trait-name rollable" data-roll="{{trait.value}}" data-label="{{trait.name}}">
         {{trait.label}}
       </span>
       <span>
       {{#for 1 trait.max 1}}
         {{#iff trait.value '>=' @index}}
-          <i data-name="data.traits.{{key}}.value" data-value="{{@index}}" data-type="trait" data-key="{{key}}" class="fillable fas fa-circle"></i>
+          <i data-name="data.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable fas fa-circle"></i>
         {{else}}
-          <i data-name="data.traits.{{key}}.value" data-value="{{@index}}" data-type="trait" data-key="{{key}}" class="fillable far fa-circle"></i>
+          <i data-name="data.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable far fa-circle"></i>
         {{/iff}}
       {{/for}}
       </span>
