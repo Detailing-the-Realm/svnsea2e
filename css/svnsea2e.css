@@ -43,7 +43,7 @@ h1 {
 h2 {
   font-size: 1.6em;
   padding-bottom: 2px;
-  background: url(/systems/svnsea2e/imgs/paint_border.png);
+  background: url(../imgs/paint_border.png);
   background-repeat: no-repeat;
   background-size: 100% 6px;
   background-position: left bottom;
@@ -257,7 +257,7 @@ input[type=range]::-webkit-slider-thumb {
 .rollable:focus, .rollable:hover {
   text-shadow: 0 0 10px #EEE8BF;
   cursor: pointer;
-  background-image: url("/systems/svnsea2e/icons/d10.svg");
+  background-image: url("../icons/d10.svg");
   background-size: 20px;
   background-repeat: no-repeat;
   padding-left: 20px;
@@ -428,7 +428,7 @@ input[type=range]::-webkit-slider-thumb {
 #sidebar .sidebar-tab .directory-list .playlist-header h4,
 #sidebar .sidebar-tab .directory-list h3 {
   padding-bottom: 2px;
-  background: url(/systems/svnsea2e/imgs/paint_border.png);
+  background: url(../imgs/paint_border.png);
   background-repeat: no-repeat;
   background-size: 100% 6px;
   background-position: left bottom;
@@ -496,7 +496,7 @@ input[type=range]::-webkit-slider-thumb {
 
 #chat #chat-log .chat-card.skill-roll .card-header {
   padding-bottom: 2px;
-  background: url(/systems/svnsea2e/imgs/paint_border.png);
+  background: url(../imgs/paint_border.png);
   background-repeat: no-repeat;
   background-size: 100% 6px;
   background-position: left bottom;
@@ -666,7 +666,7 @@ input[type=range]::-webkit-slider-thumb {
 .sheet h1.charname,
 .sheet h3 {
   padding-bottom: 2px;
-  background: url(/systems/svnsea2e/imgs/paint_border.png);
+  background: url(../imgs/paint_border.png);
   background-repeat: no-repeat;
   background-size: 100% 6px;
   background-position: left bottom;
