@@ -1,4 +1,4 @@
-import LanguageSelector from "../../apps/language-selector.js";
+import LanguageSelector from '../../apps/language-selector.js';
 
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
@@ -26,17 +26,17 @@ export default class ActorSheetSS2e extends ActorSheet {
       limited,
       options: this.options,
       editable: this.isEditable,
-      cssClass: owner ? "editable" : "locked",
+      cssClass: owner ? 'editable' : 'locked',
       isCorrupt: this.document.data.data.corruptionpts > 0,
-      isPlayerCharacter: this.document.data.type === "playercharacter",
-      isHero: this.document.data.type === "hero",
-      isVillain: this.document.data.type === "villain",
-      isMonster: this.document.data.type === "monster",
-      isNotBrute: this.document.data.type !== "brute",
-      hasSkills: typeof this.document.data.data.skills !== "undefined",
-      hasLanguages: typeof this.document.data.data.languages !== "undefined",
+      isPlayerCharacter: this.document.data.type === 'playercharacter',
+      isHero: this.document.data.type === 'hero',
+      isVillain: this.document.data.type === 'villain',
+      isMonster: this.document.data.type === 'monster',
+      isNotBrute: this.document.data.type !== 'brute',
+      hasSkills: typeof this.document.data.data.skills !== 'undefined',
+      hasLanguages: typeof this.document.data.data.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
-      dtypes: ["String", "Number", "Boolean"],
+      dtypes: ['String', 'Number', 'Boolean'],
 
       // Core Actor data:
       name: this.actor.name,
@@ -62,22 +62,22 @@ export default class ActorSheetSS2e extends ActorSheet {
     };
 
     // Prepare items.
-    if (this.actor.data.type === "playercharacter") {
+    if (this.actor.data.type === 'playercharacter') {
       this._prepareCharacterItems(baseData, sheetData);
-    } else if (this.actor.data.type === "hero") {
+    } else if (this.actor.data.type === 'hero') {
       this._prepareHeroItems(baseData, sheetData);
       sheetData.selectedlangs = this._prepareLanguages(baseData);
-    } else if (this.actor.data.type === "villain") {
+    } else if (this.actor.data.type === 'villain') {
       this._prepareVillainItems(baseData, sheetData);
       sheetData.selectedlangs = this._prepareLanguages(baseData);
-    } else if (this.actor.data.type === "monster") {
+    } else if (this.actor.data.type === 'monster') {
       this._prepareMonsterItems(baseData, sheetData);
-    } else if (this.actor.data.type === "ship") {
+    } else if (this.actor.data.type === 'ship') {
       this._prepareShipItems(baseData, sheetData);
       this._processFlags(baseData, baseData.data.flags, sheetData);
-    } else if (this.actor.data.type === "dangerpts") {
+    } else if (this.actor.data.type === 'dangerpts') {
       sheetData.points = baseData.data.data.points;
-    } else if (this.actor.data.type === "brute") {
+    } else if (this.actor.data.type === 'brute') {
       sheetData.ability = baseData.data.data.ability;
     }
     return sheetData;
@@ -87,10 +87,10 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   _prepareButtonTitles(data) {
     for (const item of Object.values(data)) {
-      item.editlabel = game.i18n.format("SVNSEA2E.EditLabel", {
+      item.editlabel = game.i18n.format('SVNSEA2E.EditLabel', {
         label: data.name,
       });
-      item.deletelabel = game.i18n.format("SVNSEA2E.DeleteLabel", {
+      item.deletelabel = game.i18n.format('SVNSEA2E.DeleteLabel', {
         label: data.name,
       });
     }
@@ -106,7 +106,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _prepareTraits(baseData) {
-    return !["ship", "dangerpts"].includes(baseData.data.type)
+    return !['ship', 'dangerpts'].includes(baseData.data.type)
       ? Object.entries(baseData.actor.data.data.traits).map(([t, trait]) => ({
           ...trait,
           name: t,
@@ -125,58 +125,58 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // language Selector
     html
-      .find(".language-selector")
-      .on("click", this._onLanguageSelector.bind(this));
+      .find('.language-selector')
+      .on('click', this._onLanguageSelector.bind(this));
 
-    html.find(".item-create").on("click", this._onItemCreate.bind(this));
+    html.find('.item-create').on('click', this._onItemCreate.bind(this));
 
     // Update Inventory Item
-    html.find(".item-edit").on("click", (ev) => {
-      const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+    html.find('.item-edit').on('click', (ev) => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data('itemId'));
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
-    html.find(".item-delete").on("click", this._onItemDelete.bind(this));
+    html.find('.item-delete').on('click', this._onItemDelete.bind(this));
 
     html
-      .find(".item h4.item-name")
-      .on("click", (event) => this._onItemSummary(event));
+      .find('.item h4.item-name')
+      .on('click', (event) => this._onItemSummary(event));
 
     // Rollable abilities.
     if (
-      this.actor.data.type === "playercharacter" ||
-      this.actor.data.type === "hero"
+      this.actor.data.type === 'playercharacter' ||
+      this.actor.data.type === 'hero'
     ) {
-      html.find(".rollable").on("click", this._onHeroRoll.bind(this));
+      html.find('.rollable').on('click', this._onHeroRoll.bind(this));
     } else if (
-      this.actor.data.type === "villain" ||
-      this.actor.data.type === "monster"
+      this.actor.data.type === 'villain' ||
+      this.actor.data.type === 'monster'
     ) {
-      html.find(".rollable").on("click", this._onVillainRoll.bind(this));
+      html.find('.rollable').on('click', this._onVillainRoll.bind(this));
     }
 
     html
-      .find(".fillable.fa-circle")
-      .on("click", (event) => this._processCircle(event));
-    if (this.actor.data.type === "brute") {
+      .find('.fillable.fa-circle')
+      .on('click', (event) => this._processCircle(event));
+    if (this.actor.data.type === 'brute') {
       html
-        .find(".fillable.fa-heart")
-        .on("click", (event) => this._processBruteWounds(event));
+        .find('.fillable.fa-heart')
+        .on('click', (event) => this._processBruteWounds(event));
     } else {
       html
-        .find(".fillable.fa-heart")
-        .on("click", (event) => this._processWounds(event));
+        .find('.fillable.fa-heart')
+        .on('click', (event) => this._processWounds(event));
     }
 
     // Drag events for macros.
     if (this.actor.isOwner) {
       const handler = (ev) => this._onDragItemStart(ev);
-      html.find("li.item").each((i, li) => {
-        if (li.classList.contains("inventory-header")) return;
-        li.setAttribute("draggable", true);
-        li.addEventListener("dragstart", handler, false);
+      html.find('li.item').each((i, li) => {
+        if (li.classList.contains('inventory-header')) return;
+        li.setAttribute('draggable', true);
+        li.addEventListener('dragstart', handler, false);
       });
     }
   }
@@ -190,7 +190,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   _prepareLanguages(baseData) {
     // Languages only apply to PCs, heroes, or villains.
-    if (!["playercharacter", "hero", "villain"].includes(baseData.data.type))
+    if (!['playercharacter', 'hero', 'villain'].includes(baseData.data.type))
       return undefined;
 
     return baseData.actor.data.data.languages.reduce(
@@ -198,7 +198,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         ...languages,
         [language]: CONFIG.SVNSEA2E.languages[language],
       }),
-      {}
+      {},
     );
   }
 
@@ -219,20 +219,20 @@ export default class ActorSheetSS2e extends ActorSheet {
     let tval = 0;
     if (dataSetValue === 1) {
       switch (dataSet.type) {
-        case "skill":
+        case 'skill':
           tval = actorData.skills[dataSet.key].value;
           break;
-        case "trait":
-          if (dataSet.key === "influence" || dataSet.key === "strength") {
+        case 'trait':
+          if (dataSet.key === 'influence' || dataSet.key === 'strength') {
             tval = actorData.traits[dataSet.key].value;
           } else {
             dataSetValue = 2;
           }
           break;
-        case "corrupt":
+        case 'corrupt':
           tval = actorData[dataSet.key];
           break;
-        case "fear":
+        case 'fear':
           tval = actorData[dataSet.key].value;
           break;
       }
@@ -256,12 +256,12 @@ export default class ActorSheetSS2e extends ActorSheet {
   _processBruteWounds(event) {
     const actor = this.actor;
     let updateObj = {};
-    updateObj["data.wounds.value"] = event.target.dataset.value;
+    updateObj['data.wounds.value'] = event.target.dataset.value;
     if (
       this.actor.data.data.wounds.value == 1 &&
       event.target.dataset.value == 1
     )
-      updateObj["data.wounds.value"] = 0;
+      updateObj['data.wounds.value'] = 0;
 
     actor.update(updateObj);
   }
@@ -281,7 +281,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     let wounds = data.wounds.value;
     let dwounds = data.dwounds.value;
 
-    if (edata.type === "wounds") {
+    if (edata.type === 'wounds') {
       wounds = edata.value;
       dwounds = data.dwounds.value;
       const dwestimate = Math.trunc(wounds / 5);
@@ -300,8 +300,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       if (data.wounds.value > edata.value * 5) wounds = edata.value * 5;
     }
 
-    updateObj["data.wounds.value"] = wounds;
-    updateObj["data.dwounds.value"] = dwounds;
+    updateObj['data.wounds.value'] = wounds;
+    updateObj['data.dwounds.value'] = dwounds;
 
     actor.update(updateObj);
   }
@@ -317,7 +317,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     event.preventDefault();
     const a = event.currentTarget;
     const options = {
-      title: game.i18n.localize("SVNSEA2E.Languages"),
+      title: game.i18n.localize('SVNSEA2E.Languages'),
       choices: CONFIG.SVNSEA2E[a.dataset.options],
     };
     new LanguageSelector(this.actor, options).render(true);
@@ -357,11 +357,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemDelete(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest(".item");
+    const li = event.currentTarget.closest('.item');
     const itemid = li.dataset.itemId;
 
     const item = this.actor.getOwnedItem(itemid);
-    if (item && item.data.type === "background")
+    if (item && item.data.type === 'background')
       await this._processBackgroundDelete(item.data.data);
 
     await this.actor.deleteOwnedItem(itemid);
@@ -375,24 +375,24 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemSummary(event) {
     event.preventDefault();
-    const li = $(event.currentTarget).parents(".item");
-    const item = this.actor.getOwnedItem(li.data("item-id"));
+    const li = $(event.currentTarget).parents('.item');
+    const item = this.actor.getOwnedItem(li.data('item-id'));
     const chatData = item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
-    if (li.hasClass("expanded")) {
-      const summary = li.children(".item-summary");
+    if (li.hasClass('expanded')) {
+      const summary = li.children('.item-summary');
       summary.slideUp(200, () => summary.remove());
     } else {
       const div = $(`<div class="item-summary">${chatData.description}</div>`);
       const metadata = $(
-        `<div class="item-metdata">${chatData.metadatahtml}</div>`
+        `<div class="item-metdata">${chatData.metadatahtml}</div>`,
       );
       div.append(metadata);
       li.append(div.hide());
       div.slideDown(200);
     }
-    li.toggleClass("expanded");
+    li.toggleClass('expanded');
   }
 
   /* -------------------------------------------- */
@@ -404,19 +404,19 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Get dropped data
     let data;
     try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
     } catch (err) {
       return false;
     }
     if (!data) return false;
 
     // Case 1 - Dropped Item
-    if (data.type === "Item") {
+    if (data.type === 'Item') {
       return this._onDropItem(event, data);
     }
 
     // Case 2 - Dropped Actor
-    if (data.type === "Actor") {
+    if (data.type === 'Actor') {
       return this._onDropActor(event, data);
     }
   }
@@ -451,47 +451,47 @@ export default class ActorSheetSS2e extends ActorSheet {
       (actor.isToken && data.tokenId === actor.token.id);
     if (sameActor) return this._onSortItem(event, itemData);
 
-    if (itemData.type !== "sorcery") {
+    if (itemData.type !== 'sorcery') {
       if (await this._doesActorHaveItem(itemData.type, itemData.name)) {
         return ui.notifications.error(
-          game.i18n.format("SVNSEA2E.ItemExists", {
+          game.i18n.format('SVNSEA2E.ItemExists', {
             type: itemData.type,
             name: itemData.name,
-          })
+          }),
         );
       }
     }
 
-    if (itemData.type === "background") {
+    if (itemData.type === 'background') {
       if (
-        itemData.data.nation === "gisles" &&
-        (this.actor.data.data.nation === "highland" ||
-          this.actor.data.data.nation === "avalon" ||
-          this.actor.data.data.nation === "insmore")
+        itemData.data.nation === 'gisles' &&
+        (this.actor.data.data.nation === 'highland' ||
+          this.actor.data.data.nation === 'avalon' ||
+          this.actor.data.data.nation === 'insmore')
       ) {
         await this._processBackgroundDrop(itemData);
-        return await this.actor.createEmbeddedDocuments("Item", [itemData]);
+        return await this.actor.createEmbeddedDocuments('Item', [itemData]);
       }
       if (
-        itemData.data.nation !== "none" &&
+        itemData.data.nation !== 'none' &&
         itemData.data.nation !== this.actor.data.data.nation
       ) {
         return ui.notifications.error(
-          game.i18n.format("SVNSEA2E.WrongNation", {
+          game.i18n.format('SVNSEA2E.WrongNation', {
             bgnation: game.i18n.localize(
-              CONFIG.SVNSEA2E.nations[itemData.data.nation]
+              CONFIG.SVNSEA2E.nations[itemData.data.nation],
             ),
             anation: game.i18n.localize(
-              CONFIG.SVNSEA2E.nations[this.actor.data.data.nation]
+              CONFIG.SVNSEA2E.nations[this.actor.data.data.nation],
             ),
             name: itemData.name,
-          })
+          }),
         );
       }
       await this._processBackgroundDrop(itemData);
     }
     // Create the owned item
-    return await this.actor.createEmbeddedDocuments("Item", [itemData]);
+    return await this.actor.createEmbeddedDocuments('Item', [itemData]);
   }
 
   /* -------------------------------------------- */
@@ -509,7 +509,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== "Actor") return;
+      if (pack.metadata.entity !== 'Actor') return;
       actorData = await pack.getEntry(data.id);
     } else if (data.data) {
       // Case 2 - Data explicitly provided
@@ -540,7 +540,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== "Item") return;
+      if (pack.metadata.entity !== 'Item') return;
       itemData = await pack.getEntry(data.id);
     } else if (data.data) {
       // Case 2 - Data explicitly provided
@@ -572,7 +572,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== "Item") return;
+      if (pack.metadata.entity !== 'Item') return;
       bkgData = await pack.getEntry(data.id);
     } else if (data.data) {
       // Case 2 - Data explicitly provided
@@ -588,7 +588,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     for (let i = 0; i < skills.length; i++) {
       const skill = skills[i];
-      updateData["data.skills." + skill + ".value"] =
+      updateData['data.skills.' + skill + '.value'] =
         actorData.skills[skill].value + 1;
     }
     await this.actor.update(updateData);
@@ -596,7 +596,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
       let advantage = game.items.entities.find(
-        (entry) => entry.data.name === bkgData.advantages[a]
+        (entry) => entry.data.name === bkgData.advantages[a],
       );
       if (!advantage) {
         // now we see if it is in a compendium
@@ -613,23 +613,23 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       if (!advantage) {
         ui.notifications.error(
-          game.i18n.format("SVNSEA2E.ItemDoesntExist", {
+          game.i18n.format('SVNSEA2E.ItemDoesntExist', {
             name: bkgData.advantages[a],
-          })
+          }),
         );
         continue;
       }
-      if (!advantage.name.toLowerCase().includes("sorcery")) {
-        if (await this._doesActorHaveItem("advantage", advantage.name)) {
+      if (!advantage.name.toLowerCase().includes('sorcery')) {
+        if (await this._doesActorHaveItem('advantage', advantage.name)) {
           ui.notifications.error(
-            game.i18n.format("SVNSEA2E.ItemExists", {
+            game.i18n.format('SVNSEA2E.ItemExists', {
               name: advantage.name,
-            })
+            }),
           );
           continue;
         }
       }
-      await this.actor.createEmbeddedDocuments("Item", [duplicate(advantage)]);
+      await this.actor.createEmbeddedDocuments('Item', [duplicate(advantage)]);
     }
   }
 
@@ -645,7 +645,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const updateData = {};
     for (let i = 0; i < bkgData.skills.length; i++) {
       const skill = bkgData.skills[i];
-      updateData["data.skills." + skill + ".value"] =
+      updateData['data.skills.' + skill + '.value'] =
         actorData.skills[skill].value - 1;
     }
     await this.actor.update(updateData);
@@ -654,7 +654,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     for (let i = 0; i < bkgData.advantages.length; i++) {
       for (let j = 0; j < charAdvs.length; j++) {
         if (charAdvs[j].data.name === bkgData.advantages[i]) {
-          await this.actor.deleteEmbeddedDocuments("Item", [charAdvs[j].id]);
+          await this.actor.deleteEmbeddedDocuments('Item', [charAdvs[j].id]);
         }
       }
     }
@@ -684,7 +684,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _getAdvantageNames() {
     return this.actor.items
-      .filter((item) => item.type === "advantage")
+      .filter((item) => item.type === 'advantage')
       .map((item) => item.name);
   }
 
@@ -695,7 +695,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _getAdvantages() {
-    return this.actor.items.filter((item) => item.type === "advantage");
+    return this.actor.items.filter((item) => item.type === 'advantage');
   }
 
   /* -------------------------------------------- */
@@ -712,7 +712,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const actor = this.actor;
     const data = this.actor.data.data;
 
-    let skillValue = data.skills[dataset.label]["value"];
+    let skillValue = data.skills[dataset.label]['value'];
     let rolled = false;
     let rolldata = {
       threshold: 10,
@@ -721,13 +721,13 @@ export default class ActorSheetSS2e extends ActorSheet {
       skilldice: skillValue,
     };
 
-    if (skillValue > 2) rolldata["reroll"] = true;
+    if (skillValue > 2) rolldata['reroll'] = true;
 
     // if the character's skill is 4 or more then they can get 2 raises when matching to a 15
-    if (skillValue >= 4) rolldata["threshold"] = 15;
+    if (skillValue >= 4) rolldata['threshold'] = 15;
 
     if (skillValue === 5 || data.dwounds.value === 3)
-      rolldata["explode"] = true;
+      rolldata['explode'] = true;
 
     const traits = {};
     for (const trait of Object.keys(data.traits)) {
@@ -735,14 +735,14 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
 
     // Render modal dialog
-    const template = "systems/svnsea2e/templates/chats/skill-roll-dialog.html";
+    const template = 'systems/svnsea2e/templates/chats/skill-roll-dialog.html';
     const dialogData = { data, traits };
 
     const html = await renderTemplate(template, dialogData);
 
     // Create the Dialog window
     let roll;
-    const title = game.i18n.format("SVNSEA2E.ApproachPromptTitle", {
+    const title = game.i18n.format('SVNSEA2E.ApproachPromptTitle', {
       skill: CONFIG.SVNSEA2E.skills[dataset.label],
     });
     return new Promise((resolve) => {
@@ -753,18 +753,18 @@ export default class ActorSheetSS2e extends ActorSheet {
           buttons: {
             roll: {
               icon: '<img src="systems/svnsea2e/icons/d10.svg" class="d10">',
-              label: game.i18n.localize("SVNSEA2E.Roll"),
+              label: game.i18n.localize('SVNSEA2E.Roll'),
               callback: (html) =>
                 (roll = this._roll({
                   rolldata,
                   actor,
                   data,
-                  form: html[0].querySelector("form"),
-                  template: "systems/svnsea2e/templates/chats/roll-card.html",
-                  title: game.i18n.format("SVNSEA2E.ApproachRollChatTitle", {
+                  form: html[0].querySelector('form'),
+                  template: 'systems/svnsea2e/templates/chats/roll-card.html',
+                  title: game.i18n.format('SVNSEA2E.ApproachRollChatTitle', {
                     trait:
-                      html[0].querySelector("form").trait[
-                        html[0].querySelector("form").trait.selectedIndex
+                      html[0].querySelector('form').trait[
+                        html[0].querySelector('form').trait.selectedIndex
                       ].text,
                     skill: CONFIG.SVNSEA2E.skills[dataset.label],
                   }),
@@ -775,7 +775,7 @@ export default class ActorSheetSS2e extends ActorSheet {
             resolve(rolled ? roll : false);
           },
         },
-        {}
+        {},
       ).render(true);
     });
   }
@@ -803,17 +803,17 @@ export default class ActorSheetSS2e extends ActorSheet {
     };
 
     // Render modal dialog
-    const template = "systems/svnsea2e/templates/chats/trait-roll-dialog.html";
+    const template = 'systems/svnsea2e/templates/chats/trait-roll-dialog.html';
     const dialogData = {
       data: data,
-      traitmax: data.traits[dataset.label]["value"],
+      traitmax: data.traits[dataset.label]['value'],
     };
 
     const html = await renderTemplate(template, dialogData);
 
     // Create the Dialog window
     let roll;
-    const title = game.i18n.format("SVNSEA2E.TraitRollTitle", {
+    const title = game.i18n.format('SVNSEA2E.TraitRollTitle', {
       trait: CONFIG.SVNSEA2E.traits[dataset.label],
     });
     return new Promise((resolve) => {
@@ -824,14 +824,14 @@ export default class ActorSheetSS2e extends ActorSheet {
           buttons: {
             roll: {
               icon: '<img src="systems/svnsea2e/icons/d10.svg" class="d10">',
-              label: game.i18n.localize("SVNSEA2E.Roll"),
+              label: game.i18n.localize('SVNSEA2E.Roll'),
               callback: (html) =>
                 (roll = this._roll({
                   rolldata: rolldata,
                   actor: actor,
                   data: data,
-                  form: html[0].querySelector("form"),
-                  template: "systems/svnsea2e/templates/chats/roll-card.html",
+                  form: html[0].querySelector('form'),
+                  template: 'systems/svnsea2e/templates/chats/roll-card.html',
                   title: title,
                 })),
             },
@@ -840,7 +840,7 @@ export default class ActorSheetSS2e extends ActorSheet {
             resolve(rolled ? roll : false);
           },
         },
-        {}
+        {},
       ).render(true);
     });
   }
@@ -901,10 +901,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     const _leftOverDice = function (
       rolls,
       threshold = 10,
-      incThreshold = false
+      incThreshold = false,
     ) {
       let total = 0;
-      let combotxt = "";
+      let combotxt = '';
       let data = {
         rolls: [],
         combos: [],
@@ -915,30 +915,30 @@ export default class ActorSheetSS2e extends ActorSheet {
       while (i--) {
         if (i > 0 && total === 0) {
           total += rolls[0] + rolls[i];
-          combotxt = rolls[0].toString() + " + " + rolls[i].toString();
+          combotxt = rolls[0].toString() + ' + ' + rolls[i].toString();
           rolls.splice(i, 1);
           rolls.splice(0, 1);
           i--; // length needs to shrink twice because we removed two elements from the array
         } else {
           total += rolls[0];
-          combotxt = combotxt + " + " + rolls[0].toString();
+          combotxt = combotxt + ' + ' + rolls[0].toString();
           rolls.splice(0, 1);
         }
 
         if (total >= threshold) {
-          data["raises"] += _addRaise(threshold, incThreshold);
-          data["combos"].push(combotxt);
-          combotxt = "";
+          data['raises'] += _addRaise(threshold, incThreshold);
+          data['combos'].push(combotxt);
+          combotxt = '';
           total = 0;
         }
       }
 
-      data["rolls"] = rolls;
+      data['rolls'] = rolls;
       return data;
     };
 
     const nd =
-      parseInt(rolldata["skilldice"]) +
+      parseInt(rolldata['skilldice']) +
       parseInt(form.trait.value) +
       parseInt(form.bonusDice.value);
     let incThreshold = 0;
@@ -951,13 +951,13 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (incThreshold) rolldata.threshold += 5;
 
     let matcharr = CONFIG.SVNSEA2E.match10;
-    if (rolldata["threshold"] == 15) matcharr = CONFIG.SVNSEA2E.match15;
-    if (rolldata["threshold"] == 20) matcharr = CONFIG.SVNSEA2E.match20;
+    if (rolldata['threshold'] == 15) matcharr = CONFIG.SVNSEA2E.match15;
+    if (rolldata['threshold'] == 20) matcharr = CONFIG.SVNSEA2E.match20;
 
     // explode the dice on 10s if the character has a high enough skill or has taken 3 dynamic wounds
-    if (rolldata["explode"]) {
+    if (rolldata['explode']) {
       exploded = true;
-      d10.explode("X", false);
+      d10.explode('X', false);
     }
 
     // deep copy of the rolls
@@ -971,12 +971,12 @@ export default class ActorSheetSS2e extends ActorSheet {
     let combos = [];
 
     // If the threshold is 10 then count all 10s as raises
-    if (rolldata["threshold"] == 10) {
+    if (rolldata['threshold'] == 10) {
       let i = rolls.length;
       while (i--) {
         if (rolls[i] == 10) {
           raises++;
-          combos.push("10");
+          combos.push('10');
           rolls.splice(i, 1);
         } else if (rolls[i] < 10) {
           break;
@@ -988,9 +988,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     for (let c = 0; c < matcharr.two.length; c++) {
       let vals = _getIndexes(rolls, matcharr.two[c]);
       while (vals[0] > -1 && vals[1] > -1) {
-        raises += _addRaise(rolldata["threshold"], incThreshold);
+        raises += _addRaise(rolldata['threshold'], incThreshold);
         combos.push(
-          rolls[vals[0]].toString() + " + " + rolls[vals[1]].toString()
+          rolls[vals[0]].toString() + ' + ' + rolls[vals[1]].toString(),
         );
         rolls.splice(vals[0], 1);
         rolls.splice(rolls.indexOf(matcharr.two[c][1]), 1);
@@ -1002,13 +1002,13 @@ export default class ActorSheetSS2e extends ActorSheet {
     for (let c = 0; c < matcharr.three.length; c++) {
       var vals = _getIndexes(rolls, matcharr.three[c]);
       while (vals[0] > -1 && vals[1] > -1 && vals[2] > -1) {
-        raises += _addRaise(rolldata["threshold"], incThreshold);
+        raises += _addRaise(rolldata['threshold'], incThreshold);
         combos.push(
           rolls[vals[0]].toString() +
-            " + " +
+            ' + ' +
             rolls[vals[1]].toString() +
-            " + " +
-            rolls[vals[2]].toString()
+            ' + ' +
+            rolls[vals[2]].toString(),
         );
         rolls.splice(vals[0], 1);
         rolls.splice(rolls.indexOf(matcharr.three[c][1]), 1);
@@ -1019,7 +1019,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     let i = rolls.length;
     let rerolled = false;
-    let reroll = "";
+    let reroll = '';
 
     const sortedRolls = d10.values;
     sortedRolls.sort(function (a, b) {
@@ -1027,10 +1027,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     });
 
     // reroll the first die in our results if it is less than 5
-    if (i > 0 && rolldata["reroll"] && rolls[0] < 5) {
+    if (i > 0 && rolldata['reroll'] && rolls[0] < 5) {
       const orgroll = rolls[0];
       rolls[0] = Math.floor(Math.random() * 10) + 1;
-      reroll = game.i18n.format("SVNSEA2E.Reroll", {
+      reroll = game.i18n.format('SVNSEA2E.Reroll', {
         roll1: orgroll,
         roll2: rolls[0],
       });
@@ -1045,54 +1045,54 @@ export default class ActorSheetSS2e extends ActorSheet {
       });
     }
 
-    let leftdata = _leftOverDice(rolls, rolldata["threshold"], incThreshold);
-    combos.push(...leftdata["combos"]);
-    raises += leftdata["raises"];
+    let leftdata = _leftOverDice(rolls, rolldata['threshold'], incThreshold);
+    combos.push(...leftdata['combos']);
+    raises += leftdata['raises'];
 
     // If the threshold is 15 and we have left over dice check for matching 10s for a single rais
     if (
-      leftdata["rolls"].length > 0 &&
-      ((!incThreshold && rolldata["threshold"] == 15) ||
-        (incThreshold && rolldata["threshold"] == 20))
+      leftdata['rolls'].length > 0 &&
+      ((!incThreshold && rolldata['threshold'] == 15) ||
+        (incThreshold && rolldata['threshold'] == 20))
     ) {
       let leftdata2 = _leftOverDice(
-        leftdata["rolls"],
-        rolldata["threshold"] - 5,
-        incThreshold
+        leftdata['rolls'],
+        rolldata['threshold'] - 5,
+        incThreshold,
       );
-      combos.push(...leftdata2["combos"]);
-      raises += leftdata2["raises"];
+      combos.push(...leftdata2['combos']);
+      raises += leftdata2['raises'];
     }
 
     const messageOptions = {
-      rollmode: "gmroll",
+      rollmode: 'gmroll',
     };
 
-    let thresholdmsg = rolldata["threshold"].toString();
+    let thresholdmsg = rolldata['threshold'].toString();
 
     if (incThreshold)
       thresholdmsg =
-        rolldata["threshold"].toString() +
-        " " +
-        game.i18n.localize("SVNSEA2E.GMIncreasedThreshold");
+        rolldata['threshold'].toString() +
+        ' ' +
+        game.i18n.localize('SVNSEA2E.GMIncreasedThreshold');
 
     const templateData = {
       actor: actor,
       raisetxt:
         raises > 1
-          ? game.i18n.localize("SVNSEA2E.Raises")
-          : game.i18n.localize("SVNSEA2E.Raise"),
+          ? game.i18n.localize('SVNSEA2E.Raises')
+          : game.i18n.localize('SVNSEA2E.Raise'),
       data: data,
       exploded: exploded,
-      explosions: game.i18n.format("SVNSEA2E.RollsExploded"),
+      explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
       labels: data.labels,
       rolls: sortedRolls,
       raises: raises,
-      rCombos: game.i18n.localize("SVNSEA2E.RaiseCombos"),
+      rCombos: game.i18n.localize('SVNSEA2E.RaiseCombos'),
       combos: combos,
       rerolled: rerolled,
       reroll: reroll,
-      threshold: game.i18n.format("SVNSEA2E.RollThreshold", {
+      threshold: game.i18n.format('SVNSEA2E.RollThreshold', {
         threshold: thresholdmsg,
       }),
     };
@@ -1114,10 +1114,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     };
 
     // Toggle default roll mode
-    const rollMode = game.settings.get("core", "rollMode");
-    if (["gmroll", "blindroll"].includes(rollMode))
-      chatData.whisper = ChatMessage.getWhisperRecipients("GM");
-    if (rollMode === "blindroll") chatData.blind = true;
+    const rollMode = game.settings.get('core', 'rollMode');
+    if (['gmroll', 'blindroll'].includes(rollMode))
+      chatData.whisper = ChatMessage.getWhisperRecipients('GM');
+    if (rollMode === 'blindroll') chatData.blind = true;
 
     // Create the chat message
     const chatmsg = ChatMessage.create(chatData);

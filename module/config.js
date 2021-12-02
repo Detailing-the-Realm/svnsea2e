@@ -1,5 +1,5 @@
 // Namespace D&D5e Configuration Values
-export const SVNSEA2E = {}
+export const SVNSEA2E = {};
 
 SVNSEA2E.ASCII = `
 ==================================================
@@ -8,7 +8,7 @@ SVNSEA2E.ASCII = `
     / /| __| '_ \\  \\___ \\ / _ \\/ _\` |
    / / | |_| | | |  ___) |  __/ (_| |
   /_/   \\__|_| |_| |____/ \\___|\\__,_|
-==================================================`
+==================================================`;
 
 SVNSEA2E.itemTypes = {
   advantage: 'SVNSEA2E.Advantage',
@@ -23,8 +23,8 @@ SVNSEA2E.itemTypes = {
   sorcery: 'SVNSEA2E.Sorcery',
   story: 'SVNSEA2E.Story',
   hubris: 'SVNSEA2E.Hubris',
-  virtue: 'SVNSEA2E.Virtue'
-}
+  virtue: 'SVNSEA2E.Virtue',
+};
 
 SVNSEA2E.actorTypes = {
   brute: 'SVNSEA2E.Brute',
@@ -32,8 +32,8 @@ SVNSEA2E.actorTypes = {
   monster: 'SVNSEA2E.Monster',
   villain: 'SVNSEA2E.Villain',
   ship: 'SVNSEA2E.Ship',
-  hero: 'SVNSEA2E.Hero'
-}
+  hero: 'SVNSEA2E.Hero',
+};
 
 SVNSEA2E.nations = {
   aksum: 'SVNSEA2E.NationAksum',
@@ -63,8 +63,8 @@ SVNSEA2E.nations = {
   tzakkan: 'SVNSEA2E.NationTzakkan',
   ussura: 'SVNSEA2E.NationUssura',
   vesten: 'SVNSEA2E.NationVesten',
-  vodacce: 'SVNSEA2E.NationVodacce'
-}
+  vodacce: 'SVNSEA2E.NationVodacce',
+};
 
 SVNSEA2E.languages = {
   amizagh: 'SVNSEA2E.LanguageAmizagh',
@@ -96,8 +96,8 @@ SVNSEA2E.languages = {
   vesten: 'SVNSEA2E.LanguageVesten',
   vodacce: 'SVNSEA2E.LanguageVodacce',
   xweda: 'SVNSEA2E.LanguageXweda',
-  zeeg: 'SVNSEA2E.LanguageZeeg'
-}
+  zeeg: 'SVNSEA2E.LanguageZeeg',
+};
 
 SVNSEA2E.traits = {
   brawn: 'SVNSEA2E.TraitBrawn',
@@ -106,8 +106,8 @@ SVNSEA2E.traits = {
   wits: 'SVNSEA2E.TraitWits',
   panache: 'SVNSEA2E.TraitPanache',
   influence: 'SVNSEA2E.TraitInfluence',
-  strength: 'SVNSEA2E.TraitStrength'
-}
+  strength: 'SVNSEA2E.TraitStrength',
+};
 
 SVNSEA2E.skills = {
   aim: 'SVNSEA2E.SkillAim',
@@ -125,15 +125,15 @@ SVNSEA2E.skills = {
   tempt: 'SVNSEA2E.SkillTempt',
   theft: 'SVNSEA2E.SkillTheft',
   warfare: 'SVNSEA2E.SkillWarfare',
-  weaponry: 'SVNSEA2E.SkillWeaponry'
-}
+  weaponry: 'SVNSEA2E.SkillWeaponry',
+};
 
 SVNSEA2E.storyStatuses = {
   abandoned: 'SVNSEA2E.StatusAbandoned',
   complete: 'SVNSEA2E.StatusComplete',
   inprogress: 'SVNSEA2E.StatusInProgress',
-  future: 'SVNSEA2E.StatusFuture'
-}
+  future: 'SVNSEA2E.StatusFuture',
+};
 
 SVNSEA2E.sorceryTypes = {
   hex: 'SVNSEA2E.SorceryHexenwerk',
@@ -158,12 +158,12 @@ SVNSEA2E.sorceryTypes = {
   wanuy: 'SVNSEA2E.SorceryWanuy',
   heka: 'SVNSEA2E.SorceryHeka',
   melbur: 'SVNSEA2E.SorceryMelbur',
-  redtouch: 'SVNSEA2E.SorceryRedTouch'
-}
+  redtouch: 'SVNSEA2E.SorceryRedTouch',
+};
 
 SVNSEA2E.durations = {
-  scene: 'SVNSEA2E.Scene'
-}
+  scene: 'SVNSEA2E.Scene',
+};
 
 SVNSEA2E.sorceryCats = {
   ahura: 'SVNSEA2E.Ahura',
@@ -194,8 +194,8 @@ SVNSEA2E.sorceryCats = {
   magnum: 'SVNSEA2E.MagnumOpus',
   futhark: 'SVNSEA2E.Futhark',
   patron: 'SVNSEA2E.Patron',
-  unguents: 'SVNSEA2E.Unguents'
-}
+  unguents: 'SVNSEA2E.Unguents',
+};
 
 SVNSEA2E.sorcerySubcats = {
   advanced: 'SVNSEA2E.Advanced',
@@ -206,14 +206,14 @@ SVNSEA2E.sorcerySubcats = {
   pixan: 'SVNSEA2E.Pixan',
   rare: 'SVNSEA2E.Rare',
   great: 'SVNSEA2E.Great',
-  small: 'SVNSEA2E.Small'
-}
+  small: 'SVNSEA2E.Small',
+};
 
 SVNSEA2E.crewStatuses = {
   happy: 'SVNSEA2E.Happy',
   dissatisfied: 'SVNSEA2E.Dissatisfied',
-  mutinous: 'SVNSEA2E.Mutinous'
-}
+  mutinous: 'SVNSEA2E.Mutinous',
+};
 
 SVNSEA2E.artifactTypes = {
   deathtoken: 'SVNSEA2E.DeathToken',
@@ -223,8 +223,8 @@ SVNSEA2E.artifactTypes = {
   inscription: 'SVNSEA2E.Inscription',
   mbey: 'SVNSEA2E.Mbey',
   wonder: 'SVNSEA2E.Wonder',
-  tatoo: 'SVNSEA2E.Tatoo'
-}
+  tatoo: 'SVNSEA2E.Tatoo',
+};
 
 SVNSEA2E.shipRoles = {
   captain: 'SVNSEA2E.Captain',
@@ -240,8 +240,8 @@ SVNSEA2E.shipRoles = {
   surgeon: 'SVNSEA2E.Surgeon',
   midshipmen: 'SVNSEA2E.Midshipmen',
   ableseaman: 'SVNSEA2E.AbleSeaman',
-  seaman: 'SVNSEA2E.Seaman'
-}
+  seaman: 'SVNSEA2E.Seaman',
+};
 
 SVNSEA2E.match10 = {
   two: [
@@ -249,7 +249,7 @@ SVNSEA2E.match10 = {
     [2, 8],
     [3, 7],
     [4, 6],
-    [5, 5]
+    [5, 5],
   ],
   three: [
     [1, 1, 8],
@@ -259,15 +259,15 @@ SVNSEA2E.match10 = {
     [2, 2, 6],
     [2, 3, 5],
     [4, 4, 2],
-    [3, 3, 4]
-  ]
-}
+    [3, 3, 4],
+  ],
+};
 
 SVNSEA2E.match15 = {
   two: [
     [5, 10],
     [6, 9],
-    [7, 8]
+    [7, 8],
   ],
   three: [
     [1, 4, 10],
@@ -284,14 +284,12 @@ SVNSEA2E.match15 = {
     [6, 6, 3],
     [4, 4, 7],
     [4, 5, 6],
-    [5, 5, 5]
-  ]
-}
+    [5, 5, 5],
+  ],
+};
 
 SVNSEA2E.match20 = {
-  two: [
-    [10, 10]
-  ],
+  two: [[10, 10]],
   three: [
     [1, 9, 10],
     [2, 9, 9],
@@ -301,6 +299,6 @@ SVNSEA2E.match20 = {
     [4, 8, 8],
     [5, 7, 8],
     [6, 6, 8],
-    [6, 7, 7]
-  ]
-}
+    [6, 7, 7],
+  ],
+};

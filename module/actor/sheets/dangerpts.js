@@ -1,4 +1,4 @@
-import ActorSheetSS2e from "./base.js";
+import ActorSheetSS2e from './base.js';
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -8,11 +8,11 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["svnsea2e", "sheet", "actor"],
-      template: "systems/svnsea2e/templates/actors/dangerpts.html",
+      classes: ['svnsea2e', 'sheet', 'actor'],
+      template: 'systems/svnsea2e/templates/actors/dangerpts.html',
       tabs: [
         {
-          contentSelector: ".sheet-body",
+          contentSelector: '.sheet-body',
         },
       ],
       width: 450,
@@ -28,11 +28,11 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find(".dpminus").on("click", this._decreaseDP.bind(this, 1));
-    html.find(".dpmminus").on("click", this._decreaseDP.bind(this, 2));
+    html.find('.dpminus').on('click', this._decreaseDP.bind(this, 1));
+    html.find('.dpmminus').on('click', this._decreaseDP.bind(this, 2));
 
-    html.find(".dpplus").on("click", this._increaseDP.bind(this, 1));
-    html.find(".dppplus").on("click", this._increaseDP.bind(this, 2));
+    html.find('.dpplus').on('click', this._increaseDP.bind(this, 1));
+    html.find('.dppplus').on('click', this._increaseDP.bind(this, 2));
   }
 
   _decreaseDP(value, event) {
@@ -43,7 +43,7 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
 
     this.actor
       .update({
-        "data.points": dp,
+        'data.points': dp,
       })
       .then(this.render(false));
   }
@@ -53,7 +53,7 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
 
     this.actor
       .update({
-        "data.points": dp,
+        'data.points': dp,
       })
       .then(this.render(false));
   }
