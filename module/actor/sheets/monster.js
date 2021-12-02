@@ -29,6 +29,7 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
    * @return {undefined}
    */
   _prepareMonsterItems(baseData, sheetData) {
+    sheetData.fear = baseData.data.data.fear;
     sheetData.monsterqualities = getMonsterQualityItems(baseData);
   }
 }

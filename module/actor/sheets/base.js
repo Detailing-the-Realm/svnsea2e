@@ -713,7 +713,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     const data = this.actor.data.data;
 
     let skillValue = data.skills[dataset.label]["value"];
-    console.log(typeof skillValue);
     let rolled = false;
     let rolldata = {
       threshold: 10,

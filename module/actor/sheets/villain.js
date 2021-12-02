@@ -36,6 +36,7 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
    */
   _prepareVillainItems(baseData, sheetData) {
     // Assign and return
+    sheetData.villainy = baseData.data.data.villainy;
     sheetData.advantages = getAdvantageItems(baseData);
     sheetData.artifacts = getArtifactItems(baseData);
     sheetData.sorcery = getSorceryItems(baseData);
