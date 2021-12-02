@@ -23,14 +23,14 @@
   background-position: left bottom;
 }
 
-@mixin hover-highlight{
+@mixin hover-highlight {
   color: $f-c-lt;
   border: $brd-s-sm-lt;
   border-bottom: $brd-s-sm-glow;
   box-shadow: 0 0 10px inset $c-sec;
 }
 
-@mixin main-bg{
+@mixin main-bg {
   background: $bg-c-rgba-dk;
   border: $brd-s-sm-dk;
 }

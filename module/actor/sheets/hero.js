@@ -1,4 +1,4 @@
-import ActorSheetSS2e from "./base.js";
+import ActorSheetSS2e from './base.js';
 import {
   getAdvantageItems,
   getArtifactItems,
@@ -8,7 +8,7 @@ import {
   getSorceryItems,
   getStoryItems,
   skillsToSheetData,
-} from "../../helpers.js";
+} from '../../helpers.js';
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
@@ -17,13 +17,13 @@ export class ActorSheetSS2eHero extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["svnsea2e", "sheet", "actor", "hero"],
-      template: "systems/svnsea2e/templates/actors/hero.html",
+      classes: ['svnsea2e', 'sheet', 'actor', 'hero'],
+      template: 'systems/svnsea2e/templates/actors/hero.html',
       tabs: [
         {
-          navSelector: ".sheet-tabs",
-          contentSelector: ".sheet-body",
-          initial: "traits",
+          navSelector: '.sheet-tabs',
+          contentSelector: '.sheet-body',
+          initial: 'traits',
         },
       ],
     });

@@ -1,10 +1,6 @@
-import {
-  SVNSEA2E
-} from '../../config.js'
+import { SVNSEA2E } from '../../config.js';
 
-import {
-  ItemSheetSS2e
-} from './base.js'
+import { ItemSheetSS2e } from './base.js';
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -12,14 +8,16 @@ import {
  */
 export class ItemSheetSS2eBackground extends ItemSheetSS2e {
   /** @override */
-  static get defaultOptions () {
+  static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       template: 'systems/svnsea2e/templates/items/background.html',
-      tabs: [{
-        navSelector: '.sheet-tabs',
-        contentSelector: '.sheet-body',
-        initial: 'description'
-      }]
-    })
+      tabs: [
+        {
+          navSelector: '.sheet-tabs',
+          contentSelector: '.sheet-body',
+          initial: 'description',
+        },
+      ],
+    });
   }
 }

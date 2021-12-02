@@ -14,13 +14,13 @@ export class SvnSea2EActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if (actorData.type === "playercharacter")
+    if (actorData.type === 'playercharacter')
       this._preparePlayerCharacterData(data);
-    if (actorData.type === "hero") this._prepareHeroData(data);
-    if (actorData.type === "villain" || actorData.type === "monster")
+    if (actorData.type === 'hero') this._prepareHeroData(data);
+    if (actorData.type === 'villain' || actorData.type === 'monster')
       this._prepareVillainData(data);
-    if (actorData.type === "brute") this._prepareBruteData(data);
-    if (actorData.type === "ship") this._prepareShipData(data);
+    if (actorData.type === 'brute') this._prepareBruteData(data);
+    if (actorData.type === 'ship') this._prepareShipData(data);
   }
 
   /**
@@ -65,7 +65,7 @@ export class SvnSea2EActor extends Actor {
     data.wounds.value = this._validateMinMaxData(
       data.wounds.value,
       data.wounds.min,
-      data.wounds.max
+      data.wounds.max,
     );
   }
 
@@ -76,7 +76,7 @@ export class SvnSea2EActor extends Actor {
     data.traits.strength.value = this._validateMinMaxData(
       data.traits.strength.value,
       data.traits.strength.min,
-      data.traits.strength.max
+      data.traits.strength.max,
     );
     data.wounds.max = data.traits.strength.value;
     if (parseInt(data.wounds.max) < parseInt(data.wounds.value)) {
@@ -93,14 +93,14 @@ export class SvnSea2EActor extends Actor {
    * Remove a member from the crew
    */
   async removeFromCrew() {
-    await this.unsetFlag("svnsea2e", "crewMember");
+    await this.unsetFlag('svnsea2e', 'crewMember');
   }
 
   /**
    * Set a crew member's role
    */
   async setCrewMemberRole(shipId, role) {
-    return this.setFlag("svnsea2e", "crewMember", {
+    return this.setFlag('svnsea2e', 'crewMember', {
       shipId: shipId,
       role: role,
     });
@@ -131,7 +131,7 @@ export class SvnSea2EActor extends Actor {
     data.wounds.value = this._validateMinMaxData(
       data.wounds.value,
       data.wounds.min,
-      data.wounds.max
+      data.wounds.max,
     );
   }
 }

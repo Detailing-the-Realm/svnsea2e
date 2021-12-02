@@ -1,8 +1,8 @@
-import ActorSheetSS2e from "./base.js";
+import ActorSheetSS2e from './base.js';
 import {
   getShipAdventureItems,
   getShipBackgroundItems,
-} from "../../helpers.js";
+} from '../../helpers.js';
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -12,13 +12,13 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["svnsea2e", "sheet", "actor", "ship"],
-      template: "systems/svnsea2e/templates/actors/ship.html",
+      classes: ['svnsea2e', 'sheet', 'actor', 'ship'],
+      template: 'systems/svnsea2e/templates/actors/ship.html',
       tabs: [
         {
-          navSelector: ".sheet-tabs",
-          contentSelector: ".sheet-body",
-          initial: "roster",
+          navSelector: '.sheet-tabs',
+          contentSelector: '.sheet-body',
+          initial: 'roster',
         },
       ],
     });
@@ -55,138 +55,138 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     const crew = {
       captain: {
-        label: game.i18n.localize("SVNSEA2E.Captain"),
-        cssClass: "captain",
+        label: game.i18n.localize('SVNSEA2E.Captain'),
+        cssClass: 'captain',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "captain",
+          type: 'shipsCrew',
+          role: 'captain',
         },
       },
       firstmate: {
-        label: game.i18n.localize("SVNSEA2E.FirstMate"),
-        cssClass: "firstmate",
+        label: game.i18n.localize('SVNSEA2E.FirstMate'),
+        cssClass: 'firstmate',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "firstmate",
+          type: 'shipsCrew',
+          role: 'firstmate',
         },
       },
       quartermaster: {
-        label: game.i18n.localize("SVNSEA2E.QuaterMaster"),
-        cssClass: "quartermaster",
+        label: game.i18n.localize('SVNSEA2E.QuaterMaster'),
+        cssClass: 'quartermaster',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "quartermaster",
+          type: 'shipsCrew',
+          role: 'quartermaster',
         },
       },
       accountant: {
-        label: game.i18n.localize("SVNSEA2E.Accountant"),
-        cssClass: "accountant",
+        label: game.i18n.localize('SVNSEA2E.Accountant'),
+        cssClass: 'accountant',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "accountant",
+          type: 'shipsCrew',
+          role: 'accountant',
         },
       },
       boatswain: {
-        label: game.i18n.localize("SVNSEA2E.Boatswain"),
-        cssClass: "boatswain",
+        label: game.i18n.localize('SVNSEA2E.Boatswain'),
+        cssClass: 'boatswain',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "boatswain",
+          type: 'shipsCrew',
+          role: 'boatswain',
         },
       },
       shipsmaster: {
-        label: game.i18n.localize("SVNSEA2E.ShipsMaster"),
-        cssClass: "shipsmaster",
+        label: game.i18n.localize('SVNSEA2E.ShipsMaster'),
+        cssClass: 'shipsmaster',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "shipsmaster",
+          type: 'shipsCrew',
+          role: 'shipsmaster',
         },
       },
       captaintops: {
-        label: game.i18n.localize("SVNSEA2E.CaptainTops"),
-        cssClass: "captaintops",
+        label: game.i18n.localize('SVNSEA2E.CaptainTops'),
+        cssClass: 'captaintops',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "captaintops",
+          type: 'shipsCrew',
+          role: 'captaintops',
         },
       },
       surgeon: {
-        label: game.i18n.localize("SVNSEA2E.Surgeon"),
-        cssClass: "surgeon",
+        label: game.i18n.localize('SVNSEA2E.Surgeon'),
+        cssClass: 'surgeon',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "surgeon",
+          type: 'shipsCrew',
+          role: 'surgeon',
         },
       },
       cook: {
-        label: game.i18n.localize("SVNSEA2E.Cook"),
-        cssClass: "cook",
+        label: game.i18n.localize('SVNSEA2E.Cook'),
+        cssClass: 'cook',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "cook",
+          type: 'shipsCrew',
+          role: 'cook',
         },
       },
       mastergunner: {
-        label: game.i18n.localize("SVNSEA2E.MasterGunner"),
-        cssClass: "mastergunner",
+        label: game.i18n.localize('SVNSEA2E.MasterGunner'),
+        cssClass: 'mastergunner',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "mastergunner",
+          type: 'shipsCrew',
+          role: 'mastergunner',
         },
       },
       mastermariner: {
-        label: game.i18n.localize("SVNSEA2E.MasterMariner"),
-        cssClass: "mastermariner",
+        label: game.i18n.localize('SVNSEA2E.MasterMariner'),
+        cssClass: 'mastermariner',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "mastermariner",
+          type: 'shipsCrew',
+          role: 'mastermariner',
         },
       },
       midshipmen: {
-        label: game.i18n.localize("SVNSEA2E.Midshipmen"),
-        cssClass: "midshipmen",
+        label: game.i18n.localize('SVNSEA2E.Midshipmen'),
+        cssClass: 'midshipmen',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "midshipmen",
+          type: 'shipsCrew',
+          role: 'midshipmen',
         },
       },
       powdermonkey: {
-        label: game.i18n.localize("SVNSEA2E.PowderMonkey"),
-        cssClass: "powdermonkey",
+        label: game.i18n.localize('SVNSEA2E.PowderMonkey'),
+        cssClass: 'powdermonkey',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "powdermonkey",
+          type: 'shipsCrew',
+          role: 'powdermonkey',
         },
       },
       ableseaman: {
-        label: game.i18n.localize("SVNSEA2E.AbleSeaman"),
-        cssClass: "ableseaman",
+        label: game.i18n.localize('SVNSEA2E.AbleSeaman'),
+        cssClass: 'ableseaman',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "ableseaman",
+          type: 'shipsCrew',
+          role: 'ableseaman',
         },
       },
       seaman: {
-        label: game.i18n.localize("SVNSEA2E.Seaman"),
-        cssClass: "seaman",
+        label: game.i18n.localize('SVNSEA2E.Seaman'),
+        cssClass: 'seaman',
         actors: [],
         dataset: {
-          type: "shipsCrew",
-          role: "seaman",
+          type: 'shipsCrew',
+          role: 'seaman',
         },
       },
     };
@@ -213,28 +213,28 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
         if (!actor) return arr;
 
-        const crewMember = actor.getFlag("svnsea2e", "crewMember") || null;
+        const crewMember = actor.getFlag('svnsea2e', 'crewMember') || null;
         if (!crewMember) return arr;
 
-        if (crewMember.role === "ableseaman") arr[0].push(actor);
-        else if (crewMember.role === "accountant") arr[1].push(actor);
-        else if (crewMember.role === "boatswain") arr[2].push(actor);
-        else if (crewMember.role === "captain") arr[3].push(actor);
-        else if (crewMember.role === "captaintops") arr[4].push(actor);
-        else if (crewMember.role === "cook") arr[5].push(actor);
-        else if (crewMember.role === "firstmate") arr[6].push(actor);
-        else if (crewMember.role === "mastergunner") arr[7].push(actor);
-        else if (crewMember.role === "mastermariner") arr[8].push(actor);
-        else if (crewMember.role === "midshipmen") arr[9].push(actor);
-        else if (crewMember.role === "powdermonkey") arr[10].push(actor);
-        else if (crewMember.role === "quartermaster") arr[11].push(actor);
-        else if (crewMember.role === "seaman") arr[12].push(actor);
-        else if (crewMember.role === "shipsmaster") arr[13].push(actor);
-        else if (crewMember.role === "surgeon") arr[14].push(actor);
+        if (crewMember.role === 'ableseaman') arr[0].push(actor);
+        else if (crewMember.role === 'accountant') arr[1].push(actor);
+        else if (crewMember.role === 'boatswain') arr[2].push(actor);
+        else if (crewMember.role === 'captain') arr[3].push(actor);
+        else if (crewMember.role === 'captaintops') arr[4].push(actor);
+        else if (crewMember.role === 'cook') arr[5].push(actor);
+        else if (crewMember.role === 'firstmate') arr[6].push(actor);
+        else if (crewMember.role === 'mastergunner') arr[7].push(actor);
+        else if (crewMember.role === 'mastermariner') arr[8].push(actor);
+        else if (crewMember.role === 'midshipmen') arr[9].push(actor);
+        else if (crewMember.role === 'powdermonkey') arr[10].push(actor);
+        else if (crewMember.role === 'quartermaster') arr[11].push(actor);
+        else if (crewMember.role === 'seaman') arr[12].push(actor);
+        else if (crewMember.role === 'shipsmaster') arr[13].push(actor);
+        else if (crewMember.role === 'surgeon') arr[14].push(actor);
 
         return arr;
       },
-      [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+      [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
     );
 
     crew.ableseaman.actors = ableseaman;
@@ -266,21 +266,21 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     if (!this.options.editable) return;
 
-    html.find(".roster .item-delete").click(this._onRemoveFromCrew.bind(this));
+    html.find('.roster .item-delete').click(this._onRemoveFromCrew.bind(this));
 
     const crewhandler = (ev) => this._onDragCrewStart(ev);
-    html.find(".roster li.item").each((i, li) => {
-      li.setAttribute("draggable", true);
-      li.addEventListener("dragstart", crewhandler, false);
+    html.find('.roster li.item').each((i, li) => {
+      li.setAttribute('draggable', true);
+      li.addEventListener('dragstart', crewhandler, false);
     });
 
-    html.find(".roster .items-list").each((i, li) => {
-      li.addEventListener("dragover", this._onCrewDragOver.bind(this), false);
+    html.find('.roster .items-list').each((i, li) => {
+      li.addEventListener('dragover', this._onCrewDragOver.bind(this), false);
     });
 
-    html.find(".roster li.item-header").each((i, li) => {
-      li.addEventListener("dragenter", this._onCrewDragEnter, false);
-      li.addEventListener("dragleave", this._onCrewDragLeave, false);
+    html.find('.roster li.item-header').each((i, li) => {
+      li.addEventListener('dragenter', this._onCrewDragEnter, false);
+      li.addEventListener('dragleave', this._onCrewDragLeave, false);
     });
   }
 
@@ -290,7 +290,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     let data;
     try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
     } catch (err) {
       return false;
     }
@@ -298,12 +298,12 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     if (!data) return false;
 
     // Case 1 - Dropped Item
-    if (data.type === "Item") {
+    if (data.type === 'Item') {
       return this._onDropItem(event, data);
     }
 
     // Case 2 - Dropped Actor
-    if (data.type === "Actor") {
+    if (data.type === 'Actor') {
       return this._onCrewDrop(event, data);
     }
   }
@@ -317,11 +317,11 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
   async _onCrewDrop(event, data) {
     event.preventDefault();
 
-    $(event.target).css("background", "");
+    $(event.target).css('background', '');
 
     if (!data.id) return false;
 
-    const c = this.actor.getFlag("svnsea2e", "shipsCrew");
+    const c = this.actor.getFlag('svnsea2e', 'shipsCrew');
     let crew;
 
     if (c) crew = duplicate(c);
@@ -346,7 +346,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     await actor.setCrewMemberRole(this.actor.id, role);
     this.actor
       .update({
-        "flags.svnsea2e.shipsCrew": crew,
+        'flags.svnsea2e.shipsCrew': crew,
       })
       .then(this.render(false));
 
@@ -358,7 +358,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {Event} event The originating dragenter event
    */
   _onCrewDragEnter(event) {
-    $(event.target).css("background", "rgba(0,0,0,0.3)");
+    $(event.target).css('background', 'rgba(0,0,0,0.3)');
   }
 
   /**
@@ -366,7 +366,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    * @param {Event} event The originating dragleave event
    */
   _onCrewDragLeave(event) {
-    $(event.target).css("background", "");
+    $(event.target).css('background', '');
   }
 
   /**
@@ -379,13 +379,13 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     const actor = game.actors.get(actorId);
 
     const dragData = {
-      type: "Actor",
+      type: 'Actor',
       id: actor.id,
       data: actor.data,
     };
 
     if (this.actor.isToken) dragData.tokenId = actorId;
-    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
   }
 
   /**
@@ -395,7 +395,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    */
   _onCrewDragOver(event) {
     event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
+    event.dataTransfer.dropEffect = 'move';
   }
 
   /**
@@ -420,19 +420,19 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
   async _onRemoveFromCrew(event) {
     event.preventDefault();
 
-    const actorId = $(event.currentTarget).parents(".item").data("actorId");
+    const actorId = $(event.currentTarget).parents('.item').data('actorId');
     const actor = game.actors.get(actorId);
 
     await actor.removeFromCrew();
 
-    const shipsCrew = this.actor.getFlag("svnsea2e", "shipsCrew");
+    const shipsCrew = this.actor.getFlag('svnsea2e', 'shipsCrew');
 
     if (!shipsCrew) return;
 
     const updateData = shipsCrew.members.filter((val) => val !== actor.id);
 
     await this.actor.update({
-      "flags.svnsea2e.shipsCrew.members": updateData,
+      'flags.svnsea2e.shipsCrew.members': updateData,
     });
   }
 }

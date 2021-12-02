@@ -13,7 +13,7 @@
     }
 
     .item.active {
-      color: #FFF;
+      color: #fff;
       border: $brd-s-sm-lt;
       box-shadow: 0 0 6px inset $c-sec;
     }
@@ -29,7 +29,7 @@
   }
 
   .sidebar-tab {
-    .directory-header input[type="text"]{
+    .directory-header input[type='text'] {
       text-align: left;
     }
     .directory-list {
@@ -45,7 +45,11 @@
       .entity {
         border-bottom: $brd-g-md-dk;
         border-top: 0;
-        background-image: linear-gradient(to left, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
+        background-image: linear-gradient(
+          to left,
+          rgba(52, 152, 219, 0.5) 90%,
+          rgba(255, 0, 0, 0) 10%
+        );
       }
 
       .entity.journal {
@@ -54,7 +58,7 @@
 
       .playlist-header h4,
       h3 {
-        @include paint-bottom-border
+        @include paint-bottom-border;
       }
 
       .directory-item.scene h3 {
@@ -62,7 +66,8 @@
       }
     }
 
-    #scene {}
+    #scene {
+    }
 
     .dice-result h4 {
       color: $f-c-dk;
@@ -99,7 +104,11 @@
     li.combatant {
       border-bottom: $brd-g-md-dk;
       border-top: 0;
-      background-image: linear-gradient(to left, rgba(52, 152, 219, 0.5) 90%, rgba(255,0,0,0) 10%);
+      background-image: linear-gradient(
+        to left,
+        rgba(52, 152, 219, 0.5) 90%,
+        rgba(255, 0, 0, 0) 10%
+      );
 
       .token-name {
         .combatant-control {

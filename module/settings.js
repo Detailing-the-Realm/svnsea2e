@@ -7,6 +7,6 @@ export const registerSystemSettings = function () {
     scope: 'world',
     config: false,
     type: Number,
-    default: 0
-  })
-}
+    default: 0,
+  });
+};

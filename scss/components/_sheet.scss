@@ -4,10 +4,10 @@ img {
 
 h1.charname,
 h3 {
-  @include paint-bottom-border
+  @include paint-bottom-border;
 }
 
-input[type="text"] {
+input[type='text'] {
   min-width: $min-input-width-xs;
   text-align: left;
   border: $no-border;
@@ -61,7 +61,7 @@ nav.sheet-tabs {
     }
   }
 
-  .twodigit input[type="text"] {
+  .twodigit input[type='text'] {
     max-width: $max-input-width-xs;
     text-align: right;
   }
@@ -76,8 +76,8 @@ nav.sheet-tabs {
 }
 
 .secretsociety .tag {
-  flex-grow:0.25;
-  flex-shrink:0.25;
+  flex-grow: 0.25;
+  flex-shrink: 0.25;
   flex-basis: 10px;
 }
 
@@ -87,8 +87,7 @@ nav.sheet-tabs {
   }
 
   .skill-selector,
-  .advantage-selector
-  .language-selector {
+  .advantage-selector .language-selector {
     flex: 0 0 2%;
   }
 }
@@ -201,16 +200,16 @@ nav.sheet-tabs {
 .skill-name,
 .trait-name {
   font-weight: 600;
-//  margin-left: $margin-md;
-//  margin-top: 5px;
+  //  margin-left: $margin-md;
+  //  margin-top: 5px;
 }
 
-.wound-title{
+.wound-title {
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 // Brute specific stuff
 .brute h2.ability-title {
-  text-shadow:none;
+  text-shadow: none;
 }

@@ -4,7 +4,7 @@ body#tinymce.mce-content-body {
   font-family: $f-body;
 }
 
-body{
+body {
   scrollbar-color: $c-prim-lt $c-prim-dk;
 }
 
@@ -32,7 +32,7 @@ h1 {
 
 h2 {
   font-size: $f-s-2xl;
-  @include paint-bottom-border
+  @include paint-bottom-border;
 }
 
 h3 {
@@ -57,8 +57,8 @@ h6 {
 
 #calendar-time-container h1,
 #calendar-time-container h2 {
-    color: rgba(255,255,255,.87);
-    background: none;
+  color: rgba(255, 255, 255, 0.87);
+  background: none;
 }
 
 label.checkbox {
@@ -102,9 +102,9 @@ button {
 .app.sheet .editor-content,
 .tox .tox-edit-area,
 .tox-tinymce,
-input[type="text"],
-input[type="password"],
-input[type="datetime-local"],
+input[type='text'],
+input[type='password'],
+input[type='datetime-local'],
 select,
 textarea {
   font-family: $f-body;
@@ -117,15 +117,15 @@ textarea {
 .tox-tinymce:hover,
 button:focus,
 button:hover,
-input[type="text"]:hover,
-input[type="text"]:focus,
+input[type='text']:hover,
+input[type='text']:focus,
 textarea:focus,
 textarea:hover {
   box-shadow: 0 0 8px $c-prim;
 }
 
-input[type=range]::-moz-range-thumb,
-input[type=range]::-webkit-slider-thumb {
+input[type='range']::-moz-range-thumb,
+input[type='range']::-webkit-slider-thumb {
   background: $c-prim-lt;
 }
 
@@ -143,19 +143,19 @@ input[type=range]::-webkit-slider-thumb {
   }
 
   #nav-toggle {
-    @include main-bg :hover {
+    @include main-bg: hover {
       text-shadow: 0 0 10px $c-sec;
     }
   }
 
   #scene-list {
     .scene.gm {
-      @include main-bg
+      @include main-bg;
     }
 
     .scene.context,
     .scene.view {
-      @include hover-highlight
+      @include hover-highlight;
     }
   }
 }
@@ -172,35 +172,35 @@ input[type=range]::-webkit-slider-thumb {
 #controls {
   .control-tool,
   .scene-control {
-    @include main-bg
+    @include main-bg;
   }
 
   .control-tool.active,
   .control-tool:hover,
   .scene-control.active,
   .scene-control:hover {
-    @include hover-highlight
+    @include hover-highlight;
   }
 }
 
 #hotbar {
   .bar-controls,
   .macro {
-    @include main-bg
+    @include main-bg;
   }
 
   .bar-controls:hover,
   .macro:hover {
-    @include hover-highlight
+    @include hover-highlight;
   }
 }
 
 .app {
-  @include main-bg
+  @include main-bg;
 }
 
 #players h3 i {
-  margin:0;
+  margin: 0;
 }
 
 .sheet header.sheet-header {

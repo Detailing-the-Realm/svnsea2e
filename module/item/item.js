@@ -6,19 +6,19 @@ export class SvnSea2EItem extends Item {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
-  prepareData () {
-    super.prepareData()
+  prepareData() {
+    super.prepareData();
 
     // Get the Item's data
-    const itemData = this.data
+    const itemData = this.data;
 
-    const actorData = this.actor ? this.actor.data : {}
-    const data = itemData.data
+    const actorData = this.actor ? this.actor.data : {};
+    const data = itemData.data;
 
     if (itemData.type === 'scheme') {
-      this._prepareSchemeData(itemData.data)
+      this._prepareSchemeData(itemData.data);
     } else if (itemData.type === 'advantage') {
-      this._prepareAdvantageData(itemData.data)
+      this._prepareAdvantageData(itemData.data);
     }
   }
 
@@ -27,16 +27,16 @@ export class SvnSea2EItem extends Item {
    * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
    * @return {Object}               An object of chat data to render
    */
-  getChatData (htmlOptions) {
-    const data = duplicate(this.data.data)
+  getChatData(htmlOptions) {
+    const data = duplicate(this.data.data);
 
     // Rich text description
-    data.metadatahtml = ''
-    data.description = TextEditor.enrichHTML(data.description, htmlOptions)
-    const fn = this[`_${this.data.type}ChatData`]
-    if (fn) fn.bind(this)(data, htmlOptions)
+    data.metadatahtml = '';
+    data.description = TextEditor.enrichHTML(data.description, htmlOptions);
+    const fn = this[`_${this.data.type}ChatData`];
+    if (fn) fn.bind(this)(data, htmlOptions);
 
-    return data
+    return data;
   }
 
   /**
@@ -44,30 +44,43 @@ export class SvnSea2EItem extends Item {
    * @param {Object} data    Options used by the TextEditor.enrichHTML function
    * @return {Object}               An object of chat data to render
    */
-  _advantageChatData (data, htmlOptions) {
-    const pts = data.cost.normal === 1 ? game.i18n.localize('SVNSEA2E.Point') : game.i18n.localize('SVNSEA2E.Points')
-    data.metadatahtml = `<ul class="details-list"><li class="tag">${data.cost.normal} ${pts}</li>`
-    data.metadatahtml += data.cost.specreq ? '<li class="tag">' + data.cost.specreq + '</li>' : ''
-    data.metadatahtml += data.knack ? '<li class="tag">' + game.i18n.localize('SVNSEA2E.Knack') + '</li>' : ''
-    data.metadatahtml += data.innate ? '<li class="tag">' + game.i18n.localize('SVNSEA2E.Innate') + '</li>' : ''
-    data.metadatahtml += '</ul>'
+  _advantageChatData(data, htmlOptions) {
+    const pts =
+      data.cost.normal === 1
+        ? game.i18n.localize('SVNSEA2E.Point')
+        : game.i18n.localize('SVNSEA2E.Points');
+    data.metadatahtml = `<ul class="details-list"><li class="tag">${data.cost.normal} ${pts}</li>`;
+    data.metadatahtml += data.cost.specreq
+      ? '<li class="tag">' + data.cost.specreq + '</li>'
+      : '';
+    data.metadatahtml += data.knack
+      ? '<li class="tag">' + game.i18n.localize('SVNSEA2E.Knack') + '</li>'
+      : '';
+    data.metadatahtml += data.innate
+      ? '<li class="tag">' + game.i18n.localize('SVNSEA2E.Innate') + '</li>'
+      : '';
+    data.metadatahtml += '</ul>';
 
-    return data
+    return data;
   }
 
-  _artifactChatData (data, htmlOptions) {
-    const type = data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.type]
-    data.metadatahtml = `<ul class="details-list"><li class="tag">${type}</li></ul>`
-    return data
+  _artifactChatData(data, htmlOptions) {
+    const type =
+      data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.type];
+    data.metadatahtml = `<ul class="details-list"><li class="tag">${type}</li></ul>`;
+    return data;
   }
 
-  _backgroundChatData (data, htmlOptions) {
-    let skillNames = ''
-    data.skills.forEach(skl => skillNames += `<li class="tag">${CONFIG.SVNSEA2E.skills[skl]}</li>`)
+  _backgroundChatData(data, htmlOptions) {
+    let skillNames = '';
+    data.skills.forEach(
+      (skl) =>
+        (skillNames += `<li class="tag">${CONFIG.SVNSEA2E.skills[skl]}</li>`),
+    );
 
-    let advNames = ''
+    let advNames = '';
     for (let i = 0; i < data.advantages.length; i++) {
-      advNames += `<li class="tag">${data.advantages[i]}</li>`
+      advNames += `<li class="tag">${data.advantages[i]}</li>`;
     }
 
     data.metadatahtml = `<h5>${game.i18n.localize('SVNSEA2E.Quirk')}</h5>
@@ -80,26 +93,29 @@ export class SvnSea2EItem extends Item {
     <ul class="advantages-list">
     ${advNames}
     </ul>
-`
-    return data
+`;
+    return data;
   }
 
-  _duelstyleChatData (data, htmlOptions) {
+  _duelstyleChatData(data, htmlOptions) {
     data.metadatahtml = `
     <h5>${game.i18n.format('SVNSEA2E.Bonus')}</h5>
     <p>${data.bonus}</p>
-      `
-    return data
+      `;
+    return data;
   }
 
-  _schemeChatData (data, htmlOptions) {
-    data.metadatahtml = '<p>' + game.i18n.format('SVNSEA2E.ChatInfluence', {
-      influence: data.influence.toString()
-    }) + '</p>'
-    return data
+  _schemeChatData(data, htmlOptions) {
+    data.metadatahtml =
+      '<p>' +
+      game.i18n.format('SVNSEA2E.ChatInfluence', {
+        influence: data.influence.toString(),
+      }) +
+      '</p>';
+    return data;
   }
 
-  _secretsocietyChatData (data, htmlOptions) {
+  _secretsocietyChatData(data, htmlOptions) {
     data.metadatahtml = `
     <h5>${game.i18n.localize('SVNSEA2E.Concern')}</h5>
     <p>${data.concern}</p>
@@ -107,22 +123,26 @@ export class SvnSea2EItem extends Item {
     <p>${data.earnfavor}</p>
     <h5>${game.i18n.localize('SVNSEA2E.UseFavor')}</h5>
     <p>${data.callupon}</p>
-`
-    return data
+`;
+    return data;
   }
 
-  _sorceryChatData (data, htmlOptions) {
+  _sorceryChatData(data, htmlOptions) {
     data.metadatahtml = `
     <ul class="tag-list">
     <li class="tag">${CONFIG.SVNSEA2E.sorceryTypes[data.sorctype]}</li>
-    <li class="tag">${CONFIG.SVNSEA2E.sorcerySubcats[data.sorcsubcat]} ${CONFIG.SVNSEA2E.sorceryCats[data.sorccat]}</li>
-    <li class="tag">${game.i18n.localize('SVNSEA2E.Duration')}: ${CONFIG.SVNSEA2E.durations[data.sorcdur]}</li>
+    <li class="tag">${CONFIG.SVNSEA2E.sorcerySubcats[data.sorcsubcat]} ${
+      CONFIG.SVNSEA2E.sorceryCats[data.sorccat]
+    }</li>
+    <li class="tag">${game.i18n.localize('SVNSEA2E.Duration')}: ${
+      CONFIG.SVNSEA2E.durations[data.sorcdur]
+    }</li>
     </ul>
-`
-    return data
+`;
+    return data;
   }
 
-  _storyChatData (data, htmlOptions) {
+  _storyChatData(data, htmlOptions) {
     data.metadatahtml = `
     <h5>${game.i18n.localize('SVNSEA2E.Status')}</h5>
     <p>${CONFIG.SVNSEA2E.storyStatuses[data.status]}</p>
@@ -132,30 +152,38 @@ export class SvnSea2EItem extends Item {
     <p>${data.steps}</p>
     <h5>${game.i18n.localize('SVNSEA2E.Reward')}</h5>
     <p>${data.reward}</p>
-`
-    return data
+`;
+    return data;
   }
 
-  _validateMinMaxData (value, min, max) {
+  _validateMinMaxData(value, min, max) {
     if (value > max) {
-      return max
+      return max;
     } else if (value < min) {
-      return min
+      return min;
     }
-    return value
+    return value;
   }
 
   /**
    * Prepare advantage type specific data
    */
-  _prepareAdvantageData (data) {
-    data.cost.norm = this._validateMinMaxData(data.cost.norm, data.cost.min, data.cost.max)
+  _prepareAdvantageData(data) {
+    data.cost.norm = this._validateMinMaxData(
+      data.cost.norm,
+      data.cost.min,
+      data.cost.max,
+    );
   }
 
   /**
    * Prepare scheme type specific data
    */
-  _prepareSchemeData (data) {
-    data.influence.value = this._validateMinMaxData(data.influence.value, data.influence.min, data.influence.max)
+  _prepareSchemeData(data) {
+    data.influence.value = this._validateMinMaxData(
+      data.influence.value,
+      data.influence.min,
+      data.influence.max,
+    );
   }
 }
