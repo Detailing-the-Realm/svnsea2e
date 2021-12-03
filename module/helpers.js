@@ -3,7 +3,7 @@ export const skillsToSheetData = (baseData, CONFIG) =>
     ...skill,
     name: s,
     label: CONFIG.SVNSEA2E.skills[s],
-  }));
+  })).sort((a, b) => a.label.localeCompare(b.label));
 
 export const getAdvantageItems = (baseData) =>
   baseData.items.filter((item) => item.type === 'advantage');
