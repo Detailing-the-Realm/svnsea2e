@@ -230,7 +230,7 @@ Hooks.once('ready', async function () {
   if (!currentVersion) {
     currentVersion = 0.6;
   }
-  const NEEDS_MIGRATION_VERSION = 2.6;
+  const NEEDS_MIGRATION_VERSION = 3.0;
   // const COMPATIBLE_MIGRATION_VERSION = 0.6
   const needMigration = currentVersion < NEEDS_MIGRATION_VERSION;
 

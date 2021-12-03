@@ -167,6 +167,19 @@ export const migrateActorData = function (actor) {
     }
   }
 
+    if (
+    (actor.type === 'playercharacter' ||
+      actor.type === 'hero' ||
+      actor.type === 'villain')
+  ) {
+    if(data.arcana) {
+      migrateVirtue(actor);
+      migrateHubris(actor);
+      actor.document.update({ data: { arcana: null }});
+    }
+  }
+
+
   return updateData;
 };
 
@@ -201,3 +214,33 @@ export const migrateItemData = function (item) {
 export const migrateSceneData = function (scene) {
   return {};
 };
+
+export const migrateVirtue = function (actor) {
+  const virtue = actor.data.arcana.virtue;
+  if (virtue.name != null) {
+    const itemData = {
+      name: virtue.name,
+      img: `systems/svnsea2e/icons/virtue.jpg`,
+      type: 'virtue',
+      data: {
+        description: virtue.description
+      }
+    };
+    actor.document.createOwnedItem(itemData);
+  }
+}
+
+export const migrateHubris = function (actor) {
+  const hubris = actor.data.arcana.hubris;
+  if (hubris.name != null) {
+    const itemData = {
+      name: hubris.name,
+      img: `systems/svnsea2e/icons/hubris.jpg`,
+      type: 'hubris',
+      data: {
+        description: hubris.description
+      }
+    };
+    actor.document.createOwnedItem(itemData);
+  }
+}
