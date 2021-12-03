@@ -1,5 +1,4 @@
-
-import { ItemSheetSS2e } from './base.js'
+import { ItemSheetSS2e } from './base.js';
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -7,16 +6,18 @@ import { ItemSheetSS2e } from './base.js'
  */
 export class ItemSheetSS2eSecretSociety extends ItemSheetSS2e {
   /** @override */
-  static get defaultOptions () {
+  static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       template: 'systems/svnsea2e/templates/items/secretsociety.html',
       width: 800,
       height: 700,
-      tabs: [{
-        navSelector: '.sheet-tabs',
-        contentSelector: '.sheet-body',
-        initial: 'description'
-      }]
-    })
+      tabs: [
+        {
+          navSelector: '.sheet-tabs',
+          contentSelector: '.sheet-body',
+          initial: 'description',
+        },
+      ],
+    });
   }
 }

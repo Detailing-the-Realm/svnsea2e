@@ -6,12 +6,12 @@ export default class SkillSelector extends FormApplication {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      id: "skill-selector",
-      classes: ["svnsea2e"],
-      title: game.i18n.localize("SVNSEA2E.BackgroundSkillSelect"),
-      template: "systems/svnsea2e/templates/apps/skill-selector.html",
+      id: 'skill-selector',
+      classes: ['svnsea2e'],
+      title: game.i18n.localize('SVNSEA2E.BackgroundSkillSelect'),
+      template: 'systems/svnsea2e/templates/apps/skill-selector.html',
       width: 320,
-      height: "auto",
+      height: 'auto',
       choices: {},
       minimum: 0,
       maximum: null,
@@ -53,20 +53,20 @@ export default class SkillSelector extends FormApplication {
         chosen.push(k);
       }
     }
-    updateData["data.skills"] = chosen;
+    updateData['data.skills'] = chosen;
 
     if (this.options.minimum && chosen.length < this.options.minimum) {
       return ui.notifications.error(
-        game.i18n.format("SVNSEA2E.AtLeastOptions", {
+        game.i18n.format('SVNSEA2E.AtLeastOptions', {
           min: this.options.minimum,
-        })
+        }),
       );
     }
     if (this.options.maximum && chosen.length > this.options.maximum) {
       return ui.notifications.error(
-        game.i18n.format("SVNSEA2E.AtLeastOptions", {
+        game.i18n.format('SVNSEA2E.AtLeastOptions', {
           max: this.options.maximum,
-        })
+        }),
       );
     }
 

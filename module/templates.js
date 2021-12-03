@@ -6,7 +6,6 @@
 export const preloadHandlebarsTemplates = async function () {
   // Define template paths to load
   const templatePaths = [
-
     // Actor Sheet Partials
     'systems/svnsea2e/templates/actors/parts/actor-name.html',
     'systems/svnsea2e/templates/actors/parts/actor-traits.html',
@@ -21,9 +20,9 @@ export const preloadHandlebarsTemplates = async function () {
 
     // Item Sheet Partials
     'systems/svnsea2e/templates/items/parts/item-header.html',
-    'systems/svnsea2e/templates/items/parts/item-description.html'
-  ]
+    'systems/svnsea2e/templates/items/parts/item-description.html',
+  ];
 
   // Load the template parts
-  return loadTemplates(templatePaths)
-}
+  return loadTemplates(templatePaths);
+};

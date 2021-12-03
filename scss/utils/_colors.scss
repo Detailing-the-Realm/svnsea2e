@@ -1,20 +1,20 @@
-$c-prim: #143A54; //;
-$c-sec: #EEE8BF;
-$c-prim-lt: #3498DB;
-$c-prim-dk: #091B27;
-$c-sec-dk: #DBD5B0;
-$c-sec-lt: #FFF;
+$c-prim: #143a54; //;
+$c-sec: #eee8bf;
+$c-prim-lt: #3498db;
+$c-prim-dk: #091b27;
+$c-sec-dk: #dbd5b0;
+$c-sec-lt: #fff;
 
 //Backgrounds
 $bg-c-lt: $c-sec;
 $bg-c-dk: $c-prim;
 $bg-c-rgba-dk: rgba(20, 58, 84, 0.7);
-$bg-c-rgba-lt: rgba(255, 255, 255, .6);
+$bg-c-rgba-lt: rgba(255, 255, 255, 0.6);
 //$bg-c-rgba-dk: rgba(52, 152, 219, 0.6);
 
 //Borders
 $brd-c-lt: $c-sec-dk;
-$brd-c-dk:$c-prim-dk;
+$brd-c-dk: $c-prim-dk;
 $brd-c-glow: $c-sec;
 
 // Font Colors
@@ -23,5 +23,5 @@ $f-c-lt: $c-sec;
 
 // Gradients
 
-$g-c-lt:rgba(255,0,0,0);
-$g-c-dk:rgba(52, 152, 219, 0.5);
+$g-c-lt: rgba(255, 0, 0, 0);
+$g-c-dk: rgba(52, 152, 219, 0.5);

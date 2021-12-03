@@ -1,6 +1,6 @@
-import { SVNSEA2E } from "../../config.js";
-import SkillSelector from "../../apps/skill-selector.js";
-import AdvantageSelector from "../../apps/advantage-selector.js";
+import { SVNSEA2E } from '../../config.js';
+import SkillSelector from '../../apps/skill-selector.js';
+import AdvantageSelector from '../../apps/advantage-selector.js';
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -10,7 +10,7 @@ export class ItemSheetSS2e extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["svnsea2e", "sheet", "item"],
+      classes: ['svnsea2e', 'sheet', 'item'],
       width: 600,
       height: 700,
     });
@@ -23,8 +23,8 @@ export class ItemSheetSS2e extends ItemSheet {
     // const data = super.getData();
     const baseData = super.getData(options);
     const { isOwner } = this.document;
-    console.log("baseData", baseData);
-    console.log("this.item", this.item);
+    console.log('baseData', baseData);
+    console.log('this.item', this.item);
     // mergeObject(data, {
     //   owner: isOwner,
     //   itemType: SVNSEA2E.itemTypes[data.item.type],
@@ -40,9 +40,9 @@ export class ItemSheetSS2e extends ItemSheet {
       itemType: SVNSEA2E.itemTypes[baseData.item.type],
       options: this.options,
       editable: this.isEditable,
-      cssClass: isOwner ? "editable" : "locked",
+      cssClass: isOwner ? 'editable' : 'locked',
       config: CONFIG.SVNSEA2E,
-      dtypes: ["String", "Number", "Boolean"],
+      dtypes: ['String', 'Number', 'Boolean'],
 
       name: this.item.name,
       img: this.item.img,
@@ -52,33 +52,33 @@ export class ItemSheetSS2e extends ItemSheet {
       quirk: baseData.data.data.quirk,
     };
 
-    if (baseData.item.type === "background") {
+    if (baseData.item.type === 'background') {
       sheetData.selectedskills = baseData.data.data.skills.map(
-        (s) => CONFIG.SVNSEA2E.skills[s]
+        (s) => CONFIG.SVNSEA2E.skills[s],
       );
       sheetData.selectedadvantages = baseData.data.data.advantages;
 
       sheetData.nation = baseData.data.data.nation;
-    } else if (baseData.item.type === "advantage") {
+    } else if (baseData.item.type === 'advantage') {
       sheetData.normalCost = baseData.data.data.cost.normal;
       sheetData.reducedCost = baseData.data.data.cost.reducecost;
       sheetData.knack = baseData.data.data.knack;
       sheetData.innate = baseData.data.data.innate;
-    } else if (baseData.item.type === "duelstyle") {
+    } else if (baseData.item.type === 'duelstyle') {
       sheetData.bonus = baseData.data.data.bonus;
-    } else if (baseData.item.type === "scheme") {
+    } else if (baseData.item.type === 'scheme') {
       sheetData.influence = baseData.data.data.influence;
-    } else if (baseData.item.type === "secretsociety") {
+    } else if (baseData.item.type === 'secretsociety') {
       sheetData.concern = baseData.data.data.concern;
       sheetData.favor = baseData.data.data.favor;
       sheetData.earnFavor = baseData.data.data.earnfavor;
       sheetData.callUpon = baseData.data.data.callupon;
-    } else if (baseData.item.type === "sorcery") {
+    } else if (baseData.item.type === 'sorcery') {
       sheetData.sorceryType = baseData.data.data.sorctype;
       sheetData.sorceryDuration = baseData.data.data.sorcdur;
       sheetData.sorceryCategory = baseData.data.data.sorccat;
       sheetData.sorcerySubCategory = baseData.data.data.sorcsubcat;
-    } else if (baseData.item.type === "story") {
+    } else if (baseData.item.type === 'story') {
       sheetData.storyStatus = baseData.data.data.status;
       sheetData.reward = baseData.data.data.reward;
       sheetData.endings = baseData.data.data.endings;
@@ -92,9 +92,9 @@ export class ItemSheetSS2e extends ItemSheet {
   /** @override */
   setPosition(options = {}) {
     const position = super.setPosition(options);
-    const sheetBody = this.element.find(".sheet-body");
+    const sheetBody = this.element.find('.sheet-body');
     const bodyHeight = position.height - 192;
-    sheetBody.css("height", bodyHeight);
+    sheetBody.css('height', bodyHeight);
     return position;
   }
 
@@ -104,10 +104,10 @@ export class ItemSheetSS2e extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find(".skill-selector").on("click", this._onSkillSelector.bind(this));
+    html.find('.skill-selector').on('click', this._onSkillSelector.bind(this));
     html
-      .find(".advantage-selector")
-      .on("click", this._onAdvantageSelector.bind(this));
+      .find('.advantage-selector')
+      .on('click', this._onAdvantageSelector.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -140,7 +140,7 @@ export class ItemSheetSS2e extends ItemSheet {
     const advantages = [];
     const items = game.items.directory.entities;
     for (let i = 0; i < items.length; i++) {
-      if (items[i].type === "advantage") {
+      if (items[i].type === 'advantage') {
         advantages.push(items[i].name);
       }
     }
@@ -149,11 +149,11 @@ export class ItemSheetSS2e extends ItemSheet {
     const worldAdv = duplicate(advantages);
     for (var i = 0; i < packs.length; i++) {
       const pack = packs[i];
-      if (pack.metadata.entity === "Item") {
+      if (pack.metadata.entity === 'Item') {
         const pitems = await pack.getIndex();
         for (let j = 0; j < pitems.length; j++) {
           const entry = await pack.getEntry(pitems[j]._id);
-          if (entry.type === "advantage" && !worldAdv.includes(entry.name)) {
+          if (entry.type === 'advantage' && !worldAdv.includes(entry.name)) {
             advantages.push(entry.name);
           }
         }
@@ -173,7 +173,7 @@ export class ItemSheetSS2e extends ItemSheet {
     event.preventDefault();
     const a = event.currentTarget;
     const options = {
-      title: game.i18n.localize("SVNSEA2E.Skills"),
+      title: game.i18n.localize('SVNSEA2E.Skills'),
       choices: CONFIG.SVNSEA2E[a.dataset.options],
     };
     new SkillSelector(this.item, options).render(true);
@@ -189,7 +189,7 @@ export class ItemSheetSS2e extends ItemSheet {
   async _onAdvantageSelector(event) {
     event.preventDefault();
     const options = {
-      title: game.i18n.localize("SVNSEA2E.Advantages"),
+      title: game.i18n.localize('SVNSEA2E.Advantages'),
       choices: await this._getAllAdvantages(),
     };
     new AdvantageSelector(this.item, options).render(true);
