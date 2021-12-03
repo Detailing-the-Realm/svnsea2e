@@ -328,5 +328,6 @@
   "SVNSEA2E.Great": "Great",
   "SVNSEA2E.Small": "Small",
   "SVNSEA2E.IncreaseThreshold": "Incrementar el umbral en 5",
-  "SVNSEA2E.GMIncreasedThreshold": "(el DJ incrementa el umbral en 5)"
+  "SVNSEA2E.GMIncreasedThreshold": "(el DJ incrementa el umbral en 5)",
+  "SVNSEA2E.AddToInitiativeTracker": "Agregar al rastreador de iniciativas"
 }

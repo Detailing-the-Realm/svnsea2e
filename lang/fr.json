@@ -323,5 +323,6 @@
   "SVNSEA2E.GMIncreasedThreshold": "(GM a augmenté le seuil de 5)",
   "SVNSEA2E.DeathToken": "Jeton de mort",
   "SVNSEA2E.Wonder": "Merveille",
-  "SVNSEA2E.Tatoo": "Tatouage"
+  "SVNSEA2E.Tatoo": "Tatouage",
+  "SVNSEA2E.AddToInitiativeTracker": "Définir comme initiative"
 }

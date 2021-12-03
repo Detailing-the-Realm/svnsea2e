@@ -328,5 +328,6 @@
   "SVNSEA2E.Great": "Great",
   "SVNSEA2E.Small": "Small",
   "SVNSEA2E.IncreaseThreshold": "Increase Threshold by 5",
-  "SVNSEA2E.GMIncreasedThreshold": "(GM increased the threshold by 5)"
+  "SVNSEA2E.GMIncreasedThreshold": "(GM increased the threshold by 5)",
+  "SVNSEA2E.AddToInitiativeTracker": "Add to initiative tracker"
 }
