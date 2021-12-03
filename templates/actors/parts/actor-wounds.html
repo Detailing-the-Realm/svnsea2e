@@ -1,12 +1,27 @@
+<div class="resources flex-row">
+  <div class="form-group flex-group raise-tracking">
+    <label for="data.initiative">{{ localize "SVNSEA2E.Initiative" }}</label>
+    <span class="twodigit">
+      <button class="minus-1-initiative">-1</button>
+      <input
+        type="text"
+        name="data.initiative"
+        value="{{initiative}}"
+        id="data.initiative"
+        disabled
+      />
+      <button class="add-1-initiative">+1</button>
+  </div>
+</div>
 {{#if isPlayerCharacter}}
   <div class="resources flex-row">
     <div class="form-group flex-group">
       <label for="data.heropts">{{ localize "SVNSEA2E.HeroPoints" }}</label>
-      <span class="twodigit">
+      <span class="twodigit herospts">
         <input type="text" name="data.heropts" value="{{heropts}}" id="data.heropts"/>
       </span>
       <label for="data.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
-      <span class="twodigit">
+      <span class="twodigit wealth">
         <input type="text" name="data.wealth" value="{{wealth}}" data-dtype="String" id="data.wealth" />
       </span>
     </div>
