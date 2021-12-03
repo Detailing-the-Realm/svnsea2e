@@ -3,6 +3,7 @@
     "types": ["brute", "dangerpts", "hero", "monster", "playercharacter", "ship", "villain"],
     "templates": {
       "base": {
+        "initiative": 0,
         "wounds": {
           "value": 0,
           "min": 0,

@@ -324,5 +324,6 @@
   "SVNSEA2E.DeathToken": "Jeton de mort",
   "SVNSEA2E.Wonder": "Merveille",
   "SVNSEA2E.Tatoo": "Tatouage",
-  "SVNSEA2E.AddToInitiativeTracker": "Définir comme initiative"
+  "SVNSEA2E.AddToInitiativeTracker": "Définir comme initiative",
+  "SVNSEA2E.Initiative": "Mises"
 }

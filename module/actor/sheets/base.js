@@ -1,4 +1,5 @@
 import LanguageSelector from '../../apps/language-selector.js';
+import { updateInitiative } from '../../combat.js';
 
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
@@ -41,6 +42,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       // Core Actor data:
       name: this.actor.name,
       img: this.actor.img,
+      initiative: this.actor.data.data.initiative,
       age: this.actor.data.data.age,
       nation: this.actor.data.data.nation,
       wealth: this.document.data.data.wealth,
@@ -128,6 +130,9 @@ export default class ActorSheetSS2e extends ActorSheet {
       .find('.language-selector')
       .on('click', this._onLanguageSelector.bind(this));
 
+    html.find('.add-1-initiative').on('click', this._onAddInitiative.bind(this))
+    html.find('.minus-1-initiative').on('click', this._onMinusInitiative.bind(this))
+
     html.find('.item-create').on('click', this._onItemCreate.bind(this));
 
     // Update Inventory Item
@@ -179,6 +184,18 @@ export default class ActorSheetSS2e extends ActorSheet {
         li.addEventListener('dragstart', handler, false);
       });
     }
+  }
+
+  _onAddInitiative(event) {
+    event.preventDefault();
+    const initiative = (this.actor.data.data.initiative || 0) + 1;
+    updateInitiative(this.actor.id, initiative); 
+  }
+
+  _onMinusInitiative(event) {
+    event.preventDefault();
+    const initiative = (this.actor.data.data.initiative || 0) - 1;
+    updateInitiative(this.actor.id, initiative); 
   }
 
   /* -------------------------------------------- */
