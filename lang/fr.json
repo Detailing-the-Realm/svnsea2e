@@ -321,6 +321,8 @@
   "SVNSEA2E.Small": "Petit",
   "SVNSEA2E.IncreaseThreshold": "Augmenter le seuil de 5",
   "SVNSEA2E.GMIncreasedThreshold": "(GM a augmenté le seuil de 5)",
+  "SVNSEA2E.AddOneToDice": "+1 aux dés",
+  "SVNSEA2E.AddOneToDiced": "+1 a été ajoutés à chaque dé.",
   "SVNSEA2E.DeathToken": "Jeton de mort",
   "SVNSEA2E.Wonder": "Merveille",
   "SVNSEA2E.Tatoo": "Tatouage",

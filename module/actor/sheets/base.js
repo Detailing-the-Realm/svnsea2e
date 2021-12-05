@@ -967,6 +967,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     let incThreshold = 0;
     if (form.increaseThreshold !== undefined)
       incThreshold = form.increaseThreshold.checked;
+
+    let addOneToDice = 0;
+    if (form.addOneToDice !== undefined)
+      addOneToDice = form.addOneToDice.checked;
+
     let d10 = new Die({ faces: 10, number: nd }).evaluate();
     let exploded = false;
 
@@ -984,7 +989,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     }
 
     // deep copy of the rolls
-    const rolls = d10.values;
+    const rolls = d10.values.map((d) => addOneToDice ? d + 1 : d);
 
     rolls.sort(function (a, b) {
       return a - b;
@@ -997,9 +1002,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (rolldata['threshold'] == 10) {
       let i = rolls.length;
       while (i--) {
-        if (rolls[i] == 10) {
+        if (rolls[i] >= 10) {
           raises++;
-          combos.push('10');
+          combos.push(rolls[i]);
           rolls.splice(i, 1);
         } else if (rolls[i] < 10) {
           break;
@@ -1044,15 +1049,16 @@ export default class ActorSheetSS2e extends ActorSheet {
     let rerolled = false;
     let reroll = '';
 
-    const sortedRolls = d10.values;
+    const sortedRolls = d10.values.map(v => v);
     sortedRolls.sort(function (a, b) {
       return a - b;
     });
 
     // reroll the first die in our results if it is less than 5
     if (i > 0 && rolldata['reroll'] && rolls[0] < 5) {
-      const orgroll = rolls[0];
+      const orgroll = addOneToDice ? rolls[0] - 1 : rolls[0];
       rolls[0] = Math.floor(Math.random() * 10) + 1;
+
       reroll = game.i18n.format('SVNSEA2E.Reroll', {
         roll1: orgroll,
         roll2: rolls[0],
@@ -1060,8 +1066,12 @@ export default class ActorSheetSS2e extends ActorSheet {
       rerolled = true;
 
       for (let k = 0; k < sortedRolls.length && sortedRolls[k] < 5; k++) {
-        if (sortedRolls[k] == orgroll) sortedRolls[k] = rolls[0];
+        if (sortedRolls[k] == orgroll) {
+          sortedRolls[k] = rolls[0];
+        }
       }
+
+      if (addOneToDice) rolls[0] = rolls[0] + 1;
 
       sortedRolls.sort(function (a, b) {
         return a - b;
@@ -1108,6 +1118,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       data: data,
       exploded: exploded,
       explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
+      hasAddOneToDice: addOneToDice,
+      addOneToDiced: game.i18n.format('SVNSEA2E.AddOneToDiced'),
       labels: data.labels,
       rolls: sortedRolls,
       raises: raises,
@@ -1146,4 +1158,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     const chatmsg = ChatMessage.create(chatData);
     return d10;
   }
+}
+
+function rollComparator(a, b) {
+  return a - b;
 }

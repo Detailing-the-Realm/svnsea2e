@@ -321,6 +321,8 @@
   "SVNSEA2E.Small": "Klein",
   "SVNSEA2E.IncreaseThreshold": "Erhöhen Sie den Schwellenwert um 5",
   "SVNSEA2E.GMIncreasedThreshold": "(GM erhöhte den Schwellenwert um 5)",
+  "SVNSEA2E.AddOneToDice": "+1 zu den Würfeln hinzu",
+  "SVNSEA2E.AddOneToDiced": "+1 wurde zu jedem Würfel hinzugefügt.",
   "SVNSEA2E.AddToInitiativeTracker": "Zum Initiativen-Tracker hinzufügen",
   "SVNSEA2E.Initiative": "Steigerungen"
 }
