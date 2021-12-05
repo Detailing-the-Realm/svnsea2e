@@ -990,10 +990,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // deep copy of the rolls
     const rolls = d10.values.map((d) => addOneToDice ? d + 1 : d);
-
-    rolls.sort(function (a, b) {
-      return a - b;
-    });
+    rolls.sort(rollComparator);
 
     let raises = 0;
     let combos = [];
@@ -1050,12 +1047,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     let reroll = '';
 
     const sortedRolls = d10.values.map(v => v);
-    sortedRolls.sort(function (a, b) {
-      return a - b;
-    });
+    sortedRolls.sort(rollComparator);
 
-    // reroll the first die in our results if it is less than 5
-    if (i > 0 && rolldata['reroll'] && rolls[0] < 5) {
+    // reroll the first unused die in our results
+    if (i > 0 && rolldata['reroll']) {
       const orgroll = addOneToDice ? rolls[0] - 1 : rolls[0];
       rolls[0] = Math.floor(Math.random() * 10) + 1;
 
@@ -1065,17 +1060,32 @@ export default class ActorSheetSS2e extends ActorSheet {
       });
       rerolled = true;
 
-      for (let k = 0; k < sortedRolls.length && sortedRolls[k] < 5; k++) {
+      for (let k = 0; k < sortedRolls.length; k++) {
         if (sortedRolls[k] == orgroll) {
           sortedRolls[k] = rolls[0];
+          break;
         }
       }
 
       if (addOneToDice) rolls[0] = rolls[0] + 1;
 
-      sortedRolls.sort(function (a, b) {
-        return a - b;
-      });
+      sortedRolls.sort(rollComparator);
+      rolls.sort(rollComparator);
+    }
+
+    // If the threshold is 10 then count all 10s as raises
+    if (rolldata['threshold'] == 10) {
+      let j = rolls.length;
+      while (j--) {
+        if (rolls[j] >= 10) {
+          raises++;
+          combos.push(rolls[j]);
+          rolls.splice(j, 1);
+          i = rolls.length;
+        } else if (rolls[j] < 10) {
+          break;
+        }
+      }
     }
 
     let leftdata = _leftOverDice(rolls, rolldata['threshold'], incThreshold);
