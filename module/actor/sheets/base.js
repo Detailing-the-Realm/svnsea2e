@@ -751,9 +751,11 @@ export default class ActorSheetSS2e extends ActorSheet {
       traits[CONFIG.SVNSEA2E.traits[trait]] = data.traits[trait].value;
     }
 
+    const initialBonusDice = data.dwounds.value >= 1 ? 1 : 0;
+
     // Render modal dialog
     const template = 'systems/svnsea2e/templates/chats/skill-roll-dialog.html';
-    const dialogData = { data, traits };
+    const dialogData = { data, traits, initialBonusDice };
 
     const html = await renderTemplate(template, dialogData);
 
@@ -821,9 +823,13 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Render modal dialog
     const template = 'systems/svnsea2e/templates/chats/trait-roll-dialog.html';
+
+    const initialBonusDice = data.dwounds.value >= 1 ? 1 : 0;
+
     const dialogData = {
       data: data,
       traitmax: data.traits[dataset.label]['value'],
+      initialBonusDice,
     };
 
     const html = await renderTemplate(template, dialogData);
