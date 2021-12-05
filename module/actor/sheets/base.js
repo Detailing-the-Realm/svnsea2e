@@ -298,8 +298,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     let wounds = data.wounds.value;
     let dwounds = data.dwounds.value;
 
+    const eValue = +edata.value;
+
     if (edata.type === 'wounds') {
-      wounds = edata.value;
+      wounds = eValue;
       dwounds = data.dwounds.value;
       const dwestimate = Math.trunc(wounds / 5);
 
@@ -309,12 +311,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     } else {
       // If the event dramatic wound is larger than the current dramatic wound
       // increase the dramatic wound and the regular wounds
-      if (edata.value > data.dwounds.value) dwounds = edata.value;
-      else if (edata.value == data.dwounds.value)
-        dwounds = data.dwounds.value - 1;
-      else dwounds = edata.value;
+      if (eValue > data.dwounds.value) dwounds = eValue;
+      else if (eValue == data.dwounds.value) dwounds = data.dwounds.value - 1;
+      else dwounds = eValue;
 
-      if (data.wounds.value > edata.value * 5) wounds = edata.value * 5;
+      if (data.wounds.value > eValue * 5) wounds = eValue * 5;
     }
 
     updateObj['data.wounds.value'] = wounds;
