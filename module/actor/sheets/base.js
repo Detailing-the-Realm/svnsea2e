@@ -887,7 +887,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     template,
     title,
   }) {
-    console.log('rolldata', rolldata);
     /**
      * get the indexes in the rolls array that matches the dice combos
      */
@@ -967,10 +966,8 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     const incThreshold =
       form.increaseThreshold !== undefined ? form.increaseThreshold.checked : 0;
-
-    let addOneToDice = 0;
-    if (form.addOneToDice !== undefined)
-      addOneToDice = form.addOneToDice.checked;
+    const addOneToDice =
+      form.addOneToDice !== undefined ? form.addOneToDice.checked : false;
 
     const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
     r.roll();
