@@ -1,5 +1,8 @@
 import LanguageSelector from '../../apps/language-selector.js';
 
+const getSortedRolls = (roll) =>
+  roll.terms[0].results.map((dr) => dr.result).sort((a, b) => a - b);
+
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
  * This sheet is an Abstract layer which is not used.
@@ -713,7 +716,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     const data = this.actor.data.data;
 
     let skillValue = data.skills[dataset.label]['value'];
-    let rolled = false;
     let rolldata = {
       threshold: 10,
       explode: false,
@@ -755,7 +757,7 @@ export default class ActorSheetSS2e extends ActorSheet {
               icon: '<img src="systems/svnsea2e/icons/d10.svg" class="d10">',
               label: game.i18n.localize('SVNSEA2E.Roll'),
               callback: (html) =>
-                (roll = this._roll({
+                this._roll({
                   rolldata,
                   actor,
                   data,
@@ -768,11 +770,8 @@ export default class ActorSheetSS2e extends ActorSheet {
                       ].text,
                     skill: CONFIG.SVNSEA2E.skills[dataset.label],
                   }),
-                })),
+                }),
             },
-          },
-          close: (html) => {
-            resolve(rolled ? roll : false);
           },
         },
         {},
@@ -794,7 +793,6 @@ export default class ActorSheetSS2e extends ActorSheet {
     const actor = this.actor;
     const data = this.actor.data.data;
 
-    let rolled = false;
     let rolldata = {
       threshold: 10,
       explode: false,
@@ -812,11 +810,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     const html = await renderTemplate(template, dialogData);
 
     // Create the Dialog window
-    let roll;
     const title = game.i18n.format('SVNSEA2E.TraitRollTitle', {
       trait: CONFIG.SVNSEA2E.traits[dataset.label],
     });
-    return new Promise((resolve) => {
+    return new Promise(() => {
       new Dialog(
         {
           title: title,
@@ -826,18 +823,15 @@ export default class ActorSheetSS2e extends ActorSheet {
               icon: '<img src="systems/svnsea2e/icons/d10.svg" class="d10">',
               label: game.i18n.localize('SVNSEA2E.Roll'),
               callback: (html) =>
-                (roll = this._roll({
+                this._roll({
                   rolldata: rolldata,
                   actor: actor,
                   data: data,
                   form: html[0].querySelector('form'),
                   template: 'systems/svnsea2e/templates/chats/roll-card.html',
                   title: title,
-                })),
+                }),
             },
-          },
-          close: (html) => {
-            resolve(rolled ? roll : false);
           },
         },
         {},
@@ -941,40 +935,37 @@ export default class ActorSheetSS2e extends ActorSheet {
       parseInt(rolldata['skilldice']) +
       parseInt(form.trait.value) +
       parseInt(form.bonusDice.value);
-    let incThreshold = 0;
-    if (form.increaseThreshold !== undefined)
-      incThreshold = form.increaseThreshold.checked;
-    let d10 = new Die({ faces: 10, number: nd }).evaluate();
-    let exploded = false;
+
+    const incThreshold =
+      form.increaseThreshold !== undefined ? form.increaseThreshold.checked : 0;
+
+    const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
+    r.roll();
+    const rolls = getSortedRolls(r);
+
+    console.log(r);
+    console.log(rolldata['explode']);
+
+    const exploded = rolldata['explode'];
 
     // GM spent a danger point and increased the threshold by 5
     if (incThreshold) rolldata.threshold += 5;
 
-    let matcharr = CONFIG.SVNSEA2E.match10;
-    if (rolldata['threshold'] == 15) matcharr = CONFIG.SVNSEA2E.match15;
-    if (rolldata['threshold'] == 20) matcharr = CONFIG.SVNSEA2E.match20;
-
-    // explode the dice on 10s if the character has a high enough skill or has taken 3 dynamic wounds
-    if (rolldata['explode']) {
-      exploded = true;
-      d10.explode('X', false);
-    }
-
-    // deep copy of the rolls
-    const rolls = d10.values;
-
-    rolls.sort(function (a, b) {
-      return a - b;
-    });
+    const matcharr =
+      rolldata['threshold'] === 15
+        ? CONFIG.SVNSEA2E.match15
+        : rolldata['threshold'] === 20
+        ? CONFIG.SVNSEA2E.match20
+        : CONFIG.SVNSEA2E.match10;
 
     let raises = 0;
     let combos = [];
 
     // If the threshold is 10 then count all 10s as raises
-    if (rolldata['threshold'] == 10) {
+    if (rolldata['threshold'] === 10) {
       let i = rolls.length;
       while (i--) {
-        if (rolls[i] == 10) {
+        if (rolls[i] === 10) {
           raises++;
           combos.push('10');
           rolls.splice(i, 1);
@@ -1021,10 +1012,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     let rerolled = false;
     let reroll = '';
 
-    const sortedRolls = d10.values;
-    sortedRolls.sort(function (a, b) {
-      return a - b;
-    });
+    const sortedRolls = getSortedRolls(r);
 
     // reroll the first die in our results if it is less than 5
     if (i > 0 && rolldata['reroll'] && rolls[0] < 5) {
@@ -1098,7 +1086,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     };
 
     const html = await renderTemplate(template, templateData);
-
+    const rollMode = game.settings.get('core', 'rollMode');
     // Basic chat message
     const chatData = {
       user: game.user._id,
@@ -1111,16 +1099,24 @@ export default class ActorSheetSS2e extends ActorSheet {
         alias: actor.name,
       },
       flavor: title,
+      blind: rollMode === 'blindroll',
+      // Toggle default roll mode
+      whisper: ['gmroll', 'blindroll'].includes(rollMode)
+        ? ChatMessage.getWhisperRecipients('GM')
+        : undefined,
     };
 
-    // Toggle default roll mode
-    const rollMode = game.settings.get('core', 'rollMode');
-    if (['gmroll', 'blindroll'].includes(rollMode))
-      chatData.whisper = ChatMessage.getWhisperRecipients('GM');
-    if (rollMode === 'blindroll') chatData.blind = true;
+    // Check if the dice3d module exists (Dice So Nice). If it does, post a roll in that and then send to chat after the roll has finished. If not just send to chat.
+    if (game.dice3d) {
+      game.dice3d.showForRoll(r).then(() => {
+        // Create the chat message
+        ChatMessage.create(chatData);
+      });
+    } else {
+      // Create the chat message
+      ChatMessage.create(chatData);
+    }
 
-    // Create the chat message
-    const chatmsg = ChatMessage.create(chatData);
-    return d10;
+    return r;
   }
 }
