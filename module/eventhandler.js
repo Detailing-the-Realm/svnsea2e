@@ -8,6 +8,7 @@ export function chatEventHandler() {
 
 function _onAddToInitiativeTracker(event) {
   event.stopPropagation();
+  event.preventDefault();
 
   console.log('7th Sea 2E | Add to initiative tracker');
   const dataset = event.currentTarget.dataset;
