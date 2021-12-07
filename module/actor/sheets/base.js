@@ -887,6 +887,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     template,
     title,
   }) {
+    console.log('rolldata', rolldata);
     /**
      * get the indexes in the rolls array that matches the dice combos
      */
@@ -973,7 +974,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
     r.roll();
-    const rolls = getSortedRolls(r);
+    const rolls = getSortedRolls(r).map((d) => (addOneToDice ? d + 1 : d));
     const exploded = rolldata['explode'];
 
     // GM spent a danger point and increased the threshold by 5
