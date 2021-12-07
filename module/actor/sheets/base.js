@@ -1,4 +1,5 @@
 import LanguageSelector from '../../apps/language-selector.js';
+import { updateInitiative } from '../../combat.js';
 
 const getSortedRolls = (roll) =>
   roll.terms[0].results.map((dr) => dr.result).sort((a, b) => a - b);
@@ -44,6 +45,7 @@ export default class ActorSheetSS2e extends ActorSheet {
       // Core Actor data:
       name: this.actor.name,
       img: this.actor.img,
+      initiative: this.actor.data.data.initiative,
       age: this.actor.data.data.age,
       nation: this.actor.data.data.nation,
       wealth: this.document.data.data.wealth,
@@ -131,6 +133,13 @@ export default class ActorSheetSS2e extends ActorSheet {
       .find('.language-selector')
       .on('click', this._onLanguageSelector.bind(this));
 
+    html
+      .find('.add-1-initiative')
+      .on('click', this._onAddInitiative.bind(this));
+    html
+      .find('.minus-1-initiative')
+      .on('click', this._onMinusInitiative.bind(this));
+
     html.find('.item-create').on('click', this._onItemCreate.bind(this));
 
     // Update Inventory Item
@@ -182,6 +191,18 @@ export default class ActorSheetSS2e extends ActorSheet {
         li.addEventListener('dragstart', handler, false);
       });
     }
+  }
+
+  _onAddInitiative(event) {
+    event.preventDefault();
+    const initiative = (this.actor.data.data.initiative || 0) + 1;
+    updateInitiative(this.actor.id, initiative);
+  }
+
+  _onMinusInitiative(event) {
+    event.preventDefault();
+    const initiative = (this.actor.data.data.initiative || 0) - 1;
+    updateInitiative(this.actor.id, initiative);
   }
 
   /* -------------------------------------------- */
@@ -284,8 +305,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     let wounds = data.wounds.value;
     let dwounds = data.dwounds.value;
 
+    const eValue = +edata.value;
+
     if (edata.type === 'wounds') {
-      wounds = edata.value;
+      wounds = eValue;
       dwounds = data.dwounds.value;
       const dwestimate = Math.trunc(wounds / 5);
 
@@ -295,12 +318,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     } else {
       // If the event dramatic wound is larger than the current dramatic wound
       // increase the dramatic wound and the regular wounds
-      if (edata.value > data.dwounds.value) dwounds = edata.value;
-      else if (edata.value == data.dwounds.value)
-        dwounds = data.dwounds.value - 1;
-      else dwounds = edata.value;
+      if (eValue > data.dwounds.value) dwounds = eValue;
+      else if (eValue == data.dwounds.value) dwounds = data.dwounds.value - 1;
+      else dwounds = eValue;
 
-      if (data.wounds.value > edata.value * 5) wounds = edata.value * 5;
+      if (data.wounds.value > eValue * 5) wounds = eValue * 5;
     }
 
     updateObj['data.wounds.value'] = wounds;
@@ -736,9 +758,11 @@ export default class ActorSheetSS2e extends ActorSheet {
       traits[CONFIG.SVNSEA2E.traits[trait]] = data.traits[trait].value;
     }
 
+    const initialBonusDice = data.dwounds.value >= 1 ? 1 : 0;
+
     // Render modal dialog
     const template = 'systems/svnsea2e/templates/chats/skill-roll-dialog.html';
-    const dialogData = { data, traits };
+    const dialogData = { data, traits, initialBonusDice };
 
     const html = await renderTemplate(template, dialogData);
 
@@ -802,9 +826,13 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Render modal dialog
     const template = 'systems/svnsea2e/templates/chats/trait-roll-dialog.html';
+
+    const initialBonusDice = data.dwounds.value >= 1 ? 1 : 0;
+
     const dialogData = {
       data: data,
       traitmax: data.traits[dataset.label]['value'],
+      initialBonusDice,
     };
 
     const html = await renderTemplate(template, dialogData);
@@ -939,13 +967,13 @@ export default class ActorSheetSS2e extends ActorSheet {
     const incThreshold =
       form.increaseThreshold !== undefined ? form.increaseThreshold.checked : 0;
 
+    let addOneToDice = 0;
+    if (form.addOneToDice !== undefined)
+      addOneToDice = form.addOneToDice.checked;
+
     const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
     r.roll();
     const rolls = getSortedRolls(r);
-
-    console.log(r);
-    console.log(rolldata['explode']);
-
     const exploded = rolldata['explode'];
 
     // GM spent a danger point and increased the threshold by 5
@@ -965,9 +993,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (rolldata['threshold'] === 10) {
       let i = rolls.length;
       while (i--) {
-        if (rolls[i] === 10) {
+        if (rolls[i] >= 10) {
           raises++;
-          combos.push('10');
+          combos.push(rolls[i]);
           rolls.splice(i, 1);
         } else if (rolls[i] < 10) {
           break;
@@ -1014,23 +1042,43 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     const sortedRolls = getSortedRolls(r);
 
-    // reroll the first die in our results if it is less than 5
-    if (i > 0 && rolldata['reroll'] && rolls[0] < 5) {
-      const orgroll = rolls[0];
+    // reroll the first unused die in our results
+    if (i > 0 && rolldata['reroll']) {
+      const orgroll = addOneToDice ? rolls[0] - 1 : rolls[0];
       rolls[0] = Math.floor(Math.random() * 10) + 1;
+
       reroll = game.i18n.format('SVNSEA2E.Reroll', {
         roll1: orgroll,
         roll2: rolls[0],
       });
       rerolled = true;
 
-      for (let k = 0; k < sortedRolls.length && sortedRolls[k] < 5; k++) {
-        if (sortedRolls[k] == orgroll) sortedRolls[k] = rolls[0];
+      for (let k = 0; k < sortedRolls.length; k++) {
+        if (sortedRolls[k] == orgroll) {
+          sortedRolls[k] = rolls[0];
+          break;
+        }
       }
 
-      sortedRolls.sort(function (a, b) {
-        return a - b;
-      });
+      if (addOneToDice) rolls[0] = rolls[0] + 1;
+
+      sortedRolls.sort(rollComparator);
+      rolls.sort(rollComparator);
+    }
+
+    // If the threshold is 10 then count all 10s as raises
+    if (rolldata['threshold'] == 10) {
+      let j = rolls.length;
+      while (j--) {
+        if (rolls[j] >= 10) {
+          raises++;
+          combos.push(rolls[j]);
+          rolls.splice(j, 1);
+          i = rolls.length;
+        } else if (rolls[j] < 10) {
+          break;
+        }
+      }
     }
 
     let leftdata = _leftOverDice(rolls, rolldata['threshold'], incThreshold);
@@ -1073,6 +1121,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       data: data,
       exploded: exploded,
       explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
+      hasAddOneToDice: addOneToDice,
+      addOneToDiced: game.i18n.format('SVNSEA2E.AddOneToDiced'),
       labels: data.labels,
       rolls: sortedRolls,
       raises: raises,
@@ -1119,4 +1169,8 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     return r;
   }
+}
+
+function rollComparator(a, b) {
+  return a - b;
 }

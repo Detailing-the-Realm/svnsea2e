@@ -30,6 +30,7 @@ import SkillSelector from './apps/skill-selector.js';
 import * as migrations from './migration.js';
 import { ItemSheetSS2eVirtue } from './item/sheets/virtue.js';
 import { ItemSheetSS2eHubris } from './item/sheets/hubris.js';
+import { chatEventHandler } from './eventhandler.js';
 
 Hooks.once('init', async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System
@@ -230,7 +231,7 @@ Hooks.once('ready', async function () {
   if (!currentVersion) {
     currentVersion = 0.6;
   }
-  const NEEDS_MIGRATION_VERSION = 2.6;
+  const NEEDS_MIGRATION_VERSION = 3.0;
   // const COMPATIBLE_MIGRATION_VERSION = 0.6
   const needMigration = currentVersion < NEEDS_MIGRATION_VERSION;
 
@@ -238,6 +239,8 @@ Hooks.once('ready', async function () {
   if (needMigration && game.user.isGM) {
     migrations.migrateWorld();
   }
+
+  chatEventHandler();
 });
 
 /* -------------------------------------------- */

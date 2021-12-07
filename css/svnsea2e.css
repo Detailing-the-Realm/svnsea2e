@@ -742,6 +742,11 @@ input[type=range]::-webkit-slider-thumb {
   text-align: right;
 }
 
+.sheet .sheet-header  .herospts, .sheet .sheet-header .wealth {
+  max-width: 30px;
+  margin-right: 10px;
+}
+
 .sheet .tag {
   display: inline-block;
   margin: 0 2px 2px 0;
@@ -908,6 +913,11 @@ input[type=range]::-webkit-slider-thumb {
 
 .actor .sheet-header .wounds .pts.bigger {
   padding-left: 37px;
+}
+
+.actor .sheet-header .raise-tracking button {
+  width: 2em;
+  margin: 0 1em;
 }
 
 .actor .danger-points input[type="text"] {

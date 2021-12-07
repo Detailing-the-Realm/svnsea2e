@@ -1,9 +1,11 @@
 export const skillsToSheetData = (baseData, CONFIG) =>
-  Object.entries(baseData.data.data.skills).map(([s, skill]) => ({
-    ...skill,
-    name: s,
-    label: CONFIG.SVNSEA2E.skills[s],
-  }));
+  Object.entries(baseData.data.data.skills)
+    .map(([s, skill]) => ({
+      ...skill,
+      name: s,
+      label: CONFIG.SVNSEA2E.skills[s],
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 
 export const getAdvantageItems = (baseData) =>
   baseData.items.filter((item) => item.type === 'advantage');

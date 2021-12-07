@@ -65,6 +65,12 @@ nav.sheet-tabs {
     max-width: $max-input-width-xs;
     text-align: right;
   }
+
+  .herospts,
+  .wealth {
+    max-width: 30px;
+    margin-right: 10px;
+  }
 }
 
 .tag {
