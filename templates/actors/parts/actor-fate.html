@@ -1,24 +1,34 @@
 <div class="tab fate" data-group="primary" data-tab="fate">
-  <div class="flex-group flex-between">
-    <div class="virtue-title flexrow flex-group">
-      <h3>{{localize "SVNSEA2E.Virtue"}}: <input type="text" name="data.arcana.virtue.arcana" value="{{arcana.virtue.arcana}}" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Arcana'}}" class="arcana" /></h3>
-    </div>
-    <div class="virtue-name flexrow flex-group">
-      <input type="text" name="data.arcana.virtue.name" value="{{arcana.virtue.name}}" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Virtue'}} {{localize "SVNSEA2E.Name"}}" />
-    </div>
-    <div class="virtue-desc flexrow flex-group flex-between">
-      <textarea name="data.arcana.virtue.description" placeholder="{{localize "SVNSEA2E.Virtue"}}  {{localize "SVNSEA2E.Description"}}">{{ arcana.virtue.description }}</textarea>
-    </div>
-    <div class="hubris-title flexrow flex-group">
-      <h3>{{localize "SVNSEA2E.Hubris"}}: <input type="text" name="data.arcana.hubris.arcana" value="{{arcana.hubris.arcana}}" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Arcana'}}" class="arcana" /></h3>
-    </div>
-    <div class="hubris-name flexrow flex-group">
-      <input type="text" name="data.arcana.hubris.name" value="{{arcana.hubris.name}}" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Hubris'}} {{localize 'SVNSEA2E.Name'}}" />
-    </div>
-    <div class="hubris-desc flexrow flex-group flex-between">
-      <textarea name="data.arcana.hubris.description" placeholder="{{localize 'SVNSEA2E.Hubris'}}  {{localize 'SVNSEA2E.Description'}}">{{ arcana.hubris.description }}</textarea>
-    </div>
-  </div>
+  <ol class="items-list">
+    <li class="flexrow item-header story">
+      <h3 class="item-name flexrow">{{localize "SVNSEA2E.Virtue"}}</h3>
+    </li>
+  {{#each virtues as |item id|}}
+    <li class="item flexrow story" data-item-id="{{item._id}}">
+      <div class="item-image"><img src="{{ item.img }}" title="{{ item.name }}" /></div>
+      <h4 class="item-name">{{ item.name }}</h4>
+      <div class="item-controls">
+        <a class="item-control item-edit" title="{{ item.editlabel }}"><i class="fas fa-edit"></i></a>
+        <a class="item-control item-delete" title="{{ item.deletelabel }}"><i class="fas fa-trash"></i></a>
+      </div>
+    </li>
+  {{/each}}
+  </ol>
+  <ol class="items-list">
+    <li class="flexrow item-header story">
+      <h3 class="item-name flexrow">{{localize "SVNSEA2E.Hubris"}}</h3>
+    </li>
+  {{#each hubriss as |item id|}}
+    <li class="item flexrow story" data-item-id="{{item._id}}">
+      <div class="item-image"><img src="{{ item.img }}" title="{{ item.name }}" /></div>
+      <h4 class="item-name">{{ item.name }}</h4>
+      <div class="item-controls">
+        <a class="item-control item-edit" title="{{ item.editlabel }}"><i class="fas fa-edit"></i></a>
+        <a class="item-control item-delete" title="{{ item.deletelabel }}"><i class="fas fa-trash"></i></a>
+      </div>
+    </li>
+  {{/each}}
+  </ol>
 {{#if isPlayerCharacter}}
   <ol class="items-list">
     <li class="flexrow item-header story">

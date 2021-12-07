@@ -16,10 +16,17 @@
   .wounds .pts.bigger {
     padding-left: 37px;
   }
+
+  .raise-tracking {
+    button {
+      width: 2em;
+      margin: 0 1em;
+    }
+  }
 }
 
 .danger-points {
-  input[type="text"] {
+  input[type='text'] {
     font-size: $f-s-4xl;
     height: 1.5em;
     width: 1.5em;

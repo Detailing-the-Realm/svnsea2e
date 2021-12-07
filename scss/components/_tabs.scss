@@ -4,7 +4,7 @@
   h2 {
     border: $no-border;
     font-size: $f-s-md;
-    margin:0;
+    margin: 0;
   }
 
   .item {
@@ -22,13 +22,13 @@
 
     h2 {
       color: $f-c-lt;
-      background:none;
+      background: none;
     }
   }
 
   .item.active {
     background: $c-sec;
-    text-shadow:none;
+    text-shadow: none;
     h2 {
       color: $f-c-dk;
     }

@@ -157,7 +157,7 @@
   "SVNSEA2E.SkillAim": "Tir",
   "SVNSEA2E.SkillAthletics": "Athlétisme",
   "SVNSEA2E.SkillBrawl": "Bagarre",
-  "SVNSEA2E.SkillConvince": "Convince",
+  "SVNSEA2E.SkillConvince": "Persuasion",
   "SVNSEA2E.SkillEmpathy": "Empathie",
   "SVNSEA2E.SkillHide": "Dissimulation",
   "SVNSEA2E.SkillIntimidate": "Intimidation",
@@ -321,7 +321,11 @@
   "SVNSEA2E.Small": "Petit",
   "SVNSEA2E.IncreaseThreshold": "Augmenter le seuil de 5",
   "SVNSEA2E.GMIncreasedThreshold": "(GM a augmenté le seuil de 5)",
+  "SVNSEA2E.AddOneToDice": "+1 aux dés",
+  "SVNSEA2E.AddOneToDiced": "+1 a été ajoutés à chaque dé.",
   "SVNSEA2E.DeathToken": "Jeton de mort",
   "SVNSEA2E.Wonder": "Merveille",
-  "SVNSEA2E.Tatoo": "Tatouage"
+  "SVNSEA2E.Tatoo": "Tatouage",
+  "SVNSEA2E.AddToInitiativeTracker": "Définir comme initiative",
+  "SVNSEA2E.Initiative": "Mises"
 }

@@ -1,14 +1,16 @@
-import ActorSheetSS2e from "./base.js";
+import ActorSheetSS2e from './base.js';
 import {
   getAdvantageItems,
   getArtifactItems,
   getBackgroundItems,
   getDuelStyleItems,
+  getHubrisItems,
   getSecretSocietyItems,
   getSorceryItems,
   getStoryItems,
+  getVirtueItems,
   skillsToSheetData,
-} from "../../helpers.js";
+} from '../../helpers.js';
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -18,13 +20,13 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["svnsea2e", "sheet", "actor", "pc"],
-      template: "systems/svnsea2e/templates/actors/playercharacter.html",
+      classes: ['svnsea2e', 'sheet', 'actor', 'pc'],
+      template: 'systems/svnsea2e/templates/actors/playercharacter.html',
       tabs: [
         {
-          navSelector: ".sheet-tabs",
-          contentSelector: ".sheet-body",
-          initial: "traits",
+          navSelector: '.sheet-tabs',
+          contentSelector: '.sheet-body',
+          initial: 'traits',
         },
       ],
     });
@@ -47,5 +49,7 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
     sheetData.stories = getStoryItems(baseData);
     sheetData.duelstyles = getDuelStyleItems(baseData);
     sheetData.artifacts = getArtifactItems(baseData);
+    sheetData.virtues = getVirtueItems(baseData);
+    sheetData.hubriss = getHubrisItems(baseData);
   }
 }
