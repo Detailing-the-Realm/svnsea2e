@@ -3,6 +3,7 @@ import {
   getAdvantageItems,
   getArtifactItems,
   getHubrisItems,
+  getMonsterQualityItems,
   getSchemeItems,
   getSorceryItems,
   getVirtueItems,
@@ -43,5 +44,6 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
     sheetData.schemes = getSchemeItems(baseData);
     sheetData.virtues = getVirtueItems(baseData);
     sheetData.hubriss = getHubrisItems(baseData);
+    sheetData.monsterqualities = getMonsterQualityItems(baseData);
   }
 }
