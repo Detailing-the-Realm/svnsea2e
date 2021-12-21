@@ -140,18 +140,16 @@ export default class ActorSheetSS2e extends ActorSheet {
       .find('.minus-1-initiative')
       .on('click', this._onMinusInitiative.bind(this));
 
+    //Create Inventory Item
     html.find('.item-create').on('click', this._onItemCreate.bind(this));
 
     // Update Inventory Item
-    html.find('.item-edit').on('click', (ev) => {
-      const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data('itemId'));
-      item.sheet.render(true);
-    });
+    html.find('.item-edit').on('click', this._onItemEdit.bind(this));
 
     // Delete Inventory Item
     html.find('.item-delete').on('click', this._onItemDelete.bind(this));
 
+    //Expand item summary
     html
       .find('.item h4.item-name')
       .on('click', (event) => this._onItemSummary(event));
@@ -374,6 +372,21 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Finally, create the item!
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an existing Owned Item for the Actor.
+   * @param {Event} event    The originating click event.
+   * @returns {ItemSheet5e}  The rendered item sheet.
+   * @private
+   */
+  _onItemEdit(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    const item = this.actor.items.get(li.dataset.itemId);
+    return item.sheet.render(true);
+  }
   
   /* -------------------------------------------- */
 
@@ -384,14 +397,15 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemDelete(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest('.item');
-    const itemid = li.dataset.itemId;
+    const li = event.currentTarget.closest(".item");
+    const item = this.actor.items.get(li.dataset.itemId);
 
-    const item = this.actor.getOwnedItem(itemid);
-    if (item && item.data.type === 'background')
-      await this._processBackgroundDelete(item.data.data);
+    if (item){
+      if(item.data.type === 'background')
+        await this._processBackgroundDelete(item.data.data);
 
-    await this.actor.deleteOwnedItem(itemid);
+      return item.delete();
+    }
   }
 
   /* -------------------------------------------- */
@@ -402,8 +416,8 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemSummary(event) {
     event.preventDefault();
-    const li = $(event.currentTarget).parents('.item');
-    const item = this.actor.getOwnedItem(li.data('item-id'));
+    const li = event.currentTarget.closest(".item");
+    const item = this.actor.items.get(li.dataset.itemId);
     const chatData = item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
