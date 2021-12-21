@@ -301,11 +301,11 @@ Hooks.on('preCreateItem', function (document, options, userId) {
 /**
  * Set the default image for an actor type instead of the mystery man
  **/
-Hooks.on('preCreateActor', function (entity, options, userId) {
-  entity.img = 'systems/svnsea2e/icons/' + entity.type + '.jpg';
-  if (entity.name == '') {
-    entity.name = 'New ' + entity.type[0].toUpperCase() + entity.type.slice(1);
-  }
+Hooks.on('preCreateActor', function (document, entity, options, userId) {
+  console.log(document)
+  document.data.update({
+    img: 'systems/svnsea2e/icons/' + document.data.type + '.jpg',
+  });
 });
 
 async function getAllPackAdvantages() {

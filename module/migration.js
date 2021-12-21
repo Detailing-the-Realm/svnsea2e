@@ -9,33 +9,37 @@ export const migrateWorld = async function () {
       permanent: true,
     },
   );
-  // Migrate World Actors
-  for (const a of game.actors.entities) {
-    try {
-      const updateData = migrateActorData(a.data);
-      if (!isObjectEmpty(updateData)) {
-        console.log(`Migrating Actor entity ${a.name}`);
-        await a.update(updateData, {
-          enforceTypes: false,
-        });
+  if (typeof game.actors.entities !== 'undefined') {
+    // Migrate World Actors
+    for (const a of game.actors.entities) {
+      try {
+        const updateData = migrateActorData(a.data);
+        if (!isObjectEmpty(updateData)) {
+          console.log(`Migrating Actor entity ${a.name}`);
+          await a.update(updateData, {
+            enforceTypes: false,
+          });
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
     }
   }
 
-  // Migrate World Items
-  for (const i of game.items.entities) {
-    try {
-      const updateData = migrateItemData(i.data);
-      if (!isObjectEmpty(updateData)) {
-        console.log(`Migrating Item entity ${i.name}`);
-        await i.update(updateData, {
-          enforceTypes: false,
-        });
+  if (typeof game.items.entities !== 'undefined') {
+    // Migrate World Items
+    for (const i of game.items.entities) {
+      try {
+        const updateData = migrateItemData(i.data);
+        if (!isObjectEmpty(updateData)) {
+          console.log(`Migrating Item entity ${i.name}`);
+          await i.update(updateData, {
+            enforceTypes: false,
+          });
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
     }
   }
 
