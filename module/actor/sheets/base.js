@@ -350,9 +350,10 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-   * @param {Event} event   The originating click event
+ /**
+   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
+   * @param {Event} event          The originating click event.
+   * @returns {Promise<Item5e[]>}  The newly created item.
    * @private
    */
   _onItemCreate(event) {
@@ -365,14 +366,15 @@ export default class ActorSheetSS2e extends ActorSheet {
       name: game.i18n.localize(`SVNSEA2E.New${type}`),
       img: `systems/svnsea2e/icons/${type}.jpg`,
       type: type,
-      data: duplicate(header.dataset),
+      data: foundry.utils.deepClone(header.dataset),
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data.type;
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
+  
   /* -------------------------------------------- */
 
   /**

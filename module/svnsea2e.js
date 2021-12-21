@@ -302,7 +302,6 @@ Hooks.on('preCreateItem', function (document, options, userId) {
  * Set the default image for an actor type instead of the mystery man
  **/
 Hooks.on('preCreateActor', function (document, entity, options, userId) {
-  console.log(document)
   document.data.update({
     img: 'systems/svnsea2e/icons/' + document.data.type + '.jpg',
   });
