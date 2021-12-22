@@ -23,7 +23,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   getData(options) {
     const baseData = super.getData(options);
-    console.log(baseData);
+
     const { isOwner: owner, limited } = this.document;
     const sheetData = {
       owner,
@@ -141,43 +141,37 @@ export default class ActorSheetSS2e extends ActorSheet {
       .on('click', this._onMinusInitiative.bind(this));
 
     //Create Inventory Item
-    html.find('.item-create').on('click', this._onItemCreate.bind(this));
+    html.find('.item-create').click(this._onItemCreate.bind(this));
 
     // Update Inventory Item
-    html.find('.item-edit').on('click', this._onItemEdit.bind(this));
+    html.find('.item-edit').click(this._onItemEdit.bind(this));
 
     // Delete Inventory Item
-    html.find('.item-delete').on('click', this._onItemDelete.bind(this));
+    html.find('.item-delete').click(this._onItemDelete.bind(this));
 
     //Expand item summary
-    html
-      .find('.item h4.item-name')
-      .on('click', (event) => this._onItemSummary(event));
+    html.find('.item h4.item-name').click(event => this._onItemSummary(event));
 
     // Rollable abilities.
     if (
       this.actor.data.type === 'playercharacter' ||
       this.actor.data.type === 'hero'
     ) {
-      html.find('.rollable').on('click', this._onHeroRoll.bind(this));
+      html.find('.rollable').click(this._onHeroRoll.bind(this));
     } else if (
       this.actor.data.type === 'villain' ||
       this.actor.data.type === 'monster'
     ) {
-      html.find('.rollable').on('click', this._onVillainRoll.bind(this));
+      html.find('.rollable').click(this._onVillainRoll.bind(this));
     }
 
     html
       .find('.fillable.fa-circle')
       .on('click', (event) => this._processCircle(event));
     if (this.actor.data.type === 'brute') {
-      html
-        .find('.fillable.fa-heart')
-        .on('click', (event) => this._processBruteWounds(event));
+      html.find('.fillable.fa-heart').click(event => this._processBruteWounds(event));
     } else {
-      html
-        .find('.fillable.fa-heart')
-        .on('click', (event) => this._processWounds(event));
+      html.find('.fillable.fa-heart').click(event => this._processWounds(event));
     }
 
     // Drag events for macros.
@@ -411,22 +405,23 @@ export default class ActorSheetSS2e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle toggling and items expanded description.
+   * @param {Event} event   Triggering event.
    * @private
    */
   async _onItemSummary(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    const chatData = item.getChatData({ secrets: this.actor.owner });
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.items.get(li.data("item-id"));
+    const chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
     if (li.hasClass('expanded')) {
-      const summary = li.children('.item-summary');
+      let summary = li.children('.item-summary');
       summary.slideUp(200, () => summary.remove());
     } else {
-      const div = $(`<div class="item-summary">${chatData.description}</div>`);
-      const metadata = $(
+      let div = $(`<div class="item-summary">${chatData.description}</div>`);
+      let metadata = $(
         `<div class="item-metdata">${chatData.metadatahtml}</div>`,
       );
       div.append(metadata);

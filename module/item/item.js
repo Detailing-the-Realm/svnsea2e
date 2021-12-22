@@ -6,19 +6,16 @@ export class SvnSea2EItem extends Item {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
-  prepareData() {
-    super.prepareData();
+  prepareDerivedData() {
+    super.prepareDerivedData();
 
-    // Get the Item's data
-    const itemData = this.data;
+    //const actorData = this.actor ? this.actor.data : {};
+    const data = this.data.data;
 
-    const actorData = this.actor ? this.actor.data : {};
-    const data = itemData.data;
-
-    if (itemData.type === 'scheme') {
-      this._prepareSchemeData(itemData.data);
-    } else if (itemData.type === 'advantage') {
-      this._prepareAdvantageData(itemData.data);
+    if (this.data.type === 'scheme') {
+      this._prepareSchemeData(data);
+    } else if (this.data.type === 'advantage') {
+      this._prepareAdvantageData(data);
     }
   }
 
@@ -27,9 +24,9 @@ export class SvnSea2EItem extends Item {
    * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
    * @return {Object}               An object of chat data to render
    */
-  getChatData(htmlOptions) {
-    const data = duplicate(this.data.data);
-
+  getChatData(htmlOptions={}) {
+    const data = foundry.utils.deepClone(this.data.data);
+    
     // Rich text description
     data.metadatahtml = '';
     data.description = TextEditor.enrichHTML(data.description, htmlOptions);
