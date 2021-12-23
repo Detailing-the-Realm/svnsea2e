@@ -129,49 +129,41 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (!this.options.editable) return;
 
     // language Selector
-    html
-      .find('.language-selector')
-      .on('click', this._onLanguageSelector.bind(this));
+    html.find('.language-selector').on('click', this._onLanguageSelector.bind(this));
 
-    html
-      .find('.add-1-initiative')
-      .on('click', this._onAddInitiative.bind(this));
-    html
-      .find('.minus-1-initiative')
-      .on('click', this._onMinusInitiative.bind(this));
+    html.find('.add-1-initiative').on('click', this._onAddInitiative.bind(this));
+    html.find('.minus-1-initiative').on('click', this._onMinusInitiative.bind(this));
 
     //Create Inventory Item
-    html.find('.item-create').click(this._onItemCreate.bind(this));
+    html.find('.item-create').on('click', this._onItemCreate.bind(this));
 
     // Update Inventory Item
-    html.find('.item-edit').click(this._onItemEdit.bind(this));
+    html.find('.item-edit').on('click', this._onItemEdit.bind(this));
 
     // Delete Inventory Item
-    html.find('.item-delete').click(this._onItemDelete.bind(this));
+    html.find('.item-delete').on('click', this._onItemDelete.bind(this));
 
     //Expand item summary
-    html.find('.item h4.item-name').click(event => this._onItemSummary(event));
+    html.find('.item h4.item-name').on('click', (event) => this._onItemSummary(event));
 
     // Rollable abilities.
     if (
       this.actor.data.type === 'playercharacter' ||
       this.actor.data.type === 'hero'
     ) {
-      html.find('.rollable').click(this._onHeroRoll.bind(this));
+      html.find('.rollable').on('click', this._onHeroRoll.bind(this));
     } else if (
       this.actor.data.type === 'villain' ||
       this.actor.data.type === 'monster'
     ) {
-      html.find('.rollable').click(this._onVillainRoll.bind(this));
+      html.find('.rollable').on('click', this._onVillainRoll.bind(this));
     }
 
-    html
-      .find('.fillable.fa-circle')
-      .on('click', (event) => this._processCircle(event));
+    html.find('.fillable.fa-circle').on('click', (event) => this._processCircle(event));
     if (this.actor.data.type === 'brute') {
-      html.find('.fillable.fa-heart').click(event => this._processBruteWounds(event));
+      html.find('.fillable.fa-heart').on('click', (event) => this._processBruteWounds(event));
     } else {
-      html.find('.fillable.fa-heart').click(event => this._processWounds(event));
+      html.find('.fillable.fa-heart').on('click', (event) => this._processWounds(event));
     }
 
     // Drag events for macros.
@@ -417,11 +409,11 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     // Toggle summary
     if (li.hasClass('expanded')) {
-      let summary = li.children('.item-summary');
+      const summary = li.children('.item-summary');
       summary.slideUp(200, () => summary.remove());
     } else {
-      let div = $(`<div class="item-summary">${chatData.description}</div>`);
-      let metadata = $(
+      const div = $(`<div class="item-summary">${chatData.description}</div>`);
+      const metadata = $(
         `<div class="item-metdata">${chatData.metadatahtml}</div>`,
       );
       div.append(metadata);

@@ -266,7 +266,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     if (!this.options.editable) return;
 
-    html.find('.roster .item-delete').click(this._onRemoveFromCrew.bind(this));
+    html.find('.roster .item-delete').on('click', this._onRemoveFromCrew.bind(this));
 
     const crewhandler = (ev) => this._onDragCrewStart(ev);
     html.find('.roster li.item').each((i, li) => {
