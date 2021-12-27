@@ -348,7 +348,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /* -------------------------------------------- */
 
- /**
+  /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
    * @param {Event} event          The originating click event.
    * @returns {Promise<Item5e[]>}  The newly created item.
@@ -370,7 +370,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     delete itemData.data.type;
 
     // Finally, create the item!
-    return this.actor.createEmbeddedDocuments("Item", [itemData]);
+    return this.actor.createEmbeddedDocuments('Item', [itemData]);
   }
 
   /* -------------------------------------------- */
@@ -383,11 +383,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   _onItemEdit(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest(".item");
+    const li = event.currentTarget.closest('.item');
     const item = this.actor.items.get(li.dataset.itemId);
     return item.sheet.render(true);
   }
-  
+
   /* -------------------------------------------- */
 
   /**
@@ -397,11 +397,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemDelete(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest(".item");
+    const li = event.currentTarget.closest('.item');
     const item = this.actor.items.get(li.dataset.itemId);
 
-    if (item){
-      if(item.data.type === 'background')
+    if (item) {
+      if (item.data.type === 'background')
         await this._processBackgroundDelete(item.data.data);
 
       return item.delete();
@@ -416,7 +416,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemSummary(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest(".item");
+    const li = event.currentTarget.closest('.item');
     const item = this.actor.items.get(li.dataset.itemId);
     const chatData = item.getChatData({ secrets: this.actor.owner });
 
@@ -636,9 +636,9 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
-      let advantage = game.items.entities.find(
-        (entry) => entry.data.name === bkgData.advantages[a],
-      );
+      let advantage = game.items
+        .values()
+        .find((entry) => entry.data.name === bkgData.advantages[a]);
       if (!advantage) {
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {

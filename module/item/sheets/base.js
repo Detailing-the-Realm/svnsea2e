@@ -138,7 +138,7 @@ export class ItemSheetSS2e extends ItemSheet {
 
   async _getAllAdvantages() {
     const advantages = [];
-    const items = game.items.directory.entities;
+    const items = game.items.directory.documents;
     for (let i = 0; i < items.length; i++) {
       if (items[i].type === 'advantage') {
         advantages.push(items[i].name);
