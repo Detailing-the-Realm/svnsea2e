@@ -10,7 +10,7 @@ export const migrateWorld = async function () {
     },
   );
   // Migrate World Actors
-  for (const a of game.actors.entities) {
+  for (const a of game.actors.values()) {
     try {
       const updateData = migrateActorData(a.data);
       if (!isObjectEmpty(updateData)) {
@@ -25,7 +25,7 @@ export const migrateWorld = async function () {
   }
 
   // Migrate World Items
-  for (const i of game.items.entities) {
+  for (const i of game.items.values()) {
     try {
       const updateData = migrateItemData(i.data);
       if (!isObjectEmpty(updateData)) {
@@ -172,10 +172,10 @@ export const migrateActorData = function (actor) {
     actor.type === 'hero' ||
     actor.type === 'villain'
   ) {
-    if (data.arcana) {
-      migrateVirtue(actor);
-      migrateHubris(actor);
-      actor.document.update({ data: { arcana: null } });
+    if (actor.data.arcana) {
+      //migrateVirtue(actor);
+      //migrateHubris(actor);
+      //actor.document.update({ data: { arcana: null } });
     }
   }
 
@@ -225,7 +225,7 @@ export const migrateVirtue = function (actor) {
         description: virtue.description,
       },
     };
-    actor.document.createOwnedItem(itemData);
+    actor.document.createEmbeddedDocuments('Item', [itemData]);
   }
 };
 
@@ -240,6 +240,6 @@ export const migrateHubris = function (actor) {
         description: hubris.description,
       },
     };
-    actor.document.createOwnedItem(itemData);
+    actor.document.createEmbeddedDocuments('Item', [itemData]);
   }
 };

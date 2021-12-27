@@ -145,7 +145,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').on('click', (ev) => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data('itemId'));
+      const item = this.actor.items.get(li.data('itemId'));
       item.sheet.render(true);
     });
 
@@ -371,7 +371,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     delete itemData.data.type;
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments('Item', [itemData]);
   }
   /* -------------------------------------------- */
 
@@ -385,11 +385,11 @@ export default class ActorSheetSS2e extends ActorSheet {
     const li = event.currentTarget.closest('.item');
     const itemid = li.dataset.itemId;
 
-    const item = this.actor.getOwnedItem(itemid);
+    const item = this.actor.items.get(itemid);
     if (item && item.data.type === 'background')
       await this._processBackgroundDelete(item.data.data);
 
-    await this.actor.deleteOwnedItem(itemid);
+    await this.actor.deleteEmbeddedDocuments('Item', [itemid]);
   }
 
   /* -------------------------------------------- */
@@ -401,7 +401,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _onItemSummary(event) {
     event.preventDefault();
     const li = $(event.currentTarget).parents('.item');
-    const item = this.actor.getOwnedItem(li.data('item-id'));
+    const item = this.actor.items.get(li.data('item-id'));
     const chatData = item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
@@ -620,9 +620,9 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
-      let advantage = game.items.entities.find(
-        (entry) => entry.data.name === bkgData.advantages[a],
-      );
+      let advantage = game.items
+        .values()
+        .find((entry) => entry.data.name === bkgData.advantages[a]);
       if (!advantage) {
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
