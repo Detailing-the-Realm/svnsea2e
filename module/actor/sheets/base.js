@@ -1153,12 +1153,12 @@ export default class ActorSheetSS2e extends ActorSheet {
     const rollMode = game.settings.get('core', 'rollMode');
     // Basic chat message
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       image: actor.img,
       speaker: {
-        actor: actor._id,
+        actor: actor.id,
         token: actor.token,
         alias: actor.name,
       },
