@@ -1,4 +1,4 @@
-<div class="chat-card skill-roll dice-roll" data-actor-id="{{ actor._id }}">
+<div class="chat-card skill-roll dice-roll" data-actor-id="{{ actor.id }}">
   <div class="dice-result">
     <h4 class="dice-total">{{ raises }} {{ raisetxt }}</h4>
     <div class="dice-tooltip">
@@ -36,7 +36,7 @@
       </section>
     </div>
     <div>
-      <button class="initiative-tracker-add" data-raise="{{ raises }}" data-actor="{{ actor._id }}">
+      <button class="initiative-tracker-add" data-raise="{{ raises }}" data-actor="{{ actor.id }}">
         {{ localize "SVNSEA2E.AddToInitiativeTracker" }}
       </button>
     </div>

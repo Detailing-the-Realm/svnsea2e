@@ -8,7 +8,7 @@ export function updateInitiative(actorId, raise) {
   }
 
   activeCombat.forEach((combat) => {
-    const actors = combat.combatants.filter((c) => c._actor._id === actorId);
+    const actors = combat.combatants.filter((c) => c.actor.id === actorId);
 
     if (actors.length === 0) {
       ui.notifications.error(`This actor does not participate in this combat.`);
@@ -16,7 +16,7 @@ export function updateInitiative(actorId, raise) {
     }
 
     combat.combatants
-      .filter((c) => c._actor._id === actorId)
+      .filter((c) => c.actor.id === actorId)
       .map((c) => {
         c.update({ initiative: parseFloat(nRaise) });
       });
