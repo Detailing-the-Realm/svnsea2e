@@ -173,9 +173,9 @@ export const migrateActorData = function (actor) {
     actor.type === 'villain'
   ) {
     if (actor.data.arcana) {
-      //migrateVirtue(actor);
-      //migrateHubris(actor);
-      //actor.document.update({ data: { arcana: null } });
+      migrateVirtue(actor);
+      migrateHubris(actor);
+      actor.document.update({ data: { arcana: null } });
     }
   }
 
@@ -216,7 +216,7 @@ export const migrateSceneData = function (scene) {
 
 export const migrateVirtue = function (actor) {
   const virtue = actor.data.arcana.virtue;
-  if (virtue.name != null) {
+  if (virtue.name) {
     const itemData = {
       name: virtue.name,
       img: `systems/svnsea2e/icons/virtue.jpg`,
@@ -231,7 +231,7 @@ export const migrateVirtue = function (actor) {
 
 export const migrateHubris = function (actor) {
   const hubris = actor.data.arcana.hubris;
-  if (hubris.name != null) {
+  if (hubris.name) {
     const itemData = {
       name: hubris.name,
       img: `systems/svnsea2e/icons/hubris.jpg`,
