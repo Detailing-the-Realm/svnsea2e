@@ -3,12 +3,16 @@
   "title": "7th Sea Second Edition (Unofficial)",
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
   "version": "THIS IS GENERATED",
-  "minimumCoreVersion" : "0.8.4",
-  "compatibleCoreVersion" : "0.8.9",
+  "minimumCoreVersion": "0.8.4",
+  "compatibleCoreVersion": "0.9.2",
   "templateVersion": 2,
   "author": "psychoph",
-  "esmodules": ["module/svnsea2e.js"],
-  "styles": ["css/svnsea2e.css"],
+  "esmodules": [
+    "module/svnsea2e.js"
+  ],
+  "styles": [
+    "css/svnsea2e.css"
+  ],
   "languages": [
     {
       "lang": "en",
@@ -29,6 +33,11 @@
       "lang": "es",
       "name": "Spanish",
       "path": "lang/es.json"
+    },
+    {
+      "lang": "it",
+      "name": "Italian",
+      "path": "lang/it.json"
     }
   ],
   "gridDistance": 5,
