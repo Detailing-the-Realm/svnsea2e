@@ -416,8 +416,8 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemSummary(event) {
     event.preventDefault();
-    const li = event.currentTarget.closest('.item');
-    const item = this.actor.items.get(li.dataset.itemId);
+    const li = $(event.currentTarget).closest('.item');
+    const item = this.actor.items.get(li.data('itemId'));
     const chatData = item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
