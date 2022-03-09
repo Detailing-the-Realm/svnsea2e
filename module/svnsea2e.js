@@ -58,8 +58,8 @@ Hooks.once('init', async function () {
   CONFIG.SVNSEA2E.natTypes.gisles = 'SVNSEA2E.RegionGlamourIsles';
 
   // Define custom Entity classes
-  CONFIG.Actor.entityClass = SvnSea2EActor;
-  CONFIG.Item.entityClass = SvnSea2EItem;
+  CONFIG.Actor.documentClass = SvnSea2EActor;
+  CONFIG.Item.documentClass = SvnSea2EItem;
 
   // Register System Settings
   registerSystemSettings();
