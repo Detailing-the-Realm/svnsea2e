@@ -10,7 +10,7 @@ export const migrateWorld = async function () {
     },
   );
   // Migrate World Actors
-  for (const a of game.actors.entities) {
+  for (const a of game.actors.values()) {
     try {
       const updateData = migrateActorData(a.data);
       if (!isObjectEmpty(updateData)) {
@@ -25,7 +25,7 @@ export const migrateWorld = async function () {
   }
 
   // Migrate World Items
-  for (const i of game.items.entities) {
+  for (const i of game.items.values()) {
     try {
       const updateData = migrateItemData(i.data);
       if (!isObjectEmpty(updateData)) {
@@ -172,7 +172,7 @@ export const migrateActorData = function (actor) {
     actor.type === 'hero' ||
     actor.type === 'villain'
   ) {
-    if (data.arcana) {
+    if (actor.data.arcana) {
       migrateVirtue(actor);
       migrateHubris(actor);
       actor.document.update({ data: { arcana: null } });
@@ -216,7 +216,7 @@ export const migrateSceneData = function (scene) {
 
 export const migrateVirtue = function (actor) {
   const virtue = actor.data.arcana.virtue;
-  if (virtue.name != null) {
+  if (virtue.name) {
     const itemData = {
       name: virtue.name,
       img: `systems/svnsea2e/icons/virtue.jpg`,
@@ -225,13 +225,13 @@ export const migrateVirtue = function (actor) {
         description: virtue.description,
       },
     };
-    actor.document.createOwnedItem(itemData);
+    actor.document.createEmbeddedDocuments('Item', [itemData]);
   }
 };
 
 export const migrateHubris = function (actor) {
   const hubris = actor.data.arcana.hubris;
-  if (hubris.name != null) {
+  if (hubris.name) {
     const itemData = {
       name: hubris.name,
       img: `systems/svnsea2e/icons/hubris.jpg`,
@@ -240,6 +240,6 @@ export const migrateHubris = function (actor) {
         description: hubris.description,
       },
     };
-    actor.document.createOwnedItem(itemData);
+    actor.document.createEmbeddedDocuments('Item', [itemData]);
   }
 };

@@ -140,18 +140,16 @@ export default class ActorSheetSS2e extends ActorSheet {
       .find('.minus-1-initiative')
       .on('click', this._onMinusInitiative.bind(this));
 
+    //Create Inventory Item
     html.find('.item-create').on('click', this._onItemCreate.bind(this));
 
     // Update Inventory Item
-    html.find('.item-edit').on('click', (ev) => {
-      const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data('itemId'));
-      item.sheet.render(true);
-    });
+    html.find('.item-edit').on('click', this._onItemEdit.bind(this));
 
     // Delete Inventory Item
     html.find('.item-delete').on('click', this._onItemDelete.bind(this));
 
+    //Expand item summary
     html
       .find('.item h4.item-name')
       .on('click', (event) => this._onItemSummary(event));
@@ -351,8 +349,9 @@ export default class ActorSheetSS2e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-   * @param {Event} event   The originating click event
+   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
+   * @param {Event} event          The originating click event.
+   * @returns {Promise<Item5e[]>}  The newly created item.
    * @private
    */
   _onItemCreate(event) {
@@ -365,14 +364,30 @@ export default class ActorSheetSS2e extends ActorSheet {
       name: game.i18n.localize(`SVNSEA2E.New${type}`),
       img: `systems/svnsea2e/icons/${type}.jpg`,
       type: type,
-      data: duplicate(header.dataset),
+      data: foundry.utils.deepClone(header.dataset),
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data.type;
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments('Item', [itemData]);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an existing Owned Item for the Actor.
+   * @param {Event} event    The originating click event.
+   * @returns {ItemSheet5e}  The rendered item sheet.
+   * @private
+   */
+  _onItemEdit(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(li.dataset.itemId);
+    return item.sheet.render(true);
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -383,13 +398,14 @@ export default class ActorSheetSS2e extends ActorSheet {
   async _onItemDelete(event) {
     event.preventDefault();
     const li = event.currentTarget.closest('.item');
-    const itemid = li.dataset.itemId;
+    const item = this.actor.items.get(li.dataset.itemId);
 
-    const item = this.actor.getOwnedItem(itemid);
-    if (item && item.data.type === 'background')
-      await this._processBackgroundDelete(item.data.data);
+    if (item) {
+      if (item.data.type === 'background')
+        await this._processBackgroundDelete(item.data.data);
 
-    await this.actor.deleteOwnedItem(itemid);
+      return item.delete();
+    }
   }
 
   /* -------------------------------------------- */
@@ -400,8 +416,8 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onItemSummary(event) {
     event.preventDefault();
-    const li = $(event.currentTarget).parents('.item');
-    const item = this.actor.getOwnedItem(li.data('item-id'));
+    const li = $(event.currentTarget).closest('.item');
+    const item = this.actor.items.get(li.data('itemId'));
     const chatData = item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
@@ -620,9 +636,9 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
-      let advantage = game.items.entities.find(
-        (entry) => entry.data.name === bkgData.advantages[a],
-      );
+      let advantage = game.items
+        .values()
+        .find((entry) => entry.data.name === bkgData.advantages[a]);
       if (!advantage) {
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
@@ -1137,12 +1153,12 @@ export default class ActorSheetSS2e extends ActorSheet {
     const rollMode = game.settings.get('core', 'rollMode');
     // Basic chat message
     const chatData = {
-      user: game.user._id,
+      user: game.user.id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       image: actor.img,
       speaker: {
-        actor: actor._id,
+        actor: actor.id,
         token: actor.token,
         alias: actor.name,
       },
