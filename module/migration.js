@@ -79,10 +79,9 @@ export const migrateCompendium = async function (pack) {
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
-  const content = await pack.getContent();
 
   // Iterate over compendium entries - applying fine-tuned migration functions
-  for (let ent of content) {
+  for (let ent of pack) {
     try {
       let updateData = null;
       if (entity === 'Item') updateData = migrateItemData(ent.data);
