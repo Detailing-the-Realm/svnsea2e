@@ -634,12 +634,18 @@ export default class ActorSheetSS2e extends ActorSheet {
         actorData.skills[skill].value + 1;
     }
     await this.actor.update(updateData);
+    let filter = (items, a) => {
+      for (let item of items) {
+        if (item.data.name === bkgData.advantages[a]) {
+          return item;
+        }
+      }
+      return false;
+    }
 
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
-      let advantage = game.items
-        .values()
-        .find((entry) => entry.data.name === bkgData.advantages[a]);
+      let advantage = filter(game.items.values(), a);
       if (!advantage) {
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
