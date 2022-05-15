@@ -152,8 +152,9 @@ export class ItemSheetSS2e extends ItemSheet {
       if (pack.metadata.entity === 'Item') {
         const pitems = await pack.getIndex();
         for (let j = 0; j < pitems.length; j++) {
-          const entry = await pack.getEntry(pitems[j]._id);
-          if (entry.type === 'advantage' && !worldAdv.includes(entry.name)) {
+        const document = await pack.getDocument(pitems[j]._id);
+        const entry = document.data;
+          if (entry.type === "advantage" && !worldAdv.includes(entry.name)) {
             advantages.push(entry.name);
           }
         }

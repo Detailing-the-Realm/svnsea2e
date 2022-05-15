@@ -509,8 +509,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Actor') return;
-      actorData = await pack.getEntry(data.id);
+      if (pack.metadata.entity !== "Actor") return;
+      const document = await pack.getDocument(data.id);
+      actorData = document.data;
     } else if (data.data) {
       // Case 2 - Data explicitly provided
       actorData = data.data;
@@ -540,8 +541,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Item') return;
-      itemData = await pack.getEntry(data.id);
+      if (pack.metadata.entity !== "Item") return;
+      const document = await pack.getDocument(data.id);
+      itemData = document.data;
     } else if (data.data) {
       // Case 2 - Data explicitly provided
       itemData = data.data;
@@ -572,8 +574,9 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     if (data.pack) {
       const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Item') return;
-      bkgData = await pack.getEntry(data.id);
+      if (pack.metadata.entity !== "Item") return;
+      const document = await pack.getDocument(data.id);
+      bkgData = document.data;
     } else if (data.data) {
       // Case 2 - Data explicitly provided
       bkgData = data.data;
