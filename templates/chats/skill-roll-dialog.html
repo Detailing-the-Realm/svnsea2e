@@ -1,4 +1,4 @@
-<form>
+<form class="roll-dialog">
   <div class="form-group">
     <label for="trait">{{ localize "SVNSEA2E.Trait" }}</label>
     <select id="trait" name="trait">
@@ -7,10 +7,32 @@
     {{/each}}
     </select>
   </div>
-  <div class="form-group">
-    <label for="bonusDice">{{ localize "SVNSEA2E.BonusDice" }}</label>
-    <input type="text" id="bonusDice" name="bonusDice" value="{{ initialBonusDice }}" />
-  </div>
+  <fieldset>
+    <legend>{{ localize "SVNSEA2E.Bonus" }}</legend>
+    <div class="form-group">
+      <label for="bonusDice">{{ localize "SVNSEA2E.FlairDice" }}</label>
+      <input type="checkbox" id="flairDice" name="flairDice" value="1" />
+    </div>
+    <div class="form-group">
+      <label for="bonusDice">{{ localize "SVNSEA2E.InterpretationDice" }}</label>
+      <input type="checkbox" id="interpretationDice" name="interpretationDice" value="1" />
+    </div>
+    <div class="form-group">
+      <label for="bonusDice">{{ localize "SVNSEA2E.BonusDice" }}</label>
+      <input type="number" id="bonusDice" name="bonusDice" value="0" />
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>{{ localize "SVNSEA2E.HeroPoints" }}</legend>
+    <div class="form-group">
+      <label for="useForMe">{{ localize "SVNSEA2E.UseForMe" }}</label>
+      <input type="number" id="useForMe" name="useForMe" value="0" />
+    </div>
+    <div class="form-group">
+      <label for="useForHelpMe">{{ localize "SVNSEA2E.UseForHelpMe" }}</label>
+      <input type="number" id="useForHelpMe" name="useForHelpMe" value="0" />
+    </div>
+  </fieldset>
   <div class="form-group">
     <label for="increaseThreshold">{{ localize "SVNSEA2E.IncreaseThreshold" }}</label>
     <input type="checkbox" id="increaseThreshold" name="increaseThreshold" value="1" />
