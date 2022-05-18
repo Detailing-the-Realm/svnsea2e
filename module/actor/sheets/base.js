@@ -1013,10 +1013,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       return;
     }
 
-    const nd =
-      parseInt(rolldata['skilldice']) +
-      parseInt(form.trait.value) +
-      _calculBonusDice(form);
+    const skillDice = parseInt(rolldata['skilldice']);
+    const nd = skillDice + parseInt(form.trait.value) + _calculBonusDice(form);
 
     const incThreshold =
       form.increaseThreshold !== undefined ? form.increaseThreshold.checked : 0;
@@ -1051,6 +1049,18 @@ export default class ActorSheetSS2e extends ActorSheet {
           rolls.splice(i, 1);
         } else if (rolls[i] < 10) {
           break;
+        }
+      }
+    }
+
+    // Count all dice <= skills as raise
+    if (form.joieDeVivreAdvantage?.checked) {
+      let i = rolls.length;
+      while (i--) {
+        if (rolls[i] <= skillDice) {
+          raises++;
+          combos.push(rolls[i]);
+          rolls.splice(i, 1);
         }
       }
     }
