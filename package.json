@@ -8,7 +8,8 @@
     "watch": "gulp",
     "gulp": "gulp",
     "prepare": "husky install",
-    "format": "prettier --write \"**\""
+    "format": "prettier --write \"**\"",
+    "test": "jest"
   },
   "browserslist": [
     "last 3 versions"
@@ -27,13 +28,19 @@
     "node-sass": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
+    "@babel/core": "^7.17.12",
     "@babel/eslint-parser": "^7.15.7",
+    "@babel/node": "^7.17.10",
+    "@babel/plugin-transform-runtime": "^7.17.12",
+    "@babel/preset-env": "^7.17.12",
     "@league-of-foundry-developers/foundry-vtt-types": "^0.8.8-9",
+    "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "eslint-plugin-jsdoc": "^32.3.0",
     "husky": "^7.0.0",
+    "jest": "^28.1.0",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.2"
   }
