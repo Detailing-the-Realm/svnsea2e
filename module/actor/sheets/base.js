@@ -636,8 +636,8 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
-      let advantage = game.items
-        .values()
+      let advantage = Array.from(game.items
+        .values())
         .find((entry) => entry.data.name === bkgData.advantages[a]);
       if (!advantage) {
         // now we see if it is in a compendium
