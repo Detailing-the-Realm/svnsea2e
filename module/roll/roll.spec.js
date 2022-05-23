@@ -1,7 +1,7 @@
 import { roll } from './roll';
 import { SVNSEA2E } from '../config';
 
-const actor = { update: jest.fn(), data: { data: { heropts: 3 } } };
+const actor = { update: jest.fn(), data: { data: { heropts: 2 } } };
 
 let standardRollConfiguration = {
   rolldata: {
@@ -25,6 +25,12 @@ let standardRollConfiguration = {
   },
   template: '',
   title: '',
+};
+
+const uiMock = {
+  notifications: {
+    error: jest.fn(),
+  },
 };
 
 describe('roll', () => {
@@ -61,14 +67,15 @@ describe('roll', () => {
       },
     };
     global.renderTemplate = jest.fn();
+    global.ui = uiMock;
   });
 
   afterEach(() => {
     delete global.Roll;
   });
 
-  afterAll(() => {
-    jest.restoreAllMocks();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   describe('raise computing', () => {
@@ -174,6 +181,86 @@ describe('roll', () => {
       });
     });
 
+    describe('with two raise on threshold of 15', () => {
+      const dicesTestsConfigurations = [
+        { results: [5, 10], raises: 2, combos: ['5 + 10'] },
+        { results: [5, 6, 4], raises: 2, combos: ['4 + 5 + 6'] },
+        /** Add test with raise of 10 (currently bug) */
+      ];
+
+      let rollConfig;
+
+      beforeEach(() => {
+        rollConfig = {
+          ...standardRollConfiguration,
+          rolldata: {
+            ...standardRollConfiguration.rolldata,
+            threshold: 15,
+          },
+        };
+      });
+
+      dicesTestsConfigurations.forEach((testConfig) => {
+        it(`should have ${
+          testConfig.raises
+        } raises when roll is ${testConfig.results.join('/')}`, async () => {
+          mockTerms[0].results = testConfig.results.map((d) => ({ result: d }));
+
+          await roll(rollConfig);
+
+          expect(global.renderTemplate).toHaveBeenCalledWith(
+            expect.anything(),
+            expect.objectContaining({
+              raises: testConfig.raises,
+              combos: expect.arrayContaining(testConfig.combos),
+            }),
+          );
+        });
+      });
+    });
+
+    describe('with two raise for threshold of 20, and one raise for threshold of 15', () => {
+      const dicesTestsConfigurations = [
+        { results: [10, 10], raises: 2, combos: ['10 + 10'] },
+        { results: [3, 10, 7], raises: 2, combos: ['3 + 7 + 10'] },
+        /** Add test with raise of 15 (currently bug) */
+      ];
+
+      let rollConfig;
+
+      beforeEach(() => {
+        rollConfig = {
+          ...standardRollConfiguration,
+          rolldata: {
+            ...standardRollConfiguration.rolldata,
+            threshold: 15,
+          },
+          form: {
+            ...standardRollConfiguration.form,
+            increaseThreshold: { checked: true },
+          },
+        };
+      });
+
+      dicesTestsConfigurations.forEach((testConfig) => {
+        it(`should have ${
+          testConfig.raises
+        } raises when roll is ${testConfig.results.join('/')}`, async () => {
+          mockTerms[0].results = testConfig.results.map((d) => ({ result: d }));
+
+          await roll(rollConfig);
+
+          expect(global.renderTemplate).toHaveBeenCalledWith(
+            expect.anything(),
+            expect.objectContaining({
+              raises: testConfig.raises,
+              combos: expect.arrayContaining(testConfig.combos),
+            }),
+          );
+        });
+      });
+    });
+
     describe('with joieDeVivreAdvantage', () => {
       const dicesTestsConfigurations = [
         { results: [5, 10, 4, 5], raises: 2, combos: ['10', '5 + 5'] },
@@ -233,6 +320,56 @@ describe('roll', () => {
         it(`should have ${
           testConfig.raises
         } raises when roll is ${testConfig.results.join('/')}`, async () => {
+          mockTerms[0].results = testConfig.results.map((d) => ({
+            result: d,
+          }));
+
+          await roll(rollConfig);
+
+          expect(global.renderTemplate).toHaveBeenCalledWith(
+            expect.anything(),
+            expect.objectContaining({
+              raises: testConfig.raises,
+              combos: expect.arrayContaining(testConfig.combos),
+            }),
+          );
+        });
+      });
+    });
+
+    describe('with reroll', () => {
+      const dicesTestsConfigurations = [
+        { results: [1, 8], raises: 1, rerollValue: 0.2, combos: ['3 + 8'] },
+        { results: [1, 6], raises: 0, rerollValue: 0.1, combos: [] },
+        {
+          results: [8, 2, 3],
+          raises: 2,
+          rerollValue: 0.9,
+          combos: ['2 + 8', '10'],
+        },
+      ];
+
+      let rollConfig;
+
+      beforeEach(() => {
+        rollConfig = {
+          ...standardRollConfiguration,
+          rolldata: {
+            ...standardRollConfiguration.rolldata,
+            reroll: true,
+          },
+        };
+      });
+
+      dicesTestsConfigurations.forEach((testConfig) => {
+        it(`should have ${
+          testConfig.raises
+        } raises when roll is ${testConfig.results.join('/')} and reroll is ${
+          testConfig.rerollValue * 10 + 1
+        }`, async () => {
+          jest
+            .spyOn(global.Math, 'random')
+            .mockReturnValue(testConfig.rerollValue);
           mockTerms[0].results = testConfig.results.map((d) => ({
             result: d,
           }));
@@ -394,6 +531,38 @@ describe('roll', () => {
           }),
         );
       });
+    });
+  });
+
+  describe('spend hero point', () => {
+    let rollConfig;
+
+    beforeEach(() => {
+      rollConfig = {
+        ...standardRollConfiguration,
+      };
+    });
+
+    it('should throw an error if the not actor enought point', async () => {
+      rollConfig.form.useForMe = { value: 3 };
+      const result = await roll(rollConfig);
+
+      expect(result).toBeFalsy();
+
+      expect(uiMock.notifications.error).toHaveBeenCalledWith(
+        'SVNSEA2E.NotEnoughHero',
+      );
+      expect(actor.update).not.toHaveBeenCalled();
+    });
+
+    it('should update actor to spend hero point', async () => {
+      rollConfig.form.useForMe = { value: 1 };
+      const result = await roll(rollConfig);
+
+      expect(result).toBeTruthy();
+
+      expect(uiMock.notifications.error).not.toHaveBeenCalled();
+      expect(actor.update).toHaveBeenCalled();
     });
   });
 });
