@@ -133,7 +133,7 @@ export async function roll({
 
   if (!_spendHeroPoint(form, actor)) {
     console.error('not enought hero point');
-    return;
+    return false;
   }
 
   const skillDice = parseInt(rolldata['skilldice']);
