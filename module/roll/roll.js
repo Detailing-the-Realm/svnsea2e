@@ -66,22 +66,25 @@ export async function roll({
   };
 
   const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
+    console.log('_leftOverDice', rolls);
     let total = 0;
     let combotxt = '';
-    let data = {
+    const response = {
       rolls: [],
       combos: [],
       raises: 0,
     };
 
     //Loop through the left over rolls and create die combos that are greater than the threshold
-    while (i--) {
-      if (i > 0 && total === 0) {
-        total += rolls[0] + rolls[i];
-        combotxt = rolls[0].toString() + ' + ' + rolls[i].toString();
-        rolls.splice(i, 1);
+    let index = rolls.length;
+    while (index > 0) {
+      index--;
+      if (index > 0 && total === 0) {
+        total += rolls[0] + rolls[index];
+        combotxt = rolls[0].toString() + ' + ' + rolls[index].toString();
+        rolls.splice(index, 1);
         rolls.splice(0, 1);
-        i--; // length needs to shrink twice because we removed two elements from the array
+        index--; // length needs to shrink twice because we removed two elements from the array
       } else {
         total += rolls[0];
         combotxt = combotxt + ' + ' + rolls[0].toString();
@@ -89,15 +92,15 @@ export async function roll({
       }
 
       if (total >= threshold) {
-        data['raises'] += _addRaise(threshold, incThreshold);
-        data['combos'].push(combotxt);
+        response['raises'] += _addRaise(threshold, incThreshold);
+        response['combos'].push(combotxt);
         combotxt = '';
         total = 0;
       }
     }
 
-    data['rolls'] = rolls;
-    return data;
+    response['rolls'] = rolls;
+    return response;
   };
 
   const _calculBonusDice = function (form) {
