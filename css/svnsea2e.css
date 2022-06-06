@@ -488,7 +488,7 @@ input[type='range']::-webkit-slider-thumb {
   border: 0;
 }
 
-.dialog .roll-dialog input[type="number"] {
+.dialog .roll-dialog input[type='number'] {
   max-width: 3rem;
   text-align: center;
 }
@@ -614,6 +614,8 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .svnsea2e .tabs .item {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
   flex: 1;
   font-weight: bold;
   text-transform: uppercase;
@@ -626,8 +628,6 @@ input[type='range']::-webkit-slider-thumb {
   padding: 4px;
   margin: 4px 4px 0 4px;
   background: #143a54;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
   flex: 1;
 }
 
@@ -643,29 +643,6 @@ input[type='range']::-webkit-slider-thumb {
 
 .svnsea2e .tabs .item.active h2 {
   color: #000;
-}
-
-.sheet {
-  /*.favor input[type="text"],
-.trait input[type="text"],
-.skill input[type="text"] {
-  text-align: center;
-  border-radius: $circle-size;
-  height: $circle-size;
-  max-width: $circle-size;
-  padding: $padding-sm;
-  background: white;
-  border: $brd-s-md-dk;
-}
-
-.sheet-header .favor,
-.sheet-header .trait,
-.skills .skill,
-.traits .trait {
-  background-image: linear-gradient(to right, $g-c-dk 90%, $g-c-lt 10%);
-  padding: 0;
-  border-radius: $circle-size;
-}*/
 }
 
 .sheet img {
@@ -754,7 +731,8 @@ input[type='range']::-webkit-slider-thumb {
   text-align: right;
 }
 
-.sheet .sheet-header  .herospts, .sheet .sheet-header .wealth {
+.sheet .sheet-header .herospts,
+.sheet .sheet-header .wealth {
   max-width: 30px;
   margin-right: 10px;
 }
@@ -900,6 +878,24 @@ input[type='range']::-webkit-slider-thumb {
 
 .sheet .brute h2.ability-title {
   text-shadow: none;
+}
+
+.sheet .skills {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 140px;
+  gap: 4px;
+}
+
+.sheet .skill {
+  height: 19px;
 }
 
 .actor .sheet-header {
