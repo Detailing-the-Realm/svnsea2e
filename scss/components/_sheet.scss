@@ -182,27 +182,6 @@ nav.sheet-tabs {
   }
 }
 
-/*.favor input[type="text"],
-.trait input[type="text"],
-.skill input[type="text"] {
-  text-align: center;
-  border-radius: $circle-size;
-  height: $circle-size;
-  max-width: $circle-size;
-  padding: $padding-sm;
-  background: white;
-  border: $brd-s-md-dk;
-}
-
-.sheet-header .favor,
-.sheet-header .trait,
-.skills .skill,
-.traits .trait {
-  background-image: linear-gradient(to right, $g-c-dk 90%, $g-c-lt 10%);
-  padding: 0;
-  border-radius: $circle-size;
-}*/
-
 .favor-label,
 .skill-name,
 .trait-name {
@@ -219,4 +198,16 @@ nav.sheet-tabs {
 // Brute specific stuff
 .brute h2.ability-title {
   text-shadow: none;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 140px;
+  gap: 4px;
+}
+
+.skill {
+  height: 19px;
 }

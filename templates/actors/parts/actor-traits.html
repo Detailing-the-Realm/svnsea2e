@@ -21,7 +21,7 @@
   </div>
   {{#if hasSkills}}
     <h3 class="skill-title">{{localize "SVNSEA2E.Skills"}}</h3>
-    <div class="skills grid grid-3col">
+    <div class="skills">
       {{#each skills as |skill key|}}
         <div class="skill flexrow flex-group flex-left">
           <span class="skill-name rollable" data-roll="{{skill.value}}" data-label="{{skill.name}}">
@@ -39,7 +39,7 @@
         </div>
       {{/each}}
     </div>
-    <div class="skills grid grid-3col">
+    <div class="skills-comment grid grid-3col">
       <div class="skill flexrow flex-group flex-left">{{localize "SVNSEA2E.SkillRank3"}}</div>
       <div class="skill flexrow flex-group flex-left">{{localize "SVNSEA2E.SkillRank4"}}</div>
       <div class="skill flexrow flex-group flex-left">{{localize "SVNSEA2E.SkillRank5"}}</div>
