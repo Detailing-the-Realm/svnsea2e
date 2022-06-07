@@ -9,8 +9,7 @@
     "gulp": "gulp",
     "prepare": "husky install",
     "format": "prettier --write \"**\"",
-    "test": "jest",
-    "test:w": "jest --watch"
+    "test": "jest"
   },
   "browserslist": [
     "last 3 versions"
