@@ -315,9 +315,8 @@ async function getAllPackAdvantages() {
     if (pack.metadata.entity === 'Item') {
       const pitems = await pack.getIndex();
       for (let j = 0; j < pitems.length; j++) {
-        const document = await pack.getDocument(pitems[j]._id);
-        const entry = document.data;
-        if (entry.type === "advantage") {
+        const entry = await pack.getEntry(pitems[j]._id);
+        if (entry.type === 'advantage') {
           advantages.push(entry);
         }
       }
