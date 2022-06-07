@@ -66,8 +66,7 @@ label.checkbox {
 }
 
 #players {
-  @include main-bg;
-  h3 {
+  @include main-bg h3 {
     color: $f-c-lt;
   }
 
@@ -144,8 +143,7 @@ input[type='range']::-webkit-slider-thumb {
   }
 
   #nav-toggle {
-    @include main-bg;
-    hover {
+    @include main-bg: hover {
       text-shadow: 0 0 10px $c-sec;
     }
   }

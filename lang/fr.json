@@ -328,11 +328,5 @@
   "SVNSEA2E.Wonder": "Merveille",
   "SVNSEA2E.Tatoo": "Tatouage",
   "SVNSEA2E.AddToInitiativeTracker": "Définir comme initiative",
-  "SVNSEA2E.Initiative": "Mises",
-  "SVNSEA2E.Brio": "Tatouage",
-  "SVNSEA2E.FlairDice": "Dé de brio",
-  "SVNSEA2E.InterpretationDice": "Dé d'interpretation",
-  "SVNSEA2E.UseForMe": "Utilisé pour moi",
-  "SVNSEA2E.UseForHelpMe": "Utilisé pour m'aider",
-  "SVNSEA2E.NotEnoughHero": "Pas assez de points d'héroïsme"
+  "SVNSEA2E.Initiative": "Mises"
 }

@@ -333,10 +333,5 @@
   "SVNSEA2E.AddOneToDice": "Agrega uno a los dados",
   "SVNSEA2E.AddOneToDiced": "Se ha añadido +1 a cada dado.",
   "SVNSEA2E.AddToInitiativeTracker": "Agregar al rastreador de iniciativas",
-  "SVNSEA2E.Initiative": "Aumentos",
-  "SVNSEA2E.FlairDice": "Flair Dice",
-  "SVNSEA2E.InterpretationDice": "Interpretation Dice",
-  "SVNSEA2E.UseForMe": "Use for me",
-  "SVNSEA2E.UseForHelpMe": "Use for help me",
-  "SVNSEA2E.NotEnoughHero": "Not enough hero points"
+  "SVNSEA2E.Initiative": "Aumentos"
 }

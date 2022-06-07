@@ -325,10 +325,5 @@
   "SVNSEA2E.AddOneToDice": "+1 zu den Würfeln hinzu",
   "SVNSEA2E.AddOneToDiced": "+1 wurde zu jedem Würfel hinzugefügt.",
   "SVNSEA2E.AddToInitiativeTracker": "Zum Initiativen-Tracker hinzufügen",
-  "SVNSEA2E.Initiative": "Steigerungen",
-  "SVNSEA2E.FlairDice": "Flair Dice",
-  "SVNSEA2E.InterpretationDice": "Interpretation Dice",
-  "SVNSEA2E.UseForMe": "Use for me",
-  "SVNSEA2E.UseForHelpMe": "Use for help me",
-  "SVNSEA2E.NotEnoughHero": "Not enough hero points"
+  "SVNSEA2E.Initiative": "Steigerungen"
 }

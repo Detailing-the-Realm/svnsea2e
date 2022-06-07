@@ -13,7 +13,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      width: 850,
+      width: 730,
       height: 750,
     });
   }
@@ -551,8 +551,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (data.pack) {
       const pack = game.packs.get(data.pack);
       if (pack.metadata.entity !== 'Actor') return;
-      const document = await pack.getDocument(data.id);
-      actorData = document.data;
+      actorData = await pack.getEntry(data.id);
     } else if (data.data) {
       // Case 2 - Data explicitly provided
       actorData = data.data;
@@ -583,8 +582,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (data.pack) {
       const pack = game.packs.get(data.pack);
       if (pack.metadata.entity !== 'Item') return;
-      const document = await pack.getDocument(data.id);
-      itemData = document.data;
+      itemData = await pack.getEntry(data.id);
     } else if (data.data) {
       // Case 2 - Data explicitly provided
       itemData = data.data;
@@ -616,8 +614,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     if (data.pack) {
       const pack = game.packs.get(data.pack);
       if (pack.metadata.entity !== 'Item') return;
-      const document = await pack.getDocument(data.id);
-      bkgData = document.data;
+      bkgData = await pack.getEntry(data.id);
     } else if (data.data) {
       // Case 2 - Data explicitly provided
       bkgData = data.data;
@@ -978,45 +975,10 @@ export default class ActorSheetSS2e extends ActorSheet {
       return data;
     };
 
-    const _calculBonusDice = function (form) {
-      const flairDice = form.flairDice?.checked ? 1 : 0;
-      const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
-      const heroDices = parseInt(form.useForMe.value || 0);
-      const helpDices = parseInt(form.useForHelpMe.value || 0) * 3;
-
-      return (
-        parseInt(form.bonusDice.value) +
-        flairDice +
-        interpretationDice +
-        heroDices +
-        helpDices
-      );
-    };
-
-    const _spendHeroPoint = function (form) {
-      const heroDices = parseInt(form.useForMe.value || 0);
-      const heroPts = actor.data.data.heropts || 0;
-      if (heroDices > heroPts) {
-        ui.notifications.error(game.i18n.format('SVNSEA2E.NotEnoughHero', {}));
-        return false;
-      }
-
-      if (heroDices > 0) {
-        actor.update({
-          data: { heropts: heroPts - heroDices },
-        });
-      }
-      return true;
-    };
-
-    if (!_spendHeroPoint(form, actor)) {
-      return;
-    }
-
     const nd =
       parseInt(rolldata['skilldice']) +
       parseInt(form.trait.value) +
-      _calculBonusDice(form);
+      parseInt(form.bonusDice.value);
 
     const incThreshold =
       form.increaseThreshold !== undefined ? form.increaseThreshold.checked : 0;
