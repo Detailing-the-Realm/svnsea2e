@@ -1,101 +1,4 @@
 /**
- * get the indexes in the rolls array that matches the dice combos
- */
-const _getIndexes = function (rolls, tomatch) {
-  const values = [];
-  values.push(rolls.indexOf(tomatch[0]));
-  if (tomatch[0] === tomatch[1]) {
-    values.push(rolls.indexOf(tomatch[1], values[0] + 1));
-  } else {
-    values.push(rolls.indexOf(tomatch[1]));
-  }
-  if (tomatch.length > 2) {
-    if (tomatch[0] === tomatch[2]) {
-      values.push(rolls.indexOf(tomatch[2], values[1] + 1));
-    } else {
-      values.push(rolls.indexOf(tomatch[2]));
-    }
-  }
-  return values;
-};
-
-// Increase the raise value based on the threshold matched.
-const _addRaise = function (threshold = 10, incThreshold = false) {
-  let raises = 1;
-  if ((threshold === 15 && !incThreshold) || (threshold === 20 && incThreshold))
-    raises++;
-  return raises;
-};
-
-const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
-  let total = 0;
-  const response = {
-    rolls: [],
-    combos: [],
-    raises: 0,
-  };
-  let currentUsedDice = [];
-
-  //Loop through the left over rolls and create die combos that are greater than the threshold
-  let index = rolls.length;
-  while (index > 0) {
-    index--;
-    if (index > 0 && total === 0) {
-      total += parseInt(rolls[0]) + parseInt(rolls[index]);
-      currentUsedDice.push(rolls.splice(index, 1));
-      currentUsedDice.push(rolls.splice(0, 1));
-      index--; // length needs to shrink twice because we removed two elements from the array
-    } else {
-      total += parseInt(rolls[0]);
-      currentUsedDice.push(rolls.splice(0, 1));
-    }
-
-    if (total >= threshold) {
-      response['raises'] += _addRaise(threshold, incThreshold);
-      response['combos'].push(
-        currentUsedDice.sort((a, b) => a - b).join(' + '),
-      );
-      currentUsedDice = [];
-      total = 0;
-    }
-  }
-
-  response['rolls'] = currentUsedDice;
-  return response;
-};
-
-const _calculBonusDice = function (form) {
-  const flairDice = form.flairDice?.checked ? 1 : 0;
-  const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
-  const heroDices = parseInt(form.useForMe.value || 0);
-  const helpDices = parseInt(form.useForHelpMe.value || 0) * 3;
-
-  return (
-    parseInt(form.bonusDice.value) +
-    flairDice +
-    interpretationDice +
-    heroDices +
-    helpDices
-  );
-};
-
-const _spendHeroPoint = function (form, actor) {
-  const heroDices = parseInt(form.useForMe.value || 0);
-  const heroPts = actor.data.data.heropts || 0;
-  if (heroDices > heroPts) {
-    ui.notifications.error(game.i18n.format('SVNSEA2E.NotEnoughHero', {}));
-    return false;
-  }
-
-  if (heroDices > 0) {
-    actor.update({
-      data: { heropts: heroPts - heroDices },
-    });
-  }
-  return true;
-};
-
-/**
  * Handle clickable rolls.
  * @param rolldata roll data from actor
  * @param rolldata.threshold the threshold to have a raise
@@ -129,6 +32,107 @@ export async function roll({
   template,
   title,
 }) {
+  /**
+   * get the indexes in the rolls array that matches the dice combos
+   */
+  const _getIndexes = function (rolls, tomatch) {
+    const values = [];
+    values.push(rolls.indexOf(tomatch[0]));
+    if (tomatch[0] === tomatch[1]) {
+      values.push(rolls.indexOf(tomatch[1], values[0] + 1));
+    } else {
+      values.push(rolls.indexOf(tomatch[1]));
+    }
+    if (tomatch.length > 2) {
+      if (tomatch[0] === tomatch[2]) {
+        values.push(rolls.indexOf(tomatch[2], values[1] + 1));
+      } else {
+        values.push(rolls.indexOf(tomatch[2]));
+      }
+    }
+    return values;
+  };
+
+  // Increase the raise value based on the threshold matched.
+  const _addRaise = function (threshold = 10, incThreshold = false) {
+    let raises = 1;
+    let combos = [];
+    if (
+      (threshold === 15 && !incThreshold) ||
+      (threshold === 20 && incThreshold)
+    )
+      raises++;
+    return raises;
+  };
+
+  const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
+    let total = 0;
+    const response = {
+      rolls: [],
+      combos: [],
+      raises: 0,
+    };
+    let currentUsedDice = [];
+
+    //Loop through the left over rolls and create die combos that are greater than the threshold
+    let index = rolls.length;
+    while (index > 0) {
+      index--;
+      if (index > 0 && total === 0) {
+        total += parseInt(rolls[0]) + parseInt(rolls[index]);
+        currentUsedDice.push(rolls.splice(index, 1));
+        currentUsedDice.push(rolls.splice(0, 1));
+        index--; // length needs to shrink twice because we removed two elements from the array
+      } else {
+        total += parseInt(rolls[0]);
+        currentUsedDice.push(rolls.splice(0, 1));
+      }
+
+      if (total >= threshold) {
+        response['raises'] += _addRaise(threshold, incThreshold);
+        response['combos'].push(
+          currentUsedDice.sort((a, b) => a - b).join(' + '),
+        );
+        currentUsedDice = [];
+        total = 0;
+      }
+    }
+
+    response['rolls'] = currentUsedDice;
+    return response;
+  };
+
+  const _calculBonusDice = function (form) {
+    const flairDice = form.flairDice?.checked ? 1 : 0;
+    const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
+    const heroDices = parseInt(form.useForMe.value || 0);
+    const helpDices = parseInt(form.useForHelpMe.value || 0) * 3;
+
+    return (
+      parseInt(form.bonusDice.value) +
+      flairDice +
+      interpretationDice +
+      heroDices +
+      helpDices
+    );
+  };
+
+  const _spendHeroPoint = function (form) {
+    const heroDices = parseInt(form.useForMe.value || 0);
+    const heroPts = actor.data.data.heropts || 0;
+    if (heroDices > heroPts) {
+      ui.notifications.error(game.i18n.format('SVNSEA2E.NotEnoughHero', {}));
+      return false;
+    }
+
+    if (heroDices > 0) {
+      actor.update({
+        data: { heropts: heroPts - heroDices },
+      });
+    }
+    return true;
+  };
+
   if (!_spendHeroPoint(form, actor)) {
     console.error('not enought hero point');
     return false;
