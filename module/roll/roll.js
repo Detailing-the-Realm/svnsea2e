@@ -281,8 +281,6 @@ export async function roll({
     );
     combos.push(...leftdata2['combos']);
     raises += leftdata2['raises'];
-
-    leftdata = leftdata2;
   }
 
   const messageOptions = {
@@ -297,18 +295,12 @@ export async function roll({
       ' ' +
       game.i18n.localize('SVNSEA2E.GMIncreasedThreshold');
 
-  const unusedDice = leftdata['rolls'].length;
-
   const templateData = {
     actor: actor,
     raisetxt:
       raises > 1
         ? game.i18n.localize('SVNSEA2E.Raises')
         : game.i18n.localize('SVNSEA2E.Raise'),
-    unusedDiceTxt:
-      unusedDice > 1
-        ? game.i18n.localize('SVNSEA2E.UnusedDice')
-        : game.i18n.localize('SVNSEA2E.UnusedDie'),
     data: data,
     exploded: exploded,
     explosions: game.i18n.format('SVNSEA2E.RollsExploded'),
@@ -321,7 +313,6 @@ export async function roll({
     combos: combos.map((c) => `${c}`),
     rerolled: rerolled,
     reroll: reroll,
-    unusedDice,
     dicesNumber: nd,
     threshold: game.i18n.format('SVNSEA2E.RollThreshold', {
       threshold: thresholdmsg,

@@ -83,41 +83,23 @@ describe('roll', () => {
       let rollConfig;
 
       const dicesTestsConfigurations = [
-        {
-          results: [5, 10, 1, 2, 10],
-          raises: 2,
-          combos: ['10', '10'],
-          unusedDice: 3,
-        },
+        { results: [5, 10, 1, 2, 10], raises: 2, combos: ['10', '10'] },
         {
           results: [10, 10, 10, 10, 10],
           raises: 5,
           combos: ['10', '10', '10', '10', '10'],
-          unusedDice: 0,
         },
-        {
-          results: [3, 2, 1, 5, 8],
-          raises: 1,
-          combos: ['2 + 8'],
-          unusedDice: 3,
-        },
-        {
-          results: [9, 2, 8, 1],
-          raises: 2,
-          combos: ['2 + 8', '1 + 9'],
-          unusedDice: 0,
-        },
+        { results: [3, 2, 1, 5, 8], raises: 1, combos: ['2 + 8'] },
+        { results: [9, 2, 8, 1], raises: 2, combos: ['2 + 8', '1 + 9'] },
         {
           results: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
           raises: 5,
           combos: ['10', '1 + 9', '2 + 8', '3 + 7', '4 + 6'],
-          unusedDice: 1,
         },
         {
           results: [1, 1, 1, 1, 1, 1, 1, 1, 1],
           raises: 0,
           combos: [],
-          unusedDice: 9,
         },
       ];
 
@@ -140,7 +122,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });
@@ -149,41 +130,23 @@ describe('roll', () => {
 
     describe('with threshold of 15', () => {
       const dicesTestsConfigurations = [
-        {
-          results: [5, 10, 1, 2, 10],
-          raises: 1,
-          combos: ['5 + 10'],
-          unusedDice: 3,
-        },
+        { results: [5, 10, 1, 2, 10], raises: 1, combos: ['5 + 10'] },
         {
           results: [10, 10, 10, 10, 10],
           raises: 2,
           combos: ['10 + 10', '10 + 10'],
-          unusedDice: 1,
         },
-        {
-          results: [3, 2, 1, 5, 8],
-          raises: 1,
-          combos: ['2 + 5 + 8'],
-          unusedDice: 2,
-        },
-        {
-          results: [9, 2, 8, 1],
-          raises: 1,
-          combos: ['1 + 2 + 8 + 9'],
-          unusedDice: 0,
-        }, // /!\ Resultat non optimum
+        { results: [3, 2, 1, 5, 8], raises: 1, combos: ['2 + 5 + 8'] },
+        { results: [9, 2, 8, 1], raises: 1, combos: ['1 + 2 + 8 + 9'] }, // /!\ Resultat non optimum
         {
           results: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
           raises: 3,
           combos: ['5 + 10', '6 + 9', '7 + 8'],
-          unusedDice: 4,
         },
         {
           results: [1, 1, 1, 1, 1, 1, 1, 1, 1],
           raises: 0,
           combos: [],
-          unusedDice: 9,
         },
       ];
 
@@ -212,7 +175,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });
@@ -221,23 +183,12 @@ describe('roll', () => {
 
     describe('with two raise on threshold of 15, on one raise on threshold of 10', () => {
       const dicesTestsConfigurations = [
-        { results: [5, 10], raises: 2, combos: ['5 + 10'], unusedDice: 0 },
-        { results: [5, 6, 4], raises: 2, combos: ['4 + 5 + 6'], unusedDice: 0 },
-        { results: [3, 7], raises: 1, combos: ['3 + 7'], unusedDice: 0 },
-        { results: [3, 4, 3], raises: 1, combos: ['3 + 3 + 4'], unusedDice: 0 },
-        {
-          results: [5, 7, 3, 10],
-          raises: 3,
-          combos: ['5 + 10', '3 + 7'],
-          unusedDice: 0,
-        },
-        { results: [1, 5, 2], raises: 0, combos: [], unusedDice: 3 },
-        {
-          results: [5, 7, 3, 10, 3],
-          raises: 3,
-          combos: ['5 + 10', '3 + 7'],
-          unusedDice: 1,
-        },
+        { results: [5, 10], raises: 2, combos: ['5 + 10'] },
+        { results: [5, 6, 4], raises: 2, combos: ['4 + 5 + 6'] },
+        { results: [3, 7], raises: 1, combos: ['3 + 7'] },
+        { results: [3, 4, 3], raises: 1, combos: ['3 + 3 + 4'] },
+        { results: [5, 7, 3, 10], raises: 3, combos: ['5 + 10', '3 + 7'] },
+        { results: [1, 5, 2], raises: 0, combos: [] },
       ];
 
       let rollConfig;
@@ -265,7 +216,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });
@@ -274,27 +224,11 @@ describe('roll', () => {
 
     describe('with two raise for threshold of 20, and one raise for threshold of 15', () => {
       const dicesTestsConfigurations = [
-        { results: [10, 10], raises: 2, combos: ['10 + 10'], unusedDice: 0 },
-        {
-          results: [3, 10, 7],
-          raises: 2,
-          combos: ['3 + 7 + 10'],
-          unusedDice: 0,
-        },
-        { results: [8, 7], raises: 1, combos: ['7 + 8'], unusedDice: 0 },
-        {
-          results: [3, 2, 10],
-          raises: 1,
-          combos: ['2 + 3 + 10'],
-          unusedDice: 0,
-        },
-        { results: [1, 3, 9], raises: 0, combos: [], unusedDice: 3 },
-        {
-          results: [3, 2, 10, 2],
-          raises: 1,
-          combos: ['2 + 3 + 10'],
-          unusedDice: 1,
-        },
+        { results: [10, 10], raises: 2, combos: ['10 + 10'] },
+        { results: [3, 10, 7], raises: 2, combos: ['3 + 7 + 10'] },
+        { results: [8, 7], raises: 1, combos: ['7 + 8'] },
+        { results: [3, 2, 10], raises: 1, combos: ['2 + 3 + 10'] },
+        { results: [1, 3, 9], raises: 0, combos: [] },
       ];
 
       let rollConfig;
@@ -326,7 +260,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });
@@ -335,18 +268,8 @@ describe('roll', () => {
 
     describe('with joieDeVivreAdvantage', () => {
       const dicesTestsConfigurations = [
-        {
-          results: [5, 10, 4, 5],
-          raises: 2,
-          combos: ['10', '5 + 5'],
-          unusedDice: 1,
-        },
-        {
-          results: [1, 10, 2, 5],
-          raises: 3,
-          combos: ['1', '2', '10'],
-          unusedDice: 1,
-        },
+        { results: [5, 10, 4, 5], raises: 2, combos: ['10', '5 + 5'] },
+        { results: [1, 10, 2, 5], raises: 3, combos: ['1', '2', '10'] },
       ];
 
       let rollConfig;
@@ -374,7 +297,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });
@@ -383,13 +305,8 @@ describe('roll', () => {
 
     describe('with addOneToDice', () => {
       const dicesTestsConfigurations = [
-        {
-          results: [4, 4, 3, 6],
-          raises: 2,
-          combos: ['5 + 5', '4 + 7'],
-          unusedDice: 0,
-        },
-        { results: [3, 2, 1], raises: 0, combos: [], unusedDice: 3 },
+        { results: [4, 4, 3, 6], raises: 2, combos: ['5 + 5', '4 + 7'] },
+        { results: [3, 2, 1], raises: 0, combos: [] },
       ];
 
       let rollConfig;
@@ -419,7 +336,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });
@@ -428,26 +344,13 @@ describe('roll', () => {
 
     describe('with reroll', () => {
       const dicesTestsConfigurations = [
-        {
-          results: [1, 8],
-          raises: 1,
-          rerollValue: 0.2,
-          combos: ['3 + 8'],
-          unusedDice: 0,
-        },
-        {
-          results: [1, 6],
-          raises: 0,
-          rerollValue: 0.1,
-          combos: [],
-          unusedDice: 2,
-        },
+        { results: [1, 8], raises: 1, rerollValue: 0.2, combos: ['3 + 8'] },
+        { results: [1, 6], raises: 0, rerollValue: 0.1, combos: [] },
         {
           results: [8, 2, 3],
           raises: 2,
           rerollValue: 0.9,
           combos: ['2 + 8', '10'],
-          unusedDice: 0,
         },
       ];
 
@@ -483,7 +386,6 @@ describe('roll', () => {
             expect.objectContaining({
               raises: testConfig.raises,
               combos: expect.arrayContaining(testConfig.combos),
-              unusedDice: testConfig.unusedDice,
             }),
           );
         });

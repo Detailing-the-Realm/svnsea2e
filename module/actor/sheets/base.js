@@ -784,6 +784,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const html = await renderTemplate(template, dialogData);
 
     // Create the Dialog window
+    let roll;
     const title = game.i18n.format('SVNSEA2E.ApproachPromptTitle', {
       skill: CONFIG.SVNSEA2E.skills[dataset.label],
     });
