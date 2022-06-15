@@ -1,7 +1,7 @@
 import LanguageSelector from '../../apps/language-selector.js';
 import { updateInitiative } from '../../combat.js';
-import { roll } from '../../roll/roll.js';
 import { getAllPackAdvantages, isValidGlamorIsles } from '../../helpers.js';
+import { roll } from '../../roll/roll.js';
 
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
@@ -12,7 +12,7 @@ export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      width: 850,
+      width: 1050,
       height: 750,
     });
   }

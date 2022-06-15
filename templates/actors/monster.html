@@ -2,10 +2,12 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" height="100" width="100" />
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
-      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+    <div class="header-concept">
+      <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" height="100" width="100" />
+      <div class="header-fields">
+        <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
+        {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+      </div>
     </div>
   </header>
 
