@@ -1,38 +1,39 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
-      <div class="grid grid-2col">
+    <div class="header-concept">
+      <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
+      <div class="header-fields">
+        <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
         <div class="form-group flex-group">
-          <label for="system.class">{{localize "SVNSEA2E.Class"}}</label>
-          <input type="text" id="system.class" name="system.class" value="{{class}}" placeholder="{{localize 'SVNSEA2E.Class'}}" />
-        </div>
-        <div class="form-group flex-group">
-          <label for="system.origin">{{localize "SVNSEA2E.Origin"}}</label>
-          <input type="text" id="system.origin" name="system.origin" value="{{origin}}" placeholder="{{localize 'SVNSEA2E.Origin'}}" />
+          <span class="flex-group">
+            <label for="system.class">{{localize "SVNSEA2E.Class"}}</label>
+            <input type="text" id="system.class" name="system.class" value="{{class}}" placeholder="{{localize 'SVNSEA2E.Class'}}" />
+          </span>
+          <span class="flex-group">
+            <label for="system.origin">{{localize "SVNSEA2E.Origin"}}</label>
+            <input type="text" id="system.origin" name="system.origin" value="{{origin}}" placeholder="{{localize 'SVNSEA2E.Origin'}}" />
+          </span>
         </div>
       </div>
-      <div class="grid grid-2col">
-        <div class="form-group flex-group-left">
-          <label for="system.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
-          <select id="system.crewstatus" class="crewstatus" name="system.crewstatus">
-            {{#select crewstatus}}
-              <option value="none"></option>
-              {{#each config.crewStatuses as |label status|}}
-                <option value="{{status}}">{{label}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </div>
-        <div class="form-group flex-group">
-          <label for="system.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
-          <input type="text" id="system.wealth" name="system.wealth" value="{{wealth}}" placeholder="{{localize 'SVNSEA2E.WealthPts'}}" />
-        </div>
-      </div>
-
-    {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
     </div>
+    <div class="grid grid-2col">
+      <div class="form-group flex-group-left">
+        <label for="system.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
+        <select id="system.crewstatus" class="crewstatus" name="system.crewstatus">
+          {{#select crewstatus}}
+            <option value="none"></option>
+            {{#each config.crewStatuses as |label status|}}
+              <option value="{{status}}">{{label}}</option>
+            {{/each}}
+          {{/select}}
+        </select>
+      </div>
+      <div class="form-group flex-group">
+        <label for="system.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
+        <input type="text" id="system.wealth" name="system.wealth" value="{{wealth}}" placeholder="{{localize 'SVNSEA2E.WealthPts'}}" />
+      </div>
+    </div>
+    {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
   </header>
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">

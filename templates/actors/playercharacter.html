@@ -2,32 +2,33 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" height="100" width="100" />
-    <div class="header-fields">
-      {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
-      {{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}
+    <div class="header-concept">
+      <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" height="100" width="100" />
+      <div class="header-fields">
+        {{> "systems/svnsea2e/templates/actors/parts/actor-name.html"}}
+      </div>
     </div>
   </header>
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="concept">
+      <h2>{{localize "SVNSEA2E.Concept"}}</h2>
+    </a>
     <a class="item" data-tab="traits">
       <h2>{{localize "SVNSEA2E.Traits"}}</h2>
     </a>
     <a class="item" data-tab="advantages">
       <h2>{{localize "SVNSEA2E.Features"}}</h2>
     </a>
-    <a class="item" data-tab="sorcery">
-      <h2>{{localize "SVNSEA2E.Sorcery"}}</h2>
+    <a class="item" data-tab="fate">
+      <h2>{{localize "SVNSEA2E.Fate"}}</h2>
     </a>
     <a class="item" data-tab="inventory">
       <h2>{{localize "SVNSEA2E.Inventory"}}</h2>
     </a>
-    <a class="item" data-tab="fate">
-      <h2>{{localize "SVNSEA2E.Fate"}}</h2>
-    </a>
-    <a class="item" data-tab="concept">
-      <h2>{{localize "SVNSEA2E.Concept"}}</h2>
+    <a class="item" data-tab="sorcery">
+      <h2>{{localize "SVNSEA2E.Sorcery"}}</h2>
     </a>
   </nav>
 
