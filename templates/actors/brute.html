@@ -1,22 +1,24 @@
 <form class="{{cssClass}} flexcol brute" autocomplete="off">
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
-      <div class="resources flex-group-left wound-title">
-        {{localize "SVNSEA2E.Wounds" }}
+    <div class="header-concept">
+      <img class="profile-img" src="{{img}}" data-edit="img" title="{{name}}" />
+      <div class="header-fields">
+        <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
+        <div class="resources flex-group-left wound-title">
+          {{localize "SVNSEA2E.Wounds" }}
+        </div>
+        <div class="resources flex-group-left wounds">
+          {{#for 1 wounds.max 1}}
+            {{#iff wounds.value '>=' @index}}
+              <i data-name="system.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable fas fa-heart fa-lg"></i>
+            {{else}}
+              <i data-name="system.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable far fa-heart fa-lg"></i>
+            {{/iff}}
+          {{/for}}
+        </div>
       </div>
-      <div class="resources flex-group-left wounds">
-        {{#for 1 wounds.max 1}}
-          {{#iff wounds.value '>=' @index}}
-            <i data-name="system.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable fas fa-heart fa-lg"></i>
-          {{else}}
-            <i data-name="system.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable far fa-heart fa-lg"></i>
-          {{/iff}}
-        {{/for}}
-      </div>
-    </div>
+  </div>
   </header>
 
   {{!-- Sheet Body --}}

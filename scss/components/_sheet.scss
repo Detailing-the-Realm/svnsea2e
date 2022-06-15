@@ -1,3 +1,7 @@
+& {
+  font-size: 18px;
+}
+
 img {
   border: $no-border;
 }
@@ -16,6 +20,7 @@ input[type='text'] {
 nav.sheet-tabs {
   height: auto;
   display: flex;
+  border-top: 0px;
 }
 
 .sheet-header {
@@ -62,16 +67,15 @@ nav.sheet-tabs {
     }
   }
 
-  .twodigit input[type='text'] {
-    max-width: $max-input-width-xs;
-    text-align: right;
-  }
-
   .herospts,
   .wealth {
     max-width: 30px;
     margin-right: 10px;
   }
+}
+
+.corruption {
+  min-width: 22em;
 }
 
 .tag {
@@ -204,10 +208,15 @@ nav.sheet-tabs {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 140px;
-  gap: 4px;
+  height: 8em;
+  gap: 0.2em;
 }
 
 .skill {
-  height: 19px;
+  height: 1em;
+}
+
+.twodigit input[type='text'] {
+  max-width: $max-input-width-xs;
+  text-align: right;
 }
