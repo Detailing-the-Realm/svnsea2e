@@ -67,8 +67,8 @@ const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
 const _calculBonusDice = function (form) {
   const flairDice = form.flairDice?.checked ? 1 : 0;
   const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
-  const heroDices = parseInt(form.useForMe.value || 0);
-  const helpDices = parseInt(form.useForHelpMe.value || 0) * 3;
+  const heroDices = parseInt(form.useForMe?.value || 0);
+  const helpDices = parseInt(form.useForHelpMe?.value || 0) * 3;
 
   return (
     parseInt(form.bonusDice.value) +
@@ -129,7 +129,8 @@ export async function roll({
   template,
   title,
 }) {
-  if (!_spendHeroPoint(form, actor)) {
+  //We don't use Hero points with a Villain
+  if (actor.data.type !== 'villain' && !_spendHeroPoint(form, actor)) {
     console.error('not enought hero point');
     return false;
   }
