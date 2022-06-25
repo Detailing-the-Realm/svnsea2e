@@ -80,7 +80,7 @@ const _calculBonusDice = function (form) {
 };
 
 const _spendHeroPoint = function (form, actor) {
-  const heroDices = parseInt(form.useForMe.value || 0);
+  const heroDices = parseInt(form.useForMe?.value || 0);
   const heroPts = actor.data.data.heropts || 0;
   if (heroDices > heroPts) {
     ui.notifications.error(game.i18n.format('SVNSEA2E.NotEnoughHero', {}));
@@ -129,8 +129,8 @@ export async function roll({
   template,
   title,
 }) {
-  //We don't use Hero points with a Villain
-  if (actor.data.type !== 'villain' && !_spendHeroPoint(form, actor)) {
+  //We don't use Hero points with a Villain or a monster
+  if ((actor.data.type !== 'villain' && actor.data.type !== 'monster') && !_spendHeroPoint(form, actor)) {
     console.error('not enought hero point');
     return false;
   }
