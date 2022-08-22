@@ -1,5 +1,5 @@
 import ActorSheetSS2e from './base.js';
-import { getMonsterQualityItems } from '../../helpers.js';
+import { getItems } from '../../helpers.js';
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
@@ -23,13 +23,13 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
   /**
    * Organize and classify Items for Character sheets.
    *
-   * @param {Object} baseData The actor data to prepare.
+   * @param {Object} actor The actor data to prepare.
    * @param {Object} sheetData The sheet to prepare.
    *
    * @return {undefined}
    */
-  _prepareMonsterItems(baseData, sheetData) {
-    sheetData.fear = baseData.data.data.fear;
-    sheetData.monsterqualities = getMonsterQualityItems(baseData);
+  _prepareMonsterItems(data, sheetData) {
+    sheetData.fear = data.document.system.fear;
+    sheetData.monsterqualities = getItems(data, 'monsterquality');
   }
 }

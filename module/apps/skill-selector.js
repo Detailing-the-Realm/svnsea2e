@@ -23,7 +23,7 @@ export default class SkillSelector extends FormApplication {
   /** @override */
   getData() {
     // Get current values
-    const skills = this.object.data.data.skills;
+    const skills = this.object.system.skills;
 
     // Populate choices
     const choices = duplicate(this.options.choices);
@@ -53,7 +53,7 @@ export default class SkillSelector extends FormApplication {
         chosen.push(k);
       }
     }
-    updateData['data.skills'] = chosen;
+    updateData['system.skills'] = chosen;
 
     if (this.options.minimum && chosen.length < this.options.minimum) {
       return ui.notifications.error(

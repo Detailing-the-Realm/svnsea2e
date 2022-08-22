@@ -20,11 +20,11 @@ export class ItemSheetSS2e extends ItemSheet {
 
   /** @override */
   getData(options) {
-    // const data = super.getData();
-    const baseData = super.getData(options);
+    const data = super.getData(options);
+    const item = data.document;
+    const itemData = item.system;
     const { isOwner } = this.document;
-    console.log('baseData', baseData);
-    console.log('this.item', this.item);
+
     // mergeObject(data, {
     //   owner: isOwner,
     //   itemType: SVNSEA2E.itemTypes[data.item.type],
@@ -37,52 +37,52 @@ export class ItemSheetSS2e extends ItemSheet {
 
     const sheetData = {
       owner: isOwner,
-      itemType: SVNSEA2E.itemTypes[baseData.item.type],
+      itemType: SVNSEA2E.itemTypes[item.type],
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? 'editable' : 'locked',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean'],
 
-      name: this.item.name,
-      img: this.item.img,
-      type: baseData.data.data.type,
-      infosource: baseData.data.data.infosource,
-      description: baseData.data.data.description,
-      quirk: baseData.data.data.quirk,
+      name: item.name,
+      img: item.img,
+      type: item.type,
+      infosource: itemData.infosource,
+      description: itemData.description,
+      quirk: itemData.quirk,
     };
 
-    if (baseData.item.type === 'background') {
-      sheetData.selectedskills = baseData.data.data.skills.map(
+    if (item.type === 'background') {
+      sheetData.selectedskills = itemData.skills.map(
         (s) => CONFIG.SVNSEA2E.skills[s],
       );
-      sheetData.selectedadvantages = baseData.data.data.advantages;
+      sheetData.selectedadvantages = itemData.advantages;
 
-      sheetData.nation = baseData.data.data.nation;
-    } else if (baseData.item.type === 'advantage') {
-      sheetData.normalCost = baseData.data.data.cost.normal;
-      sheetData.reducedCost = baseData.data.data.cost.reducecost;
-      sheetData.knack = baseData.data.data.knack;
-      sheetData.innate = baseData.data.data.innate;
-    } else if (baseData.item.type === 'duelstyle') {
-      sheetData.bonus = baseData.data.data.bonus;
-    } else if (baseData.item.type === 'scheme') {
-      sheetData.influence = baseData.data.data.influence;
-    } else if (baseData.item.type === 'secretsociety') {
-      sheetData.concern = baseData.data.data.concern;
-      sheetData.favor = baseData.data.data.favor;
-      sheetData.earnFavor = baseData.data.data.earnfavor;
-      sheetData.callUpon = baseData.data.data.callupon;
-    } else if (baseData.item.type === 'sorcery') {
-      sheetData.sorceryType = baseData.data.data.sorctype;
-      sheetData.sorceryDuration = baseData.data.data.sorcdur;
-      sheetData.sorceryCategory = baseData.data.data.sorccat;
-      sheetData.sorcerySubCategory = baseData.data.data.sorcsubcat;
-    } else if (baseData.item.type === 'story') {
-      sheetData.storyStatus = baseData.data.data.status;
-      sheetData.reward = baseData.data.data.reward;
-      sheetData.endings = baseData.data.data.endings;
-      sheetData.steps = baseData.data.data.steps;
+      sheetData.nation = itemData.nation;
+    } else if (item.type === 'advantage') {
+      sheetData.normalCost = itemData.cost.normal;
+      sheetData.reducedCost = itemData.cost.reducecost;
+      sheetData.knack = itemData.knack;
+      sheetData.innate = itemData.innate;
+    } else if (item.type === 'duelstyle') {
+      sheetData.bonus = itemData.bonus;
+    } else if (item.type === 'scheme') {
+      sheetData.influence = itemData.influence;
+    } else if (item.type === 'secretsociety') {
+      sheetData.concern = itemData.concern;
+      sheetData.favor = itemData.favor;
+      sheetData.earnFavor = itemData.earnfavor;
+      sheetData.callUpon = itemData.callupon;
+    } else if (item.type === 'sorcery') {
+      sheetData.sorceryType = itemData.sorctype;
+      sheetData.sorceryDuration = itemData.sorcdur;
+      sheetData.sorceryCategory = itemData.sorccat;
+      sheetData.sorcerySubCategory = itemData.sorcsubcat;
+    } else if (item.type === 'story') {
+      sheetData.storyStatus = itemData.status;
+      sheetData.reward = itemData.reward;
+      sheetData.endings = itemData.endings;
+      sheetData.steps = itemData.steps;
     }
     return sheetData;
   }
@@ -112,21 +112,6 @@ export class ItemSheetSS2e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare the Skills that the Actor has selected for use with the SkillSelector application
-   * @param {Object} data       The data transfer
-   * @private
-   */
-  _prepareBackground(data) {
-    data.selectedskills = {};
-    for (let i = 0; i < data.skills.length; i++) {
-      data.selectedskills[data.skills[i]] =
-        CONFIG.SVNSEA2E.skills[data.skills[i]];
-    }
-
-    data.selectedadvantages = data.advantages;
-  }
-
   _advCompare(object, value) {
     for (const property in object) {
       if (object[property] === value) {
@@ -152,9 +137,9 @@ export class ItemSheetSS2e extends ItemSheet {
       if (pack.metadata.entity === 'Item') {
         const pitems = await pack.getIndex();
         for (let j = 0; j < pitems.length; j++) {
-        const document = await pack.getDocument(pitems[j]._id);
-        const entry = document.data;
-          if (entry.type === "advantage" && !worldAdv.includes(entry.name)) {
+          const document = await pack.getDocument(pitems[j]._id);
+          const entry = document.data;
+          if (entry.type === 'advantage' && !worldAdv.includes(entry.name)) {
             advantages.push(entry.name);
           }
         }

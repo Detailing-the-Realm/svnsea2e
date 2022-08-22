@@ -1,6 +1,6 @@
 export function updateInitiative(actorId, raise) {
   const nRaise = parseFloat(raise);
-  const activeCombat = game.combats.filter((combat) => combat.scene.active);
+  const activeCombat = game.combats.filter((combat) => combat.active);
 
   if (activeCombat.length === 0) {
     ui.notifications.error(`No combat is active`);

@@ -1,8 +1,5 @@
 import ActorSheetSS2e from './base.js';
-import {
-  getShipAdventureItems,
-  getShipBackgroundItems,
-} from '../../helpers.js';
+import { getItems } from '../../helpers.js';
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -31,13 +28,14 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareShipItems(baseData, sheetData) {
-    sheetData.adventures = getShipAdventureItems(baseData);
-    sheetData.backgrounds = getShipBackgroundItems(baseData);
-    sheetData.origin = baseData.data.data.origin;
-    sheetData.class = baseData.data.data.class;
-    sheetData.crewstatus = baseData.data.data.crewstatus;
-    sheetData.cargo = baseData.data.data.cargo;
+  _prepareShipItems(data, sheetData) {
+    const actorData = data.document.system;
+    sheetData.adventures = getItems(data, 'shipadventure');
+    sheetData.backgrounds = getItems(data, 'shipbackground');
+    sheetData.origin = actorData.origin;
+    sheetData.class = actorData.class;
+    sheetData.crewstatus = actorData.crewstatus;
+    sheetData.cargo = actorData.cargo;
   }
 
   /**

@@ -4,8 +4,8 @@
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="form-group">
-        <label for="data.nation">{{localize "SVNSEA2E.Status"}}</label>
-        <select class="status" id="data.nation" name="data.status">
+        <label for="system.nation">{{localize "SVNSEA2E.Status"}}</label>
+        <select class="status" id="system.nation" name="system.status">
           {{#select storyStatus}}
             <option value="none"></option>
             {{#each config.storyStatuses as |label status|}}
@@ -38,22 +38,22 @@
 
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
+      {{editor description target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Reward Tab --}}
     <div class="tab endings" data-group="primary" data-tab="reward">
-      {{editor content=reward target="data.reward" button=true owner=owner editable=editable}}
+      {{editor reward target="system.reward" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Endings Tab --}}
     <div class="tab endings" data-group="primary" data-tab="endings">
-      {{editor content=endings target="data.endings" button=true owner=owner editable=editable}}
+      {{editor endings target="system.endings" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Steps Tab --}}
     <div class="tab steps" data-group="primary" data-tab="steps">
-      {{editor content=steps target="data.steps" button=true owner=owner editable=editable}}
+      {{editor steps target="system.steps" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

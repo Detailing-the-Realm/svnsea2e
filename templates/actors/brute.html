@@ -6,15 +6,13 @@
       <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
       <div class="resources flex-group-left wound-title">
         {{localize "SVNSEA2E.Wounds" }}
-        <!--<span class="pts {{#if isPlayerCharacter}}bigger{{/if}}"><input type="text" name="data.wounds.value" value="{{data.wounds.value}}" data-dtype="Number" />
-          /{{data.wounds.max}}</span> -->
       </div>
       <div class="resources flex-group-left wounds">
         {{#for 1 wounds.max 1}}
           {{#iff wounds.value '>=' @index}}
-            <i data-name="data.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable fas fa-heart fa-lg"></i>
+            <i data-name="system.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable fas fa-heart fa-lg"></i>
           {{else}}
-            <i data-name="data.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable far fa-heart fa-lg"></i>
+            <i data-name="system.wounds.value" data-value="{{@index}}" data-type="wounds" class="fillable far fa-heart fa-lg"></i>
           {{/iff}}
         {{/for}}
       </div>
@@ -31,9 +29,9 @@
         <span>
         {{#for 1 trait.max 1}}
           {{#iff trait.value '>=' @index}}
-            <i data-name="data.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable fas fa-circle"></i>
+            <i data-name="system.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable fas fa-circle"></i>
           {{else}}
-            <i data-name="data.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable far fa-circle"></i>
+            <i data-name="system.traits.{{trait.name}}.value" data-value="{{@index}}" data-type="trait" data-key="{{trait.name}}" class="fillable far fa-circle"></i>
           {{/iff}}
         {{/for}}
         </span>
@@ -42,10 +40,10 @@
     <h2 class="ability-title">{{localize "SVNSEA2E.Ability"}}</h2>
     <div class="flex-group flex-between">
       <div class=" flexrow flex-group flex-between">
-        <input type="text" name="data.ability.name" value="{{ability.name}}" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Ability' }} {{localize "SVNSEA2E.Name"}}" />
+        <input type="text" name="system.ability.name" value="{{ability.name}}" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Ability' }} {{localize "SVNSEA2E.Name"}}" />
       </div>
       <div class="virtue flexrow flex-group flex-between">
-        <textarea name="data.ability.description" rows="8" cols="80" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Ability' }}  {{localize "SVNSEA2E.Description"}}">{{ ability.description }}</textarea>
+        <textarea name="system.ability.description" rows="8" cols="80" data-dtype="String" placeholder="{{localize 'SVNSEA2E.Ability' }}  {{localize "SVNSEA2E.Description"}}">{{ ability.description }}</textarea>
       </div>
     </div>
   </section>

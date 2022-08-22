@@ -1,5 +1,5 @@
 /**
- * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
+ * Extend the base Actor entity by definin`g` a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
 export class SvnSea2EActor extends Actor {
@@ -9,18 +9,17 @@ export class SvnSea2EActor extends Actor {
   prepareData() {
     super.prepareData();
 
-    const actorData = this.data;
-    const data = actorData.data;
+    const actorData = this.system;
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if (actorData.type === 'playercharacter')
-      this._preparePlayerCharacterData(data);
-    if (actorData.type === 'hero') this._prepareHeroData(data);
-    if (actorData.type === 'villain' || actorData.type === 'monster')
-      this._prepareVillainData(data);
-    if (actorData.type === 'brute') this._prepareBruteData(data);
-    if (actorData.type === 'ship') this._prepareShipData(data);
+    if (this.type === 'playercharacter')
+      this._preparePlayerCharacterData(actorData);
+    if (this.type === 'hero') this._prepareHeroData(actorData);
+    if (this.type === 'villain' || this.type === 'monster')
+      this._prepareVillainData(actorData);
+    if (this.type === 'brute') this._prepareBruteData(actorData);
+    if (this.type === 'ship') this._prepareShipData(actorData);
   }
 
   /**
@@ -38,56 +37,56 @@ export class SvnSea2EActor extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _preparePlayerCharacterData(data) {
-    this._prepareWounds(data);
-    this._prepareTraits(data);
-    this._prepareSkills(data);
+  _preparePlayerCharacterData(actorData) {
+    this._prepareWounds(actorData);
+    this._prepareTraits(actorData);
+    this._prepareSkills(actorData);
   }
 
   /**
    * Prepare Hero type specific data
    */
-  _prepareHeroData(data) {
-    this._prepareWounds(data);
-    this._prepareTraits(data);
-    this._prepareSkills(data);
+  _prepareHeroData(actorData) {
+    this._prepareWounds(actorData);
+    this._prepareTraits(actorData);
+    this._prepareSkills(actorData);
   }
 
   /**
    * Prepare Villain type specific data
    */
-  _prepareVillainData(data) {
-    this._prepareTraits(data);
-    data.villainy =
-      parseInt(data.traits.strength.value) +
-      parseInt(data.traits.influence.value);
-    data.wounds.max = parseInt(data.traits.strength.value) * 5;
-    data.wounds.value = this._validateMinMaxData(
-      data.wounds.value,
-      data.wounds.min,
-      data.wounds.max,
+  _prepareVillainData(actorData) {
+    this._prepareTraits(actorData);
+    actorData.villainy =
+      parseInt(actorData.traits.strength.value) +
+      parseInt(actorData.traits.influence.value);
+    actorData.wounds.max = parseInt(actorData.traits.strength.value) * 5;
+    actorData.wounds.value = this._validateMinMaxData(
+      actorData.wounds.value,
+      actorData.wounds.min,
+      actorData.wounds.max,
     );
   }
 
   /**
    * Prepare Brute type specific data
    */
-  _prepareBruteData(data) {
-    data.traits.strength.value = this._validateMinMaxData(
-      data.traits.strength.value,
-      data.traits.strength.min,
-      data.traits.strength.max,
+  _prepareBruteData(actorData) {
+    actorData.traits.strength.value = this._validateMinMaxData(
+      actorData.traits.strength.value,
+      actorData.traits.strength.min,
+      actorData.traits.strength.max,
     );
-    data.wounds.max = data.traits.strength.value;
-    if (parseInt(data.wounds.max) < parseInt(data.wounds.value)) {
-      data.wounds.value = data.wounds.max;
+    actorData.wounds.max = actorData.traits.strength.value;
+    if (parseInt(actorData.wounds.max) < parseInt(actorData.wounds.value)) {
+      actorData.wounds.value = actorData.wounds.max;
     }
   }
 
   /**
    * Prepare Ship type specific data
    */
-  _prepareShipData(data) {}
+  _prepareShipData(actorData) {}
 
   /**
    * Remove a member from the crew
@@ -109,8 +108,8 @@ export class SvnSea2EActor extends Actor {
   /**
    *
    */
-  _prepareTraits(data) {
-    for (const trait of Object.values(data.traits)) {
+  _prepareTraits(actorData) {
+    for (const trait of Object.values(actorData.traits)) {
       trait.value = this._validateMinMaxData(trait.value, trait.min, trait.max);
     }
   }
@@ -118,8 +117,8 @@ export class SvnSea2EActor extends Actor {
   /**
    *
    */
-  _prepareSkills(data) {
-    for (const skill of Object.values(data.skills)) {
+  _prepareSkills(actorData) {
+    for (const skill of Object.values(actorData.skills)) {
       skill.value = this._validateMinMaxData(skill.value, skill.min, skill.max);
     }
   }
@@ -127,11 +126,11 @@ export class SvnSea2EActor extends Actor {
   /**
    * Establish the wound values based on the min and max for the actor type
    */
-  _prepareWounds(data) {
-    data.wounds.value = this._validateMinMaxData(
-      data.wounds.value,
-      data.wounds.min,
-      data.wounds.max,
+  _prepareWounds(actorData) {
+    actorData.wounds.value = this._validateMinMaxData(
+      actorData.wounds.value,
+      actorData.wounds.min,
+      actorData.wounds.max,
     );
   }
 }

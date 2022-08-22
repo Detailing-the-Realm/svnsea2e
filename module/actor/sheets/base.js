@@ -20,8 +20,10 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /** @override */
   getData(options) {
-    const baseData = super.getData(options);
-    console.log(baseData);
+    const data = super.getData(options);
+    const actor = data.document;
+    const actorData = actor.system;
+
     const { isOwner: owner, limited } = this.document;
     const sheetData = {
       owner,
@@ -29,59 +31,62 @@ export default class ActorSheetSS2e extends ActorSheet {
       options: this.options,
       editable: this.isEditable,
       cssClass: owner ? 'editable' : 'locked',
-      isCorrupt: this.document.data.data.corruptionpts > 0,
-      isPlayerCharacter: this.document.data.type === 'playercharacter',
-      isHero: this.document.data.type === 'hero',
-      isVillain: this.document.data.type === 'villain',
-      isMonster: this.document.data.type === 'monster',
-      isNotBrute: this.document.data.type !== 'brute',
-      hasSkills: typeof this.document.data.data.skills !== 'undefined',
-      hasLanguages: typeof this.document.data.data.languages !== 'undefined',
+      isCorrupt: actorData.corruptionpts > 0,
+      isPlayerCharacter: actor.type === 'playercharacter',
+      isHero: actor.type === 'hero',
+      isVillain: actor.type === 'villain',
+      isMonster: actor.type === 'monster',
+      isNotBrute: actor.type !== 'brute',
+      hasSkills: typeof actorData.skills !== 'undefined',
+      hasLanguages: typeof actorData.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean'],
 
       // Core Actor data:
-      name: this.actor.name,
-      img: this.actor.img,
-      initiative: this.actor.data.data.initiative,
-      age: this.actor.data.data.age,
-      nation: this.actor.data.data.nation,
-      wealth: this.document.data.data.wealth,
-      heropts: this.document.data.data.heropts,
-      corruptionpts: this.document.data.data.corruptionpts,
-      wounds: this.document.data.data.wounds,
-      dwounds: this.document.data.data.dwounds,
-      traits: this._prepareTraits(baseData),
-      selectedlangs: this._prepareLanguages(baseData),
+      name: actor.name,
+      img: actor.img,
+      initiative: actorData.initiative,
+      age: actorData.age,
+      nation: actorData.nation,
+      wealth: actorData.wealth,
+      heropts: actorData.heropts,
+      corruptionpts: actorData.corruptionpts,
+      wounds: actorData.wounds,
+      dwounds: actorData.dwounds,
+      traits: this._prepareTraits(actor),
+      selectedlangs: this._prepareLanguages(actor),
 
       // Concept tab.
-      religion: baseData.data.data.religion,
-      reputation: baseData.data.data.reputation,
-      concept: baseData.data.data.concept,
-      arcana: baseData.data.data.arcana,
+      religion: actorData.religion,
+      reputation: actorData.reputation,
+      concept: actorData.concept,
+      arcana: actorData.arcana,
 
       // Inventory Tab
-      equipment: baseData.data.data.equipment,
+      equipment: actorData.equipment,
+
+      // Fate Tab
+      redemption: actorData.redemption,
     };
 
     // Prepare items.
-    if (this.actor.data.type === 'playercharacter') {
-      this._prepareCharacterItems(baseData, sheetData);
-    } else if (this.actor.data.type === 'hero') {
-      this._prepareHeroItems(baseData, sheetData);
-      sheetData.selectedlangs = this._prepareLanguages(baseData);
-    } else if (this.actor.data.type === 'villain') {
-      this._prepareVillainItems(baseData, sheetData);
-      sheetData.selectedlangs = this._prepareLanguages(baseData);
-    } else if (this.actor.data.type === 'monster') {
-      this._prepareMonsterItems(baseData, sheetData);
-    } else if (this.actor.data.type === 'ship') {
-      this._prepareShipItems(baseData, sheetData);
-      this._processFlags(baseData, baseData.data.flags, sheetData);
-    } else if (this.actor.data.type === 'dangerpts') {
-      sheetData.points = baseData.data.data.points;
-    } else if (this.actor.data.type === 'brute') {
-      sheetData.ability = baseData.data.data.ability;
+    if (actor.type === 'playercharacter') {
+      this._prepareCharacterItems(data, sheetData);
+    } else if (actor.type === 'hero') {
+      this._prepareHeroItems(data, sheetData);
+      sheetData.selectedlangs = this._prepareLanguages(actorData);
+    } else if (actor.type === 'villain') {
+      this._prepareVillainItems(data, sheetData);
+      sheetData.selectedlangs = this._prepareLanguages(actorData);
+    } else if (actor.type === 'monster') {
+      this._prepareMonsterItems(data, sheetData);
+    } else if (actor.type === 'ship') {
+      this._prepareShipItems(data, sheetData);
+      this._processFlags(actorData, actor.flags, sheetData);
+    } else if (actor.type === 'dangerpts') {
+      sheetData.points = actorData.points;
+    } else if (actor.type === 'brute') {
+      sheetData.ability = actorData.ability;
     }
     return sheetData;
   }
@@ -104,13 +109,13 @@ export default class ActorSheetSS2e extends ActorSheet {
   /**
    * Returns a sheet-friendly list of traits with the localized label.
    *
-   * @param baseData
+   * @param actor
    * @returns {(*&{name: *, label: *})[]|*[]}
    * @private
    */
-  _prepareTraits(baseData) {
-    return !['ship', 'dangerpts'].includes(baseData.data.type)
-      ? Object.entries(baseData.actor.data.data.traits).map(([t, trait]) => ({
+  _prepareTraits(actor) {
+    return !['ship', 'dangerpts'].includes(actor.type)
+      ? Object.entries(actor.system.traits).map(([t, trait]) => ({
           ...trait,
           name: t,
           label: CONFIG.SVNSEA2E.traits[t],
@@ -153,22 +158,16 @@ export default class ActorSheetSS2e extends ActorSheet {
       .on('click', (event) => this._onItemSummary(event));
 
     // Rollable abilities.
-    if (
-      this.actor.data.type === 'playercharacter' ||
-      this.actor.data.type === 'hero'
-    ) {
+    if (this.actor.type === 'playercharacter' || this.actor.type === 'hero') {
       html.find('.rollable').on('click', this._onHeroRoll.bind(this));
-    } else if (
-      this.actor.data.type === 'villain' ||
-      this.actor.data.type === 'monster'
-    ) {
+    } else if (this.actor.type === 'villain' || this.actor.type === 'monster') {
       html.find('.rollable').on('click', this._onVillainRoll.bind(this));
     }
 
     html
       .find('.fillable.fa-circle')
       .on('click', (event) => this._processCircle(event));
-    if (this.actor.data.type === 'brute') {
+    if (this.actor.type === 'brute') {
       html
         .find('.fillable.fa-heart')
         .on('click', (event) => this._processBruteWounds(event));
@@ -191,13 +190,14 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   _onAddInitiative(event) {
     event.preventDefault();
-    const initiative = (this.actor.data.data.initiative || 0) + 1;
+    const initiative = (this.actor.system.initiative || 0) + 1;
+    console.log('new initiative', initiative);
     updateInitiative(this.actor.id, initiative);
   }
 
   _onMinusInitiative(event) {
     event.preventDefault();
-    const initiative = (this.actor.data.data.initiative || 0) - 1;
+    const initiative = (this.actor.system.initiative || 0) - 1;
     updateInitiative(this.actor.id, initiative);
   }
 
@@ -205,15 +205,15 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /**
    * Prepare the Languages that the Actor has selected for use with the LanguageSelector application
-   * @param {Object} baseData       The base data
+   * @param {Object} actor       The actor
    * @private
    */
-  _prepareLanguages(baseData) {
+  _prepareLanguages(actor) {
     // Languages only apply to PCs, heroes, or villains.
-    if (!['playercharacter', 'hero', 'villain'].includes(baseData.data.type))
+    if (!['playercharacter', 'hero', 'villain'].includes(actor.type))
       return undefined;
 
-    return baseData.actor.data.data.languages.reduce(
+    return actor.system.languages.reduce(
       (languages, language) => ({
         ...languages,
         [language]: CONFIG.SVNSEA2E.languages[language],
@@ -230,9 +230,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _processCircle(event) {
-    const actor = this.actor;
-    const actorData = actor.data.data;
+    const actor = this.document;
+    const actorData = actor.system;
     const dataSet = event.target.dataset;
+    console.log(dataSet);
+
     let updateObj = {};
     let dataSetValue = parseInt(dataSet.value);
 
@@ -274,13 +276,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _processBruteWounds(event) {
-    const actor = this.actor;
+    const actor = this.document;
+    const actorData = actor.system;
     let updateObj = {};
     updateObj['data.wounds.value'] = event.target.dataset.value;
-    if (
-      this.actor.data.data.wounds.value == 1 &&
-      event.target.dataset.value == 1
-    )
+    if (actorData.wounds.value == 1 && event.target.dataset.value == 1)
       updateObj['data.wounds.value'] = 0;
 
     actor.update(updateObj);
@@ -294,35 +294,36 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _processWounds(event) {
-    const actor = this.actor;
-    const data = this.actor.data.data;
+    const actor = this.document;
+    const actorData = actor.system;
     const edata = event.target.dataset;
     let updateObj = {};
-    let wounds = data.wounds.value;
-    let dwounds = data.dwounds.value;
+    let wounds = actorData.wounds.value;
+    let dwounds = actorData.dwounds.value;
 
     const eValue = +edata.value;
 
     if (edata.type === 'wounds') {
       wounds = eValue;
-      dwounds = data.dwounds.value;
+      dwounds = actorData.dwounds.value;
       const dwestimate = Math.trunc(wounds / 5);
 
-      if (dwestimate > data.dwounds.value) dwounds = dwestimate;
+      if (dwestimate > actorData.dwounds.value) dwounds = dwestimate;
 
-      if (edata.value == 1 && data.wounds.value == 1) wounds = 0;
+      if (edata.value == 1 && actorData.wounds.value == 1) wounds = 0;
     } else {
       // If the event dramatic wound is larger than the current dramatic wound
       // increase the dramatic wound and the regular wounds
-      if (eValue > data.dwounds.value) dwounds = eValue;
-      else if (eValue == data.dwounds.value) dwounds = data.dwounds.value - 1;
+      if (eValue > actorData.dwounds.value) dwounds = eValue;
+      else if (eValue == actorData.dwounds.value)
+        dwounds = actorData.dwounds.value - 1;
       else dwounds = eValue;
 
-      if (data.wounds.value > eValue * 5) wounds = eValue * 5;
+      if (actorData.wounds.value > eValue * 5) wounds = eValue * 5;
     }
 
-    updateObj['data.wounds.value'] = wounds;
-    updateObj['data.dwounds.value'] = dwounds;
+    updateObj['system.wounds.value'] = wounds;
+    updateObj['system.dwounds.value'] = dwounds;
 
     actor.update(updateObj);
   }
@@ -630,16 +631,16 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     for (let i = 0; i < skills.length; i++) {
       const skill = skills[i];
-      updateData['data.skills.' + skill + '.value'] =
+      updateData['skills.' + skill + '.value'] =
         actorData.skills[skill].value + 1;
     }
     await this.actor.update(updateData);
 
     for (let a = 0; a < bkgData.advantages.length; a++) {
       // need to grab the advantage first from world then compendium
-      let advantage = Array.from(game.items
-        .values())
-        .find((entry) => entry.data.name === bkgData.advantages[a]);
+      let advantage = Array.from(game.items.values()).find(
+        (entry) => entry.data.name === bkgData.advantages[a],
+      );
       if (!advantage) {
         // now we see if it is in a compendium
         for (var p = 0; p < packAdvs.length; p++) {
@@ -687,7 +688,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const updateData = {};
     for (let i = 0; i < bkgData.skills.length; i++) {
       const skill = bkgData.skills[i];
-      updateData['data.skills.' + skill + '.value'] =
+      updateData['skills.' + skill + '.value'] =
         actorData.skills[skill].value - 1;
     }
     await this.actor.update(updateData);

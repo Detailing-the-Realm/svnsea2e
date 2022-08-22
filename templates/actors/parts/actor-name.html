@@ -1,8 +1,8 @@
 <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
 <div class="nation flex-row">
   <div class="form-group flex-group">
-    <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
-    <select class="nation" name="data.nation" id="data.nation">
+    <label for="system.nation">{{localize "SVNSEA2E.Nation"}}</label>
+    <select class="nation" name="system.nation" id="system.nation">
       {{#select nation}}
         <option value="none"></option>
         {{#each config.nations as |label nation|}}
@@ -11,8 +11,8 @@
       {{/select}}
     </select>
     <span class="flex-group-right twodigit">
-      <label for="data.age">{{localize "SVNSEA2E.Age"}}</label>
-      <input type="text" name="data.age" value="{{age}}" id="data.age" />
+      <label for="system.age">{{localize "SVNSEA2E.Age"}}</label>
+      <input type="text" name="system.age" value="{{age}}" id="system.age" />
     </span>
   </div>
 </div>

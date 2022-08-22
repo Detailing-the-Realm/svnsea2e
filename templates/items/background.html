@@ -4,8 +4,8 @@
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="form-group">
-        <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
-        <select id="data.nation" class="nation" name="data.nation">
+        <label for="system.nation">{{localize "SVNSEA2E.Nation"}}</label>
+        <select id="system.nation" class="nation" name="system.nation">
           {{#select nation}}
             <option value="none"></option>
             {{#each config.natTypes as |label nation|}}
@@ -34,12 +34,12 @@
   <section class="sheet-body">
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
+      {{editor description target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Quirk Tab --}}
     <div class="tab" data-group="primary" data-tab="quirk">
-      {{editor content=quirk target="data.quirk" button=true owner=owner editable=editable}}
+      {{editor quirk target="system.quirk" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Details Tab --}}

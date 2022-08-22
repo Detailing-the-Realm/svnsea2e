@@ -5,18 +5,18 @@
       <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
       <div class="grid grid-2col">
         <div class="form-group flex-group">
-          <label for="data.class">{{localize "SVNSEA2E.Class"}}</label>
-          <input type="text" id="data.class" name="data.class" value="{{class}}" placeholder="{{localize 'SVNSEA2E.Class'}}" />
+          <label for="system.class">{{localize "SVNSEA2E.Class"}}</label>
+          <input type="text" id="system.class" name="system.class" value="{{class}}" placeholder="{{localize 'SVNSEA2E.Class'}}" />
         </div>
         <div class="form-group flex-group">
-          <label for="data.origin">{{localize "SVNSEA2E.Origin"}}</label>
-          <input type="text" id="data.origin" name="data.origin" value="{{origin}}" placeholder="{{localize 'SVNSEA2E.Origin'}}" />
+          <label for="system.origin">{{localize "SVNSEA2E.Origin"}}</label>
+          <input type="text" id="system.origin" name="system.origin" value="{{origin}}" placeholder="{{localize 'SVNSEA2E.Origin'}}" />
         </div>
       </div>
       <div class="grid grid-2col">
         <div class="form-group flex-group-left">
-          <label for="data.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
-          <select id="data.crewstatus" class="crewstatus" name="data.crewstatus">
+          <label for="system.crewstatus">{{localize "SVNSEA2E.CrewStatus"}}</label>
+          <select id="system.crewstatus" class="crewstatus" name="system.crewstatus">
             {{#select crewstatus}}
               <option value="none"></option>
               {{#each config.crewStatuses as |label status|}}
@@ -26,8 +26,8 @@
           </select>
         </div>
         <div class="form-group flex-group">
-          <label for="data.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
-          <input type="text" id="data.wealth" name="data.wealth" value="{{wealth}}" placeholder="{{localize 'SVNSEA2E.WealthPts'}}" />
+          <label for="system.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
+          <input type="text" id="system.wealth" name="system.wealth" value="{{wealth}}" placeholder="{{localize 'SVNSEA2E.WealthPts'}}" />
         </div>
       </div>
 
@@ -70,7 +70,7 @@
       </ol>
     </div>
     <div class="tab cargo" data-group="primary" data-tab="cargo">
-      {{editor content=cargo target="data.cargo" button=true owner=owner editable=editable}}
+      {{editor cargo target="system.cargo" button=true owner=owner editable=editable}}
     </div>
     <div class="tab features" data-group="primary" data-tab="features">
       <ol class="items-list">

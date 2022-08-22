@@ -43,7 +43,7 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
 
     this.actor
       .update({
-        'data.points': dp,
+        points: dp,
       })
       .then(this.render(false));
   }
@@ -53,7 +53,7 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
 
     this.actor
       .update({
-        'data.points': dp,
+        points: dp,
       })
       .then(this.render(false));
   }
