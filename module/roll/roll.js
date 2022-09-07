@@ -130,7 +130,11 @@ export async function roll({
   title,
 }) {
   //We don't use Hero points with a Villain or a monster
-  if ((actor.data.type !== 'villain' && actor.data.type !== 'monster') && !_spendHeroPoint(form, actor)) {
+  if (
+    actor.data.type !== 'villain' &&
+    actor.data.type !== 'monster' &&
+    !_spendHeroPoint(form, actor)
+  ) {
     console.error('not enought hero point');
     return false;
   }

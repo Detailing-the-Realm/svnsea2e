@@ -317,7 +317,7 @@ async function getAllPackAdvantages() {
       for (let j = 0; j < pitems.length; j++) {
         const document = await pack.getDocument(pitems[j]._id);
         const entry = document.data;
-        if (entry.type === "advantage") {
+        if (entry.type === 'advantage') {
           advantages.push(entry);
         }
       }

@@ -1,6 +1,7 @@
 import LanguageSelector from '../../apps/language-selector.js';
 import { updateInitiative } from '../../combat.js';
 import { roll } from '../../roll/roll.js';
+import { getAllPackAdvantages } from '../../helpers.js';
 
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
@@ -483,55 +484,63 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onDropItem(event, data) {
     if (!this.actor.isOwner) return false;
-    const itemData = await this._getItemDropData(event, data);
+    // const itemData = await this._getItemDropData(event, data);
+    const item = await Item.implementation.fromDropData(data);
+    console.log(item);
     // Handle item sorting within the same Actor
     const actor = this.actor;
     const sameActor =
       data.actorId === actor.id ||
       (actor.isToken && data.tokenId === actor.token.id);
-    if (sameActor) return this._onSortItem(event, itemData);
+    if (sameActor) return this._onSortItem(event, item);
 
-    if (itemData.type !== 'sorcery') {
-      if (await this._doesActorHaveItem(itemData.type, itemData.name)) {
+    if (item.type !== 'sorcery') {
+      if (await this._doesActorHaveItem(item.type, item.name)) {
         return ui.notifications.error(
           game.i18n.format('SVNSEA2E.ItemExists', {
-            type: itemData.type,
-            name: itemData.name,
+            type: item.type,
+            name: item.name,
           }),
         );
       }
     }
 
-    if (itemData.type === 'background') {
+    if (item.type === 'background') {
+      // Glamour Isles backgrounds applies to Highland, Avalon, and Inismore.
       if (
-        itemData.data.nation === 'gisles' &&
-        (this.actor.data.data.nation === 'highland' ||
-          this.actor.data.data.nation === 'avalon' ||
-          this.actor.data.data.nation === 'insmore')
+        item.system.nation === 'gisles' &&
+        (this.actor.system.nation === 'highland' ||
+          this.actor.system.nation === 'avalon' ||
+          this.actor.system.nation === 'insmore')
       ) {
-        await this._processBackgroundDrop(itemData);
-        return await this.actor.createEmbeddedDocuments('Item', [itemData]);
+        return await this._processBackgroundDrop(item);
+        // return await this.actor.createEmbeddedDocuments('Item', [item]);
       }
+
+      // If the background is nation specific the actor must be of the same nation.
       if (
-        itemData.data.nation !== 'none' &&
-        itemData.data.nation !== this.actor.data.data.nation
+        item.system.nation !== 'none' &&
+        item.system.nation !== this.actor.data.data.nation
       ) {
         return ui.notifications.error(
           game.i18n.format('SVNSEA2E.WrongNation', {
             bgnation: game.i18n.localize(
-              CONFIG.SVNSEA2E.nations[itemData.data.nation],
+              CONFIG.SVNSEA2E.nations[item.system.nation],
             ),
             anation: game.i18n.localize(
-              CONFIG.SVNSEA2E.nations[this.actor.data.data.nation],
+              CONFIG.SVNSEA2E.nations[this.actor.system.nation],
             ),
-            name: itemData.name,
+            name: item.name,
           }),
         );
       }
-      await this._processBackgroundDrop(itemData);
+
+      // Process all other background drops.
+      return await this._processBackgroundDrop(item);
+    } else {
+      // Create the owned item
+      return await this.actor.createEmbeddedDocuments('Item', [item]);
     }
-    // Create the owned item
-    return await this.actor.createEmbeddedDocuments('Item', [itemData]);
   }
 
   /* -------------------------------------------- */
@@ -598,6 +607,17 @@ export default class ActorSheetSS2e extends ActorSheet {
     return duplicate(itemData);
   }
 
+  async _updateBackgroundSkills(item, adj) {
+    const actorData = this.actor.system;
+    const updateData = item.system.skills.reduce((updateData, skill) => {
+      const skillAdjustment = actorData.skills[skill].value + adj;
+      const skillValue = Math.max(Math.min(skillAdjustment, 5), 0);
+      return { ...updateData, [`system.skills.${skill}.value`]: skillValue };
+    }, {});
+
+    await this.actor.update(updateData);
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -605,75 +625,108 @@ export default class ActorSheetSS2e extends ActorSheet {
    * Backgrouds increase skills and add advantages
    * @param itemData for the item that has been dropped on the character sheet
    */
-  async _processBackgroundDrop(data) {
-    const actorData = this.actor.data.data;
+  async _processBackgroundDrop(item) {
+    const actorData = this.actor.system;
     const packAdvs = game.svnsea2e.packAdvs;
-    let bkgData = null;
-    const updateData = {};
+    const backgroundData = item.system;
+
+    console.log('dropped background item', item);
 
     // Case 1 - Import from a Compendium pack
-    if (data.pack) {
-      const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Item') return;
-      const document = await pack.getDocument(data.id);
-      bkgData = document.data;
-    } else if (data.data) {
-      // Case 2 - Data explicitly provided
-      bkgData = data.data;
-    } else {
-      // Case 3 - Import from World entity
-      const item = game.items.get(data.id);
-      if (!item) return;
-      bkgData = item.data;
-    }
+    // if (data.pack) {
+    //   const pack = game.packs.get(data.pack);
+    //   if (pack.metadata.entity !== 'Item') return;
+    //   const document = await pack.getDocument(data.id);
+    //   bkgData = document.data;
+    // } else if (data.data) {
+    //   // Case 2 - Data explicitly provided
+    //   bkgData = data.data;
+    // } else {
+    //   // Case 3 - Import from World entity
+    //   const item = game.items.get(data.id);
+    //   if (!item) return;
+    //   bkgData = item.data;
+    // }
 
-    const skills = bkgData.skills;
+    await this._updateBackgroundSkills(item, 1);
 
-    for (let i = 0; i < skills.length; i++) {
-      const skill = skills[i];
-      updateData['skills.' + skill + '.value'] =
-        actorData.skills[skill].value + 1;
-    }
-    await this.actor.update(updateData);
-
-    for (let a = 0; a < bkgData.advantages.length; a++) {
-      // need to grab the advantage first from world then compendium
-      let advantage = Array.from(game.items.values()).find(
-        (entry) => entry.data.name === bkgData.advantages[a],
+    // Go through all of the advantates on the background and find the matching
+    // Advantage Item and add it to the actor.
+    backgroundData.advantages.forEach(async (bAdvantage) => {
+      const gameAdvantage = game.items.find(
+        (gItem) => gItem.name === bAdvantage,
       );
-      if (!advantage) {
-        // now we see if it is in a compendium
-        for (var p = 0; p < packAdvs.length; p++) {
-          if (
-            packAdvs[p].name.toLowerCase() ===
-            bkgData.advantages[a].toLowerCase()
-          ) {
-            advantage = packAdvs[p];
-            break;
-          }
-        }
-      }
+      const packAdvantages = await getAllPackAdvantages();
+      const packAdvantage = packAdvantages.find(
+        (pa) => pa.name.toLowerCase() === bAdvantage.toLowerCase(),
+      );
+      const assignedAdvantage = gameAdvantage || packAdvantage || null;
 
-      if (!advantage) {
+      // If no source advantage was found, send the user an alert.
+      if (!assignedAdvantage) {
         ui.notifications.error(
           game.i18n.format('SVNSEA2E.ItemDoesntExist', {
-            name: bkgData.advantages[a],
+            name: bAdvantage,
           }),
         );
-        continue;
+        return;
       }
-      if (!advantage.name.toLowerCase().includes('sorcery')) {
-        if (await this._doesActorHaveItem('advantage', advantage.name)) {
-          ui.notifications.error(
-            game.i18n.format('SVNSEA2E.ItemExists', {
-              name: advantage.name,
-            }),
-          );
-          continue;
-        }
+
+      // Only Sorcery items can be duplicated, if it is invalid, send the user an alert.
+      if (
+        assignedAdvantage.type !== 'sorcery' &&
+        this._doesActorHaveItem('advantage', assignedAdvantage.name)
+      ) {
+        ui.notifications.error(
+          game.i18n.format('SVNSEA2E.ItemExists', {
+            type: assignedAdvantage.type,
+            name: assignedAdvantage.name,
+          }),
+        );
+        return;
       }
-      await this.actor.createEmbeddedDocuments('Item', [duplicate(advantage)]);
-    }
+      return await this.actor.createEmbeddedDocuments('Item', [
+        duplicate(assignedAdvantage),
+      ]);
+    });
+    // for (let a = 0; a < backgroundData.advantages.length; a++) {
+    //   // need to grab the advantage first from world then compendium
+    //   let advantage = Array.from(game.items.values()).find(
+    //     (entry) => entry.data.name === bkgData.advantages[a],
+    //   );
+    //   if (!advantage) {
+    //     // now we see if it is in a compendium
+    //     for (var p = 0; p < packAdvs.length; p++) {
+    //       if (
+    //         packAdvs[p].name.toLowerCase() ===
+    //         bkgData.advantages[a].toLowerCase()
+    //       ) {
+    //         advantage = packAdvs[p];
+    //         break;
+    //       }
+    //     }
+    //   }
+
+    //   if (!advantage) {
+    //     ui.notifications.error(
+    //       game.i18n.format('SVNSEA2E.ItemDoesntExist', {
+    //         name: bkgData.advantages[a],
+    //       }),
+    //     );
+    //     continue;
+    //   }
+    //   if (!advantage.name.toLowerCase().includes('sorcery')) {
+    //     if (await this._doesActorHaveItem('advantage', advantage.name)) {
+    //       ui.notifications.error(
+    //         game.i18n.format('SVNSEA2E.ItemExists', {
+    //           name: advantage.name,
+    //         }),
+    //       );
+    //       continue;
+    //     }
+    //   }
+    //   await this.actor.createEmbeddedDocuments('Item', [duplicate(advantage)]);
+    // }
   }
 
   /* -------------------------------------------- */
@@ -710,13 +763,10 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _doesActorHaveItem(type, name) {
-    let retVal = false;
-    this.actor.items.forEach((element) => {
-      if (element.type === type && element.name === name) {
-        retVal = true;
-      }
-    });
-    return retVal;
+    const found = this.actor.items.find(
+      (item) => item.name === name && item.type === type,
+    );
+    return !!found;
   }
 
   /* -------------------------------------------- */
