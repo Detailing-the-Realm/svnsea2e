@@ -291,8 +291,8 @@ Hooks.once('setup', function () {
  * Set the default image for an item type instead of the mystery man
  **/
 Hooks.on('preCreateItem', function (document, options, userId) {
-  document.data.update({
-    img: 'systems/svnsea2e/icons/' + document.data.type + '.jpg',
+  document.updateSource({
+    img: 'systems/svnsea2e/icons/' + document.type + '.jpg',
   });
 });
 
@@ -302,8 +302,8 @@ Hooks.on('preCreateItem', function (document, options, userId) {
  * Set the default image for an actor type instead of the mystery man
  **/
 Hooks.on('preCreateActor', function (document, entity, options, userId) {
-  document.data.update({
-    img: 'systems/svnsea2e/icons/' + document.data.type + '.jpg',
+  document.updateSource({
+    img: 'systems/svnsea2e/icons/' + document.type + '.jpg',
   });
 });
 

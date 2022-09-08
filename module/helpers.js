@@ -17,32 +17,14 @@ export async function getAllPackAdvantages() {
   };
   const foo = async (p) => {
     const items = await p.getIndex();
-    console.log('items', items);
-    const filtered = await Promise.all(
+    return await Promise.all(
       items.filter((i) => i.type === 'advantage').map((i) => bar(p, i)),
     );
-    console.log('filtered', filtered);
-    return filtered;
   };
   let a = await Promise.all(itemPacks.map((p) => foo(p)));
-  let advantages = await a.flatMap((a) => a);
-
-  console.log('all advantages', advantages);
-  console.log('all advantages find', advantages.find);
-  // const advantages = [];
-  // const packs = game.packs.entries;
-  // for (var i = 0; i < packs.length; i++) {
-  //   const pack = packs[i];
-  //   if (pack.metadata.entity === 'Item') {
-  //     const pitems = await pack.getIndex();
-  //     for (let j = 0; j < pitems.length; j++) {
-  //       const document = await pack.getDocument(pitems[j]._id);
-  //       const entry = document.data;
-  //       if (entry.type === "advantage") {
-  //         advantages.push(entry);
-  //       }
-  //     }
-  //   }
-  // }
-  return advantages;
+  return a.flatMap((a) => a);
 }
+
+export const GLAMOR_NATIONS = ['highland', 'avalon', 'insmore'];
+export const isValidGlamorIsles = (actor) =>
+  GLAMOR_NATIONS.includes(actor.system.nation);

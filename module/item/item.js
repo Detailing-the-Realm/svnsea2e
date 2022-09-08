@@ -24,12 +24,15 @@ export class SvnSea2EItem extends Item {
    * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
    * @return {Object}               An object of chat data to render
    */
-  getChatData(htmlOptions) {
+  async getChatData(htmlOptions) {
     const data = duplicate(this.system);
 
     // Rich text description
     data.metadatahtml = '';
-    data.description = TextEditor.enrichHTML(data.description, htmlOptions);
+    data.description = await TextEditor.enrichHTML(data.description, {
+      htmlOptions,
+      async: true,
+    });
     const fn = this[`_${this.type}ChatData`];
     if (fn) fn.bind(this)(data, htmlOptions);
 
