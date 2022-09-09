@@ -75,10 +75,8 @@ export default class ActorSheetSS2e extends ActorSheet {
       this._prepareCharacterItems(data, sheetData);
     } else if (actor.type === 'hero') {
       this._prepareHeroItems(data, sheetData);
-      sheetData.selectedlangs = this._prepareLanguages(actorData);
     } else if (actor.type === 'villain') {
       this._prepareVillainItems(data, sheetData);
-      sheetData.selectedlangs = this._prepareLanguages(actorData);
     } else if (actor.type === 'monster') {
       this._prepareMonsterItems(data, sheetData);
     } else if (actor.type === 'ship') {
@@ -672,7 +670,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const actor = this.actor;
-    const data = this.actor.data.data;
+    const data = this.actor.system;
 
     let skillValue = data.skills[dataset.label]['value'];
     let rolldata = {
@@ -751,7 +749,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const actor = this.actor;
-    const data = this.actor.data.data;
+    const data = this.actor.system;
 
     let rolldata = {
       threshold: 10,

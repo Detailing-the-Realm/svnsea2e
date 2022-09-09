@@ -229,12 +229,11 @@ Hooks.once('ready', async function () {
   // Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
   let currentVersion = game.settings.get('svnsea2e', 'systemMigrationVersion');
   if (!currentVersion) {
-    currentVersion = 0.6;
+    currentVersion = '0.6';
   }
-  const NEEDS_MIGRATION_VERSION = 3.0;
-  // const COMPATIBLE_MIGRATION_VERSION = 0.6
-  const needMigration = currentVersion < NEEDS_MIGRATION_VERSION;
 
+  // const needMigration = semver.lt(currentVersion, game.system.version);
+  const needMigration = true;
   // Perform the migration
   if (needMigration && game.user.isGM) {
     migrations.migrateWorld();

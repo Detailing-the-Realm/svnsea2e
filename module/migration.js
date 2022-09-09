@@ -3,7 +3,6 @@
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function () {
-  console.log('game', game);
   ui.notifications.info(
     `Applying 7th Sea 2E System Migration for version ${game.system.version}. Please be patient and do not close your game or shut down your server.`,
     {
@@ -13,7 +12,6 @@ export const migrateWorld = async function () {
   // Migrate World Actors
   for (const a of game.actors.values()) {
     try {
-      // debugger;
       const updateData = migrateActorData(a);
       if (!isEmpty(updateData)) {
         console.log(`Migrating Actor entity ${a.name}`);
@@ -172,7 +170,7 @@ export const migrateActorData = function (actor) {
     if (actor.system.arcana) {
       migrateVirtue(actor);
       migrateHubris(actor);
-      actor.document.update({ data: { arcana: null } });
+      actor.update({ data: { arcana: null } });
     }
   }
 
@@ -215,7 +213,7 @@ export const migrateSceneData = function (scene) {
 };
 
 export const migrateVirtue = function (actor) {
-  const virtue = actor.data.arcana.virtue;
+  const virtue = actor.system.arcana.virtue;
   if (virtue.name) {
     const itemData = {
       name: virtue.name,
@@ -230,7 +228,7 @@ export const migrateVirtue = function (actor) {
 };
 
 export const migrateHubris = function (actor) {
-  const hubris = actor.data.arcana.hubris;
+  const hubris = actor.system.arcana.hubris;
   if (hubris.name) {
     const itemData = {
       name: hubris.name,

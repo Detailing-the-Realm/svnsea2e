@@ -81,7 +81,7 @@ const _calculBonusDice = function (form) {
 
 const _spendHeroPoint = function (form, actor) {
   const heroDices = parseInt(form.useForMe?.value || 0);
-  const heroPts = actor.data.data.heropts || 0;
+  const heroPts = actor.system.heropts || 0;
   if (heroDices > heroPts) {
     ui.notifications.error(game.i18n.format('SVNSEA2E.NotEnoughHero', {}));
     return false;
@@ -131,8 +131,8 @@ export async function roll({
 }) {
   //We don't use Hero points with a Villain or a monster
   if (
-    actor.data.type !== 'villain' &&
-    actor.data.type !== 'monster' &&
+    actor.type !== 'villain' &&
+    actor.type !== 'monster' &&
     !_spendHeroPoint(form, actor)
   ) {
     console.error('not enought hero point');
@@ -148,7 +148,7 @@ export async function roll({
     form.addOneToDice !== undefined ? form.addOneToDice.checked : false;
 
   const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
-  r.roll();
+  await r.roll({ async: true });
   const rolls = getSortedRolls(r).map((d) => (addOneToDice ? d + 1 : d));
   const exploded = rolldata['explode'];
 
