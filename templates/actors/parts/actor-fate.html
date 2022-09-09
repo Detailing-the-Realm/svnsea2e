@@ -52,19 +52,19 @@
   </ol>
   {{#if isCorrupt}}
   <div class="redemption flexrow flex-group">
-    <label for="data.redemption" class=""><h3 class="item-name">{{ localize "SVNSEA2E.Redemption" }}</h3></label>
+    <label for="system.redemption" class=""><h3 class="item-name">{{ localize "SVNSEA2E.Redemption" }}</h3></label>
   </div>
   <div class="redemption flexrow flex-group flex-between">
-    <textarea name="data.redemption">{{ data.redemption }}</textarea>
+    <textarea name="system.redemption">{{ redemption }}</textarea>
   </div>
   {{/if}}
 {{/if}}
 {{#if isVillain}}
   <div class="redemption flexrow flex-group">
-    <h3 for="data.redemption" class="">{{ localize "SVNSEA2E.Redemption" }}</h3>
+    <h3 for="system.redemption" class="">{{ localize "SVNSEA2E.Redemption" }}</h3>
   </div>
   <div class="redemption flexrow flex-group flex-between">
-    <textarea name="data.redemption">{{ data.redemption }}</textarea>
+    <textarea name="system.redemption">{{ redemption }}</textarea>
   </div>
 {{/if}}
 

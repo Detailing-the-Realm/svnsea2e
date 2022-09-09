@@ -5,8 +5,8 @@
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="traits grid grid-3col">
         <div class="trait flexrow">
-          <label for="data.influence.value" class="trait-name">{{localize "SVNSEA2E.Influence"}}</label>
-          <input type="text" id="data.influence.value" name="data.influence.value" value="{{ influence.value }}"data-dtype="Number" />
+          <label for="system.influence.value" class="trait-name">{{localize "SVNSEA2E.Influence"}}</label>
+          <input type="text" id="system.influence.value" name="system.influence.value" value="{{ influence.value }}"data-dtype="Number" />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
 
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=description target="data.description" button=true owner=owner editable=editable}}
+      {{editor description target="system.description" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

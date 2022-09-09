@@ -1,16 +1,5 @@
 import ActorSheetSS2e from './base.js';
-import {
-  getAdvantageItems,
-  getArtifactItems,
-  getBackgroundItems,
-  getDuelStyleItems,
-  getHubrisItems,
-  getSecretSocietyItems,
-  getSorceryItems,
-  getStoryItems,
-  getVirtueItems,
-  skillsToSheetData,
-} from '../../helpers.js';
+import { getItems, skillsToSheetData } from '../../helpers.js';
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -39,17 +28,20 @@ export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareCharacterItems(baseData, sheetData) {
+  _prepareCharacterItems(data, sheetData) {
+    // const actorData = actor.system;
+    // console.log('actorData', actorData);
+    // console.log('actor', actor);
     // Assign and return
-    sheetData.skills = skillsToSheetData(baseData, CONFIG);
-    sheetData.advantages = getAdvantageItems(baseData);
-    sheetData.backgrounds = getBackgroundItems(baseData);
-    sheetData.sorcery = getSorceryItems(baseData);
-    sheetData.secretsocieties = getSecretSocietyItems(baseData);
-    sheetData.stories = getStoryItems(baseData);
-    sheetData.duelstyles = getDuelStyleItems(baseData);
-    sheetData.artifacts = getArtifactItems(baseData);
-    sheetData.virtues = getVirtueItems(baseData);
-    sheetData.hubriss = getHubrisItems(baseData);
+    sheetData.skills = skillsToSheetData(data.document.system, CONFIG);
+    sheetData.advantages = getItems(data, 'advantage');
+    sheetData.backgrounds = getItems(data, 'background');
+    sheetData.sorcery = getItems(data, 'sorcery');
+    sheetData.secretsocieties = getItems(data, 'secretsociety');
+    sheetData.stories = getItems(data, 'story');
+    sheetData.duelstyles = getItems(data, 'duelstyle');
+    sheetData.artifacts = getItems(data, 'artifact');
+    sheetData.virtues = getItems(data, 'virtue');
+    sheetData.hubriss = getItems(data, 'hubris');
   }
 }

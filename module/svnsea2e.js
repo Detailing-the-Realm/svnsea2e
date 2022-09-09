@@ -229,12 +229,11 @@ Hooks.once('ready', async function () {
   // Hooks.on('hotbarDrop', (bar, data, slot) => createSvnSea2EMacro(data, slot))
   let currentVersion = game.settings.get('svnsea2e', 'systemMigrationVersion');
   if (!currentVersion) {
-    currentVersion = 0.6;
+    currentVersion = '0.6';
   }
-  const NEEDS_MIGRATION_VERSION = 3.0;
-  // const COMPATIBLE_MIGRATION_VERSION = 0.6
-  const needMigration = currentVersion < NEEDS_MIGRATION_VERSION;
 
+  // const needMigration = semver.lt(currentVersion, game.system.version);
+  const needMigration = true;
   // Perform the migration
   if (needMigration && game.user.isGM) {
     migrations.migrateWorld();
@@ -291,8 +290,8 @@ Hooks.once('setup', function () {
  * Set the default image for an item type instead of the mystery man
  **/
 Hooks.on('preCreateItem', function (document, options, userId) {
-  document.data.update({
-    img: 'systems/svnsea2e/icons/' + document.data.type + '.jpg',
+  document.updateSource({
+    img: 'systems/svnsea2e/icons/' + document.type + '.jpg',
   });
 });
 
@@ -302,8 +301,8 @@ Hooks.on('preCreateItem', function (document, options, userId) {
  * Set the default image for an actor type instead of the mystery man
  **/
 Hooks.on('preCreateActor', function (document, entity, options, userId) {
-  document.data.update({
-    img: 'systems/svnsea2e/icons/' + document.data.type + '.jpg',
+  document.updateSource({
+    img: 'systems/svnsea2e/icons/' + document.type + '.jpg',
   });
 });
 
@@ -317,7 +316,7 @@ async function getAllPackAdvantages() {
       for (let j = 0; j < pitems.length; j++) {
         const document = await pack.getDocument(pitems[j]._id);
         const entry = document.data;
-        if (entry.type === "advantage") {
+        if (entry.type === 'advantage') {
           advantages.push(entry);
         }
       }

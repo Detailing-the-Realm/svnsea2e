@@ -1,13 +1,5 @@
 import ActorSheetSS2e from './base.js';
-import {
-  getAdvantageItems,
-  getArtifactItems,
-  getHubrisItems,
-  getMonsterQualityItems,
-  getSchemeItems,
-  getSorceryItems,
-  getVirtueItems,
-} from '../../helpers.js';
+import { getItems } from '../../helpers.js';
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}
@@ -35,15 +27,15 @@ export class ActorSheetSS2eVillain extends ActorSheetSS2e {
    *
    * @return {undefined}
    */
-  _prepareVillainItems(baseData, sheetData) {
+  _prepareVillainItems(data, sheetData) {
     // Assign and return
-    sheetData.villainy = baseData.data.data.villainy;
-    sheetData.advantages = getAdvantageItems(baseData);
-    sheetData.artifacts = getArtifactItems(baseData);
-    sheetData.sorcery = getSorceryItems(baseData);
-    sheetData.schemes = getSchemeItems(baseData);
-    sheetData.virtues = getVirtueItems(baseData);
-    sheetData.hubriss = getHubrisItems(baseData);
-    sheetData.monsterqualities = getMonsterQualityItems(baseData);
+    sheetData.villainy = data.document.system.villainy;
+    sheetData.advantages = getItems(data, 'advantage');
+    sheetData.artifacts = getItems(data, 'artifact');
+    sheetData.sorcery = getItems(data, 'sorcery');
+    sheetData.schemes = getItems(data, 'scheme');
+    sheetData.virtues = getItems(data, 'virtue');
+    sheetData.hubriss = getItems(data, 'hubris');
+    sheetData.monsterqualities = getItems(data, 'monsterquality');
   }
 }

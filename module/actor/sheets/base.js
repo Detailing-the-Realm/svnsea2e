@@ -1,6 +1,7 @@
 import LanguageSelector from '../../apps/language-selector.js';
 import { updateInitiative } from '../../combat.js';
 import { roll } from '../../roll/roll.js';
+import { getAllPackAdvantages, isValidGlamorIsles } from '../../helpers.js';
 
 /**
  * Extend the basic ActorSheet class to do all the 7th Sea things!
@@ -20,8 +21,10 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /** @override */
   getData(options) {
-    const baseData = super.getData(options);
-    console.log(baseData);
+    const data = super.getData(options);
+    const actor = data.document;
+    const actorData = actor.system;
+
     const { isOwner: owner, limited } = this.document;
     const sheetData = {
       owner,
@@ -29,59 +32,60 @@ export default class ActorSheetSS2e extends ActorSheet {
       options: this.options,
       editable: this.isEditable,
       cssClass: owner ? 'editable' : 'locked',
-      isCorrupt: this.document.data.data.corruptionpts > 0,
-      isPlayerCharacter: this.document.data.type === 'playercharacter',
-      isHero: this.document.data.type === 'hero',
-      isVillain: this.document.data.type === 'villain',
-      isMonster: this.document.data.type === 'monster',
-      isNotBrute: this.document.data.type !== 'brute',
-      hasSkills: typeof this.document.data.data.skills !== 'undefined',
-      hasLanguages: typeof this.document.data.data.languages !== 'undefined',
+      isCorrupt: actorData.corruptionpts > 0,
+      isPlayerCharacter: actor.type === 'playercharacter',
+      isHero: actor.type === 'hero',
+      isVillain: actor.type === 'villain',
+      isMonster: actor.type === 'monster',
+      isNotBrute: actor.type !== 'brute',
+      hasSkills: typeof actorData.skills !== 'undefined',
+      hasLanguages: typeof actorData.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
       dtypes: ['String', 'Number', 'Boolean'],
 
       // Core Actor data:
-      name: this.actor.name,
-      img: this.actor.img,
-      initiative: this.actor.data.data.initiative,
-      age: this.actor.data.data.age,
-      nation: this.actor.data.data.nation,
-      wealth: this.document.data.data.wealth,
-      heropts: this.document.data.data.heropts,
-      corruptionpts: this.document.data.data.corruptionpts,
-      wounds: this.document.data.data.wounds,
-      dwounds: this.document.data.data.dwounds,
-      traits: this._prepareTraits(baseData),
-      selectedlangs: this._prepareLanguages(baseData),
+      name: actor.name,
+      img: actor.img,
+      initiative: actorData.initiative,
+      age: actorData.age,
+      nation: actorData.nation,
+      wealth: actorData.wealth,
+      heropts: actorData.heropts,
+      corruptionpts: actorData.corruptionpts,
+      wounds: actorData.wounds,
+      dwounds: actorData.dwounds,
+      traits: this._prepareTraits(actor),
+      selectedlangs: this._prepareLanguages(actor),
 
       // Concept tab.
-      religion: baseData.data.data.religion,
-      reputation: baseData.data.data.reputation,
-      concept: baseData.data.data.concept,
-      arcana: baseData.data.data.arcana,
+      religion: actorData.religion,
+      reputation: actorData.reputation,
+      concept: actorData.concept,
+      arcana: actorData.arcana,
 
       // Inventory Tab
-      equipment: baseData.data.data.equipment,
+      equipment: actorData.equipment,
+
+      // Fate Tab
+      redemption: actorData.redemption,
     };
 
     // Prepare items.
-    if (this.actor.data.type === 'playercharacter') {
-      this._prepareCharacterItems(baseData, sheetData);
-    } else if (this.actor.data.type === 'hero') {
-      this._prepareHeroItems(baseData, sheetData);
-      sheetData.selectedlangs = this._prepareLanguages(baseData);
-    } else if (this.actor.data.type === 'villain') {
-      this._prepareVillainItems(baseData, sheetData);
-      sheetData.selectedlangs = this._prepareLanguages(baseData);
-    } else if (this.actor.data.type === 'monster') {
-      this._prepareMonsterItems(baseData, sheetData);
-    } else if (this.actor.data.type === 'ship') {
-      this._prepareShipItems(baseData, sheetData);
-      this._processFlags(baseData, baseData.data.flags, sheetData);
-    } else if (this.actor.data.type === 'dangerpts') {
-      sheetData.points = baseData.data.data.points;
-    } else if (this.actor.data.type === 'brute') {
-      sheetData.ability = baseData.data.data.ability;
+    if (actor.type === 'playercharacter') {
+      this._prepareCharacterItems(data, sheetData);
+    } else if (actor.type === 'hero') {
+      this._prepareHeroItems(data, sheetData);
+    } else if (actor.type === 'villain') {
+      this._prepareVillainItems(data, sheetData);
+    } else if (actor.type === 'monster') {
+      this._prepareMonsterItems(data, sheetData);
+    } else if (actor.type === 'ship') {
+      this._prepareShipItems(data, sheetData);
+      this._processFlags(actorData, actor.flags, sheetData);
+    } else if (actor.type === 'dangerpts') {
+      sheetData.points = actorData.points;
+    } else if (actor.type === 'brute') {
+      sheetData.ability = actorData.ability;
     }
     return sheetData;
   }
@@ -104,13 +108,13 @@ export default class ActorSheetSS2e extends ActorSheet {
   /**
    * Returns a sheet-friendly list of traits with the localized label.
    *
-   * @param baseData
+   * @param actor
    * @returns {(*&{name: *, label: *})[]|*[]}
    * @private
    */
-  _prepareTraits(baseData) {
-    return !['ship', 'dangerpts'].includes(baseData.data.type)
-      ? Object.entries(baseData.actor.data.data.traits).map(([t, trait]) => ({
+  _prepareTraits(actor) {
+    return !['ship', 'dangerpts'].includes(actor.type)
+      ? Object.entries(actor.system.traits).map(([t, trait]) => ({
           ...trait,
           name: t,
           label: CONFIG.SVNSEA2E.traits[t],
@@ -153,22 +157,16 @@ export default class ActorSheetSS2e extends ActorSheet {
       .on('click', (event) => this._onItemSummary(event));
 
     // Rollable abilities.
-    if (
-      this.actor.data.type === 'playercharacter' ||
-      this.actor.data.type === 'hero'
-    ) {
+    if (this.actor.type === 'playercharacter' || this.actor.type === 'hero') {
       html.find('.rollable').on('click', this._onHeroRoll.bind(this));
-    } else if (
-      this.actor.data.type === 'villain' ||
-      this.actor.data.type === 'monster'
-    ) {
+    } else if (this.actor.type === 'villain' || this.actor.type === 'monster') {
       html.find('.rollable').on('click', this._onVillainRoll.bind(this));
     }
 
     html
       .find('.fillable.fa-circle')
       .on('click', (event) => this._processCircle(event));
-    if (this.actor.data.type === 'brute') {
+    if (this.actor.type === 'brute') {
       html
         .find('.fillable.fa-heart')
         .on('click', (event) => this._processBruteWounds(event));
@@ -191,13 +189,14 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   _onAddInitiative(event) {
     event.preventDefault();
-    const initiative = (this.actor.data.data.initiative || 0) + 1;
+    const initiative = (this.actor.system.initiative || 0) + 1;
+    console.log('new initiative', initiative);
     updateInitiative(this.actor.id, initiative);
   }
 
   _onMinusInitiative(event) {
     event.preventDefault();
-    const initiative = (this.actor.data.data.initiative || 0) - 1;
+    const initiative = (this.actor.system.initiative || 0) - 1;
     updateInitiative(this.actor.id, initiative);
   }
 
@@ -205,15 +204,15 @@ export default class ActorSheetSS2e extends ActorSheet {
 
   /**
    * Prepare the Languages that the Actor has selected for use with the LanguageSelector application
-   * @param {Object} baseData       The base data
+   * @param {Object} actor       The actor
    * @private
    */
-  _prepareLanguages(baseData) {
+  _prepareLanguages(actor) {
     // Languages only apply to PCs, heroes, or villains.
-    if (!['playercharacter', 'hero', 'villain'].includes(baseData.data.type))
+    if (!['playercharacter', 'hero', 'villain'].includes(actor.type))
       return undefined;
 
-    return baseData.actor.data.data.languages.reduce(
+    return actor.system.languages.reduce(
       (languages, language) => ({
         ...languages,
         [language]: CONFIG.SVNSEA2E.languages[language],
@@ -230,9 +229,10 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _processCircle(event) {
-    const actor = this.actor;
-    const actorData = actor.data.data;
+    const actor = this.document;
+    const actorData = actor.system;
     const dataSet = event.target.dataset;
+
     let updateObj = {};
     let dataSetValue = parseInt(dataSet.value);
 
@@ -274,13 +274,11 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _processBruteWounds(event) {
-    const actor = this.actor;
+    const actor = this.document;
+    const actorData = actor.system;
     let updateObj = {};
     updateObj['data.wounds.value'] = event.target.dataset.value;
-    if (
-      this.actor.data.data.wounds.value == 1 &&
-      event.target.dataset.value == 1
-    )
+    if (actorData.wounds.value == 1 && event.target.dataset.value == 1)
       updateObj['data.wounds.value'] = 0;
 
     actor.update(updateObj);
@@ -294,35 +292,36 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _processWounds(event) {
-    const actor = this.actor;
-    const data = this.actor.data.data;
+    const actor = this.document;
+    const actorData = actor.system;
     const edata = event.target.dataset;
     let updateObj = {};
-    let wounds = data.wounds.value;
-    let dwounds = data.dwounds.value;
+    let wounds = actorData.wounds.value;
+    let dwounds = actorData.dwounds.value;
 
     const eValue = +edata.value;
 
     if (edata.type === 'wounds') {
       wounds = eValue;
-      dwounds = data.dwounds.value;
+      dwounds = actorData.dwounds.value;
       const dwestimate = Math.trunc(wounds / 5);
 
-      if (dwestimate > data.dwounds.value) dwounds = dwestimate;
+      if (dwestimate > actorData.dwounds.value) dwounds = dwestimate;
 
-      if (edata.value == 1 && data.wounds.value == 1) wounds = 0;
+      if (edata.value == 1 && actorData.wounds.value == 1) wounds = 0;
     } else {
       // If the event dramatic wound is larger than the current dramatic wound
       // increase the dramatic wound and the regular wounds
-      if (eValue > data.dwounds.value) dwounds = eValue;
-      else if (eValue == data.dwounds.value) dwounds = data.dwounds.value - 1;
+      if (eValue > actorData.dwounds.value) dwounds = eValue;
+      else if (eValue == actorData.dwounds.value)
+        dwounds = actorData.dwounds.value - 1;
       else dwounds = eValue;
 
-      if (data.wounds.value > eValue * 5) wounds = eValue * 5;
+      if (actorData.wounds.value > eValue * 5) wounds = eValue * 5;
     }
 
-    updateObj['data.wounds.value'] = wounds;
-    updateObj['data.dwounds.value'] = dwounds;
+    updateObj['system.wounds.value'] = wounds;
+    updateObj['system.dwounds.value'] = dwounds;
 
     actor.update(updateObj);
   }
@@ -416,7 +415,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     event.preventDefault();
     const li = $(event.currentTarget).closest('.item');
     const item = this.actor.items.get(li.data('itemId'));
-    const chatData = item.getChatData({ secrets: this.actor.owner });
+    const chatData = await item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
     if (li.hasClass('expanded')) {
@@ -482,204 +481,126 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   async _onDropItem(event, data) {
     if (!this.actor.isOwner) return false;
-    const itemData = await this._getItemDropData(event, data);
+    const item = await Item.implementation.fromDropData(data);
+
     // Handle item sorting within the same Actor
     const actor = this.actor;
     const sameActor =
       data.actorId === actor.id ||
       (actor.isToken && data.tokenId === actor.token.id);
-    if (sameActor) return this._onSortItem(event, itemData);
+    if (sameActor) return this._onSortItem(event, item);
 
-    if (itemData.type !== 'sorcery') {
-      if (await this._doesActorHaveItem(itemData.type, itemData.name)) {
-        return ui.notifications.error(
-          game.i18n.format('SVNSEA2E.ItemExists', {
-            type: itemData.type,
-            name: itemData.name,
-          }),
-        );
-      }
+    // Non-sorcery items cannot have duplicate entries on the actor.
+    const actorHasDrop = await this._doesActorHaveItem(item.type, item.name);
+    if (item.type !== 'sorcery' && actorHasDrop) {
+      return ui.notifications.error(
+        game.i18n.format('SVNSEA2E.ItemExists', {
+          type: item.type,
+          name: item.name,
+        }),
+      );
     }
 
-    if (itemData.type === 'background') {
+    if (item.type === 'background') {
       if (
-        itemData.data.nation === 'gisles' &&
-        (this.actor.data.data.nation === 'highland' ||
-          this.actor.data.data.nation === 'avalon' ||
-          this.actor.data.data.nation === 'insmore')
-      ) {
-        await this._processBackgroundDrop(itemData);
-        return await this.actor.createEmbeddedDocuments('Item', [itemData]);
-      }
-      if (
-        itemData.data.nation !== 'none' &&
-        itemData.data.nation !== this.actor.data.data.nation
+        // If the background is nation specific the actor must be of the same nation.
+        (item.system.nation !== 'none' &&
+          item.system.nation !== this.actor.system.nation) ||
+        // Glamour Isles backgrounds applies to Highland, Avalon, and Inismore.
+        (item.system.nation === 'gisles' && !isValidGlamorIsles(this.actor))
       ) {
         return ui.notifications.error(
           game.i18n.format('SVNSEA2E.WrongNation', {
             bgnation: game.i18n.localize(
-              CONFIG.SVNSEA2E.nations[itemData.data.nation],
+              CONFIG.SVNSEA2E.nations[item.system.nation],
             ),
             anation: game.i18n.localize(
-              CONFIG.SVNSEA2E.nations[this.actor.data.data.nation],
+              CONFIG.SVNSEA2E.nations[this.actor.system.nation],
             ),
-            name: itemData.name,
+            name: item.name,
           }),
         );
       }
-      await this._processBackgroundDrop(itemData);
+
+      // Process background drops.
+      await this._processBackgroundDrop(item);
     }
     // Create the owned item
-    return await this.actor.createEmbeddedDocuments('Item', [itemData]);
+    return await this.actor.createEmbeddedDocuments('Item', [item]);
   }
 
-  /* -------------------------------------------- */
+  async _updateBackgroundSkills(item, adj) {
+    const actorData = this.actor.system;
+    const updateData = item.system.skills.reduce((updateData, skill) => {
+      const skillAdjustment = actorData.skills[skill].value + adj;
+      const skillValue = Math.max(Math.min(skillAdjustment, 5), 0);
+      return { ...updateData, [`system.skills.${skill}.value`]: skillValue };
+    }, {});
 
-  /**
-   * TODO: A temporary shim method until Item.getDropData() is implemented
-   * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
-   * @param {DragEvent} event     The concluding DragEvent which contains drop data
-   * @param {Object} data         The data transfer extracted from the event
-   * @private
-   */
-  async _getActorDropData(event, data) {
-    let actorData = null;
-
-    // Case 1 - Import from a Compendium pack
-    if (data.pack) {
-      const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Actor') return;
-      const document = await pack.getDocument(data.id);
-      actorData = document.data;
-    } else if (data.data) {
-      // Case 2 - Data explicitly provided
-      actorData = data.data;
-    } else {
-      // Case 3 - Import from World entity
-      const actor = game.actors.get(data.id);
-      if (!actor) return;
-      actorData = actor.data;
-    }
-
-    // Return a copy of the extracted data
-    return duplicate(actorData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * TODO: A temporary shim method until Item.getDropData() is implemented
-   * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
-   * @param {DragEvent} event     The concluding DragEvent which contains drop data
-   * @param {Object} data         The data transfer extracted from the event
-   * @private
-   */
-  async _getItemDropData(event, data) {
-    let itemData = null;
-
-    // Case 1 - Import from a Compendium pack
-    if (data.pack) {
-      const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Item') return;
-      const document = await pack.getDocument(data.id);
-      itemData = document.data;
-    } else if (data.data) {
-      // Case 2 - Data explicitly provided
-      itemData = data.data;
-    } else {
-      // Case 3 - Import from World entity
-      const item = game.items.get(data.id);
-      if (!item) return;
-      itemData = item.data;
-    }
-
-    // Return a copy of the extracted data
-    return duplicate(itemData);
+    await this.actor.update(updateData);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Process for modifying the character sheet when a background is dropped on it.
-   * Backgrouds increase skills and add advantages
-   * @param itemData for the item that has been dropped on the character sheet
+   * Backgrounds increase skills and add advantages
+   * @param item for the item that has been dropped on the character sheet
    */
-  async _processBackgroundDrop(data) {
-    const actorData = this.actor.data.data;
-    const packAdvs = game.svnsea2e.packAdvs;
-    let bkgData = null;
-    const updateData = {};
+  async _processBackgroundDrop(item) {
+    const backgroundData = item.system;
 
-    // Case 1 - Import from a Compendium pack
-    if (data.pack) {
-      const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== 'Item') return;
-      const document = await pack.getDocument(data.id);
-      bkgData = document.data;
-    } else if (data.data) {
-      // Case 2 - Data explicitly provided
-      bkgData = data.data;
-    } else {
-      // Case 3 - Import from World entity
-      const item = game.items.get(data.id);
-      if (!item) return;
-      bkgData = item.data;
-    }
+    // Go through all the advantages on the background and find the matching
+    // Advantage Item and add it to the actor.
+    for (const bAdvantage of backgroundData.advantages) {
+      const gameAdvantage = game.items.find(
+        (gItem) => gItem.name === bAdvantage,
+      );
+      const packAdvantages = await getAllPackAdvantages();
+      const packAdvantage = packAdvantages.find(
+        (pa) => pa.name.toLowerCase() === bAdvantage.toLowerCase(),
+      );
+      const assignedAdvantage = gameAdvantage || packAdvantage || null;
 
-    const skills = bkgData.skills;
-
-    for (let i = 0; i < skills.length; i++) {
-      const skill = skills[i];
-      updateData['data.skills.' + skill + '.value'] =
-        actorData.skills[skill].value + 1;
-    }
-    await this.actor.update(updateData);
-
-    for (let a = 0; a < bkgData.advantages.length; a++) {
-      // need to grab the advantage first from world then compendium
-      let advantage = Array.from(game.items
-        .values())
-        .find((entry) => entry.data.name === bkgData.advantages[a]);
-      if (!advantage) {
-        // now we see if it is in a compendium
-        for (var p = 0; p < packAdvs.length; p++) {
-          if (
-            packAdvs[p].name.toLowerCase() ===
-            bkgData.advantages[a].toLowerCase()
-          ) {
-            advantage = packAdvs[p];
-            break;
-          }
-        }
-      }
-
-      if (!advantage) {
+      // If no source advantage was found, send the user an alert.
+      if (!assignedAdvantage) {
         ui.notifications.error(
           game.i18n.format('SVNSEA2E.ItemDoesntExist', {
-            name: bkgData.advantages[a],
+            name: bAdvantage,
           }),
         );
         continue;
       }
-      if (!advantage.name.toLowerCase().includes('sorcery')) {
-        if (await this._doesActorHaveItem('advantage', advantage.name)) {
-          ui.notifications.error(
-            game.i18n.format('SVNSEA2E.ItemExists', {
-              name: advantage.name,
-            }),
-          );
-          continue;
-        }
+      const actorHas = await this._doesActorHaveItem(
+        'advantage',
+        assignedAdvantage.name,
+      );
+
+      // Only Sorcery items can be duplicated, if it is invalid, send the user an alert.
+      if (assignedAdvantage.type !== 'sorcery' && actorHas) {
+        ui.notifications.error(
+          game.i18n.format('SVNSEA2E.ItemExists', {
+            type: assignedAdvantage.type,
+            name: assignedAdvantage.name,
+          }),
+        );
+        continue;
       }
-      await this.actor.createEmbeddedDocuments('Item', [duplicate(advantage)]);
+
+      // Add the background's advantage to the actor.
+      await this.actor.createEmbeddedDocuments('Item', [
+        duplicate(assignedAdvantage),
+      ]);
     }
+    // Apply the skills.
+    await this._updateBackgroundSkills(item, 1);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Process for modifying the character sheet when a background is dropped on it.
-   * Backgrouds increase skills and add advantages
+   * Backgrounds increase skills and add advantages
    * @param itemData data for the item that is being deleted
    */
   async _processBackgroundDelete(bkgData) {
@@ -687,7 +608,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const updateData = {};
     for (let i = 0; i < bkgData.skills.length; i++) {
       const skill = bkgData.skills[i];
-      updateData['data.skills.' + skill + '.value'] =
+      updateData['skills.' + skill + '.value'] =
         actorData.skills[skill].value - 1;
     }
     await this.actor.update(updateData);
@@ -709,13 +630,10 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   async _doesActorHaveItem(type, name) {
-    let retVal = false;
-    this.actor.items.forEach((element) => {
-      if (element.type === type && element.name === name) {
-        retVal = true;
-      }
-    });
-    return retVal;
+    const found = this.actor.items.find(
+      (item) => item.name === name && item.type === type,
+    );
+    return !!found;
   }
 
   /* -------------------------------------------- */
@@ -752,7 +670,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const actor = this.actor;
-    const data = this.actor.data.data;
+    const data = this.actor.system;
 
     let skillValue = data.skills[dataset.label]['value'];
     let rolldata = {
@@ -831,7 +749,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const actor = this.actor;
-    const data = this.actor.data.data;
+    const data = this.actor.system;
 
     let rolldata = {
       threshold: 10,

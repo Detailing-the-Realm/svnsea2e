@@ -1,5 +1,5 @@
-export const skillsToSheetData = (baseData, CONFIG) =>
-  Object.entries(baseData.data.data.skills)
+export const skillsToSheetData = (actorData, CONFIG) =>
+  Object.entries(actorData.skills)
     .map(([s, skill]) => ({
       ...skill,
       name: s,
@@ -7,31 +7,24 @@ export const skillsToSheetData = (baseData, CONFIG) =>
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
-export const getAdvantageItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'advantage');
+export const getItems = (data, type) =>
+  data.items.filter((item) => item.type === type);
 
-export const getBackgroundItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'background');
+export async function getAllPackAdvantages() {
+  let itemPacks = game.packs.filter((p) => p.metadata.type === 'Item');
+  const bar = async (p, i) => {
+    return await p.getDocument(i._id);
+  };
+  const foo = async (p) => {
+    const items = await p.getIndex();
+    return await Promise.all(
+      items.filter((i) => i.type === 'advantage').map((i) => bar(p, i)),
+    );
+  };
+  let a = await Promise.all(itemPacks.map((p) => foo(p)));
+  return a.flatMap((a) => a);
+}
 
-export const getSorceryItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'sorcery');
-export const getSecretSocietyItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'secretsociety');
-export const getStoryItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'story');
-export const getDuelStyleItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'duelstyle');
-export const getArtifactItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'artifact');
-export const getSchemeItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'scheme');
-export const getShipAdventureItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'shipadventure');
-export const getShipBackgroundItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'shipbackground');
-export const getMonsterQualityItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'monsterquality');
-export const getVirtueItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'virtue');
-export const getHubrisItems = (baseData) =>
-  baseData.items.filter((item) => item.type === 'hubris');
+export const GLAMOR_NATIONS = ['highland', 'avalon', 'insmore'];
+export const isValidGlamorIsles = (actor) =>
+  GLAMOR_NATIONS.includes(actor.system.nation);

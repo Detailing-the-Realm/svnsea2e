@@ -23,7 +23,7 @@ export default class LanguageSelector extends FormApplication {
   /** @override */
   getData() {
     // Get current values
-    const langs = this.object.data.data.languages;
+    const langs = this.object.system.languages;
 
     // Populate choices
     const choices = duplicate(this.options.choices);
@@ -55,7 +55,7 @@ export default class LanguageSelector extends FormApplication {
       }
     }
 
-    updateData['data.languages'] = chosen;
+    updateData['system.languages'] = chosen;
 
     if (this.options.minimum && chosen.length < this.options.minimum) {
       return ui.notifications.error(
