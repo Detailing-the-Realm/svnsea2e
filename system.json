@@ -41,7 +41,11 @@
       "lang": "it",
       "name": "Italian",
       "path": "lang/it.json"
-    }
+     },
+    {
+      "lang": "pt-BR",
+      "name": "Brazilian Portuguese",
+      "path": "lang/pt-BR.json" }
   ],
   "gridDistance": 5,
   "gridUnits": "ft",
