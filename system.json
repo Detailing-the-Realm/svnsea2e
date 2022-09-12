@@ -4,8 +4,8 @@
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
   "version": "THIS IS GENERATED",
   "compatibility": {
-    "minimum": "10.277",
-    "verified": "10.278",
+    "minimum": "10",
+    "verified": "10.285",
     "maximum": "10"
   },
   "templateVersion": 2,
