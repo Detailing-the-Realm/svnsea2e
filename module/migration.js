@@ -4,7 +4,7 @@
  */
 export const migrateWorld = async function () {
   ui.notifications.info(
-    `Applying 7th Sea 2E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`,
+    `Applying 7th Sea 2E System Migration for version ${game.system.version}. Please be patient and do not close your game or shut down your server.`,
     {
       permanent: true,
     },
@@ -12,8 +12,8 @@ export const migrateWorld = async function () {
   // Migrate World Actors
   for (const a of game.actors.values()) {
     try {
-      const updateData = migrateActorData(a.data);
-      if (!isObjectEmpty(updateData)) {
+      const updateData = migrateActorData(a);
+      if (!isEmpty(updateData)) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {
           enforceTypes: false,
@@ -27,8 +27,8 @@ export const migrateWorld = async function () {
   // Migrate World Items
   for (const i of game.items.values()) {
     try {
-      const updateData = migrateItemData(i.data);
-      if (!isObjectEmpty(updateData)) {
+      const updateData = migrateItemData(i);
+      if (!isEmpty(updateData)) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {
           enforceTypes: false,
@@ -51,13 +51,9 @@ export const migrateWorld = async function () {
   }
 
   // Set the migration as complete
-  game.settings.set(
-    'svnsea2e',
-    'systemMigrationVersion',
-    game.system.data.version,
-  );
+  game.settings.set('svnsea2e', 'systemMigrationVersion', game.system.version);
   ui.notifications.info(
-    `7th Sea 2E System Migration to version ${game.system.data.version} completed!`,
+    `7th Sea 2E System Migration to version ${game.system.version} completed!`,
     {
       permanent: true,
     },
@@ -113,56 +109,56 @@ export const migrateCompendium = async function (pack) {
 export const migrateActorData = function (actor) {
   const updateData = {};
 
-  if (actor.type === 'playercharacter' && actor.data.wealth == null) {
-    updateData['data.wealth'] = 0;
+  if (actor.type === 'playercharacter' && actor.system.wealth == null) {
+    updateData['wealth'] = 0;
   }
 
   if (
     actor.type !== 'dangerpts' &&
     actor.type !== 'brute' &&
-    actor.data.wounds.max != 20
+    actor.system.wounds.max != 20
   ) {
-    updateData['data.wounds.max'] = 20;
+    updateData['wounds.max'] = 20;
   }
 
   if (
     (actor.type === 'playercharacter' ||
       actor.type === 'hero' ||
       actor.type === 'villain') &&
-    actor.data.nation === 'rahuris'
+    actor.system.nation === 'rahuris'
   ) {
-    updateData['data.nation'] = 'rahuri';
+    updateData['nation'] = 'rahuri';
   }
 
   if (
     (actor.type === 'villain' || actor.type === 'monster') &&
-    actor.data.traits.strength.max != 10
+    actor.system.traits.strength.max != 10
   ) {
-    updateData['data.traits.strength.max'] = 20;
-    updateData['data.traits.influence.max'] = 20;
-    updateData['data.traits.influence.min'] = 0;
+    updateData['traits.strength.max'] = 20;
+    updateData['traits.influence.max'] = 20;
+    updateData['traits.influence.min'] = 0;
   }
 
   if (actor.type === 'brute') {
-    updateData['data.traits.strength.max'] = 20;
+    updateData['traits.strength.max'] = 20;
   }
 
-  if (actor.type === 'dangerpts' && actor.data.points < 5) {
-    updateData['data.points'] = 5;
+  if (actor.type === 'dangerpts' && actor.system.points < 5) {
+    updateData['points'] = 5;
   }
 
-  if (actor.type === 'monster' && actor.data.fear.max != 5) {
-    updateData['data.fear.value'] = 0;
-    updateData['data.fear.min'] = 0;
-    updateData['data.fear.max'] = 5;
+  if (actor.type === 'monster' && actor.system.fear.max != 5) {
+    updateData['fear.value'] = 0;
+    updateData['fear.min'] = 0;
+    updateData['fear.max'] = 5;
   }
 
-  if (actor.type === 'ship' && actor.data.crewstatus == null) {
-    if (actor.data.crewstatus == null) {
-      updateData['data.crewstatus'] = '';
+  if (actor.type === 'ship' && actor.system.crewstatus == null) {
+    if (actor.system.crewstatus == null) {
+      updateData['crewstatus'] = '';
     }
-    if (aactor.data.wealth == null) {
-      updateData['data.wealth'] = '0';
+    if (aactor.system.wealth == null) {
+      updateData['wealth'] = '0';
     }
   }
 
@@ -171,10 +167,10 @@ export const migrateActorData = function (actor) {
     actor.type === 'hero' ||
     actor.type === 'villain'
   ) {
-    if (actor.data.arcana) {
+    if (actor.system.arcana) {
       migrateVirtue(actor);
       migrateHubris(actor);
-      actor.document.update({ data: { arcana: null } });
+      actor.update({ data: { arcana: null } });
     }
   }
 
@@ -190,12 +186,15 @@ export const migrateActorData = function (actor) {
 export const migrateItemData = function (item) {
   const updateData = {};
 
-  if (item.type === 'secretsociety' && typeof item.favor === 'undefined') {
-    updateData['data.favor'] = 0;
+  if (
+    item.type === 'secretsociety' &&
+    typeof item.system.favor === 'undefined'
+  ) {
+    updateData['favor'] = 0;
   }
 
-  if (item.type === 'story' && typeof item.status === 'undefined') {
-    updateData['data.status'] = '';
+  if (item.type === 'story' && typeof item.system.status === 'undefined') {
+    updateData['status'] = '';
   }
 
   return updateData;
@@ -214,7 +213,7 @@ export const migrateSceneData = function (scene) {
 };
 
 export const migrateVirtue = function (actor) {
-  const virtue = actor.data.arcana.virtue;
+  const virtue = actor.system.arcana.virtue;
   if (virtue.name) {
     const itemData = {
       name: virtue.name,
@@ -229,7 +228,7 @@ export const migrateVirtue = function (actor) {
 };
 
 export const migrateHubris = function (actor) {
-  const hubris = actor.data.arcana.hubris;
+  const hubris = actor.system.arcana.hubris;
   if (hubris.name) {
     const itemData = {
       name: hubris.name,

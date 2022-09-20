@@ -1,13 +1,13 @@
 <div class="tab concept" data-group="primary" data-tab="concept">
   <div class="grid grid-2col">
     <div class="form-group flex-group">
-      <label for="data.religion">{{localize "SVNSEA2E.Religion"}}</label>
-      <input type="text" id="data.religion" name="data.religion" value="{{religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
+      <label for="system.religion">{{localize "SVNSEA2E.Religion"}}</label>
+      <input type="text" id="system.religion" name="system.religion" value="{{religion}}" placeholder="{{localize "SVNSEA2E.Religion"}}" />
     </div>
     <div class="form-group flex-group">
-      <label for="data.reputation">{{localize "SVNSEA2E.Reputation"}}</label>
-      <input type="text" id="data.reputation" name="data.reputation" value="{{reputation}}" placeholder="{{localize "SVNSEA2E.Reputation"}}" />
+      <label for="system.reputation">{{localize "SVNSEA2E.Reputation"}}</label>
+      <input type="text" id="system.reputation" name="system.reputation" value="{{reputation}}" placeholder="{{localize "SVNSEA2E.Reputation"}}" />
     </div>
   </div>
-  {{editor content=concept target="data.concept" button=true owner=owner editable=editable}}
+  {{editor concept target="system.concept" button=true owner=owner editable=editable}}
 </div>

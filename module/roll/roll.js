@@ -67,8 +67,8 @@ const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
 const _calculBonusDice = function (form) {
   const flairDice = form.flairDice?.checked ? 1 : 0;
   const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
-  const heroDices = parseInt(form.useForMe.value || 0);
-  const helpDices = parseInt(form.useForHelpMe.value || 0) * 3;
+  const heroDices = parseInt(form.useForMe?.value || 0);
+  const helpDices = parseInt(form.useForHelpMe?.value || 0) * 3;
 
   return (
     parseInt(form.bonusDice.value) +
@@ -80,8 +80,8 @@ const _calculBonusDice = function (form) {
 };
 
 const _spendHeroPoint = function (form, actor) {
-  const heroDices = parseInt(form.useForMe.value || 0);
-  const heroPts = actor.data.data.heropts || 0;
+  const heroDices = parseInt(form.useForMe?.value || 0);
+  const heroPts = actor.system.heropts || 0;
   if (heroDices > heroPts) {
     ui.notifications.error(game.i18n.format('SVNSEA2E.NotEnoughHero', {}));
     return false;
@@ -129,7 +129,12 @@ export async function roll({
   template,
   title,
 }) {
-  if (!_spendHeroPoint(form, actor)) {
+  //We don't use Hero points with a Villain or a monster
+  if (
+    actor.type !== 'villain' &&
+    actor.type !== 'monster' &&
+    !_spendHeroPoint(form, actor)
+  ) {
     console.error('not enought hero point');
     return false;
   }
@@ -143,7 +148,7 @@ export async function roll({
     form.addOneToDice !== undefined ? form.addOneToDice.checked : false;
 
   const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
-  r.roll();
+  await r.roll({ async: true });
   const rolls = getSortedRolls(r).map((d) => (addOneToDice ? d + 1 : d));
   const exploded = rolldata['explode'];
 

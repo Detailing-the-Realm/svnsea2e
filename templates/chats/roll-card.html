@@ -1,44 +1,44 @@
-<div class="chat-card skill-roll dice-roll" data-actor-id="{{ actor.id }}">
-  <div class="dice-result">
-    <h4 class="dice-total">{{ raises }} {{ raisetxt }} - {{ unusedDice }} {{ unusedDiceTxt }} </h4>
-    <div class="dice-tooltip">
-      <section class="tooltip-part">
-        <div class="dice">
-          <ol class="dice-rolls">
-            {{#each rolls as |roll|}}
-              <li class="roll die d10"> {{ roll }}</li>
-            {{/each}}
-          </ol>
-          <h6>{{ rCombos }}</h6>
-          <div class="flexrow flex-group flex-left">
-            <ul  class="raise-combos-list">
-              {{#each combos as |combo|}}
-                <li class="combo"> {{ combo }}</li>
+<div>
+  <div class="chat-card skill-roll dice-roll" data-actor-id="{{ actor.id }}">
+    <div class="dice-result">
+      <h4 class="dice-total">{{ raises }} {{ raisetxt }} - {{ unusedDice }} {{ unusedDiceTxt }} </h4>
+      <div class="dice-tooltip">
+        <section class="tooltip-part">
+          <div class="dice">
+            <ol class="dice-rolls">
+              {{#each rolls as |roll|}}
+                <li class="roll die d10"> {{ roll }}</li>
               {{/each}}
-            </ul>
-          </div>
+            </ol>
+            <h6>{{ rCombos }}</h6>
+            <div class="flexrow flex-group flex-left">
+              <ul  class="raise-combos-list">
+                {{#each combos as |combo|}}
+                  <li class="combo"> {{ combo }}</li>
+                {{/each}}
+              </ul>
+            </div>
 
-          {{#if rerolled}}
-            <div class="rerolled">
-              {{ reroll }}
-            </div>
-          {{/if}}
-          {{#if exploded}}
-            <div class="explosions">
-              {{ explosions }}
-            </div>
-          {{/if}}
-          {{#if hasAddOneToDice}}
-            {{ addOneToDiced }}
-          {{/if}}
-          <div class="threshold">{{ threshold }}</div>
-        </div>
-      </section>
-    </div>
-    <div>
-      <button class="initiative-tracker-add" data-raise="{{ raises }}" data-actor="{{ actor.id }}">
-        {{ localize "SVNSEA2E.AddToInitiativeTracker" }}
-      </button>
+            {{#if rerolled}}
+              <div class="rerolled">
+                {{ reroll }}
+              </div>
+            {{/if}}
+            {{#if exploded}}
+              <div class="explosions">
+                {{ explosions }}
+              </div>
+            {{/if}}
+            {{#if hasAddOneToDice}}
+              {{ addOneToDiced }}
+            {{/if}}
+            <div class="threshold">{{ threshold }}</div>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
+  <button class="initiative-tracker-add" data-raise="{{ raises }}" data-actor="{{ actor.id }}">
+    {{ localize "SVNSEA2E.AddToInitiativeTracker" }}
+  </button>
 </div>

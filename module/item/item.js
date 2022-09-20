@@ -10,15 +10,12 @@ export class SvnSea2EItem extends Item {
     super.prepareData();
 
     // Get the Item's data
-    const itemData = this.data;
+    const itemData = this.system;
 
-    const actorData = this.actor ? this.actor.data : {};
-    const data = itemData.data;
-
-    if (itemData.type === 'scheme') {
-      this._prepareSchemeData(itemData.data);
+    if (this.type === 'scheme') {
+      this._prepareSchemeData(itemData);
     } else if (itemData.type === 'advantage') {
-      this._prepareAdvantageData(itemData.data);
+      this._prepareAdvantageData(itemData);
     }
   }
 
@@ -27,13 +24,16 @@ export class SvnSea2EItem extends Item {
    * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
    * @return {Object}               An object of chat data to render
    */
-  getChatData(htmlOptions) {
-    const data = duplicate(this.data.data);
+  async getChatData(htmlOptions) {
+    const data = duplicate(this.system);
 
     // Rich text description
     data.metadatahtml = '';
-    data.description = TextEditor.enrichHTML(data.description, htmlOptions);
-    const fn = this[`_${this.data.type}ChatData`];
+    data.description = await TextEditor.enrichHTML(data.description, {
+      htmlOptions,
+      async: true,
+    });
+    const fn = this[`_${this.type}ChatData`];
     if (fn) fn.bind(this)(data, htmlOptions);
 
     return data;

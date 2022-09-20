@@ -3,8 +3,11 @@
   "title": "7th Sea Second Edition (Unofficial)",
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
   "version": "THIS IS GENERATED",
-  "minimumCoreVersion": "0.8.4",
-  "compatibleCoreVersion": "0.9.2",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10.285",
+    "maximum": "10"
+  },
   "templateVersion": 2,
   "author": "psychoph",
   "esmodules": [

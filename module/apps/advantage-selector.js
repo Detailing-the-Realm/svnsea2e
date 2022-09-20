@@ -23,7 +23,7 @@ export default class AdvantageSelector extends FormApplication {
   /** @override */
   getData() {
     // Get current values
-    const advantages = this.object.data.data.advantages;
+    const advantages = this.object.system.advantages;
 
     // Populate choices
     const choices = duplicate(this.options.choices);
@@ -53,7 +53,7 @@ export default class AdvantageSelector extends FormApplication {
         chosen.push(k);
       }
     }
-    updateData['data.advantages'] = chosen;
+    updateData['system.advantages'] = chosen;
 
     if (this.options.minimum && chosen.length < this.options.minimum) {
       return ui.notifications.error(
