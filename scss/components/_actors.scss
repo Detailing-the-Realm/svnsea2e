@@ -1,5 +1,29 @@
-.sheet-header {
-  flex: 0 0 195px;
+header.sheet-header {
+  flex: 0 0 150px;
+
+  flex-direction: column;
+
+  .header-concept {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .header-data {
+    & > .flex-group {
+      gap: 0.2em;
+
+      & > * {
+        flex: auto;
+      }
+    }
+
+    input {
+      text-align: center;
+      font-size: 0.9em;
+    }
+  }
 
   .profile-img {
     flex: 0 0 $profile-img-lg-size;
@@ -18,9 +42,25 @@
   }
 
   .raise-tracking {
+    min-width: 10em;
+
+    label {
+      margin-right: 0.4em;
+    }
     button {
-      width: 2em;
-      margin: 0 1em;
+      width: 1.8rem;
+      font-size: 0.8em;
+      height: 1.8rem;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      border-radius: 1em;
+      border: 0px;
+      box-shadow: 1px 1px 4px #771213;
+    }
+
+    input {
+      text-align: center;
     }
   }
 }

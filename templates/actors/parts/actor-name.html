@@ -1,18 +1,3 @@
-<h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" /></h1>
-<div class="nation flex-row">
-  <div class="form-group flex-group">
-    <label for="system.nation">{{localize "SVNSEA2E.Nation"}}</label>
-    <select class="nation" name="system.nation" id="system.nation">
-      {{#select nation}}
-        <option value="none"></option>
-        {{#each config.nations as |label nation|}}
-          <option value="{{nation}}">{{label}}</option>
-        {{/each}}
-      {{/select}}
-    </select>
-    <span class="flex-group-right twodigit">
-      <label for="system.age">{{localize "SVNSEA2E.Age"}}</label>
-      <input type="text" name="system.age" value="{{age}}" id="system.age" />
-    </span>
-  </div>
-</div>
+<h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="{{localize 'SVNSEA2E.ActorName'}}" />
+</h1>
+{{> "systems/svnsea2e/templates/actors/parts/actor-wounds.html"}}

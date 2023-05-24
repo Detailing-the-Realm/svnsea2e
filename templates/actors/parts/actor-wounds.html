@@ -1,50 +1,44 @@
-<div class="resources flex-row">
-  <div class="form-group flex-group raise-tracking">
-    <label for="system.initiative">{{ localize "SVNSEA2E.Initiative" }}</label>
-    <span class="twodigit">
-      <button class="minus-1-initiative">-1</button>
-      <input
-        type="text"
-        name="system.initiative"
-        value="{{initiative}}"
-        id="system.initiative"
-        disabled
-      />
-      <button class="add-1-initiative">+1</button>
-  </div>
-</div>
 {{#if isPlayerCharacter}}
-  <div class="resources flex-row">
-    <div class="form-group flex-group">
-      <label for="system.heropts">{{ localize "SVNSEA2E.HeroPoints" }}</label>
+  <div class="form-group flex-group">
+    <span class="flex-group corruption">
+    <label>{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
+    {{#for 1 10 1}}
+      {{#iff corruptionpts '>=' @index}}
+        <i data-name="system.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable fas fa-circle"></i>
+      {{else}}
+        <i data-name="system.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable far fa-circle"></i>
+      {{/iff}}
+    {{/for}}
+    </span>
+    <div class="flex-group">
+      <label for="system.heropts" class="icon-label"><i class="fas fa-sun" title="{{localize "SVNSEA2E.HeroPoints"}}"></i></label>
       <span class="twodigit herospts">
         <input type="text" name="system.heropts" value="{{heropts}}" id="system.heropts"/>
       </span>
-      <label for="system.wealth">{{localize "SVNSEA2E.WealthPts"}}</label>
+    </div>
+    <div class="flex-group">
+      <label for="system.wealth" class="icon-label"><i class="fas fa-coins" title="{{localize "SVNSEA2E.WealthPts"}}"></i></label>
       <span class="twodigit wealth">
         <input type="text" name="system.wealth" value="{{wealth}}" data-dtype="String" id="system.wealth" />
       </span>
     </div>
-  </div>
-  <div class="flex-row corruption">
-    <div class="form-group flex-group-left">
-      <label>{{ localize "SVNSEA2E.CorruptionPoints" }}</label>
-      <span class="flex-group-right">
-      {{#for 1 10 1}}
-        {{#iff corruptionpts '>=' @index}}
-          <i data-name="system.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable fas fa-circle"></i>
-        {{else}}
-          <i data-name="system.corruptionpts" data-value="{{@index}}" data-type="corrupt" data-key="corruptionpts" class="fillable far fa-circle"></i>
-        {{/iff}}
-      {{/for}}
-      </span>
+    <div class="flex-group raise-tracking">
+      <label for="system.initiative">{{ localize "SVNSEA2E.Initiative" }}</label>
+      <span class="twodigit">
+        <button class="minus-1-initiative">-1</button>
+        <input
+          type="text"
+          name="system.initiative"
+          value="{{initiative}}"
+          id="system.initiative"
+          disabled
+        />
+        <button class="add-1-initiative">+1</button>
     </div>
   </div>
 {{/if}}
 <div class="flex-group-left wounds">
   {{localize "SVNSEA2E.Wounds" }}
-</div>
-<div class="flex-group-left wounds">
   {{#for 1 wounds.max 1}}
     {{#iff @remain '!=' 0}}
       {{#iff wounds.value '>=' @index}}
