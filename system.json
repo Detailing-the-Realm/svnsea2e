@@ -5,8 +5,7 @@
   "version": "THIS IS GENERATED",
   "compatibility": {
     "minimum": "10",
-    "verified": "10.285",
-    "maximum": "10"
+    "verified": "11.299"
   },
   "templateVersion": 2,
   "author": "psychoph",
