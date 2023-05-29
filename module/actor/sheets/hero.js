@@ -1,5 +1,5 @@
-import ActorSheetSS2e from './base.js';
 import { getItems, skillsToSheetData } from '../../helpers.js';
+import ActorSheetSS2e from './base.js';
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @ext'../../dice.js't}

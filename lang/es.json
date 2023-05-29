@@ -342,5 +342,7 @@
   "SVNSEA2E.UseForMe": "Use for me",
   "SVNSEA2E.UseForHelpMe": "Use for help me",
   "SVNSEA2E.NotEnoughHero": "Not enough hero points",
-  "SVNSEA2E.JoieDeVivre": "Joie de Vivre"
+  "SVNSEA2E.JoieDeVivre": "Joie de Vivre",
+  "SVNSEA2E.Toolbox": "Toolbox",
+  "SVNSEA2E.EmptyToolbox": "Drop some actor here"
 }

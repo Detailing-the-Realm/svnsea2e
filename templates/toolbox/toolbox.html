@@ -1,0 +1,30 @@
+<div class="items">
+    {{#each object.showActors as |actor|}}
+    <div class="actor-resume">
+        <h3>{{actor.name}}</h3>
+        {{#iff actor.type '!=' 'dangerpts'}}
+            <div class="score-container">
+                <div>
+                    <label class="icon-label"><i class="fas fa-star-of-life" title="{{localize "SVNSEA2E.Raises"}}"></i></label>
+                    <span>{{actor.system.initiative}}
+                    </span>
+                </div>
+                <div>
+                    <label class="icon-label"><i class="fas fa-sun" title="{{localize "SVNSEA2E.HeroPoints"}}"></i></label>
+                    <span>{{actor.system.heropts}}
+                    </span>
+                </div>
+            </div>
+        {{else}}
+            <div class="score-container">
+                <div>
+                    <label class="icon-label"><i class="fas fa-skull" title="{{localize "SVNSEA2E.HeroPoints"}}"></i></label>
+                    <span>{{actor.system.points}}
+                    </span>
+                </div>
+            </div>
+        {{/iff}}
+    </div>
+    {{else}}
+    <p>{{ localize 'SVNSEA2E.EmptyToolbox' }}</p>
+    {{/each}}

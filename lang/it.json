@@ -332,5 +332,7 @@
   "SVNSEA2E.AddOneToDice": "Aggiungi 1 al dado",
   "SVNSEA2E.AddOneToDiced": "+1 aggiunto a tutti i dadi.",
   "SVNSEA2E.AddToInitiativeTracker": "Aggiungi all'iniziativa",
-  "SVNSEA2E.Initiative": "Incrementi"
+  "SVNSEA2E.Initiative": "Incrementi",
+  "SVNSEA2E.Toolbox": "Toolbox",
+  "SVNSEA2E.EmptyToolbox": "Drop some actor here"
 }
