@@ -9,13 +9,16 @@
 
 .items {
   display: flex;
-  gap: 4px;
+  gap: $margin-md;
+  flex-direction: column;
+  padding-bottom: $padding-lg;
+  padding-right: $padding-md;
 }
 
 .actor-resume {
   display: flex;
-  flex-direction: column;
   flex: 1 1 100%;
+  justify-content: space-between;
 
   h3 {
     text-align: center;
@@ -28,6 +31,7 @@
 .score-container {
   display: flex;
   justify-content: space-around;
+  gap: $margin-lg;
 }
 
 .score-container > div {

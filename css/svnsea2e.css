@@ -952,19 +952,24 @@ input[type=range]::-webkit-slider-thumb {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 4px;
+  gap: 8px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-bottom: 16px;
+  padding-right: 8px;
 }
 .toolbox .actor-resume {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 100%;
   flex: 1 1 100%;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 .toolbox .actor-resume h3 {
   text-align: center;
@@ -978,6 +983,7 @@ input[type=range]::-webkit-slider-thumb {
   display: flex;
   -ms-flex-pack: distribute;
   justify-content: space-around;
+  gap: 16px;
 }
 .toolbox .score-container > div {
   display: -webkit-box;
