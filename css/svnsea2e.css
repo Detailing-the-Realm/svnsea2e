@@ -891,8 +891,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 .actor .danger-points input[type=text] {
   font-size: 6em;
-  height: 1.5em;
-  width: 1.5em;
+  height: 1.3em;
+  width: 1.3em;
   border: 4px solid #530202;
   border-radius: 2em;
   text-align: center;
@@ -900,6 +900,14 @@ input[type=range]::-webkit-slider-thumb {
 .actor .danger-points button {
   margin-top: 3em;
   width: auto;
+}
+.actor .sheet-header.dangerpts {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin: 0px;
+  gap: 8px;
 }
 .actor .sheet-header.dangerpts .profile-img {
   -webkit-box-flex: 0;
