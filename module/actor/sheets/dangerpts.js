@@ -37,13 +37,15 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
 
   _decreaseDP(value, event) {
     let dp = 0;
-    if (this.actor.data.data.points > value) {
+    if (this.actor.system.points > value) {
       dp = parseInt(this.actor.data.data.points) - parseInt(value);
     }
 
     this.actor
       .update({
-        points: dp,
+        system: {
+          points: dp,
+        },
       })
       .then(this.render(false));
   }
@@ -53,7 +55,9 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
 
     this.actor
       .update({
-        points: dp,
+        system: {
+          points: dp,
+        },
       })
       .then(this.render(false));
   }

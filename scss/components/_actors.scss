@@ -68,8 +68,8 @@ header.sheet-header {
 .danger-points {
   input[type='text'] {
     font-size: $f-s-4xl;
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.3em;
+    width: 1.3em;
     border: $brd-s-lg-dk;
     border-radius: 2em;
     text-align: center;
@@ -81,12 +81,18 @@ header.sheet-header {
   }
 }
 
-.sheet-header.dangerpts .profile-img {
-  flex: 0 0 $profile-img-sm-size;
-  height: $profile-img-sm-size;
-  width: $profile-img-sm-size;
-  border: $brd-s-sm-dk;
-  border-radius: $profile-img-sm-size;
+.sheet-header.dangerpts {
+  flex-direction: row;
+  margin: 0px;
+  gap: $margin-md;
+
+  .profile-img {
+    flex: 0 0 $profile-img-sm-size;
+    height: $profile-img-sm-size;
+    width: $profile-img-sm-size;
+    border: $brd-s-sm-dk;
+    border-radius: $profile-img-sm-size;
+  }
 }
 
 .red {
