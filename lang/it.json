@@ -334,5 +334,6 @@
   "SVNSEA2E.AddToInitiativeTracker": "Aggiungi all'iniziativa",
   "SVNSEA2E.Initiative": "Incrementi",
   "SVNSEA2E.Toolbox": "Toolbox",
-  "SVNSEA2E.EmptyToolbox": "Drop some actor here"
+  "SVNSEA2E.EmptyToolbox": "Drop some actor here",
+  "SVNSEA2E.OpenToolbox": "Open toolbox"
 }

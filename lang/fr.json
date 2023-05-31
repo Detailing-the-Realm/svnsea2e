@@ -339,5 +339,6 @@
   "SVNSEA2E.NotEnoughHero": "Pas assez de points d'héroïsme",
   "SVNSEA2E.JoieDeVivre": "Joie de Vivre",
   "SVNSEA2E.EmptyToolbox": "Glisser des acteurs ici",
-  "SVNSEA2E.Toolbox": "Boite à outils"
+  "SVNSEA2E.Toolbox": "Boite à outils",
+  "SVNSEA2E.OpenToolbox": "Ouvrir la boite à outils"
 }

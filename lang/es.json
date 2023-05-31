@@ -344,5 +344,6 @@
   "SVNSEA2E.NotEnoughHero": "Not enough hero points",
   "SVNSEA2E.JoieDeVivre": "Joie de Vivre",
   "SVNSEA2E.Toolbox": "Toolbox",
-  "SVNSEA2E.EmptyToolbox": "Drop some actor here"
+  "SVNSEA2E.EmptyToolbox": "Drop some actor here",
+  "SVNSEA2E.OpenToolbox": "Open toolbox"
 }

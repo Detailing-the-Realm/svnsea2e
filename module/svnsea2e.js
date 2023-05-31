@@ -313,6 +313,18 @@ Hooks.on('updateActor', function () {
   emitCharacterChange();
 });
 
+Hooks.on('renderActorDirectory', (app, html, data) => {
+  if (game.user.isGM) {
+    const button = document.createElement('button');
+    button.style.width = '95%';
+    button.innerHTML = game.i18n.localize('SVNSEA2E.OpenToolbox');
+    button.addEventListener('click', () => {
+      game.svnsea2e.toolbox.render(true);
+    });
+    html.find('.header-actions').after(button);
+  }
+});
+
 async function getAllPackAdvantages() {
   const advantages = [];
   const packs = game.packs.entries;

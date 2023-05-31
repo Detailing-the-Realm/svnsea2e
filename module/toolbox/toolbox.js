@@ -76,14 +76,6 @@ export class Toolbox extends FormApplication {
   }
 
   /**
-   * Remove the close button
-   * @override
-   */
-  _getHeaderButtons() {
-    return [];
-  }
-
-  /**
    * Construct and return the data object used to render the HTML template for this form application.
    * @param options
    * @return {Object}
