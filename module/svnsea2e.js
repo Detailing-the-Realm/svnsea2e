@@ -1,36 +1,36 @@
 // Import Modules
 import { SVNSEA2E } from './config.js';
-import { preloadHandlebarsTemplates } from './templates.js';
 import { registerSystemSettings } from './settings.js';
+import { preloadHandlebarsTemplates } from './templates.js';
 
 // Import Applications
 import { SvnSea2EActor } from './actor/actor.js';
-import { ActorSheetSS2ePlayerCharacter } from './actor/sheets/playercharacter.js';
-import { ActorSheetSS2eHero } from './actor/sheets/hero.js';
 import { ActorSheetSS2eBrute } from './actor/sheets/brute.js';
-import { ActorSheetSS2eMonster } from './actor/sheets/monster.js';
-import { ActorSheetSS2eVillain } from './actor/sheets/villain.js';
-import { ActorSheetSS2eShip } from './actor/sheets/ship.js';
 import { ActorSheetSS2eDangerPts } from './actor/sheets/dangerpts.js';
+import { ActorSheetSS2eHero } from './actor/sheets/hero.js';
+import { ActorSheetSS2eMonster } from './actor/sheets/monster.js';
+import { ActorSheetSS2ePlayerCharacter } from './actor/sheets/playercharacter.js';
+import { ActorSheetSS2eShip } from './actor/sheets/ship.js';
+import { ActorSheetSS2eVillain } from './actor/sheets/villain.js';
 import { SvnSea2EItem } from './item/item.js';
 import { ItemSheetSS2eAdvantage } from './item/sheets/advantage.js';
 import { ItemSheetSS2eArtifact } from './item/sheets/artifact.js';
 import { ItemSheetSS2eBackground } from './item/sheets/background.js';
 import { ItemSheetSS2eDuelStyle } from './item/sheets/duelstyle.js';
 import { ItemSheetSS2eMonsterQuality } from './item/sheets/monsterquality.js';
-import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js';
 import { ItemSheetSS2eScheme } from './item/sheets/scheme.js';
+import { ItemSheetSS2eSecretSociety } from './item/sheets/secretsociety.js';
 import { ItemSheetSS2eShipAdventure } from './item/sheets/shipadventure.js';
 import { ItemSheetSS2eShipBackground } from './item/sheets/shipbackground.js';
 import { ItemSheetSS2eSorcery } from './item/sheets/sorcery.js';
 import { ItemSheetSS2eStory } from './item/sheets/story.js';
-import LanguageSelector from './apps/language-selector.js';
-import SkillSelector from './apps/skill-selector.js';
 
-import * as migrations from './migration.js';
-import { ItemSheetSS2eVirtue } from './item/sheets/virtue.js';
-import { ItemSheetSS2eHubris } from './item/sheets/hubris.js';
 import { chatEventHandler } from './eventhandler.js';
+import { ItemSheetSS2eHubris } from './item/sheets/hubris.js';
+import { ItemSheetSS2eVirtue } from './item/sheets/virtue.js';
+import * as migrations from './migration.js';
+import { emitCharacterChange } from './toolbox/socket.js';
+import { Toolbox } from './toolbox/toolbox.js';
 
 Hooks.once('init', async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System
@@ -42,6 +42,7 @@ Hooks.once('init', async function () {
     },
     config: SVNSEA2E,
     migrations: migrations,
+    toolbox: new Toolbox(),
   };
 
   /**
@@ -240,6 +241,8 @@ Hooks.once('ready', async function () {
   }
 
   chatEventHandler();
+
+  game.svnsea2e.toolbox.render(true);
 });
 
 /* -------------------------------------------- */
@@ -304,6 +307,22 @@ Hooks.on('preCreateActor', function (document, entity, options, userId) {
   document.updateSource({
     img: 'systems/svnsea2e/icons/' + document.type + '.jpg',
   });
+});
+
+Hooks.on('updateActor', function () {
+  emitCharacterChange();
+});
+
+Hooks.on('renderActorDirectory', (app, html, data) => {
+  if (game.user.isGM) {
+    const button = document.createElement('button');
+    button.style.width = '95%';
+    button.innerHTML = game.i18n.localize('SVNSEA2E.OpenToolbox');
+    button.addEventListener('click', () => {
+      game.svnsea2e.toolbox.render(true);
+    });
+    html.find('.header-actions').after(button);
+  }
 });
 
 async function getAllPackAdvantages() {
