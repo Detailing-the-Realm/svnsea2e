@@ -1,5 +1,5 @@
 header.sheet-header {
-  flex: 0 0 150px;
+  flex: 0 0 9.375rem;
 
   flex-direction: column;
 
@@ -12,7 +12,7 @@ header.sheet-header {
 
   .header-data {
     & > .flex-group {
-      gap: 0.2em;
+      gap: 0.2rem;
 
       & > * {
         flex: auto;
@@ -21,7 +21,7 @@ header.sheet-header {
 
     input {
       text-align: center;
-      font-size: 0.9em;
+      font-size: 0.9rem;
     }
   }
 
@@ -34,11 +34,11 @@ header.sheet-header {
   }
 
   .wounds .pts {
-    padding-left: 10px;
+    padding-left: 0.625rem;
   }
 
   .wounds .pts.bigger {
-    padding-left: 37px;
+    padding-left: 2.375rem;
   }
 
   .raise-tracking {
@@ -49,12 +49,12 @@ header.sheet-header {
     }
     button {
       width: 1.8rem;
-      font-size: 0.8em;
+      font-size: 0.8rem;
       height: 1.8rem;
       margin: 0;
       padding: 0;
       background-color: white;
-      border-radius: 1em;
+      border-radius: 1rem;
       border: 0px;
       box-shadow: 1px 1px 4px #771213;
     }
@@ -68,8 +68,8 @@ header.sheet-header {
 .danger-points {
   input[type='text'] {
     font-size: $f-s-4xl;
-    height: 1.3em;
-    width: 1.3em;
+    height: 1.3rem;
+    width: 1.3rem;
     border: $brd-s-lg-dk;
     border-radius: 2em;
     text-align: center;

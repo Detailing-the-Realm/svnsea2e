@@ -1,5 +1,5 @@
 #sidebar {
-  width: 320px;
+  width: 20rem;
 
   h2,
   h3,
@@ -15,17 +15,17 @@
     .item.active {
       color: #fff;
       border: $brd-s-sm-lt;
-      box-shadow: 0 0 6px inset $c-sec;
+      box-shadow: 0 0 0.375rem inset $c-sec;
     }
   }
 
   #sidebar-tabs {
     border-bottom: $brd-s-sm-glow;
-    box-shadow: 0 0 10px $c-sec;
+    box-shadow: 0 0 0.625rem $c-sec;
   }
 
   .tabs .item.active {
-    text-shadow: 0 0 10px $c-sec;
+    text-shadow: 0 0 0.625rem $c-sec;
   }
 
   .sidebar-tab {

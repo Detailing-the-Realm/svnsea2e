@@ -16,10 +16,10 @@
 }
 
 @mixin paint-bottom-border {
-  padding-bottom: 2px;
+  padding-bottom: $padding-xs;
   background: url(../imgs/paint_border.png);
   background-repeat: no-repeat;
-  background-size: 100% 6px;
+  background-size: 100% 0.375rem;
   background-position: left bottom;
 }
 
@@ -27,7 +27,7 @@
   color: $f-c-lt;
   border: $brd-s-sm-lt;
   border-bottom: $brd-s-sm-glow;
-  box-shadow: 0 0 10px inset $c-sec;
+  box-shadow: 0 0 0.625rem inset $c-sec;
 }
 
 @mixin main-bg {
