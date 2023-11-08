@@ -1,27 +1,28 @@
 /* -------------------------------------------- */
+$base-size: 16px;
 
 // Padding Sizes
-$padding-xs: 2px;
-$padding-sm: 4px;
-$padding-md: 8px;
-$padding-lg: 16px;
+$padding-xs: 0.125rem;
+$padding-sm: 0.25rem;
+$padding-md: 0.5rem;
+$padding-lg: 1rem;
 
 /* -------------------------------------------- */
 
 // Margin Sizes
-$margin-xs: 2px;
-$margin-sm: 4px;
-$margin-md: 8px;
-$margin-lg: 16px;
+$margin-xs: 0.125rem;
+$margin-sm: 0.25rem;
+$margin-md: 0.5rem;
+$margin-lg: 1rem;
 
 /* -------------------------------------------- */
 
 // Border Sizes
-$bs-sm: 1px;
-$bs-md: 2px;
-$bs-lg: 4px;
-$bs-xl: 6px;
-$bs-2xl: 12px;
+$bs-sm: 0.0625rem;
+$bs-md: 0.125rem;
+$bs-lg: 0.25rem;
+$bs-xl: 0.372rem;
+$bs-2xl: 0.75rem;
 
 /* -------------------------------------------- */
 
@@ -51,12 +52,12 @@ $no-brd-2xl: $bs-2xl solid transparent;
 /* -------------------------------------------- */
 
 // Profile img sizes
-$profile-img-lg-size: 150px;
-$profile-img-md-size: 125px;
-$profile-img-sm-size: 50px;
+$profile-img-lg-size: 9.375rem;
+$profile-img-md-size: 7.8125rem;
+$profile-img-sm-size: 3.125rem;
 
 //circle
-$circle-size: 30px;
+$circle-size: 1.875rem;
 
 // Inputs
 $max-input-width-xs: $circle-size;

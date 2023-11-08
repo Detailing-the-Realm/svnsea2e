@@ -1,5 +1,5 @@
 & {
-  font-size: 18px;
+  font-size: $base-size;
 }
 
 img {
@@ -53,7 +53,7 @@ nav.sheet-tabs {
   }
 
   h1.charname {
-    height: 50px;
+    height: 3.125rem;
     margin: $margin-sm;
     text-indent: 0;
 
@@ -62,15 +62,15 @@ nav.sheet-tabs {
       height: 100%;
       margin: 0;
       background: none;
-      text-indent: 15px;
+      text-indent: 1rem;
       font-family: $f-header;
     }
   }
 
   .herospts,
   .wealth {
-    max-width: 30px;
-    margin-right: 10px;
+    max-width: 1.875rem;
+    margin-right: 0.625rem;
   }
 }
 
@@ -89,7 +89,7 @@ nav.sheet-tabs {
 .secretsociety .tag {
   flex-grow: 0.25;
   flex-shrink: 0.25;
-  flex-basis: 10px;
+  flex-basis: 0.625rem;
 }
 
 .flexrow {
@@ -105,7 +105,7 @@ nav.sheet-tabs {
 
 .details-list,
 .tag-list {
-  line-height: 20px;
+  line-height: 1.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -120,19 +120,19 @@ nav.sheet-tabs {
   margin: $margin-md 0;
   padding: 0;
   overflow-y: auto;
-  line-height: 30px;
+  line-height: 1.875rem;
 
   .item-header {
     font-weight: bold;
   }
 
   .item {
-    line-height: 24px;
-    padding: 3px 0;
+    line-height: 1.5rem;
+    padding: $padding-sm 0;
     border-bottom: $brd-s-sm-lt;
 
     .item-image {
-      flex: 0 0 24px;
+      flex: 0 0 1.5rem;
       margin-right: $margin-sm;
     }
 
@@ -145,7 +145,7 @@ nav.sheet-tabs {
     }
 
     .item-weight {
-      flex: 0 0 60px;
+      flex: 0 0 3.75rem;
       border-left: $brd-s-sm-lt;
       border-right: $brd-s-sm-lt;
     }
@@ -157,11 +157,11 @@ nav.sheet-tabs {
     }
     // Item Control Buttons
     .item-controls {
-      flex: 0 0 44px;
+      flex: 0 0 2.75rem;
       justify-content: flex-end;
 
       a {
-        flex: 0 0 22px;
+        flex: 0 0 1.375rem;
         text-align: center;
         color: $f-c-dk;
       }
@@ -181,7 +181,7 @@ nav.sheet-tabs {
   }
 
   .item-controls {
-    flex: 0 0 86px;
+    flex: 0 0 5.375rem;
     text-align: right;
   }
 }
@@ -190,13 +190,14 @@ nav.sheet-tabs {
 .skill-name,
 .trait-name {
   font-weight: 600;
+  padding-left: 1.5rem;
   //  margin-left: $margin-md;
   //  margin-top: 5px;
 }
 
 .wound-title {
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 // Brute specific stuff

@@ -26,13 +26,13 @@
       color: $f-c-lt;
       background: none;
     }
-  }
 
-  .item.active {
-    background: $c-sec;
-    text-shadow: none;
-    h2 {
-      color: $f-c-dk;
+    &.active {
+      background: $c-sec;
+      text-shadow: none;
+      h2 {
+        color: $f-c-dk;
+      }
     }
   }
 }

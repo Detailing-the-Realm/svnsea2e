@@ -12,6 +12,14 @@
 
 @import 'components/sidebar';
 
+body {
+  font-size: $base-size;
+}
+
+.sheet {
+  font-size: $base-size;
+}
+
 .dialog {
   @import 'components/dialogs';
 }
