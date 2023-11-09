@@ -1,4 +1,5 @@
 // Import Modules
+import './assets/svnsea2e.scss';
 import { SVNSEA2E } from './config.js';
 import { registerSystemSettings } from './settings.js';
 import { preloadHandlebarsTemplates } from './templates.js';
