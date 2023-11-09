@@ -10,10 +10,10 @@
   "templateVersion": 2,
   "author": "psychoph",
   "esmodules": [
-    "module/svnsea2e.js"
+    "svnsea2e.mjs"
   ],
   "styles": [
-    "css/svnsea2e.css"
+    "svnsea2e.css"
   ],
   "languages": [
     {

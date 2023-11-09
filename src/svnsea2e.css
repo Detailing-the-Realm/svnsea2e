@@ -1,0 +1,7 @@
+// only required in dev
+
+// in prod, foundry loads svnsea2e.css, as compiled by vite/rollup,
+// mostly from the `import lancer.scss` line at the top of lancer.ts
+
+// in dev, foundry loads svnsea2e.css, this file, which is a no-op
+// in dev, svnsea2e.ts imports svnsea2e.scss directly
