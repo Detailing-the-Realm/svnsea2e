@@ -8,6 +8,7 @@
     "prepare": "husky install",
     "format": "prettier --write \"**\"",
     "test": "jest",
+    "test:ci": "cross-env CI=true jest --reporters=jest-junit",
     "test:watch": "jest --watch",
     "link-package": "node ./tools/link-package.mjs"
   },
@@ -17,8 +18,7 @@
   "author": "Psychoph03",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.17.12",
     "@babel/eslint-parser": "^7.15.7",
@@ -30,16 +30,22 @@
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "cross-env": "^7.0.3",
     "dart-sass": "^1.25.0",
     "eslint": "^8.41.0",
     "eslint-plugin-jsdoc": "^32.3.0",
     "fs-extra": "^11.1.1",
     "husky": "^7.0.0",
     "jest": "^28.1.0",
+    "jest-junit": "^16.0.0",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.2",
     "sass": "^1.69.5",
     "vite": "^4.5.0",
     "yargs": "^17.7.2"
+  },
+  "jest-junit": {
+    "outputDirectory": "reports",
+    "outputName": "jest-junit.xml"
   }
 }

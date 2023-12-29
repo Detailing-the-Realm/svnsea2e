@@ -1,7 +1,7 @@
 import { roll } from './roll';
 import { SVNSEA2E } from '../config';
 
-const actor = { update: jest.fn(), data: { data: { heropts: 2 } } };
+const actor = { update: jest.fn(), system: { heropts: 2 } };
 
 let standardRollConfiguration = {
   rolldata: {

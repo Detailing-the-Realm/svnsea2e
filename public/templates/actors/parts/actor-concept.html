@@ -2,7 +2,7 @@
   <div class="nation grid grid-2col">
     <div class="form-group flex-group">
       <label for="data.nation">{{localize "SVNSEA2E.Nation"}}</label>
-      <select class="nation" name="data.nation" id="data.nation">
+      <select class="nation" name="system.nation" id="system.nation">
         {{#select nation}}
           <option value="none"></option>
           {{#each config.nations as |label nation|}}
@@ -13,7 +13,7 @@
     </div>
     <div class="form-group flex-group twodigit">
       <label for="data.age">{{localize "SVNSEA2E.Age"}}</label>
-      <input type="text" name="data.age" value="{{age}}" id="data.age" />
+      <input type="text" name="system.age" value="{{age}}" id="system.age" />
     </div>
   </div>
 
