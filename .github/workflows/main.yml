@@ -8,7 +8,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Run Tests
+        run: yarn test:ci
+
+      - name: Export Tests
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: JEST Tests
+          path: ./reports/*.xml
+          reporter: jest-junit
+          list-tests: 'failed'
+      
+      - name: Build System
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
 
       # get part of the tag after the `v`
       - name: Extract tag version number
@@ -20,15 +46,16 @@ jobs:
         id: sub_manifest_link_version
         uses: microsoft/variable-substitution@v1
         with:
-          files: 'system.json'
+          files: 'dist/system.json'
         env:
           version: ${{steps.get_version.outputs.version-without-v}}
           url: https://github.com/${{github.repository}}
           manifest: https://github.com/${{github.repository}}/releases/latest/download/system.json
           download: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.zip
 
+      - run: cp LICENSE dist/
       # Create a zip file with all files required by the system to add to the release
-      - run: zip -r ./system.zip system.json template.json LICENSE css/ module/ templates/ lang/ imgs/ icons/
+      - run: zip -r ./system.zip dist/*
 
       # Create a release for this specific version
       - name: Update Release with Files
@@ -37,7 +64,7 @@ jobs:
         with:
           allowUpdates: true # Set this to false if you want to prevent updating existing releases
           name: ${{ github.event.release.name }}
-          draft: ${{ github.event.release.unpublished }}
+          draft: ${{ github.event.release.draft }}
           prerelease: ${{ github.event.release.prerelease }}
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: './system.json, ./system.zip'
