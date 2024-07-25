@@ -4,15 +4,11 @@
     <div class="header-fields">
       {{> "systems/svnsea2e/templates/items/parts/item-header.html"}}
       <div class="form-group">
-        <label for="system.type">{{localize "SVNSEA2E.Type"}}</label>
-        <select class="type" id="system.type" name="system.type">
-          {{#select type}}
-            <option value="none"></option>
-            {{#each config.artifactTypes as |label type|}}
-              <option value="{{type}}">{{label}}</option>
-            {{/each}}
-          {{/select}}
-          </select>
+        <p>artifact type: {{system.artifactType}}</p>
+        <label for="system.artifactType">{{localize "SVNSEA2E.Type"}}</label>
+        <select class="artifact-type" id="system.artifactType" name="system.artifactType">
+          {{selectOptions config.artifactTypes selected=artifactType localize=true}}
+        </select>
       </div>
     </div>
   </header>

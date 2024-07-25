@@ -239,7 +239,7 @@
     },
     "artifact": {
       "templates": ["base"],
-      "type": ""
+      "artifactType": ""
     },
     "background": {
       "templates": ["base"],

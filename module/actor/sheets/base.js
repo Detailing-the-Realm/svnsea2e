@@ -11,7 +11,7 @@ import { roll } from '../../roll/roll.js';
 export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 1050,
       height: 750,
     });
@@ -398,8 +398,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     const item = this.actor.items.get(li.dataset.itemId);
 
     if (item) {
-      if (item.data.type === 'background')
-        await this._processBackgroundDelete(item.data.data);
+      if (item.system.type === 'background')
+        await this._processBackgroundDelete(item.system.data);
 
       return item.delete();
     }

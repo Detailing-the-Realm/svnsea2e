@@ -8,7 +8,7 @@ import { getItems } from '../../helpers.js';
 export class ActorSheetSS2eShip extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor', 'ship'],
       template: 'systems/svnsea2e/templates/actors/ship.html',
       tabs: [

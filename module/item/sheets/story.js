@@ -7,7 +7,7 @@ import { ItemSheetSS2e } from './base.js';
 export class ItemSheetSS2eStory extends ItemSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: 'systems/svnsea2e/templates/items/story.html',
       tabs: [
         {

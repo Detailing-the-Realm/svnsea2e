@@ -65,9 +65,9 @@ export class SvnSea2EItem extends Item {
   }
 
   _artifactChatData(data, htmlOptions) {
-    const type =
-      data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.type];
-    data.metadatahtml = `<ul class="details-list"><li class="tag">${type}</li></ul>`;
+    const artifactType =
+      data.artifactType === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.artifactType];
+    data.metadatahtml = `<ul class="details-list"><li class="tag">${artifactType}</li></ul>`;
     return data;
   }
 

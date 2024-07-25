@@ -36,6 +36,7 @@ SVNSEA2E.actorTypes = {
 };
 
 SVNSEA2E.nations = {
+  none: 'SVNSEA2E.Empty',
   aksum: 'SVNSEA2E.NationAksum',
   anatol: 'SVNSEA2E.NationAnatol',
   aragosta: 'SVNSEA2E.NationAragosta',
@@ -129,6 +130,7 @@ SVNSEA2E.skills = {
 };
 
 SVNSEA2E.storyStatuses = {
+  none: 'SVNSEA2E.Empty',
   abandoned: 'SVNSEA2E.StatusAbandoned',
   complete: 'SVNSEA2E.StatusComplete',
   inprogress: 'SVNSEA2E.StatusInProgress',
@@ -136,6 +138,7 @@ SVNSEA2E.storyStatuses = {
 };
 
 SVNSEA2E.sorceryTypes = {
+  none: 'SVNSEA2E.Empty',
   hex: 'SVNSEA2E.SorceryHexenwerk',
   knight: 'SVNSEA2E.SorceryAvalonKnight',
   alquimia: 'SVNSEA2E.SorceryAlquimia',
@@ -162,10 +165,12 @@ SVNSEA2E.sorceryTypes = {
 };
 
 SVNSEA2E.durations = {
+  none: 'SVNSEA2E.Empty',
   scene: 'SVNSEA2E.Scene',
 };
 
 SVNSEA2E.sorceryCats = {
+  none: 'SVNSEA2E.Empty',
   ahura: 'SVNSEA2E.Ahura',
   ahpulul: 'SVNSEA2E.Ahpulul',
   amulet: 'SVNSEA2E.Amulet',
@@ -198,6 +203,7 @@ SVNSEA2E.sorceryCats = {
 };
 
 SVNSEA2E.sorcerySubcats = {
+  none: 'SVNSEA2E.Empty',
   advanced: 'SVNSEA2E.Advanced',
   common: 'SVNSEA2E.Common',
   baxan: 'SVNSEA2E.Baxan',
@@ -210,12 +216,14 @@ SVNSEA2E.sorcerySubcats = {
 };
 
 SVNSEA2E.crewStatuses = {
+  none: 'SVNSEA2E.Empty',
   happy: 'SVNSEA2E.Happy',
   dissatisfied: 'SVNSEA2E.Dissatisfied',
   mutinous: 'SVNSEA2E.Mutinous',
 };
 
 SVNSEA2E.artifactTypes = {
+  none: 'SVNSEA2E.Empty',
   deathtoken: 'SVNSEA2E.DeathToken',
   syrneth: 'SVNSEA2E.Syrneth',
   thiqa: 'SVNSEA2E.Thiqa',

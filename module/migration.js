@@ -13,7 +13,7 @@ export const migrateWorld = async function () {
   for (const a of game.actors.values()) {
     try {
       const updateData = migrateActorData(a);
-      if (!isEmpty(updateData)) {
+      if (!foundry.utils.isEmpty(updateData)) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {
           enforceTypes: false,
@@ -28,7 +28,7 @@ export const migrateWorld = async function () {
   for (const i of game.items.values()) {
     try {
       const updateData = migrateItemData(i);
-      if (!isEmpty(updateData)) {
+      if (!foundry.utils.isEmpty(updateData)) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {
           enforceTypes: false,

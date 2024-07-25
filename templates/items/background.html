@@ -6,12 +6,7 @@
       <div class="form-group">
         <label for="system.nation">{{localize "SVNSEA2E.Nation"}}</label>
         <select id="system.nation" class="nation" name="system.nation">
-          {{#select nation}}
-            <option value="none"></option>
-            {{#each config.natTypes as |label nation|}}
-              <option value="{{nation}}">{{label}}</option>
-            {{/each}}
-          {{/select}}
+          {{selectOptions config.natTypes selected=nation localize=true}}
         </select>
       </div>
     </div>

@@ -5,7 +5,7 @@
 export default class AdvantageSelector extends FormApplication {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'advantage-selector',
       classes: ['svnsea2e'],
       title: game.i18n.localize('SVNSEA2E.BackgroundAdvantageSelect'),

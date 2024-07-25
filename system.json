@@ -1,57 +1,62 @@
 {
-  "name": "svnsea2e",
-  "title": "7th Sea Second Edition (Unofficial)",
-  "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
-  "version": "THIS IS GENERATED",
-  "compatibility": {
-    "minimum": "10",
-    "verified": "11.299"
-  },
-  "templateVersion": 2,
-  "author": "psychoph",
-  "esmodules": [
-    "module/svnsea2e.js"
-  ],
-  "styles": [
-    "css/svnsea2e.css"
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
+    "name": "svnsea2e",
+    "title": "7th Sea Second Edition (Unofficial)",
+    "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
+    "version": "3.3.1",
+    "compatibility": {
+        "minimum": "10",
+        "verified": "12.329"
     },
-    {
-      "lang": "de",
-      "name": "German",
-      "path": "lang/de.json"
-    },
-    {
-      "lang": "fr",
-      "name": "French",
-      "path": "lang/fr.json"
-    },
-    {
-      "lang": "es",
-      "name": "Spanish",
-      "path": "lang/es.json"
-    },
-    {
-      "lang": "it",
-      "name": "Italian",
-      "path": "lang/it.json"
-     },
-    {
-      "lang": "pt-BR",
-      "name": "Brazilian Portuguese",
-      "path": "lang/pt-BR.json" }
-  ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
-  "primaryTokenAttribute": "wounds",
-  "secondaryTokenAttribute": "dwounds",
-  "url": "THIS IS GENERATED",
-  "manifest": "THIS IS GENERATED",
-  "download": "THIS IS GENERATED",
-  "license": "MIT"
+    "templateVersion": 3,
+    "authors": [{
+      "name": "psychoph"
+    },{
+      "name": "schmurtz"
+    }],
+    "esmodules": [
+        "module/svnsea2e.js"
+    ],
+    "styles": [
+        "css/svnsea2e.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "de",
+            "name": "German",
+            "path": "lang/de.json"
+        },
+        {
+            "lang": "fr",
+            "name": "French",
+            "path": "lang/fr.json"
+        },
+        {
+            "lang": "es",
+            "name": "Spanish",
+            "path": "lang/es.json"
+        },
+        {
+            "lang": "it",
+            "name": "Italian",
+            "path": "lang/it.json"
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Brazilian Portuguese",
+            "path": "lang/pt-BR.json"
+        }
+    ],
+    "gridDistance": 5,
+    "gridUnits": "ft",
+    "primaryTokenAttribute": "wounds",
+    "secondaryTokenAttribute": "dwounds",
+    "url": "https://github.com/Detailing-the-Realm/svnsea2e",
+    "manifest": "https://github.com/Detailing-the-Realm/svnsea2e/releases/latest/download/system.json",
+    "download": "https://github.com/Detailing-the-Realm/svnsea2e/releases/download/v3.3.0/system.zip",
+    "license": "MIT"
 }

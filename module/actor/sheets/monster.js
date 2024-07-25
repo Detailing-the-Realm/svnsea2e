@@ -7,7 +7,7 @@ import { getItems } from '../../helpers.js';
 export class ActorSheetSS2eMonster extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor', 'monster'],
       template: 'systems/svnsea2e/templates/actors/monster.html',
       tabs: [
@@ -31,5 +31,7 @@ export class ActorSheetSS2eMonster extends ActorSheetSS2e {
   _prepareMonsterItems(data, sheetData) {
     sheetData.fear = data.document.system.fear;
     sheetData.monsterqualities = getItems(data, 'monsterquality');
+    sheetData.virtues = getItems(data, 'virtue');
+    sheetData.hubriss = getItems(data, 'hubris');
   }
 }

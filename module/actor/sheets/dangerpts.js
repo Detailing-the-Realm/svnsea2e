@@ -7,7 +7,7 @@ import ActorSheetSS2e from './base.js';
 export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor'],
       template: 'systems/svnsea2e/templates/actors/dangerpts.html',
       tabs: [
@@ -38,7 +38,7 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
   _decreaseDP(value, event) {
     let dp = 0;
     if (this.actor.system.points > value) {
-      dp = parseInt(this.actor.data.data.points) - parseInt(value);
+      dp = parseInt(this.actor.system.points) - parseInt(value);
     }
 
     this.actor
@@ -51,7 +51,7 @@ export class ActorSheetSS2eDangerPts extends ActorSheetSS2e {
   }
 
   _increaseDP(value, event) {
-    const dp = parseInt(this.actor.data.data.points) + parseInt(value);
+    const dp = parseInt(this.actor.system.points) + parseInt(value);
 
     this.actor
       .update({

@@ -2,6 +2,11 @@
   <ol class="items-list">
     <li class="flexrow item-header story">
       <h3 class="item-name flexrow">{{localize "SVNSEA2E.Virtue"}}</h3>
+      <div class="item-controls">
+        <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddVirtue'}}" data-type="virtue" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+          <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
+        </a>
+      </div>
     </li>
   {{#each virtues as |item id|}}
     <li class="item flexrow story" data-item-id="{{item._id}}">
@@ -17,6 +22,11 @@
   <ol class="items-list">
     <li class="flexrow item-header story">
       <h3 class="item-name flexrow">{{localize "SVNSEA2E.Hubris"}}</h3>
+      <div class="item-controls">
+        <a class="item-control item-create" title="{{localize 'SVNSEA2E.AddHubris'}}" data-type="hubris" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+          <i class="fas fa-plus"></i> {{localize "SVNSEA2E.Add"}}
+        </a>
+      </div>
     </li>
   {{#each hubriss as |item id|}}
     <li class="item flexrow story" data-item-id="{{item._id}}">
