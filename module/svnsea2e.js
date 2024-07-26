@@ -174,14 +174,14 @@ Hooks.once('init', async function () {
 
     const count = parseInt(from) + parseInt(to);
 
-    const stepNumber = Math.ceil((count - 1) / 4);
+    const nWoundByStep = Math.ceil((count - 1) / 4); // TODO: remove magic number, 4 is in reality dwounds.max (for wounds display)
 
     for (var i = from; i < count; i += incr) {
       block.data.index = i;
       block.data.first = i === 0;
       block.data.last = i === to;
-      block.data.mod = Math.trunc(i / stepNumber);
-      block.data.remain = i % stepNumber;
+      block.data.mod = Math.trunc(i / nWoundByStep);
+      block.data.remain = i % nWoundByStep;
       accum += block.fn(this);
     }
     return accum;

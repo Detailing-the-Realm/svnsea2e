@@ -60,7 +60,7 @@ export class SvnSea2EActor extends Actor {
     actorData.villainy =
       parseInt(actorData.traits.strength.value) +
       parseInt(actorData.traits.influence.value);
-    actorData.wounds.max = parseInt(actorData.traits.strength.value + 1) * 4;
+    actorData.wounds.max = parseInt(actorData.traits.strength.value + 1) * actorData.dwounds.max;
     actorData.wounds.value = this._validateMinMaxData(
       actorData.wounds.value,
       actorData.wounds.min,
