@@ -173,12 +173,17 @@ Hooks.once('init', async function () {
     var accum = '';
 
     const count = parseInt(from) + parseInt(to);
+
+console.log("count : " + count);
+
+    const stepNumber = Math.ceil((count - 1) / 4);
+
     for (var i = from; i < count; i += incr) {
       block.data.index = i;
       block.data.first = i === 0;
       block.data.last = i === to;
-      block.data.mod = Math.trunc(i / 5);
-      block.data.remain = i % 5;
+      block.data.mod = Math.trunc(i / stepNumber);
+      block.data.remain = i % stepNumber;
       accum += block.fn(this);
     }
     return accum;
