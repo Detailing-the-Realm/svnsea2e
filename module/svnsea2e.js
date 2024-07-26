@@ -174,8 +174,6 @@ Hooks.once('init', async function () {
 
     const count = parseInt(from) + parseInt(to);
 
-console.log("count : " + count);
-
     const stepNumber = Math.ceil((count - 1) / 4);
 
     for (var i = from; i < count; i += incr) {
