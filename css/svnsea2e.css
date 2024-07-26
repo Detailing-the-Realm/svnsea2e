@@ -507,9 +507,18 @@ input[type=range]::-webkit-slider-thumb {
 #chat #chat-log .message .message-content h4,
 #chat #chat-log .message .message-content h5,
 #chat #chat-log .message .message-content h6 {
+  color: #771213;
   margin-top: 0;
   margin-bottom: 4px;
 }
+
+#chat #chat-log .message .message-content .dice-result h3,
+#chat #chat-log .message .message-content .dice-result h4,
+#chat #chat-log .message .message-content .dice-result h5,
+#chat #chat-log .message .message-content .dice-result h6 {
+  color: black;
+}
+
 #chat #chat-log .message .message-content .raise-combos-list {
   list-style: none;
   padding: 0;
