@@ -322,7 +322,7 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
     const c = this.actor.getFlag('svnsea2e', 'shipsCrew');
     let crew;
 
-    if (c) crew = duplicate(c);
+    if (c) crew = foundry.utils.duplicate(c);
     else {
       crew = {
         members: [],

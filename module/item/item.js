@@ -25,7 +25,7 @@ export class SvnSea2EItem extends Item {
    * @return {Object}               An object of chat data to render
    */
   async getChatData(htmlOptions) {
-    const data = duplicate(this.system);
+    const data = foundry.utils.duplicate(this.system);
 
     // Rich text description
     data.metadatahtml = '';

@@ -589,7 +589,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       // Add the background's advantage to the actor.
       await this.actor.createEmbeddedDocuments('Item', [
-        duplicate(assignedAdvantage),
+        foundry.utils.duplicate(assignedAdvantage),
       ]);
     }
     // Apply the skills.

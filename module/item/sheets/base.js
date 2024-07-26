@@ -133,7 +133,7 @@ export class ItemSheetSS2e extends ItemSheet {
     }
 
     const packs = game.packs.entries;
-    const worldAdv = duplicate(advantages);
+    const worldAdv = foundry.utils.duplicate(advantages);
     for (var i = 0; i < packs.length; i++) {
       const pack = packs[i];
       if (pack.metadata.entity === 'Item') {

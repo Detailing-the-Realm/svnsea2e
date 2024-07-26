@@ -26,7 +26,7 @@ export default class LanguageSelector extends FormApplication {
     const langs = this.object.system.languages;
 
     // Populate choices
-    const choices = duplicate(this.options.choices);
+    const choices = foundry.utils.duplicate(this.options.choices);
     for (const [k, v] of Object.entries(choices)) {
       choices[k] = {
         label: v,
