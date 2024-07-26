@@ -148,7 +148,7 @@ export async function roll({
     form.addOneToDice !== undefined ? form.addOneToDice.checked : false;
 
   const r = new Roll(`${nd}d10${rolldata['explode'] ? 'x' : ''}`);
-  await r.roll({ async: true });
+  await r.evaluate();
   const rolls = getSortedRolls(r).map((d) => (addOneToDice ? d + 1 : d));
   const exploded = rolldata['explode'];
 
@@ -338,7 +338,7 @@ export async function roll({
   // Basic chat message
   const chatData = {
     user: game.user.id,
-    type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
     content: html,
     image: actor.img,
     speaker: {
