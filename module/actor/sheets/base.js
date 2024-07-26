@@ -301,10 +301,12 @@ export default class ActorSheetSS2e extends ActorSheet {
 
     const eValue = +edata.value;
 
+    const stepNumber = Math.ceil(actorData.wounds.max / actorData.dwounds.max);
+
     if (edata.type === 'wounds') {
       wounds = eValue;
       dwounds = actorData.dwounds.value;
-      const dwestimate = Math.trunc(wounds / 5);
+      const dwestimate = Math.trunc(wounds / stepNumber);
 
       if (dwestimate > actorData.dwounds.value) dwounds = dwestimate;
 
@@ -317,7 +319,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         dwounds = actorData.dwounds.value - 1;
       else dwounds = eValue;
 
-      if (actorData.wounds.value > eValue * 5) wounds = eValue * 5;
+      if (actorData.wounds.value > (eValue + 1) * stepNumber) wounds = (eValue + 1) * stepNumber;
     }
 
     updateObj['system.wounds.value'] = wounds;
