@@ -7,7 +7,7 @@ import ActorSheetSS2e from './base.js';
 export class ActorSheetSS2eHero extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor', 'hero'],
       template: 'systems/svnsea2e/templates/actors/hero.html',
       tabs: [

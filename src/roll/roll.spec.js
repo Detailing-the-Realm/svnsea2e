@@ -44,7 +44,7 @@ describe('roll', () => {
       },
     ];
     global.Roll = function () {
-      this.roll = jest.fn();
+      this.evaluate = jest.fn();
       this.terms = mockTerms;
     };
     global.ChatMessage = {
@@ -54,7 +54,7 @@ describe('roll', () => {
       SVNSEA2E,
     };
     global.CONST = {
-      CHAT_MESSAGE_TYPES: {},
+      CHAT_MESSAGE_STYLES: {},
     };
     global.game = {
       user: {},

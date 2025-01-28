@@ -15,7 +15,7 @@ export class Toolbox extends FormApplication {
   static get defaultOptions() {
     const x = $(window).width();
     const y = $(window).height();
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'svnsea-toolbox',
       classes: ['toolbox'],
       template: 'systems/svnsea2e/templates/toolbox/toolbox.html',

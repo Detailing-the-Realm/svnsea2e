@@ -8,7 +8,7 @@ import { getItems } from '../../helpers.js';
 export class ActorSheetSS2eShip extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor', 'ship'],
       template: 'systems/svnsea2e/templates/actors/ship.html',
       tabs: [
@@ -317,27 +317,27 @@ export class ActorSheetSS2eShip extends ActorSheetSS2e {
 
     $(event.target).css('background', '');
 
-    if (!data.id) return false;
+    if (!data.uuid) return false;
 
     const c = this.actor.getFlag('svnsea2e', 'shipsCrew');
     let crew;
 
-    if (c) crew = duplicate(c);
+
+    if (c) crew = foundry.utils.duplicate(c);
     else {
       crew = {
         members: [],
       };
     }
 
-    if (!crew.members) {
-      crew.members = [data.id];
-    } else if (!crew.members.includes(data.id)) {
-      crew.members.push(data.id);
-    }
-
-    const actor = game.actors.get(data.id);
-
+    const actor = await Actor.implementation.fromDropData(data);
     if (!actor) return false;
+
+    if (!crew.members) {
+      crew.members = [actor.id];
+    } else if (!crew.members.includes(actor.id)) {
+      crew.members.push(actor.id);
+    }
 
     const role = event.target.dataset.role;
 

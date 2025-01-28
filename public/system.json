@@ -2,13 +2,17 @@
   "name": "svnsea2e",
   "title": "7th Sea Second Edition (Unofficial)",
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "compatibility": {
     "minimum": "10",
-    "verified": "11.299"
+    "verified": "12.329"
   },
-  "templateVersion": 2,
-  "author": "psychoph",
+  "templateVersion": 3,
+  "authors": [
+    { "name": "psychoph" },
+    { "name": "mattraykowski" },
+    { "name": "schmurtz" }
+  ],
   "esmodules": [
     "svnsea2e.mjs"
   ],

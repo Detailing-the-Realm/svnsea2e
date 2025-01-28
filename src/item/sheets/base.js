@@ -9,7 +9,7 @@ import AdvantageSelector from '../../apps/advantage-selector.js';
 export class ItemSheetSS2e extends ItemSheet {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'item'],
       width: 600,
       height: 700,
@@ -25,7 +25,7 @@ export class ItemSheetSS2e extends ItemSheet {
     const itemData = item.system;
     const { isOwner } = this.document;
 
-    // mergeObject(data, {
+    // foundry.utils.mergeObject(data, {
     //   owner: isOwner,
     //   itemType: SVNSEA2E.itemTypes[data.item.type],
     //   options: this.options,
@@ -83,6 +83,8 @@ export class ItemSheetSS2e extends ItemSheet {
       sheetData.reward = itemData.reward;
       sheetData.endings = itemData.endings;
       sheetData.steps = itemData.steps;
+    } else if (item.type === 'artifact') {
+      sheetData.artifactType = itemData.artifactType;
     }
     return sheetData;
   }
@@ -131,7 +133,7 @@ export class ItemSheetSS2e extends ItemSheet {
     }
 
     const packs = game.packs.entries;
-    const worldAdv = duplicate(advantages);
+    const worldAdv = foundry.utils.duplicate(advantages);
     for (var i = 0; i < packs.length; i++) {
       const pack = packs[i];
       if (pack.metadata.entity === 'Item') {

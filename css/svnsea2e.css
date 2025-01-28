@@ -514,8 +514,15 @@ body {
 #chat #chat-log .message .message-content h4,
 #chat #chat-log .message .message-content h5,
 #chat #chat-log .message .message-content h6 {
+  color: #771213;
   margin-top: 0;
   margin-bottom: 0.25rem;
+}
+#chat #chat-log .message .message-content .dice-result h3,
+#chat #chat-log .message .message-content .dice-result h4,
+#chat #chat-log .message .message-content .dice-result h5,
+#chat #chat-log .message .message-content .dice-result h6 {
+  color: black;
 }
 #chat #chat-log .message .message-content .raise-combos-list {
   list-style: none;
@@ -899,8 +906,8 @@ body {
 }
 .actor .danger-points input[type=text] {
   font-size: 6em;
-  height: 1.3rem;
-  width: 1.3rem;
+  height: 6.3rem;
+  width: 6.3rem;
   border: 0.25rem solid #530202;
   border-radius: 2em;
   text-align: center;

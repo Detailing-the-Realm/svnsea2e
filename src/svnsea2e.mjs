@@ -56,7 +56,7 @@ Hooks.once('init', async function () {
   };
 
   CONFIG.SVNSEA2E = SVNSEA2E;
-  CONFIG.SVNSEA2E.natTypes = duplicate(SVNSEA2E.nations);
+  CONFIG.SVNSEA2E.natTypes = foundry.utils.duplicate(SVNSEA2E.nations);
   CONFIG.SVNSEA2E.natTypes.gisles = 'SVNSEA2E.RegionGlamourIsles';
 
   // Define custom Entity classes
@@ -174,12 +174,14 @@ Hooks.once('init', async function () {
     var accum = '';
 
     const count = parseInt(from) + parseInt(to);
+    const nWoundByStep = Math.ceil((count - 1) / 4); // TODO: remove magic number, 4 is in reality dwounds.max (for wounds display)
+
     for (var i = from; i < count; i += incr) {
       block.data.index = i;
       block.data.first = i === 0;
       block.data.last = i === to;
-      block.data.mod = Math.trunc(i / 5);
-      block.data.remain = i % 5;
+      block.data.mod = Math.trunc(i / nWoundByStep);
+      block.data.remain = i % nWoundByStep;
       accum += block.fn(this);
     }
     return accum;

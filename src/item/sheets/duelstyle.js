@@ -8,7 +8,7 @@ import { ItemSheetSS2e } from './base.js';
 export class ItemSheetSS2eDuelStyle extends ItemSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: 'systems/svnsea2e/templates/items/duelstyle.html',
       tabs: [
         {
