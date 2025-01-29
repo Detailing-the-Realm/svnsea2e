@@ -8,9 +8,9 @@ const config = {
     port: 30001,
     open: true,
     proxy: {
-      '^(?!/systems/svnsea2e)': 'http://BIGWIG.local:30000/',
+      '^(?!/systems/svnsea2e)': 'http://localhost:30000/',
       '/socket.io': {
-        target: 'ws://BIGWIG.local:30000',
+        target: 'ws://localhost:30000',
         ws: true,
       },
     }

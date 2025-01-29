@@ -12,5 +12,3 @@ reports/
 # The user's actual Foundry configuration.
 foundryconfig.json
 
-# The build directory
-dist
