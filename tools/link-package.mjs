@@ -29,7 +29,7 @@ function getDataPath() {
  * @param {boolean} clean Whether to remove the link instead of creating it
  */
 async function linkPackage(clean) {
-  if (!fs.existsSync(path.resolve("system.json"))) {
+  if (!fs.existsSync(path.resolve("dist", "system.json"))) {
     throw new Error("Could not find system.json");
   }
 

@@ -80,6 +80,17 @@ Stories are a type best created in the player character sheet and not added to t
 ### Danger Points
 ![danger points](https://user-images.githubusercontent.com/1393032/97649281-53665d00-1a2d-11eb-8b9c-c629d51a025d.png)
 
+## Contributing
+
+This project uses the Vite build tool and Yarn. If you want to get started contributing you can follow these steps:
+
+1. Run `yarn install` to install dependencies.
+2. Run `yarn build` to build the project, this will bundle the system up into the `dist` folder.
+3. Copy `foundryconfig.json.example` to `foundryconfig.json` and edit the `dataPath` to point to your, for example on Windows it might be: `C:\\Users\\Me\\AppData\\Local\\FoundryVTT`
+4. Run `yarn link-package` to link the compiled `dist` folder to your Foundry installation.
+5. Run `yarn serve` to start the Dev Server up.
+6. Now you should be able to go to `http://localhost:30001` which proxies the Foundry port 30000 to do reloading while you edit.
+
 ## Credits
 Developed from then [FoundryVTT System Tutorial](https://gitlab.com/asacolips-projects/foundry-mods/foundryvtt-system-tutorial). With code and ideas from DnD5E System also by Atropos.
 
