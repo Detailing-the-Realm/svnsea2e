@@ -8,7 +8,7 @@ import { getItems, skillsToSheetData } from '../../helpers.js';
 export class ActorSheetSS2ePlayerCharacter extends ActorSheetSS2e {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['svnsea2e', 'sheet', 'actor', 'pc'],
       template: 'systems/svnsea2e/templates/actors/playercharacter.html',
       tabs: [

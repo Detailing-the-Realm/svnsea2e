@@ -25,7 +25,7 @@ export class SvnSea2EItem extends Item {
    * @return {Object}               An object of chat data to render
    */
   async getChatData(htmlOptions) {
-    const data = duplicate(this.system);
+    const data = foundry.utils.duplicate(this.system);
 
     // Rich text description
     data.metadatahtml = '';
@@ -65,9 +65,9 @@ export class SvnSea2EItem extends Item {
   }
 
   _artifactChatData(data, htmlOptions) {
-    const type =
-      data.type === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.type];
-    data.metadatahtml = `<ul class="details-list"><li class="tag">${type}</li></ul>`;
+    const artifactType =
+      data.artifactType === 'none' ? '' : CONFIG.SVNSEA2E.artifactTypes[data.artifactType];
+    data.metadatahtml = `<ul class="details-list"><li class="tag">${artifactType}</li></ul>`;
     return data;
   }
 

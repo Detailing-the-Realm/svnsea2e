@@ -5,7 +5,7 @@
 export default class SkillSelector extends FormApplication {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'skill-selector',
       classes: ['svnsea2e'],
       title: game.i18n.localize('SVNSEA2E.BackgroundSkillSelect'),
@@ -26,7 +26,7 @@ export default class SkillSelector extends FormApplication {
     const skills = this.object.system.skills;
 
     // Populate choices
-    const choices = duplicate(this.options.choices);
+    const choices = foundry.utils.duplicate(this.options.choices);
     for (const [k, v] of Object.entries(choices)) {
       choices[k] = {
         label: v,

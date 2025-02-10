@@ -5,7 +5,7 @@
 export default class LanguageSelector extends FormApplication {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'language-selector',
       classes: ['svnsea2e'],
       title: game.i18n.localize('SVNSEA2E.ActorLangSelect'),
@@ -26,7 +26,7 @@ export default class LanguageSelector extends FormApplication {
     const langs = this.object.system.languages;
 
     // Populate choices
-    const choices = duplicate(this.options.choices);
+    const choices = foundry.utils.duplicate(this.options.choices);
     for (const [k, v] of Object.entries(choices)) {
       choices[k] = {
         label: v,

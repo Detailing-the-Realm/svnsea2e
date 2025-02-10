@@ -11,7 +11,7 @@ import { roll } from '../../roll/roll.js';
 export default class ActorSheetSS2e extends ActorSheet {
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 1050,
       height: 750,
     });
@@ -300,11 +300,12 @@ export default class ActorSheetSS2e extends ActorSheet {
     let dwounds = actorData.dwounds.value;
 
     const eValue = +edata.value;
+    const nWoundByStep = Math.ceil(actorData.wounds.max / actorData.dwounds.max);
 
     if (edata.type === 'wounds') {
       wounds = eValue;
       dwounds = actorData.dwounds.value;
-      const dwestimate = Math.trunc(wounds / 5);
+      const dwestimate = Math.trunc(wounds / nWoundByStep);
 
       if (dwestimate > actorData.dwounds.value) dwounds = dwestimate;
 
@@ -317,7 +318,7 @@ export default class ActorSheetSS2e extends ActorSheet {
         dwounds = actorData.dwounds.value - 1;
       else dwounds = eValue;
 
-      if (actorData.wounds.value > eValue * 5) wounds = eValue * 5;
+      if (actorData.wounds.value > (eValue + 1) * nWoundByStep) wounds = (eValue + 1) * nWoundByStep;
     }
 
     updateObj['system.wounds.value'] = wounds;
@@ -398,8 +399,8 @@ export default class ActorSheetSS2e extends ActorSheet {
     const item = this.actor.items.get(li.dataset.itemId);
 
     if (item) {
-      if (item.data.type === 'background')
-        await this._processBackgroundDelete(item.data.data);
+      if (item.system.type === 'background')
+        await this._processBackgroundDelete(item.system.data);
 
       return item.delete();
     }
@@ -589,7 +590,7 @@ export default class ActorSheetSS2e extends ActorSheet {
 
       // Add the background's advantage to the actor.
       await this.actor.createEmbeddedDocuments('Item', [
-        duplicate(assignedAdvantage),
+        foundry.utils.duplicate(assignedAdvantage),
       ]);
     }
     // Apply the skills.

@@ -25,7 +25,7 @@
     "@babel/node": "^7.17.10",
     "@babel/plugin-transform-runtime": "^7.17.12",
     "@babel/preset-env": "^7.17.12",
-    "@league-of-foundry-developers/foundry-vtt-types": "^9.269.0",
+    "@league-of-foundry-developers/foundry-vtt-types": "12.331.3-beta",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",

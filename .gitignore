@@ -11,3 +11,4 @@ dist/
 reports/
 # The user's actual Foundry configuration.
 foundryconfig.json
+
