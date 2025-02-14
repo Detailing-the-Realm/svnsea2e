@@ -1,3 +1,5 @@
+import { ActorType } from "../enums";
+
 /**
  * Extend the base Actor entity by definin`g` a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -13,13 +15,13 @@ export class SvnSea2EActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if (this.type === 'playercharacter')
+    if (this.type === ActorType.PLAYER)
       this._preparePlayerCharacterData(actorData);
-    if (this.type === 'hero') this._prepareHeroData(actorData);
-    if (this.type === 'villain' || this.type === 'monster')
+    if (this.type === ActorType.HERO) this._prepareHeroData(actorData);
+    if (this.type === ActorType.VILLAIN || this.type === ActorType.MONSTER)
       this._prepareVillainData(actorData);
-    if (this.type === 'brute') this._prepareBruteData(actorData);
-    if (this.type === 'ship') this._prepareShipData(actorData);
+    if (this.type === ActorType.BRUTE) this._prepareBruteData(actorData);
+    if (this.type === ActorType.SHIP) this._prepareShipData(actorData);
   }
 
   /**
