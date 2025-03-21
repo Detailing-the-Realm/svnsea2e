@@ -1,5 +1,6 @@
 import LanguageSelector from '../../apps/language-selector.js';
 import { updateInitiative } from '../../combat.js';
+import { ActorType } from '../../enums.js';
 import { getAllPackAdvantages, isValidGlamorIsles } from '../../helpers.js';
 import { roll } from '../../roll/roll.js';
 
@@ -33,11 +34,11 @@ export default class ActorSheetSS2e extends ActorSheet {
       editable: this.isEditable,
       cssClass: owner ? 'editable' : 'locked',
       isCorrupt: actorData.corruptionpts > 0,
-      isPlayerCharacter: actor.type === 'playercharacter',
-      isHero: actor.type === 'hero',
-      isVillain: actor.type === 'villain',
-      isMonster: actor.type === 'monster',
-      isNotBrute: actor.type !== 'brute',
+      isPlayerCharacter: actor.type === ActorType.PLAYER,
+      isHero: actor.type === ActorType.HERO,
+      isVillain: actor.type === ActorType.VILLAIN,
+      isMonster: actor.type === ActorType.MONSTER,
+      isNotBrute: actor.type !== ActorType.BRUTE,
       hasSkills: typeof actorData.skills !== 'undefined',
       hasLanguages: typeof actorData.languages !== 'undefined',
       config: CONFIG.SVNSEA2E,
@@ -71,20 +72,20 @@ export default class ActorSheetSS2e extends ActorSheet {
     };
 
     // Prepare items.
-    if (actor.type === 'playercharacter') {
+    if (actor.type === ActorType.PLAYER) {
       this._prepareCharacterItems(data, sheetData);
-    } else if (actor.type === 'hero') {
+    } else if (actor.type === ActorType.HERO) {
       this._prepareHeroItems(data, sheetData);
-    } else if (actor.type === 'villain') {
+    } else if (actor.type === ActorType.VILLAIN) {
       this._prepareVillainItems(data, sheetData);
-    } else if (actor.type === 'monster') {
+    } else if (actor.type === ActorType.MONSTER) {
       this._prepareMonsterItems(data, sheetData);
-    } else if (actor.type === 'ship') {
+    } else if (actor.type === ActorType.SHIP) {
       this._prepareShipItems(data, sheetData);
       this._processFlags(actorData, actor.flags, sheetData);
-    } else if (actor.type === 'dangerpts') {
+    } else if (actor.type === ActorType.DANGERPOINTS) {
       sheetData.points = actorData.points;
-    } else if (actor.type === 'brute') {
+    } else if (actor.type === ActorType.BRUTE) {
       sheetData.ability = actorData.ability;
     }
     return sheetData;
@@ -113,7 +114,7 @@ export default class ActorSheetSS2e extends ActorSheet {
    * @private
    */
   _prepareTraits(actor) {
-    return !['ship', 'dangerpts'].includes(actor.type)
+    return ![ActorType.SHIP, ActorType.DANGERPOINTS].includes(actor.type)
       ? Object.entries(actor.system.traits).map(([t, trait]) => ({
           ...trait,
           name: t,
@@ -157,16 +158,16 @@ export default class ActorSheetSS2e extends ActorSheet {
       .on('click', (event) => this._onItemSummary(event));
 
     // Rollable abilities.
-    if (this.actor.type === 'playercharacter' || this.actor.type === 'hero') {
+    if (this.actor.type === ActorType.PLAYER || this.actor.type === ActorType.HERO) {
       html.find('.rollable').on('click', this._onHeroRoll.bind(this));
-    } else if (this.actor.type === 'villain' || this.actor.type === 'monster') {
+    } else if (this.actor.type === ActorType.VILLAIN || this.actor.type === ActorType.MONSTER) {
       html.find('.rollable').on('click', this._onVillainRoll.bind(this));
     }
 
     html
       .find('.fillable.fa-circle')
       .on('click', (event) => this._processCircle(event));
-    if (this.actor.type === 'brute') {
+    if (this.actor.type === ActorType.BRUTE) {
       html
         .find('.fillable.fa-heart')
         .on('click', (event) => this._processBruteWounds(event));
@@ -209,8 +210,12 @@ export default class ActorSheetSS2e extends ActorSheet {
    */
   _prepareLanguages(actor) {
     // Languages only apply to PCs, heroes, or villains.
-    if (!['playercharacter', 'hero', 'villain'].includes(actor.type))
+    if (![ActorType.PLAYER, ActorType.HERO, ActorType.VILLAIN].includes(actor.type))
       return undefined;
+
+    console.log(actor)
+    console.log(actor.system)
+    console.log(actor.system.languages)
 
     return actor.system.languages.reduce(
       (languages, language) => ({

@@ -3,6 +3,30 @@ import './assets/svnsea2e.scss';
 import { SVNSEA2E } from './config.js';
 import { registerSystemSettings } from './settings.js';
 import { preloadHandlebarsTemplates } from './templates.js';
+import { ActorType, ItemTypes } from './enums';
+
+// Import System Data Models
+import { BruteModel } from './actor/models/bruteModel';
+import { DangerPointsModel } from './actor/models/dangerPointsModel';
+import { HeroModel } from './actor/models/heroModel';
+import { MonsterModel } from './actor/models/monsterModel';
+import { PlayerModel } from './actor/models/playerModel';
+import { ShipModel } from './actor/models/shipModel';
+import { VillainModel } from './actor/models/villainModel';
+
+import { AdvantageModel } from './item/models/advantageModel';
+import { ArtifactModel } from './item/models/artifactModel';
+import { BackgroundModel } from './item/models/backgroundModel';
+import { DuelStyleModel } from './item/models/duelStyleModel';
+import { MonsterQualityModel } from './item/models/monsterQualityModel';
+import { SchemeModel } from './item/models/schemeModel';
+import { ShipAdventureModel } from './item/models/shipAdventureModel';
+import { ShipBackgroundModel } from './item/models/shipBackgroundModel';
+import { VirtueModel } from './item/models/virtueModel';
+import { HubrisModel } from './item/models/hubrisModel';
+import { SecretSocietyModel } from './item/models/secretSocietyModel';
+import { SorceryModel } from './item/models/sorceryModel';
+import { StoryModel } from './item/models/storyModel';
 
 // Import Applications
 import { SvnSea2EActor } from './actor/actor.js';
@@ -32,6 +56,7 @@ import { ItemSheetSS2eVirtue } from './item/sheets/virtue.js';
 import * as migrations from './migration.js';
 import { emitCharacterChange } from './toolbox/socket.js';
 import { Toolbox } from './toolbox/toolbox.js';
+
 
 Hooks.once('init', async function () {
   console.log(`7th Sea 2E | Initializing 7th Sea Second Edition System
@@ -63,91 +88,113 @@ Hooks.once('init', async function () {
   CONFIG.Actor.documentClass = SvnSea2EActor;
   CONFIG.Item.documentClass = SvnSea2EItem;
 
+  CONFIG.Actor.dataModels[ActorType.BRUTE] = BruteModel;
+  CONFIG.Actor.dataModels[ActorType.DANGERPOINTS] = DangerPointsModel;
+  CONFIG.Actor.dataModels[ActorType.HERO] = HeroModel;
+  CONFIG.Actor.dataModels[ActorType.MONSTER] = MonsterModel;
+  CONFIG.Actor.dataModels[ActorType.PLAYER] = PlayerModel;
+  CONFIG.Actor.dataModels[ActorType.SHIP] = ShipModel;
+  CONFIG.Actor.dataModels[ActorType.VILLAIN] = VillainModel;
+
+  CONFIG.Item.dataModels[ItemTypes.ADVANTAGE] = AdvantageModel;
+  CONFIG.Item.dataModels[ItemTypes.ARTIFACT] = ArtifactModel;
+  CONFIG.Item.dataModels[ItemTypes.BACKGROUND] = BackgroundModel;
+  CONFIG.Item.dataModels[ItemTypes.DUEL_STYLE] = DuelStyleModel;
+  CONFIG.Item.dataModels[ItemTypes.MONSTER_QUALITY] = MonsterQualityModel;
+  CONFIG.Item.dataModels[ItemTypes.SCHEME] = SchemeModel;
+  CONFIG.Item.dataModels[ItemTypes.SECRET_SOCIETY] = SecretSocietyModel;
+  CONFIG.Item.dataModels[ItemTypes.SHIP_ADVENTURE] = ShipAdventureModel;
+  CONFIG.Item.dataModels[ItemTypes.SHIP_BACKGROUND] = ShipBackgroundModel;
+  CONFIG.Item.dataModels[ItemTypes.VIRTUE] = VirtueModel;
+  CONFIG.Item.dataModels[ItemTypes.HUBRIS] = HubrisModel;
+  CONFIG.Item.dataModels[ItemTypes.SORCERY] = SorceryModel;
+  CONFIG.Item.dataModels[ItemTypes.STORY] = StoryModel;
+
   // Register System Settings
   registerSystemSettings();
 
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet('svnsea2e', ActorSheetSS2ePlayerCharacter, {
-    types: ['playercharacter'],
+    types: [ActorType.PLAYER],
     makeDefault: true,
   });
   Actors.registerSheet('svnsea2e', ActorSheetSS2eHero, {
-    types: ['hero'],
+    types: [ActorType.HERO],
     makeDefault: true,
   });
   Actors.registerSheet('svnsea2e', ActorSheetSS2eBrute, {
-    types: ['brute'],
+    types: [ActorType.BRUTE],
     makeDefault: true,
   });
   Actors.registerSheet('svnsea2e', ActorSheetSS2eMonster, {
-    types: ['monster'],
+    types: [ActorType.MONSTER],
     makeDefault: true,
   });
   Actors.registerSheet('svnsea2e', ActorSheetSS2eVillain, {
-    types: ['villain'],
+    types: [ActorType.VILLAIN],
     makeDefault: true,
   });
   Actors.registerSheet('svnsea2e', ActorSheetSS2eShip, {
-    types: ['ship'],
+    types: [ActorType.SHIP],
     makeDefault: true,
   });
   Actors.registerSheet('svnsea2e', ActorSheetSS2eDangerPts, {
-    types: ['dangerpts'],
+    types: [ActorType.DANGERPOINTS],
     makeDefault: true,
   });
 
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('svnsea2e', ItemSheetSS2eAdvantage, {
-    types: ['advantage'],
+    types: [ItemTypes.ADVANTAGE],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eArtifact, {
-    types: ['artifact'],
+    types: [ItemTypes.ARTIFACT],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eBackground, {
-    types: ['background'],
+    types: [ItemTypes.BACKGROUND],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eDuelStyle, {
-    types: ['duelstyle'],
+    types: [ItemTypes.DUEL_STYLE],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eMonsterQuality, {
-    types: ['monsterquality'],
+    types: [ItemTypes.MONSTER_QUALITY],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eScheme, {
-    types: ['scheme'],
+    types: [ItemTypes.SCHEME],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eSecretSociety, {
-    types: ['secretsociety'],
+    types: [ItemTypes.SECRET_SOCIETY],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eShipAdventure, {
-    types: ['shipadventure'],
+    types: [ItemTypes.SHIP_ADVENTURE],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eShipBackground, {
-    types: ['shipbackground'],
+    types: [ItemTypes.SHIP_BACKGROUND],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eSorcery, {
-    types: ['sorcery'],
+    types: [ItemTypes.SORCERY],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eStory, {
-    types: ['story'],
+    types: [ItemTypes.STORY],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eVirtue, {
-    types: ['virtue'],
+    types: [ItemTypes.VIRTUE],
     makeDefault: true,
   });
   Items.registerSheet('svnsea2e', ItemSheetSS2eHubris, {
-    types: ['hubris'],
+    types: [ItemTypes.HUBRIS],
     makeDefault: true,
   });
 

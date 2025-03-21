@@ -2,7 +2,7 @@
   "name": "svnsea2e",
   "title": "7th Sea Second Edition (Unofficial)",
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "compatibility": {
     "minimum": "10",
     "verified": "12.329"
@@ -50,6 +50,63 @@
       "name": "Brazilian Portuguese",
       "path": "lang/pt-BR.json" }
   ],
+  "documentTypes": {
+    "Actor": {
+      "brute": {
+        "htmlFields": ["ability.description"]
+      },
+      "dangerpts": {},
+      "hero": {
+        "htmlFields": ["concept", "arcana.virtue.description"]
+      },
+      "monster": {},
+      "playercharacter": {
+        "htmlFields": ["concept", "arcana.virtue.description"]
+      },
+      "ship": {
+        "htmlFields": ["cargo"]
+      },
+      "villain": {
+        "htmlFields": ["concept", "arcana.virtue.description"]
+      }
+    },
+    "Item": {
+      "advantage": {
+        "htmlFields": ["desciption"]
+      },
+      "artifact": {
+        "htmlFields": ["desciption"]
+      },
+      "background": {
+        "htmlFields": ["desciption", "quirk"]
+      },
+      "duelstyle": {
+        "htmlFields": ["desciption", "bonus"]
+      },
+      "monsterquality": {
+        "htmlFields": ["desciption"]
+      },
+      "scheme": {
+        "htmlFields": ["desciption"]
+      },
+      "secretsociety": {
+        "htmlFields": ["desciption", "concern", "earnfavor", "callupon", "favor"]
+      },
+      "shipadventure": {
+        "htmlFields": ["desciption"]
+      },
+      "shipbackground": {
+        "htmlFields": ["desciption"]
+      },
+      "virtue": {
+        "htmlFields": ["desciption"]
+      },
+      "hubris": {
+        "htmlFields": ["desciption"]
+      }
+      
+    }
+  },
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "wounds",

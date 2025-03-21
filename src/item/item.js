@@ -1,3 +1,5 @@
+import { ItemTypes } from "../enums";
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -12,9 +14,9 @@ export class SvnSea2EItem extends Item {
     // Get the Item's data
     const itemData = this.system;
 
-    if (this.type === 'scheme') {
+    if (this.type === ItemTypes.SCHEME) {
       this._prepareSchemeData(itemData);
-    } else if (itemData.type === 'advantage') {
+    } else if (itemData.type === ItemTypes.ADVANTAGE) {
       this._prepareAdvantageData(itemData);
     }
   }

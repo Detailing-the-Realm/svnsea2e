@@ -1,3 +1,5 @@
+import { ActorType } from "./enums";
+
 /**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
  * @return {Promise}      A Promise which resolves once the migration is completed
@@ -109,29 +111,29 @@ export const migrateCompendium = async function (pack) {
 export const migrateActorData = function (actor) {
   const updateData = {};
 
-  if (actor.type === 'playercharacter' && actor.system.wealth == null) {
+  if (actor.type === ActorType.PLAYER && actor.system.wealth == null) {
     updateData['wealth'] = 0;
   }
 
   if (
-    actor.type !== 'dangerpts' &&
-    actor.type !== 'brute' &&
+    actor.type !== ActorType.DANGERPOINTS &&
+    actor.type !== ActorType.BRUTE &&
     actor.system.wounds.max != 20
   ) {
     updateData['wounds.max'] = 20;
   }
 
   if (
-    (actor.type === 'playercharacter' ||
-      actor.type === 'hero' ||
-      actor.type === 'villain') &&
+    (actor.type === ActorType.PLAYER ||
+      actor.type === ActorType.HERO ||
+      actor.type === ActorType.VILLAIN) &&
     actor.system.nation === 'rahuris'
   ) {
     updateData['nation'] = 'rahuri';
   }
 
   if (
-    (actor.type === 'villain' || actor.type === 'monster') &&
+    (actor.type === ActorType.VILLAIN || actor.type === ActorType.MONSTER) &&
     actor.system.traits.strength.max != 10
   ) {
     updateData['traits.strength.max'] = 20;
@@ -139,21 +141,21 @@ export const migrateActorData = function (actor) {
     updateData['traits.influence.min'] = 0;
   }
 
-  if (actor.type === 'brute') {
+  if (actor.type === ActorType.BRUTE) {
     updateData['traits.strength.max'] = 20;
   }
 
-  if (actor.type === 'dangerpts' && actor.system.points < 5) {
+  if (actor.type === ActorType.DANGERPOINTS && actor.system.points < 5) {
     updateData['points'] = 5;
   }
 
-  if (actor.type === 'monster' && actor.system.fear.max != 5) {
+  if (actor.type === ActorType.MONSTER && actor.system.fear.max != 5) {
     updateData['fear.value'] = 0;
     updateData['fear.min'] = 0;
     updateData['fear.max'] = 5;
   }
 
-  if (actor.type === 'ship' && actor.system.crewstatus == null) {
+  if (actor.type === ActorType.SHIP && actor.system.crewstatus == null) {
     if (actor.system.crewstatus == null) {
       updateData['crewstatus'] = '';
     }
@@ -163,9 +165,9 @@ export const migrateActorData = function (actor) {
   }
 
   if (
-    actor.type === 'playercharacter' ||
-    actor.type === 'hero' ||
-    actor.type === 'villain'
+    actor.type === ActorType.PLAYER ||
+    actor.type === ActorType.HERO ||
+    actor.type === ActorType.VILLAIN
   ) {
     if (actor.system.arcana) {
       migrateVirtue(actor);

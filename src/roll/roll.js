@@ -1,3 +1,5 @@
+import { ActorType } from "../enums";
+
 /**
  * get the indexes in the rolls array that matches the dice combos
  */
@@ -131,8 +133,8 @@ export async function roll({
 }) {
   //We don't use Hero points with a Villain or a monster
   if (
-    actor.type !== 'villain' &&
-    actor.type !== 'monster' &&
+    actor.type !== ActorType.VILLAIN &&
+    actor.type !== ActorType.MONSTER &&
     !_spendHeroPoint(form, actor)
   ) {
     console.error('not enought hero point');
