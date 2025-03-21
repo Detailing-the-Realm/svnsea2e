@@ -3,7 +3,8 @@
 
   .window-content {
     color: $f-c-dk;
-    background: $c-sec;
+    // This overrides the parchment background.
+    // background: $c-sec;
   }
 
   .window-header .window-title,

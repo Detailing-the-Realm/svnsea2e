@@ -167,7 +167,7 @@ export default class ActorSheetSS2e extends ActorSheet {
     html
       .find('.fillable.fa-circle')
       .on('click', (event) => this._processCircle(event));
-    if (this.actor.type === 'brute') {
+    if (this.actor.type === ActorType.BRUTE) {
       html
         .find('.fillable.fa-heart')
         .on('click', (event) => this._processBruteWounds(event));
@@ -212,6 +212,10 @@ export default class ActorSheetSS2e extends ActorSheet {
     // Languages only apply to PCs, heroes, or villains.
     if (![ActorType.PLAYER, ActorType.HERO, ActorType.VILLAIN].includes(actor.type))
       return undefined;
+
+    console.log(actor)
+    console.log(actor.system)
+    console.log(actor.system.languages)
 
     return actor.system.languages.reduce(
       (languages, language) => ({
