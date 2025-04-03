@@ -18,7 +18,7 @@ export function updateInitiative(actorId, raise) {
 
   game.actors
     .filter((a) => a.id === actorId)
-    .map((a) => {
-      a.update({ data: { initiative: nRaise } });
+    .forEach((a) => {
+      a.update({system: { initiative: nRaise }});
     });
 }
