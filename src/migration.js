@@ -85,7 +85,7 @@ export const migrateCompendium = async function (pack) {
       if (entity === 'Item') updateData = migrateItemData(ent.data);
       else if (entity === 'Actor') updateData = migrateActorData(ent.data);
       else if (entity === 'Scene') updateData = migrateSceneData(ent.data);
-      if (!isObjectEmpty(updateData)) {
+      if (!foundry.utils.isEmpty(updateData)) {
         expandObject(updateData);
         updateData['_id'] = ent._id;
         await pack.updateEntity(updateData);
