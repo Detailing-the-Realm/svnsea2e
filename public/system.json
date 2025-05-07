@@ -2,10 +2,10 @@
   "name": "svnsea2e",
   "title": "7th Sea Second Edition (Unofficial)",
   "description": "The 7th Sea Second Edition (Unofficial) system for FoundryVTT!",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "compatibility": {
-    "minimum": "10",
-    "verified": "12.329"
+    "minimum": "12.329",
+    "verified": "13.341"
   },
   "templateVersion": 3,
   "authors": [
@@ -96,6 +96,12 @@
         "htmlFields": ["desciption"]
       },
       "shipbackground": {
+        "htmlFields": ["desciption"]
+      },
+      "sorcery": {
+        "htmlFields": ["desciption"]
+      },
+      "story": {
         "htmlFields": ["desciption"]
       },
       "virtue": {
