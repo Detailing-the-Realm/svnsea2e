@@ -1,14 +1,7 @@
 header.sheet-header {
   flex: 0 0 9.375rem;
 
-  flex-direction: column;
-
-  .header-concept {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
+  flex-direction: row;
 
   .header-data {
     & > .flex-group {
