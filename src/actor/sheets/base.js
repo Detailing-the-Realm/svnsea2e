@@ -1,7 +1,7 @@
 import LanguageSelector from '../../apps/language-selector.js';
 import { updateInitiative } from '../../combat.js';
 import { ActorType } from '../../enums.js';
-import { getAllPackAdvantages, isValidGlamorIsles, getVillainTraitMax } from '../../helpers.js';
+import { getAllPackAdvantages, isValidGlamorIsles } from '../../helpers.js';
 import { roll } from '../../roll/roll.js';
 
 /**

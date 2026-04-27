@@ -66,6 +66,119 @@ const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
   return response;
 };
 
+/**
+ * Bottom-up bitmask DP over leftover dice. When a second-chance pass
+ * exists (natural 15 or GM-increased 20), splits dice between primary
+ * combos (2 raises) and secondary combos (1 raise) to maximize raises.
+ * Ties prefer more leftover dice (tighter combos). Subset sums and
+ * popcounts are precomputed so the inner loop is branch-light. Falls
+ * back to the greedy `_leftOverDice` when no second-chance pass applies.
+ *
+ * @param {number[]} rolls dice values; mutated to empty on return
+ * @param {number} [threshold=10] raise threshold (10, 15, or 20)
+ * @param {boolean} [incThreshold=false] GM increased threshold by 5
+ * @returns {{rolls: number[], combos: string[], raises: number}}
+ *   leftover dice, combo strings, and total raises earned
+ */
+const _optimizedLeftOverDice = function (
+  rolls,
+  threshold = 10,
+  incThreshold = false,
+) {
+  const hasSecondChance =
+    (!incThreshold && threshold === 15) || (incThreshold && threshold === 20);
+
+  if (!hasSecondChance) {
+    return _leftOverDice(rolls, threshold, incThreshold);
+  }
+
+  const dice = [...rolls].map(Number).sort((a, b) => a - b);
+  const n = dice.length;
+
+  if (n === 0) {
+    rolls.length = 0;
+    return { rolls: [], combos: [], raises: 0 };
+  }
+
+  const primaryRaiseVal = _addRaise(threshold, incThreshold);
+  const secondaryThreshold = threshold - 5;
+  const total = 1 << n;
+
+  const sums = new Int32Array(total);
+  const popcounts = new Int8Array(total);
+  for (let m = 1; m < total; m++) {
+    const low = m & -m;
+    sums[m] = sums[m ^ low] + dice[31 - Math.clz32(low)];
+    popcounts[m] = popcounts[m >> 1] + (m & 1);
+  }
+
+  // Per-mask DP. chosenSub=0 marks the base case (no combo taken).
+  const memoRaises = new Int32Array(total);
+  const memoChosenSub = new Int32Array(total);
+  const memoUnusedMask = new Int32Array(total);
+
+  for (let mask = 1; mask < total; mask++) {
+    let bestRaises = 0;
+    let bestChosenSub = 0;
+    let bestUnusedMask = mask;
+
+    let sub = mask;
+    while (sub > 0) {
+      const subSum = sums[sub];
+      if (subSum >= secondaryThreshold) {
+        // A subset meeting primary always scores >= splitting into
+        // secondaries on the same dice, so don't double-evaluate.
+        const raiseVal = subSum >= threshold ? primaryRaiseVal : 1;
+        const rest = mask ^ sub;
+        const totalRaises = raiseVal + memoRaises[rest];
+        const restUnused = memoUnusedMask[rest];
+        if (
+          totalRaises > bestRaises ||
+          (totalRaises === bestRaises &&
+            popcounts[restUnused] > popcounts[bestUnusedMask])
+        ) {
+          bestRaises = totalRaises;
+          bestChosenSub = sub;
+          bestUnusedMask = restUnused;
+        }
+      }
+      sub = (sub - 1) & mask;
+    }
+
+    memoRaises[mask] = bestRaises;
+    memoChosenSub[mask] = bestChosenSub;
+    memoUnusedMask[mask] = bestUnusedMask;
+  }
+
+  // Walk the chain to materialize combos. Bits of dice are ascending,
+  // so extracting via (s & -s) yields each combo already sorted.
+  const combos = [];
+  let cur = total - 1;
+  while (memoChosenSub[cur] !== 0) {
+    const sub = memoChosenSub[cur];
+    const subsetDice = [];
+    let s = sub;
+    while (s) {
+      const low = s & -s;
+      subsetDice.push(dice[31 - Math.clz32(low)]);
+      s ^= low;
+    }
+    combos.push(subsetDice.join(' + '));
+    cur ^= sub;
+  }
+
+  const remaining = [];
+  let u = memoUnusedMask[total - 1];
+  while (u) {
+    const low = u & -u;
+    remaining.push(dice[31 - Math.clz32(low)]);
+    u ^= low;
+  }
+
+  rolls.length = 0;
+  return { rolls: remaining, combos, raises: memoRaises[total - 1] };
+};
+
 const _calculBonusDice = function (form) {
   const flairDice = form.flairDice?.checked ? 1 : 0;
   const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
@@ -271,26 +384,13 @@ export async function roll({
     }
   }
 
-  let leftdata = _leftOverDice(rolls, rolldata['threshold'], incThreshold);
+  let leftdata = _optimizedLeftOverDice(
+    rolls,
+    rolldata['threshold'],
+    incThreshold,
+  );
   combos.push(...leftdata['combos']);
   raises += leftdata['raises'];
-
-  // If the threshold is 15 and we have left over dice check for matching 10s for a single rais
-  if (
-    leftdata['rolls'].length > 0 &&
-    ((!incThreshold && rolldata['threshold'] == 15) ||
-      (incThreshold && rolldata['threshold'] == 20))
-  ) {
-    let leftdata2 = _leftOverDice(
-      leftdata['rolls'],
-      rolldata['threshold'] - 5,
-      incThreshold,
-    );
-    combos.push(...leftdata2['combos']);
-    raises += leftdata2['raises'];
-
-    leftdata = leftdata2;
-  }
 
   const messageOptions = {
     rollmode: 'gmroll',

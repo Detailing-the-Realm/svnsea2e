@@ -270,6 +270,27 @@ describe('roll', () => {
           );
         });
       });
+
+      // Issue #147: leftover algorithm greedily pairs lowest+highest (2+10=12),
+      // then adds 7 to reach 15, wasting 3 dice on one combo. Optimal: pair
+      // 7+9=16 at threshold 15 (2 raises), then 2+10=12 at second-chance
+      // threshold 10 (1 raise), for 7 total raises instead of 6.
+      it('should not waste dice in leftover combos (issue #147)', async () => {
+        mockTerms[0].results = [2, 5, 6, 7, 9, 9, 10, 10].map((d) => ({
+          result: d,
+        }));
+
+        await roll(rollConfig);
+
+        expect(global.renderTemplate).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({
+            raises: 7,
+            combos: expect.arrayContaining(['5 + 10', '6 + 9']),
+            unusedDice: 1,
+          }),
+        );
+      });
     });
 
     describe('with two raise for threshold of 20, and one raise for threshold of 15', () => {
