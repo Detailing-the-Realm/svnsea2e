@@ -66,6 +66,194 @@ const _leftOverDice = function (rolls, threshold = 10, incThreshold = false) {
   return response;
 };
 
+/**
+ * Enumerate every multiset of face values [1..maxFace] that is a *minimal*
+ * combo for the given thresholds. A multiset is a minimal primary combo if
+ * its sum >= primaryT but removing its smallest die would drop it below;
+ * symmetrically for secondary. Non-minimal combos are dominated (the
+ * smaller subset already scores, and the extra die is better left over),
+ * so the optimizer never needs to consider them.
+ */
+const _enumerateMinimalCombos = function (
+  maxFace,
+  primaryT,
+  secondaryT,
+  primaryRaiseVal,
+) {
+  const combos = [];
+  const upperSum = primaryT + maxFace;
+  const counts = new Array(maxFace + 1).fill(0);
+
+  const recurse = (face, sum) => {
+    if (face > maxFace) {
+      let minFace = -1;
+      let size = 0;
+      for (let v = 1; v <= maxFace; v++) {
+        if (counts[v] > 0) {
+          if (minFace === -1) minFace = v;
+          size += counts[v];
+        }
+      }
+      if (minFace === -1) return;
+
+      let raises = 0;
+      if (sum >= primaryT && sum - minFace < primaryT) {
+        raises = primaryRaiseVal;
+      } else if (
+        sum < primaryT &&
+        sum >= secondaryT &&
+        sum - minFace < secondaryT
+      ) {
+        raises = 1;
+      }
+      if (raises === 0) return;
+
+      combos.push({ counts: counts.slice(), raises, size, sum });
+      return;
+    }
+    let k = 0;
+    while (sum + k * face < upperSum) {
+      counts[face] = k;
+      recurse(face + 1, sum + k * face);
+      k++;
+    }
+    counts[face] = 0;
+  };
+
+  recurse(1, 0);
+  return combos;
+};
+
+/**
+ * Maximum weighted set packing over leftover dice (NP-hard in general):
+ * partition into subsets summing to >= T (worth `primaryRaiseVal`) or
+ * >= T-5 (worth 1) to maximize raises; ties prefer more leftover dice.
+ * Greedy is provably suboptimal, so we run a memoized recursion keyed on
+ * the multiset of remaining face values. Equal-valued dice are
+ * interchangeable, so the count-vector state space (`O(prod(c_v + 1))`)
+ * is far smaller than the subset lattice (`O(2^n)`) once any face value
+ * repeats. Per-state pruning uses the `floor(sum/T)` upper bound from
+ * the SO write-up below.
+ *
+ * Falls back to greedy `_leftOverDice` when no second-chance pass applies.
+ *
+ * See https://rpg.stackexchange.com/q/168062 for the formal framing.
+ *
+ * @param {number[]} rolls dice values; mutated to empty on return
+ * @param {number} [threshold=10] raise threshold (10, 15, or 20)
+ * @param {boolean} [incThreshold=false] GM increased threshold by 5
+ * @returns {{rolls: number[], combos: string[], raises: number}}
+ *   leftover dice, combo strings, and total raises earned
+ */
+const _optimizedLeftOverDice = function (
+  rolls,
+  threshold = 10,
+  incThreshold = false,
+) {
+  const hasSecondChance =
+    (!incThreshold && threshold === 15) || (incThreshold && threshold === 20);
+
+  if (!hasSecondChance || rolls.length === 0) {
+    return _leftOverDice(rolls, threshold, incThreshold);
+  }
+
+  const primaryRaiseVal = _addRaise(threshold, incThreshold);
+  const secondaryThreshold = threshold - 5;
+  const maxFace = Math.max(...rolls.map(Number));
+
+  const counts = new Array(maxFace + 1).fill(0);
+  let initialSum = 0;
+  for (const r of rolls) {
+    const v = Number(r);
+    counts[v]++;
+    initialSum += v;
+  }
+
+  const minimalCombos = _enumerateMinimalCombos(
+    maxFace,
+    threshold,
+    secondaryThreshold,
+    primaryRaiseVal,
+  );
+
+  // Memoize {raises, diceUsed, picks} by canonical count-vector key.
+  // diceUsed lets us tiebreak on max leftover (= n - diceUsed) without
+  // tracking the leftover multiset separately.
+  const memo = new Map();
+
+  const solve = (state, stateSum) => {
+    const key = state.join(',');
+    const cached = memo.get(key);
+    if (cached !== undefined) return cached;
+
+    const upper =
+      primaryRaiseVal * Math.floor(stateSum / threshold) +
+      Math.floor((stateSum % threshold) / secondaryThreshold);
+
+    let best = { raises: 0, diceUsed: 0, picks: null };
+    if (upper === 0) {
+      memo.set(key, best);
+      return best;
+    }
+
+    for (const combo of minimalCombos) {
+      let fits = true;
+      for (let v = 1; v <= maxFace; v++) {
+        if (combo.counts[v] > state[v]) {
+          fits = false;
+          break;
+        }
+      }
+      if (!fits) continue;
+
+      for (let v = 1; v <= maxFace; v++) state[v] -= combo.counts[v];
+      const sub = solve(state, stateSum - combo.sum);
+      for (let v = 1; v <= maxFace; v++) state[v] += combo.counts[v];
+
+      const totalRaises = combo.raises + sub.raises;
+      const totalDice = combo.size + sub.diceUsed;
+      if (
+        totalRaises > best.raises ||
+        (totalRaises === best.raises &&
+          (best.picks === null || totalDice < best.diceUsed))
+      ) {
+        best = {
+          raises: totalRaises,
+          diceUsed: totalDice,
+          picks: { combo, next: sub.picks },
+        };
+      }
+    }
+
+    memo.set(key, best);
+    return best;
+  };
+
+  const result = solve(counts, initialSum);
+
+  // Materialize combos and leftover dice from the chosen pick chain.
+  const finalCounts = counts.slice();
+  const comboStrs = [];
+  for (let p = result.picks; p !== null; p = p.next) {
+    const diceList = [];
+    for (let v = 1; v <= maxFace; v++) {
+      for (let i = 0; i < p.combo.counts[v]; i++) {
+        diceList.push(v);
+        finalCounts[v]--;
+      }
+    }
+    comboStrs.push(diceList.join(' + '));
+  }
+
+  const leftoverRolls = [];
+  for (let v = 1; v <= maxFace; v++) {
+    for (let i = 0; i < finalCounts[v]; i++) leftoverRolls.push(v);
+  }
+
+  rolls.length = 0;
+  return { rolls: leftoverRolls, combos: comboStrs, raises: result.raises };
+};
+
 const _calculBonusDice = function (form) {
   const flairDice = form.flairDice?.checked ? 1 : 0;
   const interpretationDice = form.interpretationDice?.checked ? 1 : 0;
@@ -271,26 +459,13 @@ export async function roll({
     }
   }
 
-  let leftdata = _leftOverDice(rolls, rolldata['threshold'], incThreshold);
+  let leftdata = _optimizedLeftOverDice(
+    rolls,
+    rolldata['threshold'],
+    incThreshold,
+  );
   combos.push(...leftdata['combos']);
   raises += leftdata['raises'];
-
-  // If the threshold is 15 and we have left over dice check for matching 10s for a single rais
-  if (
-    leftdata['rolls'].length > 0 &&
-    ((!incThreshold && rolldata['threshold'] == 15) ||
-      (incThreshold && rolldata['threshold'] == 20))
-  ) {
-    let leftdata2 = _leftOverDice(
-      leftdata['rolls'],
-      rolldata['threshold'] - 5,
-      incThreshold,
-    );
-    combos.push(...leftdata2['combos']);
-    raises += leftdata2['raises'];
-
-    leftdata = leftdata2;
-  }
 
   const messageOptions = {
     rollmode: 'gmroll',
